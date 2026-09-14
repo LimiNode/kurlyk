@@ -5,7 +5,8 @@
 /// \file http_parser.hpp
 /// \brief Provides utility functions for parsing HTTP headers and cookies.
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \brief Parses a header pair from a buffer.
     /// \param buffer The buffer containing the header.
@@ -186,6 +187,7 @@ namespace kurlyk::utils {
         return cookies;
     }
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_UTILS_HTTP_PARSER_HPP_INCLUDED

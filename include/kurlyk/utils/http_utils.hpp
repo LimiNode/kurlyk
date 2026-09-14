@@ -5,7 +5,8 @@
 /// \file http_utils.hpp
 /// \brief Provides utility functions for working with HTTP headers, cookies, and query strings.
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \brief Removes the first occurrence of "https://" or "http://" from the given URL.
     /// \param url The URL from which to remove the substring.
@@ -34,6 +35,7 @@ namespace kurlyk::utils {
         return modified_url;
     }
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_UTILS_HTTP_UTILS_HPP_INCLUDED

@@ -9,7 +9,8 @@
 /// and decoding according to [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986). These
 /// functions are commonly used to encode query parameters or path segments in HTTP URLs.
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \brief Encodes a string using Percent Encoding according to RFC 3986.
     /// \param value The string to be encoded.
@@ -56,6 +57,7 @@ namespace kurlyk::utils {
         return result;
     }
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 #endif

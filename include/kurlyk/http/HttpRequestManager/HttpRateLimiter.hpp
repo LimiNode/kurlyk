@@ -391,6 +391,20 @@ namespace kurlyk {
             bool sequential = false;                               ///< When \`true\`, blocks other requests until the current one finishes.
             bool removed = false;                                   ///< \`true\` when the manager-owned handle has been released; physical erase is deferred until all keys are empty.
             std::unordered_map<std::string, KeyState> keys;       ///< Mutable state per partition key.
+
+            LimitData() {}
+
+            LimitData(
+                long request_limit,
+                long period,
+                bool is_sequential,
+                bool is_removed,
+                const std::unordered_map<std::string, KeyState>& key_states)
+                : requests_per_period(request_limit),
+                  period_ms(period),
+                  sequential(is_sequential),
+                  removed(is_removed),
+                  keys(key_states) {}
         };
 
         /// \brief Marks a limit as removed and erases it only when no key state remains.

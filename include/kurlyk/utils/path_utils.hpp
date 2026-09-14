@@ -5,11 +5,31 @@
 /// \file path_utils.hpp
 /// \brief Provides platform-specific utilities for obtaining paths and file locations.
 
+#include <cstdint>
+#include <cstdlib>
+#include <stdexcept>
+#include <string>
+#include <vector>
+
+#if defined(_WIN32)
+#include <windows.h>
+#include <locale>
+#include <codecvt>
+#elif defined(__APPLE__)
+#include <limits.h>
+#include <mach-o/dyld.h>
+#include <unistd.h>
+#else
+#include <limits.h>
+#include <unistd.h>
+#endif
+
 #if __cplusplus >= 201703L
 #include <filesystem>
 #endif
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \brief Retrieves the directory of the executable file.
     /// \return A string containing the directory path of the executable.
@@ -46,6 +66,29 @@ namespace kurlyk::utils {
 		return converter.to_bytes(exe_path);
 #   	endif
 
+#       elif defined(__APPLE__)
+        uint32_t path_size = 0;
+        if (_NSGetExecutablePath(NULL, &path_size) != -1 || path_size == 0) {
+            throw std::runtime_error("Failed to determine executable path size.");
+        }
+
+        std::vector<char> buffer(path_size + 1, '\0');
+        if (_NSGetExecutablePath(buffer.data(), &path_size) != 0) {
+            throw std::runtime_error("Failed to get executable path.");
+        }
+
+        std::string exe_path(buffer.data());
+        std::vector<char> resolved_path(PATH_MAX, '\0');
+        if (realpath(exe_path.c_str(), resolved_path.data()) != NULL) {
+            exe_path.assign(resolved_path.data());
+        }
+
+        const size_t pos = exe_path.find_last_of("/");
+        if (pos != std::string::npos) {
+            exe_path.erase(pos);
+        }
+        return exe_path;
+
 #       else
         char result[PATH_MAX];
         ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
@@ -64,6 +107,7 @@ namespace kurlyk::utils {
 #       endif
     }
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_UTILS_PATH_UTILS_HPP_INCLUDED

@@ -9,6 +9,8 @@
 #include <string>
 #include <unordered_map>
 #include <stdexcept>
+#include <vector>
+#include <cstdint>
 
 // Optional third-party integration
 #if KURLYK_JSON_SUPPORT
@@ -26,5 +28,6 @@
 #include "types/SubmitResult.hpp"
 #include "types/type_utils.hpp"
 #include "types/Cookie.hpp"
+#include "types/ProxyConfig.hpp"
 
 #endif // KURLYK_HEADER_KURLYK_TYPES_HPP_INCLUDED

@@ -5,7 +5,8 @@
 /// \file encoding_utils.hpp
 /// \brief Provides character encoding conversion utilities (e.g., UTF-8 to ANSI).
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
 #   if defined(_WIN32)
     /// \brief Converts a UTF-8 string to an ANSI string (Windows-specific).
@@ -27,6 +28,7 @@ namespace kurlyk::utils {
     }
 #   endif
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_UTILS_ENCODING_UTILS_HPP_INCLUDED

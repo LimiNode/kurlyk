@@ -13,7 +13,7 @@
 | `include/kurlyk/startup` | Optional auto-initialization helpers. |
 | `examples/` | Usage examples built against bundled or system libs. |
 | `docs/` | Generated and hand-written documentation. |
-| `tests/integration` | Windows dependency and integration build checks. |
+| `tests/integration` | Cross-platform local HTTP/WebSocket integration build checks. |
 | `tests/odr` | Header-only ODR checks. |
 | `tests/smoke` | Portable header smoke checks. |
 
@@ -45,4 +45,4 @@ If codebase-memory MCP is unavailable, use `Grep` for symbol search, `Read` for 
 
 ### Avoid large artifacts
 
-Build directories (`build*/`, `libs/`, generated docs) are not source files. Exclude them from indexing and reading.
+Build directories (`build*/`, generated docs, and dependency artifacts under `external/`) are not source files. Exclude them from indexing and reading.

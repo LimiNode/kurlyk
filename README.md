@@ -52,7 +52,7 @@ int main() {
 }
 ```
 
-For C++11/14 or manual lifecycle management, use `kurlyk::init()` / `kurlyk::deinit()`.
+Use `kurlyk::init()` / `kurlyk::deinit()` when explicit lifecycle management is required.
 
 ### Minimal WebSocket echo
 
@@ -102,11 +102,11 @@ cmake -S . -B build-examples-mingw -G "MinGW Makefiles" `
 cmake --build build-examples-mingw --config Release
 ```
 
-For MinGW, dependencies are already available in the repository as git submodules in the `libs` folder, and the fallback CMake options below can build missing dependencies automatically.
+For MinGW, dependencies are available in the repository as git submodules in the `external` folder, and the fallback CMake options below can build missing dependencies automatically.
 
 ## Basic HTTP usage
 
-The HTTP client can be used through callbacks, futures, or low-level helpers. With auto-init enabled by default, you can create `HttpClient` without manual `kurlyk::init()` / `kurlyk::deinit()` calls; manual lifecycle management is needed for C++11/14, synchronous mode, or explicit worker control.
+The HTTP client can be used through callbacks, futures, or low-level helpers. With auto-init enabled by default, you can create `HttpClient` without manual `kurlyk::init()` / `kurlyk::deinit()` calls; use the lifecycle functions when synchronous or explicit worker control is required.
 
 ### Shared helper for examples
 
@@ -179,7 +179,7 @@ int main() {
 int main() {
     kurlyk::HttpClient client("https://httpbin.org");
 
-    client.set_proxy("127.0.0.1", 8080, "username", "password", kurlyk::ProxyType::HTTP);
+    client.set_proxy("127.0.0.1", 8080, "username", "password", kurlyk::ProxyType::PROXY_HTTP);
 
     client.get("/ip", kurlyk::QueryParams(), kurlyk::Headers(),
         [](const kurlyk::HttpResponsePtr response) {
@@ -304,7 +304,7 @@ client.set_max_send_queue_size(32);
 
 ## Initialization
 
-In C++17+, auto-initialization is available by default, so simple examples can create `HttpClient` or `WebSocketClient` immediately. For C++11/14 or manual mode, disable auto init and call `init()` / `deinit()` yourself.
+Auto-initialization is available by default in C++11 and newer, so simple examples can create `HttpClient` or `WebSocketClient` immediately. Disable auto init and call `init()` / `deinit()` when explicit lifecycle control is required.
 
 ```cpp
 #define KURLYK_AUTO_INIT 0
@@ -494,7 +494,7 @@ Proxy settings can be configured on `HttpClient`, and then they apply to request
 
 ```cpp
 kurlyk::HttpClient client("https://httpbin.org");
-client.set_proxy("127.0.0.1", 8080, "username", "password", kurlyk::ProxyType::HTTP);
+client.set_proxy("127.0.0.1", 8080, "username", "password", kurlyk::ProxyType::PROXY_HTTP);
 ```
 
 ## Installation and dependencies
@@ -503,8 +503,9 @@ client.set_proxy("127.0.0.1", 8080, "username", "password", kurlyk::ProxyType::H
 
 - **MSVC**
 - **MinGW (GCC)**
+- **AppleClang (macOS)**
 
-MSVC builds are currently considered unstable. The confirmed configuration is **C++17** with **Visual Studio 2022 (generator: Visual Studio 17 2022)**.
+The supported language baseline is **C++11**. Examples and integration tests use **C++17** where required by their source code. MSVC, MinGW, and AppleClang are covered by CI; macOS dependencies are provided by the system or Homebrew.
 
 ### Adding kurlyk
 
@@ -528,7 +529,7 @@ To use **kurlyk** in a MinGW environment, you need these dependencies:
 2. For HTTP:
    - [libcurl](https://curl.se/windows/)
 
-All dependencies are also included as submodules in the `libs` folder.
+All dependencies are also included as submodules in the `external` folder. Asio and Simple-WebSocket-Server are used from the checked-out submodules when available.
 
 ### OpenSSL
 
@@ -608,10 +609,10 @@ crypt32
 
 The library supports automatically downloading dependencies when they are missing. Fallback availability depends on the compiler and linkage type.
 
-| Dependency | MinGW (Shared) | MinGW (Static) | MSVC (Shared) | MSVC (Static) |
-|------------|---------------|---------------|---------------|---------------|
-| OpenSSL    | yes           | yes           | yes           | yes           |
-| curl       | yes           | yes           | yes           | no            |
+| Dependency | MinGW (Shared) | MinGW (Static) | MSVC (Shared) | MSVC (Static) | macOS (system/Homebrew) |
+|------------|---------------|---------------|---------------|---------------|-------------------------|
+| OpenSSL    | yes           | yes           | yes           | yes           | yes                     |
+| curl       | yes           | yes           | yes           | no            | yes                     |
 
 Asio and Simple-WebSocket-Server are header-only libraries and work for all listed build variants.
 
@@ -651,7 +652,7 @@ Define these macros before including `kurlyk.hpp` to configure the library:
 | `include/kurlyk/websocket` | WebSocket client and connection management. |
 | `include/kurlyk/types` | Shared enums, cookie, proxy config, and helpers. |
 | `include/kurlyk/utils` | Encoding, URL, HTTP, path, and error helpers. |
-| `tests/integration` | Windows dependency and integration build checks. |
+| `tests/integration` | Cross-platform local HTTP/WebSocket integration build checks. |
 | `tests/odr` | Header-only ODR checks. |
 | `tests/smoke` | Portable header smoke checks. |
 | `examples/` | Usage examples. |
@@ -693,11 +694,28 @@ powershell -ExecutionPolicy Bypass -File tests/odr/run_odr_tests.ps1
 Run the auth unit tests:
 
 ```bash
-cmake -S tests/auth -B build-auth-tests -G "MinGW Makefiles" -DKURLYK_BUILD_EXAMPLES=OFF
--DKURLYK_USE_FALLBACK_OPENSSL=ON -DKURLYK_USE_FALLBACK_CURL=ON
--DKURLYK_USE_FALLBACK_ASIO=ON -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON
-cmake --build build-auth-tests --config Release
+cmake -S tests/auth -B build-auth-tests -G Ninja \
+    -DKURLYK_BUILD_EXAMPLES=OFF \
+    -DKURLYK_USE_FALLBACK_ASIO=ON \
+    -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON
+cmake --build build-auth-tests
 ctest --test-dir build-auth-tests
+```
+
+On macOS, install the system dependencies with Homebrew and point CMake at the
+keg-only OpenSSL installation:
+
+```bash
+brew install ninja curl openssl@3
+OSSL="$(brew --prefix openssl@3)"
+CURL="$(brew --prefix curl)"
+PATH="$CURL/bin:$PATH" cmake -S tests/integration -B build-macos -G Ninja \
+    -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+    -DOPENSSL_ROOT_DIR="$OSSL" -DCMAKE_PREFIX_PATH="$OSSL;$CURL" \
+    -DKURLYK_USE_FALLBACK_ASIO=ON \
+    -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON
+cmake --build build-macos
+ctest --test-dir build-macos --output-on-failure
 ```
 
 Build the portable smoke test manually:
@@ -708,6 +726,12 @@ c++ tests/smoke/header_smoke.cpp -Iinclude -std=c++11 -o header_smoke
 
 c++ tests/smoke/header_smoke.cpp -Iinclude -std=c++17 -o header_smoke
 ./header_smoke
+
+c++ tests/smoke/http_header_smoke.cpp -Iinclude -std=c++11 -o http_header_smoke
+./http_header_smoke
+
+c++ tests/smoke/proxy_config_smoke.cpp -Iinclude -std=c++11 -o proxy_config_smoke
+./proxy_config_smoke
 ```
 
 ## Authentication helpers
@@ -729,8 +753,8 @@ See the full guides for details:
 |----------|----------|
 | Windows | MinGW and MSVC integration builds with fallback dependencies, HTTP backpressure regression, and local WebSocket integration coverage. |
 | Windows extras | ODR checks for singleton and auto-initialization headers. |
-| Linux | C++11/C++17 header smoke test with HTTP/WebSocket disabled. |
-| macOS | C++11/C++17 header smoke test with HTTP/WebSocket disabled. |
+| Linux | C++11/C++17 header smoke, C++11 HTTP/proxy checks, and C++17 integration examples. |
+| macOS | C++11/C++17 header smoke, C++11 HTTP/proxy checks, and C++17 integration tests. |
 
 ## Documentation
 

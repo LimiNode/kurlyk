@@ -5,7 +5,8 @@
 /// \file AutoInitializer.hpp
 /// \brief Provides automatic initialization and shutdown for the Kurlyk network system.
 
-namespace kurlyk::startup {
+namespace kurlyk {
+namespace startup {
 
     /// \class AutoInitializer
     /// \brief Automatically registers and manages network task managers.
@@ -43,10 +44,17 @@ namespace kurlyk::startup {
 #       endif
     };
 	
-	/// Convenience auto-init helper. Initialization order relative to other statics
-	/// is undefined; ensure_initialized() in client constructors is the reliable fallback.
-	inline AutoInitializer _kurlyk_auto_initializer;
+    /// \brief Returns the process-wide automatic initializer.
+    inline AutoInitializer& get_auto_initializer() {
+        static AutoInitializer instance;
+        return instance;
+    }
 
-} // namespace kurlyk::startup
+    /// Convenience auto-init helper. Initialization order relative to other statics
+    /// is undefined; ensure_initialized() in client constructors is the reliable fallback.
+    static AutoInitializer& _kurlyk_auto_initializer = get_auto_initializer();
+
+} // namespace startup
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_STARTUP_AUTO_INITIALIZER_HPP_INCLUDED

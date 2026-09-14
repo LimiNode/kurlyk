@@ -73,7 +73,7 @@ namespace kurlyk {
 
         /// \brief Checks if any managed backend-specific WebSocket client is currently running.
         /// \return True if at least one WebSocket client is in a running state, otherwise false.
-        const bool is_loaded() const override {
+        bool is_loaded() const override {
             std::lock_guard<std::mutex> lock(m_client_list_mutex);
             for (auto &&client_weak_ptr : m_client_list) {
                 if (auto client_ptr = client_weak_ptr.lock()) {

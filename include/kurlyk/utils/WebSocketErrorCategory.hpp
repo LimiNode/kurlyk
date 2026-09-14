@@ -5,7 +5,8 @@
 /// \file WebSocketErrorCategory.hpp
 /// \brief Defines the WebSocketError enumeration and corresponding error category for WebSocket-level failures.
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \enum WebSocketError
     /// \brief Represents protocol-level WebSocket errors.
@@ -57,7 +58,8 @@ namespace kurlyk::utils {
         return {static_cast<int>(e), websocket_error_category()};
     }
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 /// \brief Enables WebSocketError to be used with std::error_code.
 namespace std {

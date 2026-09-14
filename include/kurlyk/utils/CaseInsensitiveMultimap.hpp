@@ -5,7 +5,8 @@
 /// \file CaseInsensitiveMultimap.hpp
 /// \brief Defines case-insensitive utilities and data structures for HTTP headers, cookies, and query parameters.
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \brief Compares two strings case-insensitively.
     /// \param str1 First string to compare.
@@ -54,7 +55,8 @@ namespace kurlyk::utils {
 	/// \brief A case-insensitive unordered multimap specifically for storing HTTP cookies.
     using CaseInsensitiveCookieMultimap = std::unordered_multimap<std::string, Cookie, CaseInsensitiveHash, CaseInsensitiveEqual>;
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 namespace kurlyk {
 

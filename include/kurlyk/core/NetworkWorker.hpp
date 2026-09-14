@@ -10,7 +10,8 @@
 
 #include <thread>
 
-namespace kurlyk::core {
+namespace kurlyk {
+namespace core {
 
     /// \class NetworkWorker
     /// \brief Singleton worker that manages asynchronous network operations, including HTTP requests and WebSocket events.
@@ -269,7 +270,7 @@ namespace kurlyk::core {
 
         /// \brief Checks if there are any pending tasks in the task list.
         /// \return True if there are pending tasks, otherwise false.
-        const bool has_pending_tasks() const {
+        bool has_pending_tasks() const {
             std::lock_guard<std::mutex> lock(m_tasks_list_mutex);
             return !m_tasks_list.empty();
         }
@@ -278,7 +279,7 @@ namespace kurlyk::core {
         ///
         /// Checks if there are any tasks or events in the HTTP or WebSocket manager or in the task list.
         /// \return True if there are tasks or events to process; otherwise, false.
-        const bool is_loaded() const {
+        bool is_loaded() const {
             std::unique_lock<std::mutex> lock(m_managers_mutex);
             for (auto* m : m_managers) {
                 if (m->is_loaded()) return true;
@@ -289,6 +290,7 @@ namespace kurlyk::core {
 
     }; // NetworkWorker
 
-}; // namespace kurlyk
+} // namespace core
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_CORE_NETWORK_WORKER_HPP_INCLUDED

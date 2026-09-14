@@ -9,7 +9,8 @@
 #include <mutex>
 #include <condition_variable>
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \class EventQueue
     /// \brief A thread-safe event queue that supports blocking and non-blocking event retrieval.
@@ -55,6 +56,7 @@ namespace kurlyk::utils {
         std::condition_variable m_cond_var; ///< Condition variable for blocking until events are available.
     };
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_UTILS_EVENT_QUEUE_HPP_INCLUDED

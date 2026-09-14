@@ -260,9 +260,12 @@ namespace kurlyk {
             }
             if (!request.ca_file.empty()) {
                 curl_easy_setopt(m_curl, CURLOPT_CAINFO, request.ca_file.c_str());
-            } else {
+            }
+#           if defined(_WIN32)
+            else {
                 curl_easy_setopt(m_curl, CURLOPT_CAINFO, get_ca_file_path());
             }
+#           endif
             if (!request.ca_path.empty()) {
                 curl_easy_setopt(m_curl, CURLOPT_CAPATH, request.ca_path.c_str());
             }
