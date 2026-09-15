@@ -65,6 +65,18 @@ add_executable(proxy_checker_test
 	proxy_checker_main.cpp
 )
 
+# Reuse the long-lived OpenSSL test certificate instead of adding key material
+# to this repository. The submodule is initialized by the CI checkout.
+set(proxy_checker_test_ssl_file
+	"${CMAKE_CURRENT_SOURCE_DIR}/../../external/openssl-win64-v3.4.0/bin/PEM/server.pem")
+if(NOT EXISTS "${proxy_checker_test_ssl_file}")
+	message(FATAL_ERROR "Proxy checker HTTPS test certificate is missing: ${proxy_checker_test_ssl_file}")
+endif()
+file(TO_CMAKE_PATH "${proxy_checker_test_ssl_file}" proxy_checker_test_ssl_file)
+target_compile_definitions(proxy_checker_test PRIVATE
+	KURLYK_TEST_SSL_FILE="${proxy_checker_test_ssl_file}"
+)
+
 list(APPEND CMAKE_MODULE_PATH 
 	"${CMAKE_CURRENT_LIST_DIR}/../../cmake/deps"
 	"${CMAKE_CURRENT_LIST_DIR}/../../cmake"

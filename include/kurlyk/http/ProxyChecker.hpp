@@ -166,6 +166,7 @@ namespace detail {
             request->url = options.test_url;
             request->method = "HEAD";
             request->head_only = true;
+            request->ca_file = options.ca_file;
             request->follow_location = options.follow_redirects;
             request->proxy_server = proxy.proxy_server;
             request->proxy_auth = proxy.proxy_auth;
