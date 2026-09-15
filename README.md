@@ -195,7 +195,7 @@ int main() {
 
 ### Proxy checks
 
-`ProxyChecker` checks a passive `ProxyConfig` with one asynchronous `HEAD` request through the proxy. The test URL is configurable and defaults to `https://example.com/`; use an endpoint you control when reproducible availability checks matter. The checker disables retries and does not download the response body, matching the lightweight availability probe used for host discovery.
+`ProxyChecker` checks a passive `ProxyConfig` with one asynchronous `HEAD` request through the proxy. The test URL is configurable and defaults to `https://example.com/`; use an endpoint you control when reproducible availability checks matter. Redirect following and proxy tunneling are disabled by default so that a probe measures one endpoint through a regular HTTP proxy; enable `options.proxy_tunnel` explicitly when a CONNECT tunnel is required. For an HTTPS endpoint signed by a private CA, set `options.ca_file` to the CA bundle path. The checker disables retries and does not download the response body, matching the lightweight availability probe used for host discovery.
 
 ```cpp
 int main() {
