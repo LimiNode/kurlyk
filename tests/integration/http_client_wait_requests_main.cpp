@@ -196,8 +196,6 @@ int main() {
 
     // --- Test 5: future-based API with max_in_flight ---
     {
-        ProcessorGuard pg;
-
         auto client = std::make_unique<kurlyk::HttpClient>(base_url);
         client->set_max_in_flight(1);
 
@@ -209,6 +207,7 @@ int main() {
         require(rejected->error_code == kurlyk::utils::make_error_code(kurlyk::utils::ClientError::QueueLimitExceeded),
                 "rejected future must carry QueueLimitExceeded error code");
 
+        ProcessorGuard pg;
         auto completed = f1.get();
         require(completed && completed->ready, "first future must complete");
 
