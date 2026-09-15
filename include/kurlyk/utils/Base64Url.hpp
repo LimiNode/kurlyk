@@ -88,10 +88,10 @@ namespace utils {
 
         std::size_t i = 0;
         while (i < padded.size()) {
-            int8_t c0 = (padded[i] < 128) ? decode_table[static_cast<uint8_t>(padded[i])] : int8_t(-1);
-            int8_t c1 = (padded[i + 1] < 128) ? decode_table[static_cast<uint8_t>(padded[i + 1])] : int8_t(-1);
-            int8_t c2 = (padded[i + 2] < 128) ? decode_table[static_cast<uint8_t>(padded[i + 2])] : int8_t(-1);
-            int8_t c3 = (padded[i + 3] < 128) ? decode_table[static_cast<uint8_t>(padded[i + 3])] : int8_t(-1);
+            int8_t c0 = decode_table[static_cast<uint8_t>(padded[i])];
+            int8_t c1 = decode_table[static_cast<uint8_t>(padded[i + 1])];
+            int8_t c2 = decode_table[static_cast<uint8_t>(padded[i + 2])];
+            int8_t c3 = decode_table[static_cast<uint8_t>(padded[i + 3])];
 
             if (c0 < 0 || c1 < 0) break;
             if (c2 < 0 && padded[i + 2] != '=') break;

@@ -6,9 +6,9 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-blue)
 ![C++ Standard](https://img.shields.io/badge/C++-11--17-orange)
-![CI Windows](https://img.shields.io/github/actions/workflow/status/NewYaroslav/kurlyk/ci.yml?branch=main&label=Windows&logo=windows)
-![CI Linux](https://img.shields.io/github/actions/workflow/status/NewYaroslav/kurlyk/ci.yml?branch=main&label=Linux&logo=linux)
-![CI macOS](https://img.shields.io/github/actions/workflow/status/NewYaroslav/kurlyk/ci.yml?branch=main&label=macOS&logo=apple)
+![CI Windows](https://img.shields.io/github/actions/workflow/status/LimiNode/kurlyk/ci.yml?branch=main&label=Windows&logo=windows)
+![CI Linux](https://img.shields.io/github/actions/workflow/status/LimiNode/kurlyk/ci.yml?branch=main&label=Linux&logo=linux)
+![CI macOS](https://img.shields.io/github/actions/workflow/status/LimiNode/kurlyk/ci.yml?branch=main&label=macOS&logo=apple)
 
 [Do you speak English?](README.md)
 
@@ -732,6 +732,13 @@ c++ tests/smoke/http_header_smoke.cpp -Iinclude -std=c++11 -o http_header_smoke
 
 c++ tests/smoke/proxy_config_smoke.cpp -Iinclude -std=c++11 -o proxy_config_smoke
 ./proxy_config_smoke
+
+cmake -S tests/smoke -B build-full-cpp11-smoke -G Ninja \
+    -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+    -DKURLYK_USE_STANDALONE_ASIO=ON \
+    -DKURLYK_USE_FALLBACK_ASIO=ON \
+    -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON
+cmake --build build-full-cpp11-smoke
 ```
 
 ## Хелперы авторизации
@@ -753,8 +760,8 @@ c++ tests/smoke/proxy_config_smoke.cpp -Iinclude -std=c++11 -o proxy_config_smok
 |-----------|-----------------|
 | Windows | Integration-сборки MinGW и MSVC с fallback-зависимостями, HTTP backpressure regression и локальным WebSocket integration coverage. |
 | Windows extras | ODR-проверки singleton и auto-init заголовков. |
-| Linux | C++11/C++17 header smoke, C++11 HTTP/proxy checks и C++17 integration examples. |
-| macOS | C++11/C++17 header smoke, C++11 HTTP/proxy checks и C++17 integration tests. |
+| Linux | C++11/C++17 header smoke, C++11 HTTP/proxy checks, полный C++11 compile-only smoke HTTP/WebSocket и C++17 integration examples. |
+| macOS | C++11/C++17 header smoke, C++11 HTTP/proxy checks, полный C++11 compile-only smoke HTTP/WebSocket и C++17 integration tests. |
 
 ## Документация
 

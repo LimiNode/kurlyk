@@ -166,7 +166,7 @@ namespace kurlyk {
         template<class ConnectionType>
         void send_message(
                 const ConnectionType& connection,
-                const send_info_ptr_t& send_info) {
+                const std::shared_ptr<WebSocketSendInfo>& send_info) {
             connection->send(
                     send_info->message,
                     [this, send_info](const SimpleWeb::error_code &ec) {
@@ -186,7 +186,7 @@ namespace kurlyk {
         template<class ConnectionType>
         void send_close(
                 const ConnectionType& connection,
-                const send_info_ptr_t& send_info) {
+                const std::shared_ptr<WebSocketSendInfo>& send_info) {
             connection->send_close(
                     send_info->status,
                     send_info->message,

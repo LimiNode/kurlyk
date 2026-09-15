@@ -63,7 +63,7 @@ Asio and Simple-WebSocket-Server are header-only and work for all build variants
 
 ## Testing
 
-There is no dedicated unit test suite. When modifying library headers, compile at least one example from `examples/` (e.g., `simple_http_request_example.cpp`) to ensure the code still builds.
+The repository includes auth unit tests, integration tests, ODR checks, and portable smoke checks. When modifying library headers, compile at least one example from `examples/` (e.g., `simple_http_request_example.cpp`) to ensure the code still builds.
 
 ### Windows integration suite
 
@@ -106,6 +106,13 @@ c++ tests/smoke/http_header_smoke.cpp -Iinclude -std=c++11 -o http_header_smoke
 
 c++ tests/smoke/proxy_config_smoke.cpp -Iinclude -std=c++11 -o proxy_config_smoke
 ./proxy_config_smoke
+
+cmake -S tests/smoke -B build-full-cpp11-smoke -G Ninja \
+    -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+    -DKURLYK_USE_STANDALONE_ASIO=ON \
+    -DKURLYK_USE_FALLBACK_ASIO=ON \
+    -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON
+cmake --build build-full-cpp11-smoke
 ```
 
 ## CI Coverage
@@ -114,8 +121,8 @@ c++ tests/smoke/proxy_config_smoke.cpp -Iinclude -std=c++11 -o proxy_config_smok
 |----------|----------|
 | Windows | MinGW and MSVC integration builds with fallback dependencies, HTTP backpressure regression, and local WebSocket integration coverage. |
 | Windows extras | ODR checks for singleton and auto-initialization headers. |
-| Linux | C++11/C++17 header smoke, C++11 HTTP/proxy checks, and C++17 integration examples. |
-| macOS | C++11/C++17 header smoke, C++11 HTTP/proxy checks, and C++17 integration tests. |
+| Linux | C++11/C++17 header smoke, C++11 HTTP/proxy checks, full C++11 HTTP/WebSocket compile-only smoke, and C++17 integration examples. |
+| macOS | C++11/C++17 header smoke, C++11 HTTP/proxy checks, full C++11 HTTP/WebSocket compile-only smoke, and C++17 integration tests. |
 
 ## Documentation
 

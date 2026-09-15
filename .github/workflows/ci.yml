@@ -32,6 +32,21 @@ jobs:
         run: c++ tests/smoke/proxy_config_smoke.cpp -Iinclude -std=c++11 -o proxy_config_smoke
       - name: Run extended C++11 smoke tests
         run: ./http_header_smoke && ./proxy_config_smoke
+      - name: Configure full C++11 HTTP/WebSocket smoke test
+        if: matrix.std == 11
+        run: |
+          cmake -S tests/smoke \
+                -B build-linux-full-cpp11-smoke \
+                -G Ninja \
+                -DCMAKE_CXX_STANDARD=11 \
+                -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+                -DKURLYK_USE_STANDALONE_ASIO=ON \
+                -DKURLYK_USE_FALLBACK_ASIO=ON \
+                -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON \
+                -Wno-dev
+      - name: Build full C++11 HTTP/WebSocket smoke test
+        if: matrix.std == 11
+        run: cmake --build build-linux-full-cpp11-smoke
       - name: Configure Linux CMake build
         run: |
           cmake -S . \
@@ -48,10 +63,6 @@ jobs:
 
   macos:
     runs-on: macos-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        std: [11, 17]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -59,16 +70,33 @@ jobs:
       - run: git submodule update --init --recursive
       - name: Install macOS dependencies
         run: brew install ninja curl openssl@3
-      - name: Build smoke test
-        run: clang++ tests/smoke/header_smoke.cpp -Iinclude -std=c++${{ matrix.std }} -o header_smoke
-      - name: Run smoke test
-        run: ./header_smoke
+      - name: Build and run C++11 header smoke test
+        run: clang++ tests/smoke/header_smoke.cpp -Iinclude -std=c++11 -o header_smoke_cpp11 && ./header_smoke_cpp11
+      - name: Build and run C++17 header smoke test
+        run: clang++ tests/smoke/header_smoke.cpp -Iinclude -std=c++17 -o header_smoke_cpp17 && ./header_smoke_cpp17
       - name: Build C++11 HTTP header smoke test
         run: clang++ tests/smoke/http_header_smoke.cpp -Iinclude -I"$(brew --prefix curl)/include" -std=c++11 -o http_header_smoke
       - name: Build standalone ProxyConfig smoke test
         run: clang++ tests/smoke/proxy_config_smoke.cpp -Iinclude -std=c++11 -o proxy_config_smoke
       - name: Run extended C++11 smoke tests
         run: ./http_header_smoke && ./proxy_config_smoke
+      - name: Configure full C++11 HTTP/WebSocket smoke test
+        run: |
+          OSSL="$(brew --prefix openssl@3)"
+          CURL="$(brew --prefix curl)"
+          PATH="$CURL/bin:$PATH" cmake -S tests/smoke \
+            -B build-macos-full-cpp11-smoke \
+            -G Ninja \
+            -DCMAKE_CXX_STANDARD=11 \
+            -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+            -DOPENSSL_ROOT_DIR="$OSSL" \
+            -DCMAKE_PREFIX_PATH="$OSSL;$CURL" \
+            -DKURLYK_USE_STANDALONE_ASIO=ON \
+            -DKURLYK_USE_FALLBACK_ASIO=ON \
+            -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON \
+            -Wno-dev
+      - name: Build full C++11 HTTP/WebSocket smoke test
+        run: cmake --build build-macos-full-cpp11-smoke
       - name: Configure macOS integration build
         run: |
           OSSL="$(brew --prefix openssl@3)"
