@@ -66,14 +66,14 @@ var NAVTREEINDEX =
 [
 "ApiKeyAuthProvider_8hpp.html",
 "classkurlyk_1_1BaseWebSocketClient.html#a72a2e27d7ad5c63656e7c5bcf7443501",
-"classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af86ce671581b381b0a3b35d69ae2ce7a",
+"classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af41d639af9e1347c69385b1b1d38f2a6",
 "classkurlyk_1_1HttpRateLimiter.html#a1b0ae8afc3a8d16afaf948d541565cb4",
 "classkurlyk_1_1HttpRequestHandler.html#a6251acfa297b2d54d5fd9a25fe7c61f8",
-"classkurlyk_1_1SimpleWebSocketClientAdapter.html#abc783896a7c0120201888f7099558393",
+"classkurlyk_1_1SimpleWebSocketClientAdapter.html#ab70025bd3a9ad09ca1e37a509bc583c6",
 "classkurlyk_1_1WebSocketConfig.html#ae539bf1796067b4b55c8ab79bd8878d3",
 "classkurlyk_1_1utils_1_1CaseInsensitiveHash.html",
-"namespacekurlyk.html#a05cdd73b7c1848155486318277d32049",
-"structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html#a5f0e014e62111a81ae0d2fcfd261a185"
+"namespacekurlyk.html#a0f462a8938544ddea65307a63b036f25",
+"structkurlyk_1_1HttpRateLimiter_1_1LimitData.html#a8e4df7ba3cb3a98e71aa013618fbe40b"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

@@ -149,10 +149,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab3a76c53a4d29251fa9bedbd907a32be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiate connection to the WebSocket server.  <br /></td></tr>
 <tr class="memitem:a5a6615e09e9f306d7a20847abb9d1759" id="r_a5a6615e09e9f306d7a20847abb9d1759"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5a6615e09e9f306d7a20847abb9d1759">disconnect</a> () override final</td></tr>
 <tr class="memdesc:a5a6615e09e9f306d7a20847abb9d1759"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnect from the WebSocket server.  <br /></td></tr>
-<tr class="memitem:ae72ebb4548ff695e2f4dcc3f7b2684be" id="r_ae72ebb4548ff695e2f4dcc3f7b2684be"><td class="memItemLeft">const bool&#160;</td><td class="memItemRight"><a class="el" href="#ae72ebb4548ff695e2f4dcc3f7b2684be">is_connected</a> () override final</td></tr>
-<tr class="memdesc:ae72ebb4548ff695e2f4dcc3f7b2684be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the WebSocket is connected.  <br /></td></tr>
-<tr class="memitem:afcc61247f2c7b0d28ef6b3cafb45e1e2" id="r_afcc61247f2c7b0d28ef6b3cafb45e1e2"><td class="memItemLeft">const bool&#160;</td><td class="memItemRight"><a class="el" href="#afcc61247f2c7b0d28ef6b3cafb45e1e2">is_running</a> () override final</td></tr>
-<tr class="memdesc:afcc61247f2c7b0d28ef6b3cafb45e1e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the client is currently running.  <br /></td></tr>
+<tr class="memitem:a26b08df1a53314beae46a245354987f6" id="r_a26b08df1a53314beae46a245354987f6"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a26b08df1a53314beae46a245354987f6">is_connected</a> () override final</td></tr>
+<tr class="memdesc:a26b08df1a53314beae46a245354987f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the WebSocket is connected.  <br /></td></tr>
+<tr class="memitem:a864d0e10c40bf163a91c03ef9000e480" id="r_a864d0e10c40bf163a91c03ef9000e480"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a864d0e10c40bf163a91c03ef9000e480">is_running</a> () override final</td></tr>
+<tr class="memdesc:a864d0e10c40bf163a91c03ef9000e480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the client is currently running.  <br /></td></tr>
 <tr class="memitem:a1138e1eb9526fc3291378b4bf5e37fcd" id="r_a1138e1eb9526fc3291378b4bf5e37fcd"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a1138e1eb9526fc3291378b4bf5e37fcd">send_message</a> (const std::string &amp;message, const <a class="el" href="namespacekurlyk.html#a23c88f8eb4092642746144a019793ccf">RateLimitType</a> &amp;rate_limit_type=RateLimitType::General, std::function&lt; void(const std::error_code &amp;ec)&gt; callback=nullptr) override final</td></tr>
 <tr class="memdesc:a1138e1eb9526fc3291378b4bf5e37fcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a message through the WebSocket.  <br /></td></tr>
 <tr class="memitem:abf42363c3da264e62eb47de2fea3cb03" id="r_abf42363c3da264e62eb47de2fea3cb03"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abf42363c3da264e62eb47de2fea3cb03">send_close</a> (const int status=1000, const std::string &amp;reason=std::string(), std::function&lt; void(const std::error_code &amp;ec)&gt; callback=nullptr) override final</td></tr>
@@ -784,8 +784,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae72ebb4548ff695e2f4dcc3f7b2684be" name="ae72ebb4548ff695e2f4dcc3f7b2684be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae72ebb4548ff695e2f4dcc3f7b2684be">&#9670;&#160;</a></span>is_connected()</h2>
+<a id="a26b08df1a53314beae46a245354987f6" name="a26b08df1a53314beae46a245354987f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26b08df1a53314beae46a245354987f6">&#9670;&#160;</a></span>is_connected()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -794,7 +794,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const bool kurlyk::EmscriptenWebSocketClientAdapter::is_connected </td>
+          <td class="memname">bool kurlyk::EmscriptenWebSocketClientAdapter::is_connected </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -814,8 +814,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="afcc61247f2c7b0d28ef6b3cafb45e1e2" name="afcc61247f2c7b0d28ef6b3cafb45e1e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afcc61247f2c7b0d28ef6b3cafb45e1e2">&#9670;&#160;</a></span>is_running()</h2>
+<a id="a864d0e10c40bf163a91c03ef9000e480" name="a864d0e10c40bf163a91c03ef9000e480"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a864d0e10c40bf163a91c03ef9000e480">&#9670;&#160;</a></span>is_running()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -824,7 +824,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const bool kurlyk::EmscriptenWebSocketClientAdapter::is_running </td>
+          <td class="memname">bool kurlyk::EmscriptenWebSocketClientAdapter::is_running </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>

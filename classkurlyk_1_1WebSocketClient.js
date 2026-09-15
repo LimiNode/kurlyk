@@ -20,7 +20,7 @@ var classkurlyk_1_1WebSocketClient =
     [ "get_http_version", "classkurlyk_1_1WebSocketClient.html#a4a127e9ceb2a416a157bafe7cfe2e6ec", null ],
     [ "get_remote_endpoint", "classkurlyk_1_1WebSocketClient.html#a95984653716fa5f67c81bf0f88857b09", null ],
     [ "init_config", "classkurlyk_1_1WebSocketClient.html#a9a83ac539ae4d2f923e65f8eb76baa19", null ],
-    [ "is_connected", "classkurlyk_1_1WebSocketClient.html#a6e4d0aa9a9aaad0865cbf658f825fcce", null ],
+    [ "is_connected", "classkurlyk_1_1WebSocketClient.html#abf03f11d73f8aaa622ae13b4fe69480e", null ],
     [ "on_event", "classkurlyk_1_1WebSocketClient.html#a47b6b81cd77a4229a4780e04f2e050ea", null ],
     [ "operator=", "classkurlyk_1_1WebSocketClient.html#a6e4346b9d5311b8cfb93106f4ff79ca4", null ],
     [ "receive_event", "classkurlyk_1_1WebSocketClient.html#a5c090b319d0b808ffee54718062e6830", null ],

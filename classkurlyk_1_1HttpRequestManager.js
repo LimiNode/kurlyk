@@ -18,7 +18,7 @@ var classkurlyk_1_1HttpRequestManager =
     [ "group_request_count_unlocked", "classkurlyk_1_1HttpRequestManager.html#aaab4f9320e4f7223eddf1ef5c3254ca0", null ],
     [ "has_requests_by_group_id", "classkurlyk_1_1HttpRequestManager.html#a3379de1bbfdfdf98738ebe5386294752", null ],
     [ "invoke_cancel_callbacks", "classkurlyk_1_1HttpRequestManager.html#ae65a21bc9fe5d5179ccb0ca44b89d96c", null ],
-    [ "is_loaded", "classkurlyk_1_1HttpRequestManager.html#a9e2ee63ae946ead895ed458ecf6b0575", null ],
+    [ "is_loaded", "classkurlyk_1_1HttpRequestManager.html#a6075e5abdc1e063950aaa30f8ca03fd7", null ],
     [ "make_cancelled_response", "classkurlyk_1_1HttpRequestManager.html#abfc8ebcfa6bf8c9f16ab20ea7172d885", null ],
     [ "matches_cancel", "classkurlyk_1_1HttpRequestManager.html#a2a7c2f7109609764e9a3b1512de3eb4a", null ],
     [ "max_pending_requests", "classkurlyk_1_1HttpRequestManager.html#a1e5723c58f3c38cbfcadfe9ee1c4a8d8", null ],

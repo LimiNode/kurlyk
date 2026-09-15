@@ -131,6 +131,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structkurlyk_1
 <p>Immutable limit parameters plus per-key mutable state.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a48cbe9850e3369e25035dd9ddf1bbf8d" id="r_a48cbe9850e3369e25035dd9ddf1bbf8d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a48cbe9850e3369e25035dd9ddf1bbf8d">LimitData</a> ()</td></tr>
+<tr class="memitem:a8e4df7ba3cb3a98e71aa013618fbe40b" id="r_a8e4df7ba3cb3a98e71aa013618fbe40b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8e4df7ba3cb3a98e71aa013618fbe40b">LimitData</a> (long request_limit, long period, bool is_sequential, bool is_removed, const std::unordered_map&lt; std::string, <a class="el" href="structkurlyk_1_1HttpRateLimiter_1_1KeyState.html">KeyState</a> &gt; &amp;key_states)</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aa0e34b6deb26a4c981d25fdb126d8485" id="r_aa0e34b6deb26a4c981d25fdb126d8485"><td class="memItemLeft">long&#160;</td><td class="memItemRight"><a class="el" href="#aa0e34b6deb26a4c981d25fdb126d8485">requests_per_period</a> = 0</td></tr>
@@ -146,7 +151,81 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><p>Immutable limit parameters plus per-key mutable state. </p>
 
 <p class="definition">Definition at line <a class="el" href="HttpRateLimiter_8hpp_source.html#l00388">388</a> of file <a class="el" href="HttpRateLimiter_8hpp_source.html">HttpRateLimiter.hpp</a>.</p>
-</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a48cbe9850e3369e25035dd9ddf1bbf8d" name="a48cbe9850e3369e25035dd9ddf1bbf8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48cbe9850e3369e25035dd9ddf1bbf8d">&#9670;&#160;</a></span>LimitData() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">kurlyk::HttpRateLimiter::LimitData::LimitData </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="HttpRateLimiter_8hpp_source.html#l00395">395</a> of file <a class="el" href="HttpRateLimiter_8hpp_source.html">HttpRateLimiter.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8e4df7ba3cb3a98e71aa013618fbe40b" name="a8e4df7ba3cb3a98e71aa013618fbe40b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e4df7ba3cb3a98e71aa013618fbe40b">&#9670;&#160;</a></span>LimitData() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">kurlyk::HttpRateLimiter::LimitData::LimitData </td>
+          <td>(</td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>request_limit</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>period</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>is_sequential</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>is_removed</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::unordered_map&lt; std::string, <a class="el" href="structkurlyk_1_1HttpRateLimiter_1_1KeyState.html">KeyState</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>key_states</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="HttpRateLimiter_8hpp_source.html#l00397">397</a> of file <a class="el" href="HttpRateLimiter_8hpp_source.html">HttpRateLimiter.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="a6236f06540e3da7a8fed7888d6ed7e40" name="a6236f06540e3da7a8fed7888d6ed7e40"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6236f06540e3da7a8fed7888d6ed7e40">&#9670;&#160;</a></span>keys</h2>
 

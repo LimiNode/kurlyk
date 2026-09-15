@@ -137,24 +137,32 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('SubmitResult_8
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekurlyk.html">kurlyk</a> {</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span></div>
 <div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="structkurlyk_1_1SubmitResult.html">   14</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structkurlyk_1_1SubmitResult.html">SubmitResult</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="structkurlyk_1_1SubmitResult.html">   14</a></span>    <span class="keyword">struct </span><a class="code hl_function" href="structkurlyk_1_1SubmitResult.html#a88d028d557d710861d419b4002356f71">SubmitResult</a> {</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structkurlyk_1_1SubmitResult.html#a3d2ef31a2a258d98fd24644848ba34a0">   15</a></span>        <span class="keywordtype">bool</span>            <a class="code hl_variable" href="structkurlyk_1_1SubmitResult.html#a3d2ef31a2a258d98fd24644848ba34a0">accepted</a> = <span class="keyword">false</span>;   </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structkurlyk_1_1SubmitResult.html#acafc7ccc166c5ca6fe7eacc0bcc79f2c">   16</a></span>        std::error_code <a class="code hl_variable" href="structkurlyk_1_1SubmitResult.html#acafc7ccc166c5ca6fe7eacc0bcc79f2c">error_code</a>;         </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
-<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structkurlyk_1_1SubmitResult.html#a839c19f72be566cc4017352a95bb53d5">   19</a></span>        <span class="keyword">explicit</span> <span class="keyword">operator</span> bool()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structkurlyk_1_1SubmitResult.html#a3d2ef31a2a258d98fd24644848ba34a0">accepted</a>;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        }</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structkurlyk_1_1SubmitResult.html#a88d028d557d710861d419b4002356f71">   19</a></span>        <a class="code hl_function" href="structkurlyk_1_1SubmitResult.html#a88d028d557d710861d419b4002356f71">SubmitResult</a>() {}</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structkurlyk_1_1SubmitResult.html#a87ae8b36856b0185130a523331959406">   24</a></span>        <a class="code hl_function" href="structkurlyk_1_1SubmitResult.html#a87ae8b36856b0185130a523331959406">SubmitResult</a>(<span class="keywordtype">bool</span> is_accepted, <span class="keyword">const</span> std::error_code&amp; error)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            : <a class="code hl_variable" href="structkurlyk_1_1SubmitResult.html#a3d2ef31a2a258d98fd24644848ba34a0">accepted</a>(is_accepted), <a class="code hl_variable" href="structkurlyk_1_1SubmitResult.html#acafc7ccc166c5ca6fe7eacc0bcc79f2c">error_code</a>(error) {}</div>
 </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    };</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structkurlyk_1_1SubmitResult.html#a839c19f72be566cc4017352a95bb53d5">   28</a></span>        <span class="keyword">explicit</span> <span class="keyword">operator</span> bool()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structkurlyk_1_1SubmitResult.html#a3d2ef31a2a258d98fd24644848ba34a0">accepted</a>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        }</div>
 </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>} <span class="comment">// namespace kurlyk</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#endif </span><span class="comment">// KURLYK_HEADER_KURLYK_TYPES_SUBMIT_RESULT_HPP_INCLUDED</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    };</div>
+</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>} <span class="comment">// namespace kurlyk</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#endif </span><span class="comment">// KURLYK_HEADER_KURLYK_TYPES_SUBMIT_RESULT_HPP_INCLUDED</span></div>
 <div class="ttc" id="anamespacekurlyk_html"><div class="ttname"><a href="namespacekurlyk.html">kurlyk</a></div><div class="ttdoc">Primary namespace for the Kurlyk library, encompassing initialization, request management,...</div></div>
-<div class="ttc" id="astructkurlyk_1_1SubmitResult_html"><div class="ttname"><a href="structkurlyk_1_1SubmitResult.html">kurlyk::SubmitResult</a></div><div class="ttdoc">Represents the synchronous result of trying to enqueue or submit work.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">SubmitResult.hpp:14</a></div></div>
 <div class="ttc" id="astructkurlyk_1_1SubmitResult_html_a3d2ef31a2a258d98fd24644848ba34a0"><div class="ttname"><a href="structkurlyk_1_1SubmitResult.html#a3d2ef31a2a258d98fd24644848ba34a0">kurlyk::SubmitResult::accepted</a></div><div class="ttdeci">bool accepted</div><div class="ttdoc">Indicates whether the work item was accepted for processing.</div><div class="ttdef"><b>Definition</b> <a href="#l00015">SubmitResult.hpp:15</a></div></div>
+<div class="ttc" id="astructkurlyk_1_1SubmitResult_html_a87ae8b36856b0185130a523331959406"><div class="ttname"><a href="structkurlyk_1_1SubmitResult.html#a87ae8b36856b0185130a523331959406">kurlyk::SubmitResult::SubmitResult</a></div><div class="ttdeci">SubmitResult(bool is_accepted, const std::error_code &amp;error)</div><div class="ttdoc">Constructs an admission result.</div><div class="ttdef"><b>Definition</b> <a href="#l00024">SubmitResult.hpp:24</a></div></div>
+<div class="ttc" id="astructkurlyk_1_1SubmitResult_html_a88d028d557d710861d419b4002356f71"><div class="ttname"><a href="structkurlyk_1_1SubmitResult.html#a88d028d557d710861d419b4002356f71">kurlyk::SubmitResult::SubmitResult</a></div><div class="ttdeci">SubmitResult()</div><div class="ttdoc">Constructs a rejected result without an error code.</div><div class="ttdef"><b>Definition</b> <a href="#l00019">SubmitResult.hpp:19</a></div></div>
 <div class="ttc" id="astructkurlyk_1_1SubmitResult_html_acafc7ccc166c5ca6fe7eacc0bcc79f2c"><div class="ttname"><a href="structkurlyk_1_1SubmitResult.html#acafc7ccc166c5ca6fe7eacc0bcc79f2c">kurlyk::SubmitResult::error_code</a></div><div class="ttdeci">std::error_code error_code</div><div class="ttdoc">Describes the rejection reason when accepted is false.</div><div class="ttdef"><b>Definition</b> <a href="#l00016">SubmitResult.hpp:16</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

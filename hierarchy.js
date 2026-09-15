@@ -53,7 +53,7 @@ var hierarchy =
     ] ],
     [ "kurlyk::utils::PkcePair", "structkurlyk_1_1utils_1_1PkcePair.html", null ],
     [ "kurlyk::utils::ThreadSafePrintStream::PrintStream", "classkurlyk_1_1utils_1_1ThreadSafePrintStream_1_1PrintStream.html", null ],
-    [ "cryptox::ProxyConfig", "structcryptox_1_1ProxyConfig.html", null ],
+    [ "kurlyk::ProxyConfig", "structkurlyk_1_1ProxyConfig.html", null ],
     [ "kurlyk::WebSocketConfig::RateLimitData", "structkurlyk_1_1WebSocketConfig_1_1RateLimitData.html", null ],
     [ "kurlyk::RateLimitDelay&lt; Duration &gt;", "structkurlyk_1_1RateLimitDelay.html", null ],
     [ "kurlyk::SimpleWebSocketWorker", "classkurlyk_1_1SimpleWebSocketWorker.html", null ],

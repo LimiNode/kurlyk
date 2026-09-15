@@ -149,14 +149,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4ac0ffcbcafb3049f0de7211ffbe7d3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called periodically to process tasks.  <br /></td></tr>
 <tr class="memitem:a926caeba983919fd4916d2c3903ad912" id="r_a926caeba983919fd4916d2c3903ad912"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a926caeba983919fd4916d2c3903ad912">shutdown</a> ()=0</td></tr>
 <tr class="memdesc:a926caeba983919fd4916d2c3903ad912"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called during shutdown to clean up.  <br /></td></tr>
-<tr class="memitem:abb8aca1498e188f975d99c21029c5f99" id="r_abb8aca1498e188f975d99c21029c5f99"><td class="memItemLeft">virtual const bool&#160;</td><td class="memItemRight"><a class="el" href="#abb8aca1498e188f975d99c21029c5f99">is_loaded</a> () const =0</td></tr>
-<tr class="memdesc:abb8aca1498e188f975d99c21029c5f99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether the module has pending or active work.  <br /></td></tr>
+<tr class="memitem:a4052578422e5a1b4ee0a557c4d4c39c0" id="r_a4052578422e5a1b4ee0a557c4d4c39c0"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#a4052578422e5a1b4ee0a557c4d4c39c0">is_loaded</a> () const =0</td></tr>
+<tr class="memdesc:a4052578422e5a1b4ee0a557c4d4c39c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether the module has pending or active work.  <br /></td></tr>
 <tr class="memitem:a91c2fb48a15fb0ebc693c2c76c817055" id="r_a91c2fb48a15fb0ebc693c2c76c817055"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#a91c2fb48a15fb0ebc693c2c76c817055">~INetworkTaskManager</a> ()=default</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for modules managed by <a class="el" href="classkurlyk_1_1core_1_1NetworkWorker.html" title="Singleton worker that manages asynchronous network operations, including HTTP requests and WebSocket ...">NetworkWorker</a> (e.g., HTTP, WebSocket). </p>
 
-<p class="definition">Definition at line <a class="el" href="INetworkTaskManager_8hpp_source.html#l00012">12</a> of file <a class="el" href="INetworkTaskManager_8hpp_source.html">INetworkTaskManager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="INetworkTaskManager_8hpp_source.html#l00013">13</a> of file <a class="el" href="INetworkTaskManager_8hpp_source.html">INetworkTaskManager.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a91c2fb48a15fb0ebc693c2c76c817055" name="a91c2fb48a15fb0ebc693c2c76c817055"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a91c2fb48a15fb0ebc693c2c76c817055">&#9670;&#160;</a></span>~INetworkTaskManager()</h2>
@@ -184,8 +184,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="abb8aca1498e188f975d99c21029c5f99" name="abb8aca1498e188f975d99c21029c5f99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb8aca1498e188f975d99c21029c5f99">&#9670;&#160;</a></span>is_loaded()</h2>
+<a id="a4052578422e5a1b4ee0a557c4d4c39c0" name="a4052578422e5a1b4ee0a557c4d4c39c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4052578422e5a1b4ee0a557c4d4c39c0">&#9670;&#160;</a></span>is_loaded()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -194,7 +194,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual const bool kurlyk::core::INetworkTaskManager::is_loaded </td>
+          <td class="memname">virtual bool kurlyk::core::INetworkTaskManager::is_loaded </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -209,7 +209,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Indicates whether the module has pending or active work. </p>
 
-<p>Implemented in <a class="el" href="classkurlyk_1_1HttpRequestManager.html#a9e2ee63ae946ead895ed458ecf6b0575">kurlyk::HttpRequestManager</a>, and <a class="el" href="classkurlyk_1_1WebSocketManager.html#acb7af0c56d437f46174da0d98f8e060a">kurlyk::WebSocketManager</a>.</p>
+<p>Implemented in <a class="el" href="classkurlyk_1_1HttpRequestManager.html#a6075e5abdc1e063950aaa30f8ca03fd7">kurlyk::HttpRequestManager</a>, and <a class="el" href="classkurlyk_1_1WebSocketManager.html#a767d32aa9a316971d88c9426b9381289">kurlyk::WebSocketManager</a>.</p>
 
 </div>
 </div>

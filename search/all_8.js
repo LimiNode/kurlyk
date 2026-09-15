@@ -12,7 +12,7 @@ var searchData=
   ['handshake_9',['handshake',['../classSimpleWeb_1_1SocketClient_3_01WSS_01_4.html#a703ec170b773dab7111e6a8a88db25e4',1,'SimpleWeb::SocketClient&lt; WSS &gt;']]],
   ['has_5fevents_10',['has_events',['../classkurlyk_1_1utils_1_1EventQueue.html#aaba44663e4b583e4e82b655aba4a873f',1,'kurlyk::utils::EventQueue']]],
   ['has_5fgroup_5fid_11',['has_group_id',['../classkurlyk_1_1HttpBatchRequestHandler.html#a4a73c0df1f73d1be3e49672f48afd822',1,'kurlyk::HttpBatchRequestHandler']]],
-  ['has_5fpending_5ftasks_12',['has_pending_tasks',['../classkurlyk_1_1core_1_1NetworkWorker.html#aa3723ca939c54949dcc365a9c7afc0ff',1,'kurlyk::core::NetworkWorker']]],
+  ['has_5fpending_5ftasks_12',['has_pending_tasks',['../classkurlyk_1_1core_1_1NetworkWorker.html#a2d6f72f909ca34072015fdd4e49d2449',1,'kurlyk::core::NetworkWorker']]],
   ['has_5frequests_5fby_5fgroup_5fid_13',['has_requests_by_group_id',['../classkurlyk_1_1HttpRequestManager.html#a3379de1bbfdfdf98738ebe5386294752',1,'kurlyk::HttpRequestManager']]],
   ['head_5fonly_14',['head_only',['../classkurlyk_1_1HttpRequest.html#a2b822c2c1ea747c5163933cc6029f162',1,'kurlyk::HttpRequest']]],
   ['header_15',['HEADER',['../namespacekurlyk_1_1http_1_1auth.html#a6d97311dd747081d2a18a21d9a38cfcaa7ad4905b4543ab4a1637dd23c50e36ce',1,'kurlyk::http::auth']]],

@@ -135,6 +135,10 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structkurlyk_1
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a88d028d557d710861d419b4002356f71" id="r_a88d028d557d710861d419b4002356f71"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a88d028d557d710861d419b4002356f71">SubmitResult</a> ()</td></tr>
+<tr class="memdesc:a88d028d557d710861d419b4002356f71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a rejected result without an error code.  <br /></td></tr>
+<tr class="memitem:a87ae8b36856b0185130a523331959406" id="r_a87ae8b36856b0185130a523331959406"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a87ae8b36856b0185130a523331959406">SubmitResult</a> (bool is_accepted, const std::error_code &amp;error)</td></tr>
+<tr class="memdesc:a87ae8b36856b0185130a523331959406"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an admission result.  <br /></td></tr>
 <tr class="memitem:a839c19f72be566cc4017352a95bb53d5" id="r_a839c19f72be566cc4017352a95bb53d5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a839c19f72be566cc4017352a95bb53d5">operator bool</a> () const</td></tr>
 <tr class="memdesc:a839c19f72be566cc4017352a95bb53d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the result to a boolean accepted flag.  <br /></td></tr>
 </table><table class="memberdecls">
@@ -149,7 +153,77 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><p>Represents the synchronous result of trying to enqueue or submit work. </p>
 
 <p class="definition">Definition at line <a class="el" href="SubmitResult_8hpp_source.html#l00014">14</a> of file <a class="el" href="SubmitResult_8hpp_source.html">SubmitResult.hpp</a>.</p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a88d028d557d710861d419b4002356f71" name="a88d028d557d710861d419b4002356f71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88d028d557d710861d419b4002356f71">&#9670;&#160;</a></span>SubmitResult() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">kurlyk::SubmitResult::SubmitResult </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a rejected result without an error code. </p>
+
+<p class="definition">Definition at line <a class="el" href="SubmitResult_8hpp_source.html#l00019">19</a> of file <a class="el" href="SubmitResult_8hpp_source.html">SubmitResult.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a87ae8b36856b0185130a523331959406" name="a87ae8b36856b0185130a523331959406"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87ae8b36856b0185130a523331959406">&#9670;&#160;</a></span>SubmitResult() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">kurlyk::SubmitResult::SubmitResult </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>is_accepted</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::error_code &amp;</td>          <td class="paramname"><span class="paramname"><em>error</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs an admission result. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">is_accepted</td><td>Indicates whether the work item was accepted. </td></tr>
+    <tr><td class="paramname">error</td><td>Describes the rejection reason. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="SubmitResult_8hpp_source.html#l00024">24</a> of file <a class="el" href="SubmitResult_8hpp_source.html">SubmitResult.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a839c19f72be566cc4017352a95bb53d5" name="a839c19f72be566cc4017352a95bb53d5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a839c19f72be566cc4017352a95bb53d5">&#9670;&#160;</a></span>operator bool()</h2>
 
@@ -175,7 +249,7 @@ Public Attributes</h2></td></tr>
 
 <p>Converts the result to a boolean accepted flag. </p>
 
-<p class="definition">Definition at line <a class="el" href="SubmitResult_8hpp_source.html#l00019">19</a> of file <a class="el" href="SubmitResult_8hpp_source.html">SubmitResult.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SubmitResult_8hpp_source.html#l00028">28</a> of file <a class="el" href="SubmitResult_8hpp_source.html">SubmitResult.hpp</a>.</p>
 
 </div>
 </div>

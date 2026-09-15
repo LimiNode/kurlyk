@@ -132,23 +132,25 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('email__utils_8
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="email__utils_8hpp.html#abe201ee41650306e6e39375069fee316">    3</a></span><span class="preprocessor">#define KURLYK_HEADER_KURLYK_UTILS_EMAIL_UTILS_HPP_INCLUDED</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekurlyk_1_1utils.html">kurlyk::utils</a> {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span></div>
-<div class="foldopen" id="foldopen00013" data-start="{" data-end="}">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#a3d3ae4dc2e34cbea0769f6f7fd4bbdad">   13</a></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a3d3ae4dc2e34cbea0769f6f7fd4bbdad">is_valid_email_id</a>(<span class="keyword">const</span> std::string &amp;str) {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <span class="comment">// Regular expression to validate an email address format</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keyword">static</span> <span class="keyword">const</span> std::regex email_regex(</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            R<span class="stringliteral">&quot;(^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$)&quot;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="stringliteral">        );</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="stringliteral">        </span><span class="keywordflow">return</span> std::regex_match(str, email_regex);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    }</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekurlyk.html">kurlyk</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>utils {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span></div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#a3d3ae4dc2e34cbea0769f6f7fd4bbdad">   14</a></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a3d3ae4dc2e34cbea0769f6f7fd4bbdad">is_valid_email_id</a>(<span class="keyword">const</span> std::string &amp;str) {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="comment">// Regular expression to validate an email address format</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keyword">static</span> <span class="keyword">const</span> std::regex email_regex(</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>            R<span class="stringliteral">&quot;(^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$)&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="stringliteral">        );</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="stringliteral">        </span><span class="keywordflow">return</span> std::regex_match(str, email_regex);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    }</div>
 </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>} <span class="comment">// namespace kurlyk::utils</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#endif </span><span class="comment">// KURLYK_HEADER_KURLYK_UTILS_EMAIL_UTILS_HPP_INCLUDED</span></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html"><div class="ttname"><a href="namespacekurlyk_1_1utils.html">kurlyk::utils</a></div><div class="ttdef"><b>Definition</b> <a href="Base64Url_8hpp_source.html#l00013">Base64Url.hpp:13</a></div></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html_a3d3ae4dc2e34cbea0769f6f7fd4bbdad"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a3d3ae4dc2e34cbea0769f6f7fd4bbdad">kurlyk::utils::is_valid_email_id</a></div><div class="ttdeci">bool is_valid_email_id(const std::string &amp;str)</div><div class="ttdoc">Validates an email address format.</div><div class="ttdef"><b>Definition</b> <a href="#l00013">email_utils.hpp:13</a></div></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>} <span class="comment">// namespace utils</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>} <span class="comment">// namespace kurlyk</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif </span><span class="comment">// KURLYK_HEADER_KURLYK_UTILS_EMAIL_UTILS_HPP_INCLUDED</span></div>
+<div class="ttc" id="anamespacekurlyk_1_1utils_html_a3d3ae4dc2e34cbea0769f6f7fd4bbdad"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a3d3ae4dc2e34cbea0769f6f7fd4bbdad">kurlyk::utils::is_valid_email_id</a></div><div class="ttdeci">bool is_valid_email_id(const std::string &amp;str)</div><div class="ttdoc">Validates an email address format.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">email_utils.hpp:14</a></div></div>
+<div class="ttc" id="anamespacekurlyk_html"><div class="ttname"><a href="namespacekurlyk.html">kurlyk</a></div><div class="ttdoc">Primary namespace for the Kurlyk library, encompassing initialization, request management,...</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

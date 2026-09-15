@@ -231,12 +231,12 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:ad10c04851f0064abc7c5286f2f1a3d4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a WebSocket message.  <br /></td></tr>
 <tr class="memitem:ae900fee6597d924d08ac5f10418429b7" id="r_ae900fee6597d924d08ac5f10418429b7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae900fee6597d924d08ac5f10418429b7">send_close</a> (std::shared_ptr&lt; <a class="el" href="classkurlyk_1_1WebSocketSendInfo.html">WebSocketSendInfo</a> &gt; &amp;send_info) override final</td></tr>
 <tr class="memdesc:ae900fee6597d924d08ac5f10418429b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a WebSocket close request.  <br /></td></tr>
-<tr class="memitem:afc05c0d1bc846c1b98c38ea807f9b652" id="r_afc05c0d1bc846c1b98c38ea807f9b652"><td class="memTemplParams" colspan="2">template&lt;class ConnectionType&gt; </td></tr>
-<tr class="memitem:afc05c0d1bc846c1b98c38ea807f9b652 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afc05c0d1bc846c1b98c38ea807f9b652">send_message</a> (const ConnectionType &amp;connection, const <a class="el" href="classkurlyk_1_1BaseWebSocketClient.html#acc805eb1f17e560f42e43863f8d860f6">send_info_ptr_t</a> &amp;send_info)</td></tr>
-<tr class="memdesc:afc05c0d1bc846c1b98c38ea807f9b652"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to send a message on a specific connection type.  <br /></td></tr>
-<tr class="memitem:a9290e471d38fad9eba2648285acdc7bf" id="r_a9290e471d38fad9eba2648285acdc7bf"><td class="memTemplParams" colspan="2">template&lt;class ConnectionType&gt; </td></tr>
-<tr class="memitem:a9290e471d38fad9eba2648285acdc7bf template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9290e471d38fad9eba2648285acdc7bf">send_close</a> (const ConnectionType &amp;connection, const <a class="el" href="classkurlyk_1_1BaseWebSocketClient.html#acc805eb1f17e560f42e43863f8d860f6">send_info_ptr_t</a> &amp;send_info)</td></tr>
-<tr class="memdesc:a9290e471d38fad9eba2648285acdc7bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to send a close request on a specific connection type.  <br /></td></tr>
+<tr class="memitem:a384eac2270ecba2f8e5ca92279720cf6" id="r_a384eac2270ecba2f8e5ca92279720cf6"><td class="memTemplParams" colspan="2">template&lt;class ConnectionType&gt; </td></tr>
+<tr class="memitem:a384eac2270ecba2f8e5ca92279720cf6 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a384eac2270ecba2f8e5ca92279720cf6">send_message</a> (const ConnectionType &amp;connection, const std::shared_ptr&lt; <a class="el" href="classkurlyk_1_1WebSocketSendInfo.html">WebSocketSendInfo</a> &gt; &amp;send_info)</td></tr>
+<tr class="memdesc:a384eac2270ecba2f8e5ca92279720cf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to send a message on a specific connection type.  <br /></td></tr>
+<tr class="memitem:a0d68eb256b18834cbd6916d23ebacc0d" id="r_a0d68eb256b18834cbd6916d23ebacc0d"><td class="memTemplParams" colspan="2">template&lt;class ConnectionType&gt; </td></tr>
+<tr class="memitem:a0d68eb256b18834cbd6916d23ebacc0d template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0d68eb256b18834cbd6916d23ebacc0d">send_close</a> (const ConnectionType &amp;connection, const std::shared_ptr&lt; <a class="el" href="classkurlyk_1_1WebSocketSendInfo.html">WebSocketSendInfo</a> &gt; &amp;send_info)</td></tr>
+<tr class="memdesc:a0d68eb256b18834cbd6916d23ebacc0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to send a close request on a specific connection type.  <br /></td></tr>
 <tr class="memitem:ac331b6ad29a4b335f5c989d1a1dcb193" id="r_ac331b6ad29a4b335f5c989d1a1dcb193"><td class="memTemplParams" colspan="2">template&lt;class ClientType, class ConnectionType, class MessageType&gt; </td></tr>
 <tr class="memitem:ac331b6ad29a4b335f5c989d1a1dcb193 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac331b6ad29a4b335f5c989d1a1dcb193">init_client</a> ()</td></tr>
 <tr class="memdesc:ac331b6ad29a4b335f5c989d1a1dcb193"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a WebSocket client based on the provided type and sets up callbacks.  <br /></td></tr>
@@ -887,8 +887,8 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
-<a id="a9290e471d38fad9eba2648285acdc7bf" name="a9290e471d38fad9eba2648285acdc7bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9290e471d38fad9eba2648285acdc7bf">&#9670;&#160;</a></span>send_close() <span class="overload">[1/3]</span></h2>
+<a id="a0d68eb256b18834cbd6916d23ebacc0d" name="a0d68eb256b18834cbd6916d23ebacc0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d68eb256b18834cbd6916d23ebacc0d">&#9670;&#160;</a></span>send_close() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -906,7 +906,7 @@ template&lt;class ConnectionType&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classkurlyk_1_1BaseWebSocketClient.html#acc805eb1f17e560f42e43863f8d860f6">send_info_ptr_t</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>send_info</em></span>&#160;)</td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="classkurlyk_1_1WebSocketSendInfo.html">WebSocketSendInfo</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>send_info</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1019,8 +1019,8 @@ template&lt;class ConnectionType&gt; </div>
 
 </div>
 </div>
-<a id="afc05c0d1bc846c1b98c38ea807f9b652" name="afc05c0d1bc846c1b98c38ea807f9b652"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc05c0d1bc846c1b98c38ea807f9b652">&#9670;&#160;</a></span>send_message() <span class="overload">[1/3]</span></h2>
+<a id="a384eac2270ecba2f8e5ca92279720cf6" name="a384eac2270ecba2f8e5ca92279720cf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a384eac2270ecba2f8e5ca92279720cf6">&#9670;&#160;</a></span>send_message() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1038,7 +1038,7 @@ template&lt;class ConnectionType&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classkurlyk_1_1BaseWebSocketClient.html#acc805eb1f17e560f42e43863f8d860f6">send_info_ptr_t</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>send_info</em></span>&#160;)</td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="classkurlyk_1_1WebSocketSendInfo.html">WebSocketSendInfo</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>send_info</em></span>&#160;)</td>
         </tr>
       </table>
   </td>

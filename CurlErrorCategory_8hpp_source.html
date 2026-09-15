@@ -132,40 +132,42 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('CurlErrorCateg
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="CurlErrorCategory_8hpp.html#a2483f10fe770b2b9713f4418bc8329b8">    3</a></span><span class="preprocessor">#define KURLYK_HEADER_KURLYK_UTILS_CURL_ERROR_CATEGORY_HPP_INCLUDED</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekurlyk_1_1utils.html">kurlyk::utils</a> {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span></div>
-<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html">   12</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html">CurlErrorCategory</a> : <span class="keyword">public</span> std::error_category {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html#a10eb84def098d76f8d4e6fc93a99d4c6">   16</a></span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html#a10eb84def098d76f8d4e6fc93a99d4c6">name</a>() const noexcept<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;curl&quot;</span>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        }</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekurlyk.html">kurlyk</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>utils {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span></div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html">   13</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html">CurlErrorCategory</a> : <span class="keyword">public</span> std::error_category {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html#a10eb84def098d76f8d4e6fc93a99d4c6">   17</a></span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html#a10eb84def098d76f8d4e6fc93a99d4c6">name</a>() const noexcept<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;curl&quot;</span>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        }</div>
 </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
-<div class="foldopen" id="foldopen00023" data-start="{" data-end="}">
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html#a1a136a2cce2a5cfeecd15a444607270f">   23</a></span>        std::string <a class="code hl_function" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html#a1a136a2cce2a5cfeecd15a444607270f">message</a>(<span class="keywordtype">int</span> ev)<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <span class="keywordflow">return</span> curl_easy_strerror(<span class="keyword">static_cast&lt;</span>CURLcode<span class="keyword">&gt;</span>(ev));</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        }</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html#a1a136a2cce2a5cfeecd15a444607270f">   24</a></span>        std::string <a class="code hl_function" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html#a1a136a2cce2a5cfeecd15a444607270f">message</a>(<span class="keywordtype">int</span> ev)<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="keywordflow">return</span> curl_easy_strerror(<span class="keyword">static_cast&lt;</span>CURLcode<span class="keyword">&gt;</span>(ev));</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        }</div>
 </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    };</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    };</div>
 </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
-<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#a4e1f8c34b442bd0f02731778fe175bd7">   31</a></span>    <span class="keyword">inline</span> std::error_code <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a9c3dc895b9661682fcc279a7c6045480">make_error_code</a>(CURLcode e) {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keyword">static</span> <a class="code hl_class" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html">CurlErrorCategory</a> category;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordflow">return</span> {<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(e), category};</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    }</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span></div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#a4e1f8c34b442bd0f02731778fe175bd7">   32</a></span>    <span class="keyword">inline</span> std::error_code <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a9c3dc895b9661682fcc279a7c6045480">make_error_code</a>(CURLcode e) {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keyword">static</span> <a class="code hl_class" href="classkurlyk_1_1utils_1_1CurlErrorCategory.html">CurlErrorCategory</a> category;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordflow">return</span> {<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(e), category};</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    }</div>
 </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>} <span class="comment">// namespace kurlyk::utils</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#endif </span><span class="comment">// KURLYK_HEADER_KURLYK_UTILS_CURL_ERROR_CATEGORY_HPP_INCLUDED</span></div>
-<div class="ttc" id="aclasskurlyk_1_1utils_1_1CurlErrorCategory_html"><div class="ttname"><a href="classkurlyk_1_1utils_1_1CurlErrorCategory.html">kurlyk::utils::CurlErrorCategory</a></div><div class="ttdoc">Represents a custom error category for CURL errors, enabling integration with std::error_code.</div><div class="ttdef"><b>Definition</b> <a href="#l00012">CurlErrorCategory.hpp:12</a></div></div>
-<div class="ttc" id="aclasskurlyk_1_1utils_1_1CurlErrorCategory_html_a10eb84def098d76f8d4e6fc93a99d4c6"><div class="ttname"><a href="classkurlyk_1_1utils_1_1CurlErrorCategory.html#a10eb84def098d76f8d4e6fc93a99d4c6">kurlyk::utils::CurlErrorCategory::name</a></div><div class="ttdeci">const char * name() const noexcept override</div><div class="ttdoc">Returns the name of the error category.</div><div class="ttdef"><b>Definition</b> <a href="#l00016">CurlErrorCategory.hpp:16</a></div></div>
-<div class="ttc" id="aclasskurlyk_1_1utils_1_1CurlErrorCategory_html_a1a136a2cce2a5cfeecd15a444607270f"><div class="ttname"><a href="classkurlyk_1_1utils_1_1CurlErrorCategory.html#a1a136a2cce2a5cfeecd15a444607270f">kurlyk::utils::CurlErrorCategory::message</a></div><div class="ttdeci">std::string message(int ev) const override</div><div class="ttdoc">Returns a descriptive error message for a given CURL error code.</div><div class="ttdef"><b>Definition</b> <a href="#l00023">CurlErrorCategory.hpp:23</a></div></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html"><div class="ttname"><a href="namespacekurlyk_1_1utils.html">kurlyk::utils</a></div><div class="ttdef"><b>Definition</b> <a href="Base64Url_8hpp_source.html#l00013">Base64Url.hpp:13</a></div></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html_a9c3dc895b9661682fcc279a7c6045480"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a9c3dc895b9661682fcc279a7c6045480">kurlyk::utils::make_error_code</a></div><div class="ttdeci">std::error_code make_error_code(ClientError e)</div><div class="ttdoc">Creates a std::error_code from a ClientError value.</div><div class="ttdef"><b>Definition</b> <a href="ClientErrorCategory_8hpp_source.html#l00062">ClientErrorCategory.hpp:62</a></div></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>} <span class="comment">// namespace utils</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>} <span class="comment">// namespace kurlyk</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif </span><span class="comment">// KURLYK_HEADER_KURLYK_UTILS_CURL_ERROR_CATEGORY_HPP_INCLUDED</span></div>
+<div class="ttc" id="aclasskurlyk_1_1utils_1_1CurlErrorCategory_html"><div class="ttname"><a href="classkurlyk_1_1utils_1_1CurlErrorCategory.html">kurlyk::utils::CurlErrorCategory</a></div><div class="ttdoc">Represents a custom error category for CURL errors, enabling integration with std::error_code.</div><div class="ttdef"><b>Definition</b> <a href="#l00013">CurlErrorCategory.hpp:13</a></div></div>
+<div class="ttc" id="aclasskurlyk_1_1utils_1_1CurlErrorCategory_html_a10eb84def098d76f8d4e6fc93a99d4c6"><div class="ttname"><a href="classkurlyk_1_1utils_1_1CurlErrorCategory.html#a10eb84def098d76f8d4e6fc93a99d4c6">kurlyk::utils::CurlErrorCategory::name</a></div><div class="ttdeci">const char * name() const noexcept override</div><div class="ttdoc">Returns the name of the error category.</div><div class="ttdef"><b>Definition</b> <a href="#l00017">CurlErrorCategory.hpp:17</a></div></div>
+<div class="ttc" id="aclasskurlyk_1_1utils_1_1CurlErrorCategory_html_a1a136a2cce2a5cfeecd15a444607270f"><div class="ttname"><a href="classkurlyk_1_1utils_1_1CurlErrorCategory.html#a1a136a2cce2a5cfeecd15a444607270f">kurlyk::utils::CurlErrorCategory::message</a></div><div class="ttdeci">std::string message(int ev) const override</div><div class="ttdoc">Returns a descriptive error message for a given CURL error code.</div><div class="ttdef"><b>Definition</b> <a href="#l00024">CurlErrorCategory.hpp:24</a></div></div>
+<div class="ttc" id="anamespacekurlyk_1_1utils_html_a9c3dc895b9661682fcc279a7c6045480"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a9c3dc895b9661682fcc279a7c6045480">kurlyk::utils::make_error_code</a></div><div class="ttdeci">std::error_code make_error_code(ClientError e)</div><div class="ttdoc">Creates a std::error_code from a ClientError value.</div><div class="ttdef"><b>Definition</b> <a href="ClientErrorCategory_8hpp_source.html#l00063">ClientErrorCategory.hpp:63</a></div></div>
+<div class="ttc" id="anamespacekurlyk_html"><div class="ttname"><a href="namespacekurlyk.html">kurlyk</a></div><div class="ttdoc">Primary namespace for the Kurlyk library, encompassing initialization, request management,...</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

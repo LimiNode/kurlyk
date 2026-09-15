@@ -21,6 +21,7 @@ var namespacekurlyk =
     [ "IWebSocketSender", "classkurlyk_1_1IWebSocketSender.html", "classkurlyk_1_1IWebSocketSender" ],
     [ "OAuthConfig", "structkurlyk_1_1OAuthConfig.html", "structkurlyk_1_1OAuthConfig" ],
     [ "OAuthToken", "structkurlyk_1_1OAuthToken.html", "structkurlyk_1_1OAuthToken" ],
+    [ "ProxyConfig", "structkurlyk_1_1ProxyConfig.html", "structkurlyk_1_1ProxyConfig" ],
     [ "RateLimitDelay", "structkurlyk_1_1RateLimitDelay.html", "structkurlyk_1_1RateLimitDelay" ],
     [ "SimpleWebSocketClientAdapter", "classkurlyk_1_1SimpleWebSocketClientAdapter.html", "classkurlyk_1_1SimpleWebSocketClientAdapter" ],
     [ "SimpleWebSocketWorker", "classkurlyk_1_1SimpleWebSocketWorker.html", "classkurlyk_1_1SimpleWebSocketWorker" ],

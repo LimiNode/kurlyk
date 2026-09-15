@@ -132,39 +132,41 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('http__utils_8h
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="http__utils_8hpp.html#a6e095bb207579aeef86bf7edc05cec9a">    3</a></span><span class="preprocessor">#define KURLYK_HEADER_KURLYK_UTILS_HTTP_UTILS_HPP_INCLUDED</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekurlyk_1_1utils.html">kurlyk::utils</a> {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span></div>
-<div class="foldopen" id="foldopen00013" data-start="{" data-end="}">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#aea756180c07f19d1505f2e324ea68c3c">   13</a></span>    <span class="keyword">inline</span> std::string <a class="code hl_function" href="namespacekurlyk_1_1utils.html#aea756180c07f19d1505f2e324ea68c3c">remove_http_prefix</a>(<span class="keyword">const</span> std::string&amp; url) {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <span class="keyword">const</span> std::string https_prefix = <span class="stringliteral">&quot;https://&quot;</span>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keyword">const</span> std::string http_prefix = <span class="stringliteral">&quot;http://&quot;</span>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        std::string modified_url = url;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="comment">// Find the position of &quot;https://&quot; or &quot;http://&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        std::size_t pos = modified_url.find(https_prefix);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordflow">if</span> (pos == std::string::npos) {</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            pos = modified_url.find(http_prefix);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        }</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="comment">// If found, erase the substring</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">if</span> (pos != std::string::npos) {</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <span class="keywordflow">if</span> (modified_url.compare(pos, https_prefix.length(), https_prefix) == 0) {</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                modified_url.erase(pos, https_prefix.length());</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (modified_url.compare(pos, http_prefix.length(), http_prefix) == 0) {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                modified_url.erase(pos, http_prefix.length());</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            }</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        }</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordflow">return</span> modified_url;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    }</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekurlyk.html">kurlyk</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>utils {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span></div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#aea756180c07f19d1505f2e324ea68c3c">   14</a></span>    <span class="keyword">inline</span> std::string <a class="code hl_function" href="namespacekurlyk_1_1utils.html#aea756180c07f19d1505f2e324ea68c3c">remove_http_prefix</a>(<span class="keyword">const</span> std::string&amp; url) {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keyword">const</span> std::string https_prefix = <span class="stringliteral">&quot;https://&quot;</span>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keyword">const</span> std::string http_prefix = <span class="stringliteral">&quot;http://&quot;</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        std::string modified_url = url;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="comment">// Find the position of &quot;https://&quot; or &quot;http://&quot;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        std::size_t pos = modified_url.find(https_prefix);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordflow">if</span> (pos == std::string::npos) {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            pos = modified_url.find(http_prefix);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="comment">// If found, erase the substring</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordflow">if</span> (pos != std::string::npos) {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            <span class="keywordflow">if</span> (modified_url.compare(pos, https_prefix.length(), https_prefix) == 0) {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                modified_url.erase(pos, https_prefix.length());</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (modified_url.compare(pos, http_prefix.length(), http_prefix) == 0) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                modified_url.erase(pos, http_prefix.length());</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            }</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        }</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">return</span> modified_url;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
 </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>} <span class="comment">// namespace kurlyk::utils</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#endif </span><span class="comment">// KURLYK_HEADER_KURLYK_UTILS_HTTP_UTILS_HPP_INCLUDED</span></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html"><div class="ttname"><a href="namespacekurlyk_1_1utils.html">kurlyk::utils</a></div><div class="ttdef"><b>Definition</b> <a href="Base64Url_8hpp_source.html#l00013">Base64Url.hpp:13</a></div></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html_aea756180c07f19d1505f2e324ea68c3c"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#aea756180c07f19d1505f2e324ea68c3c">kurlyk::utils::remove_http_prefix</a></div><div class="ttdeci">std::string remove_http_prefix(const std::string &amp;url)</div><div class="ttdoc">Removes the first occurrence of &quot;https://&quot; or &quot;http://&quot; from the given URL.</div><div class="ttdef"><b>Definition</b> <a href="#l00013">http_utils.hpp:13</a></div></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>} <span class="comment">// namespace utils</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>} <span class="comment">// namespace kurlyk</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#endif </span><span class="comment">// KURLYK_HEADER_KURLYK_UTILS_HTTP_UTILS_HPP_INCLUDED</span></div>
+<div class="ttc" id="anamespacekurlyk_1_1utils_html_aea756180c07f19d1505f2e324ea68c3c"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#aea756180c07f19d1505f2e324ea68c3c">kurlyk::utils::remove_http_prefix</a></div><div class="ttdeci">std::string remove_http_prefix(const std::string &amp;url)</div><div class="ttdoc">Removes the first occurrence of &quot;https://&quot; or &quot;http://&quot; from the given URL.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">http_utils.hpp:14</a></div></div>
+<div class="ttc" id="anamespacekurlyk_html"><div class="ttname"><a href="namespacekurlyk.html">kurlyk</a></div><div class="ttdoc">Primary namespace for the Kurlyk library, encompassing initialization, request management,...</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

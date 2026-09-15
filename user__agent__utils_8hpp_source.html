@@ -132,31 +132,33 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('user__agent__u
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="user__agent__utils_8hpp.html#a89fca9d4850f777111bf29cf89c1932d">    3</a></span><span class="preprocessor">#define KURLYK_HEADER_KURLYK_UTILS_USER_AGENT_UTILS_HPP_INCLUDED</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekurlyk_1_1utils.html">kurlyk::utils</a> {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span></div>
-<div class="foldopen" id="foldopen00013" data-start="{" data-end="}">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#abd20c4f9a5c41f92bf5589dce7dcc2ec">   13</a></span>    <span class="keyword">inline</span> std::string <a class="code hl_function" href="namespacekurlyk_1_1utils.html#abd20c4f9a5c41f92bf5589dce7dcc2ec">convert_user_agent_to_sec_ch_ua</a>(<span class="keyword">const</span> std::string&amp; user_agent) {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <span class="comment">// Regular expression to extract the browser name and version from User-Agent</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keyword">static</span> <span class="keyword">const</span> std::regex browser_regex(R<span class="stringliteral">&quot;(Chrome/(\d+)\.\d+\.\d+\.\d+)&quot;);</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="stringliteral">        std::string version = </span><span class="stringliteral">&quot;0&quot;</span>;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="comment">// Match the User-Agent string to extract the Chrome version</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        std::smatch match;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordflow">if</span> (std::regex_search(user_agent, match, browser_regex) &amp;&amp; match.size() &gt; 1) {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            version = match[1].str(); <span class="comment">// Extract version number</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        }</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="comment">// Generate sec-ch-ua header</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        std::string sec_ch_ua = <span class="stringliteral">&quot;\&quot;Not;A Brand\&quot;;v=\&quot;99\&quot;, \&quot;Google Chrome\&quot;;v=\&quot;&quot;</span> + version + <span class="stringliteral">&quot;\&quot;, \&quot;Chromium\&quot;;v=\&quot;&quot;</span> + version + <span class="stringliteral">&quot;\&quot;&quot;</span>;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">return</span> sec_ch_ua;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    }</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekurlyk.html">kurlyk</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>utils {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span></div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#abd20c4f9a5c41f92bf5589dce7dcc2ec">   14</a></span>    <span class="keyword">inline</span> std::string <a class="code hl_function" href="namespacekurlyk_1_1utils.html#abd20c4f9a5c41f92bf5589dce7dcc2ec">convert_user_agent_to_sec_ch_ua</a>(<span class="keyword">const</span> std::string&amp; user_agent) {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="comment">// Regular expression to extract the browser name and version from User-Agent</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keyword">static</span> <span class="keyword">const</span> std::regex browser_regex(R<span class="stringliteral">&quot;(Chrome/(\d+)\.\d+\.\d+\.\d+)&quot;);</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="stringliteral">        std::string version = </span><span class="stringliteral">&quot;0&quot;</span>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="comment">// Match the User-Agent string to extract the Chrome version</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        std::smatch match;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordflow">if</span> (std::regex_search(user_agent, match, browser_regex) &amp;&amp; match.size() &gt; 1) {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            version = match[1].str(); <span class="comment">// Extract version number</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        }</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="comment">// Generate sec-ch-ua header</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        std::string sec_ch_ua = <span class="stringliteral">&quot;\&quot;Not;A Brand\&quot;;v=\&quot;99\&quot;, \&quot;Google Chrome\&quot;;v=\&quot;&quot;</span> + version + <span class="stringliteral">&quot;\&quot;, \&quot;Chromium\&quot;;v=\&quot;&quot;</span> + version + <span class="stringliteral">&quot;\&quot;&quot;</span>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordflow">return</span> sec_ch_ua;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
 </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>} <span class="comment">// namespace kurlyk::utils</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif </span><span class="comment">// KURLYK_HEADER_KURLYK_UTILS_USER_AGENT_UTILS_HPP_INCLUDED</span></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html"><div class="ttname"><a href="namespacekurlyk_1_1utils.html">kurlyk::utils</a></div><div class="ttdef"><b>Definition</b> <a href="Base64Url_8hpp_source.html#l00013">Base64Url.hpp:13</a></div></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html_abd20c4f9a5c41f92bf5589dce7dcc2ec"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#abd20c4f9a5c41f92bf5589dce7dcc2ec">kurlyk::utils::convert_user_agent_to_sec_ch_ua</a></div><div class="ttdeci">std::string convert_user_agent_to_sec_ch_ua(const std::string &amp;user_agent)</div><div class="ttdoc">Converts a User-Agent string to a sec-ch-ua header value.</div><div class="ttdef"><b>Definition</b> <a href="#l00013">user_agent_utils.hpp:13</a></div></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>} <span class="comment">// namespace utils</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>} <span class="comment">// namespace kurlyk</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#endif </span><span class="comment">// KURLYK_HEADER_KURLYK_UTILS_USER_AGENT_UTILS_HPP_INCLUDED</span></div>
+<div class="ttc" id="anamespacekurlyk_1_1utils_html_abd20c4f9a5c41f92bf5589dce7dcc2ec"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#abd20c4f9a5c41f92bf5589dce7dcc2ec">kurlyk::utils::convert_user_agent_to_sec_ch_ua</a></div><div class="ttdeci">std::string convert_user_agent_to_sec_ch_ua(const std::string &amp;user_agent)</div><div class="ttdoc">Converts a User-Agent string to a sec-ch-ua header value.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">user_agent_utils.hpp:14</a></div></div>
+<div class="ttc" id="anamespacekurlyk_html"><div class="ttname"><a href="namespacekurlyk.html">kurlyk</a></div><div class="ttdoc">Primary namespace for the Kurlyk library, encompassing initialization, request management,...</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

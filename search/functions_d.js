@@ -27,6 +27,6 @@ var searchData=
   ['process_5fstate_5fstopped_24',['process_state_stopped',['../classkurlyk_1_1BaseWebSocketClient.html#a671df48c879ca8a37ba35fd2786483d1',1,'kurlyk::BaseWebSocketClient']]],
   ['process_5fstate_5fworking_25',['process_state_working',['../classkurlyk_1_1BaseWebSocketClient.html#a0ab5409ba23061d41a7c8c1bfb4aa9b0',1,'kurlyk::BaseWebSocketClient']]],
   ['process_5ftasks_26',['process_tasks',['../classkurlyk_1_1core_1_1NetworkWorker.html#a93df14a541c38e6b560ddc34ce26cc40',1,'kurlyk::core::NetworkWorker']]],
-  ['proxyconfig_27',['ProxyConfig',['../structcryptox_1_1ProxyConfig.html#a6cf8d7e9886c594f9ca7ac1b2282d0e0',1,'cryptox::ProxyConfig::ProxyConfig()'],['../structcryptox_1_1ProxyConfig.html#a651cd6933edab889da366b18224942e3',1,'cryptox::ProxyConfig::ProxyConfig(std::string server, std::string auth, ProxyType type)']]],
+  ['proxyconfig_27',['ProxyConfig',['../structkurlyk_1_1ProxyConfig.html#aa42a5d41087b973aa9ac1abb1ef381ed',1,'kurlyk::ProxyConfig::ProxyConfig()'],['../structkurlyk_1_1ProxyConfig.html#a1bd6dd222c34df5a78e7ac1a88cb14c1',1,'kurlyk::ProxyConfig::ProxyConfig(std::string server, std::string auth, ProxyType type=ProxyType::PROXY_HTTP)']]],
   ['push_5fevent_28',['push_event',['../classkurlyk_1_1utils_1_1EventQueue.html#a1b51d56e00cdf17c5c997a66d60a1966',1,'kurlyk::utils::EventQueue::push_event(T &amp;&amp;event)'],['../classkurlyk_1_1utils_1_1EventQueue.html#a3ee4788a039a86f6ebe0053176d4bb09',1,'kurlyk::utils::EventQueue::push_event(const T &amp;event)']]]
 ];

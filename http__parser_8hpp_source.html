@@ -132,190 +132,192 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('http__parser_8
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="http__parser_8hpp.html#ae045b983c555c9173ed522b85c0298b4">    3</a></span><span class="preprocessor">#define KURLYK_HEADER_KURLYK_UTILS_HTTP_PARSER_HPP_INCLUDED</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekurlyk_1_1utils.html">kurlyk::utils</a> {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span></div>
-<div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#a3b1cd5f15fb69272985ebb3a0f903c2c">   15</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a3b1cd5f15fb69272985ebb3a0f903c2c">parse_http_header_pair</a>(</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            <span class="keyword">const</span> <span class="keywordtype">char</span> *buffer,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>            <span class="keyword">const</span> <span class="keywordtype">size_t</span>&amp; size,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            std::string&amp; key,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            std::string&amp; value) {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        std::string header(buffer, size);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordflow">if</span> (header.size() &lt; 3) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        std::size_t colon_pos = header.find_first_of(<span class="stringliteral">&quot;:&quot;</span>);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        std::size_t start_pos = colon_pos + 1;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordflow">if</span> (colon_pos == std::string::npos || colon_pos == 0) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        key = header.substr(0, colon_pos);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        std::size_t end_pos = header.find_first_not_of(<span class="stringliteral">&quot; &quot;</span>, start_pos);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        value = (end_pos != std::string::npos) ? header.substr(end_pos) : std::string();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="comment">// Trim newline characters from value</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordflow">while</span> (!value.empty() &amp;&amp; (value.back() == <span class="charliteral">&#39;\r&#39;</span> || value.back() == <span class="charliteral">&#39;\n&#39;</span>)) {</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            value.pop_back();</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        }</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    }</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekurlyk.html">kurlyk</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>utils {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span></div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#a3b1cd5f15fb69272985ebb3a0f903c2c">   16</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a3b1cd5f15fb69272985ebb3a0f903c2c">parse_http_header_pair</a>(</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>            <span class="keyword">const</span> <span class="keywordtype">char</span> *buffer,</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            <span class="keyword">const</span> <span class="keywordtype">size_t</span>&amp; size,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            std::string&amp; key,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>            std::string&amp; value) {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        std::string header(buffer, size);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordflow">if</span> (header.size() &lt; 3) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        std::size_t colon_pos = header.find_first_of(<span class="stringliteral">&quot;:&quot;</span>);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        std::size_t start_pos = colon_pos + 1;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordflow">if</span> (colon_pos == std::string::npos || colon_pos == 0) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        key = header.substr(0, colon_pos);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        std::size_t end_pos = header.find_first_not_of(<span class="stringliteral">&quot; &quot;</span>, start_pos);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        value = (end_pos != std::string::npos) ? header.substr(end_pos) : std::string();</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="comment">// Trim newline characters from value</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keywordflow">while</span> (!value.empty() &amp;&amp; (value.back() == <span class="charliteral">&#39;\r&#39;</span> || value.back() == <span class="charliteral">&#39;\n&#39;</span>)) {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            value.pop_back();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        }</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    }</div>
 </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#   ifdef KURLYK_USE_CURL</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">inline</span> std::string <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a61950d982ba8304ba8d78dcd940c24ef">to_query_string</a>(</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="namespacekurlyk.html#ae6eb5e4e8f3237dc0b1b57f78adcfe5f">QueryParams</a> &amp;query,</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="keyword">const</span> std::string &amp;prefix = std::string()) noexcept {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">if</span> (query.empty()) <span class="keywordflow">return</span> std::string();</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        std::string query_string(prefix);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        CURL *curl = curl_easy_init();</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">if</span> (!curl) <span class="keywordflow">return</span> query_string;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordtype">size_t</span> index = 0;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keyword">const</span> <span class="keywordtype">size_t</span> index_end = query.size() - 1;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; pair : query) {</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <span class="keywordtype">char</span> *escaped_key = curl_easy_escape(curl, pair.first.c_str(), pair.first.size());</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keywordflow">if</span> (escaped_key) {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                query_string += std::string(escaped_key);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                curl_free(escaped_key);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            }</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            query_string += <span class="stringliteral">&quot;=&quot;</span>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordtype">char</span> *escaped_value = curl_easy_escape(curl, pair.second.c_str(), pair.second.size());</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keywordflow">if</span>(escaped_value) {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                query_string += std::string(escaped_value);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                curl_free(escaped_value);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            }</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keywordflow">if</span> (index != index_end) query_string += <span class="stringliteral">&quot;&amp;&quot;</span>;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            ++index;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        curl_easy_cleanup(curl);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordflow">return</span> query_string;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    }</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#   else</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span></div>
-<div class="foldopen" id="foldopen00076" data-start="{" data-end="}">
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#a61950d982ba8304ba8d78dcd940c24ef">   76</a></span>    <span class="keyword">inline</span> std::string <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a61950d982ba8304ba8d78dcd940c24ef">to_query_string</a>(</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="namespacekurlyk.html#ae6eb5e4e8f3237dc0b1b57f78adcfe5f">QueryParams</a> &amp;query,</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <span class="keyword">const</span> std::string &amp;prefix = std::string()) noexcept {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        std::string result(prefix);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordtype">bool</span> first = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;field : query) {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordflow">if</span> (!first) {</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                result += <span class="charliteral">&#39;&amp;&#39;</span>;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            }</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            result += field.first + <span class="charliteral">&#39;=&#39;</span> + <a class="code hl_function" href="namespacekurlyk_1_1utils.html#aca3e430ae5956e098c633a214e6c1fb9">percent_encode</a>(field.second);</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            first = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        }</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    }</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#   ifdef KURLYK_USE_CURL</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">inline</span> std::string <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a61950d982ba8304ba8d78dcd940c24ef">to_query_string</a>(</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="namespacekurlyk.html#ae6eb5e4e8f3237dc0b1b57f78adcfe5f">QueryParams</a> &amp;query,</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            <span class="keyword">const</span> std::string &amp;prefix = std::string()) noexcept {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">if</span> (query.empty()) <span class="keywordflow">return</span> std::string();</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        std::string query_string(prefix);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        CURL *curl = curl_easy_init();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">if</span> (!curl) <span class="keywordflow">return</span> query_string;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordtype">size_t</span> index = 0;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keyword">const</span> <span class="keywordtype">size_t</span> index_end = query.size() - 1;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; pair : query) {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keywordtype">char</span> *escaped_key = curl_easy_escape(curl, pair.first.c_str(), pair.first.size());</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordflow">if</span> (escaped_key) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                query_string += std::string(escaped_key);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                curl_free(escaped_key);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            query_string += <span class="stringliteral">&quot;=&quot;</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keywordtype">char</span> *escaped_value = curl_easy_escape(curl, pair.second.c_str(), pair.second.size());</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="keywordflow">if</span>(escaped_value) {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                query_string += std::string(escaped_value);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                curl_free(escaped_value);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">if</span> (index != index_end) query_string += <span class="stringliteral">&quot;&amp;&quot;</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            ++index;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        curl_easy_cleanup(curl);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">return</span> query_string;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#   else</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span></div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#a61950d982ba8304ba8d78dcd940c24ef">   77</a></span>    <span class="keyword">inline</span> std::string <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a61950d982ba8304ba8d78dcd940c24ef">to_query_string</a>(</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="namespacekurlyk.html#ae6eb5e4e8f3237dc0b1b57f78adcfe5f">QueryParams</a> &amp;query,</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <span class="keyword">const</span> std::string &amp;prefix = std::string()) noexcept {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        std::string result(prefix);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordtype">bool</span> first = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;field : query) {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <span class="keywordflow">if</span> (!first) {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                result += <span class="charliteral">&#39;&amp;&#39;</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            result += field.first + <span class="charliteral">&#39;=&#39;</span> + <a class="code hl_function" href="namespacekurlyk_1_1utils.html#aca3e430ae5956e098c633a214e6c1fb9">percent_encode</a>(field.second);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            first = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
 </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#   endif</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span></div>
-<div class="foldopen" id="foldopen00098" data-start="{" data-end="}">
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#a3a6b0153542da563fc0a485031428ecc">   98</a></span>    <span class="keyword">inline</span> std::string <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a3a6b0153542da563fc0a485031428ecc">to_cookie_string</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacekurlyk_1_1utils.html#a0f1c389206408eed954a5a761683aec7">CaseInsensitiveMultimap</a>&amp; cookies) {</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        std::string result;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = cookies.begin(); it != cookies.end(); ++it) {</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="keywordflow">if</span> (it != cookies.begin()) {</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                result += <span class="stringliteral">&quot;; &quot;</span>;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            }</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            result += it-&gt;first + <span class="stringliteral">&quot;=&quot;</span> + it-&gt;second;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        }</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#   endif</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span></div>
+<div class="foldopen" id="foldopen00099" data-start="{" data-end="}">
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#a3a6b0153542da563fc0a485031428ecc">   99</a></span>    <span class="keyword">inline</span> std::string <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a3a6b0153542da563fc0a485031428ecc">to_cookie_string</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacekurlyk_1_1utils.html#a0f1c389206408eed954a5a761683aec7">CaseInsensitiveMultimap</a>&amp; cookies) {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        std::string result;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = cookies.begin(); it != cookies.end(); ++it) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            <span class="keywordflow">if</span> (it != cookies.begin()) {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                result += <span class="stringliteral">&quot;; &quot;</span>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            result += it-&gt;first + <span class="stringliteral">&quot;=&quot;</span> + it-&gt;second;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
 </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span></div>
-<div class="foldopen" id="foldopen00114" data-start="{" data-end="}">
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#adf0d43b87bf594459f6295307df6e0f4">  114</a></span>    <span class="keyword">inline</span> std::string <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a3a6b0153542da563fc0a485031428ecc">to_cookie_string</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacekurlyk.html#ab07e33df3720a507c4116c70f0f16b6d">Cookies</a>&amp; cookies) {</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        std::string result;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = cookies.begin(); it != cookies.end(); ++it) {</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keywordflow">if</span> (it != cookies.begin()) {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                result += <span class="stringliteral">&quot;; &quot;</span>;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            }</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            result += it-&gt;second.name + <span class="stringliteral">&quot;=&quot;</span> + it-&gt;second.value;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            <span class="keywordflow">if</span> (!it-&gt;second.path.empty()) {</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                result += <span class="stringliteral">&quot;; Path=&quot;</span> + it-&gt;second.path;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            }</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <span class="keywordflow">if</span> (it-&gt;second.expiration_date != 0) {</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                result += <span class="stringliteral">&quot;; Expires=&quot;</span> + std::to_string(it-&gt;second.expiration_date);</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            }</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        }</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span></div>
+<div class="foldopen" id="foldopen00115" data-start="{" data-end="}">
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#adf0d43b87bf594459f6295307df6e0f4">  115</a></span>    <span class="keyword">inline</span> std::string <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a3a6b0153542da563fc0a485031428ecc">to_cookie_string</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacekurlyk.html#ab07e33df3720a507c4116c70f0f16b6d">Cookies</a>&amp; cookies) {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        std::string result;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = cookies.begin(); it != cookies.end(); ++it) {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            <span class="keywordflow">if</span> (it != cookies.begin()) {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                result += <span class="stringliteral">&quot;; &quot;</span>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            result += it-&gt;second.name + <span class="stringliteral">&quot;=&quot;</span> + it-&gt;second.value;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <span class="keywordflow">if</span> (!it-&gt;second.path.empty()) {</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                result += <span class="stringliteral">&quot;; Path=&quot;</span> + it-&gt;second.path;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <span class="keywordflow">if</span> (it-&gt;second.expiration_date != 0) {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                result += <span class="stringliteral">&quot;; Expires=&quot;</span> + std::to_string(it-&gt;second.expiration_date);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            }</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    }</div>
 </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span></div>
-<div class="foldopen" id="foldopen00138" data-start="{" data-end="}">
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#a92fee5e5e25268a121d64900b0f09bbd">  138</a></span>    <span class="keyword">inline</span> <a class="code hl_typedef" href="namespacekurlyk.html#ab07e33df3720a507c4116c70f0f16b6d">Cookies</a> <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a92fee5e5e25268a121d64900b0f09bbd">parse_cookie</a>(std::string cookie) {</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <a class="code hl_typedef" href="namespacekurlyk.html#ab07e33df3720a507c4116c70f0f16b6d">Cookies</a> cookies;</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        std::vector&lt;std::string&gt; list_fragment;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        cookie += <span class="stringliteral">&quot;;&quot;</span>;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="keyword">const</span> std::string secure_prefix(<span class="stringliteral">&quot;__Secure-&quot;</span>);</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keyword">const</span> std::string host_prefix(<span class="stringliteral">&quot;__Host-&quot;</span>);</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        std::size_t start_pos = 0;</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keywordflow">for</span> (;;) {</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="keywordtype">bool</span> is_option = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            std::size_t separator_pos = cookie.find_first_of(<span class="stringliteral">&quot;=;&quot;</span>, start_pos);</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="keywordflow">if</span> (separator_pos != std::string::npos) {</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                std::string name = cookie.substr(start_pos, (separator_pos - start_pos));</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                <span class="keywordflow">if</span> (name.size() &gt; host_prefix.size() &amp;&amp; name.substr(0, 2) == <span class="stringliteral">&quot;__&quot;</span>) {</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                    std::size_t prefix_pos = name.find_first_of(<span class="stringliteral">&quot;-&quot;</span>);</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                    <span class="keywordflow">if</span>(prefix_pos != std::string::npos) {</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>                        name = name.substr(prefix_pos + 1, name.size() - prefix_pos - 1);</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                    }</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                    <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;expires&quot;</span>) ||</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                        <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;max-age&quot;</span>) ||</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                        <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;path&quot;</span>) ||</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                        <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;domain&quot;</span>) ||</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                        <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;samesite&quot;</span>)) {</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                        is_option = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;secure&quot;</span>) ||</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                               <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;httponly&quot;</span>)) {</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                        start_pos = (cookie[separator_pos] == <span class="charliteral">&#39;;&#39;</span>) ? separator_pos + 2 : separator_pos + 1;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                        <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                    }</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                }</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                std::size_t end_pos = cookie.find(<span class="stringliteral">&quot;; &quot;</span>, separator_pos + 1);</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                <span class="keywordflow">if</span> (end_pos == std::string::npos) {</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                    std::string value = cookie.substr(separator_pos + 1, cookie.size() - separator_pos - 2);</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                    <a class="code hl_class" href="classkurlyk_1_1Cookie.html">Cookie</a> cookie_obj{name, value};</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                    <span class="keywordflow">if</span> (!is_option) cookies.emplace(cookie_obj.<a class="code hl_variable" href="classkurlyk_1_1Cookie.html#a1665b572906849ecd7d4f26cbec6409b">name</a>, cookie_obj);</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                }</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                std::string value = cookie.substr(separator_pos + 1, end_pos - separator_pos - 1);</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                start_pos = end_pos + 2;</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                <a class="code hl_class" href="classkurlyk_1_1Cookie.html">Cookie</a> cookie_obj{name, value};</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                <span class="keywordflow">if</span> (!is_option) cookies.emplace(cookie_obj.<a class="code hl_variable" href="classkurlyk_1_1Cookie.html#a1665b572906849ecd7d4f26cbec6409b">name</a>, cookie_obj);</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            }</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        }</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <span class="keywordflow">return</span> cookies;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    }</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span></div>
+<div class="foldopen" id="foldopen00139" data-start="{" data-end="}">
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="namespacekurlyk_1_1utils.html#a92fee5e5e25268a121d64900b0f09bbd">  139</a></span>    <span class="keyword">inline</span> <a class="code hl_typedef" href="namespacekurlyk.html#ab07e33df3720a507c4116c70f0f16b6d">Cookies</a> <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a92fee5e5e25268a121d64900b0f09bbd">parse_cookie</a>(std::string cookie) {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <a class="code hl_typedef" href="namespacekurlyk.html#ab07e33df3720a507c4116c70f0f16b6d">Cookies</a> cookies;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        std::vector&lt;std::string&gt; list_fragment;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        cookie += <span class="stringliteral">&quot;;&quot;</span>;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keyword">const</span> std::string secure_prefix(<span class="stringliteral">&quot;__Secure-&quot;</span>);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keyword">const</span> std::string host_prefix(<span class="stringliteral">&quot;__Host-&quot;</span>);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        std::size_t start_pos = 0;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordflow">for</span> (;;) {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            <span class="keywordtype">bool</span> is_option = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            std::size_t separator_pos = cookie.find_first_of(<span class="stringliteral">&quot;=;&quot;</span>, start_pos);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            <span class="keywordflow">if</span> (separator_pos != std::string::npos) {</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                std::string name = cookie.substr(start_pos, (separator_pos - start_pos));</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                <span class="keywordflow">if</span> (name.size() &gt; host_prefix.size() &amp;&amp; name.substr(0, 2) == <span class="stringliteral">&quot;__&quot;</span>) {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                    std::size_t prefix_pos = name.find_first_of(<span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>                    <span class="keywordflow">if</span>(prefix_pos != std::string::npos) {</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                        name = name.substr(prefix_pos + 1, name.size() - prefix_pos - 1);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                    }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                    <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;expires&quot;</span>) ||</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                        <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;max-age&quot;</span>) ||</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                        <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;path&quot;</span>) ||</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                        <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;domain&quot;</span>) ||</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                        <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;samesite&quot;</span>)) {</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                        is_option = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;secure&quot;</span>) ||</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                               <a class="code hl_function" href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">case_insensitive_equal</a>(name, <span class="stringliteral">&quot;httponly&quot;</span>)) {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                        start_pos = (cookie[separator_pos] == <span class="charliteral">&#39;;&#39;</span>) ? separator_pos + 2 : separator_pos + 1;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                        <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                    }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                }</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                std::size_t end_pos = cookie.find(<span class="stringliteral">&quot;; &quot;</span>, separator_pos + 1);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                <span class="keywordflow">if</span> (end_pos == std::string::npos) {</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                    std::string value = cookie.substr(separator_pos + 1, cookie.size() - separator_pos - 2);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                    <a class="code hl_class" href="classkurlyk_1_1Cookie.html">Cookie</a> cookie_obj{name, value};</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                    <span class="keywordflow">if</span> (!is_option) cookies.emplace(cookie_obj.<a class="code hl_variable" href="classkurlyk_1_1Cookie.html#a1665b572906849ecd7d4f26cbec6409b">name</a>, cookie_obj);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                }</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                std::string value = cookie.substr(separator_pos + 1, end_pos - separator_pos - 1);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                start_pos = end_pos + 2;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                <a class="code hl_class" href="classkurlyk_1_1Cookie.html">Cookie</a> cookie_obj{name, value};</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                <span class="keywordflow">if</span> (!is_option) cookies.emplace(cookie_obj.<a class="code hl_variable" href="classkurlyk_1_1Cookie.html#a1665b572906849ecd7d4f26cbec6409b">name</a>, cookie_obj);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            }</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        }</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        <span class="keywordflow">return</span> cookies;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    }</div>
 </div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>} <span class="comment">// namespace kurlyk::utils</span></div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="preprocessor">#endif </span><span class="comment">// KURLYK_HEADER_KURLYK_UTILS_HTTP_PARSER_HPP_INCLUDED</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>} <span class="comment">// namespace utils</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>} <span class="comment">// namespace kurlyk</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="preprocessor">#endif </span><span class="comment">// KURLYK_HEADER_KURLYK_UTILS_HTTP_PARSER_HPP_INCLUDED</span></div>
 <div class="ttc" id="aclasskurlyk_1_1Cookie_html"><div class="ttname"><a href="classkurlyk_1_1Cookie.html">kurlyk::Cookie</a></div><div class="ttdoc">Represents an HTTP cookie.</div><div class="ttdef"><b>Definition</b> <a href="Cookie_8hpp_source.html#l00012">Cookie.hpp:12</a></div></div>
 <div class="ttc" id="aclasskurlyk_1_1Cookie_html_a1665b572906849ecd7d4f26cbec6409b"><div class="ttname"><a href="classkurlyk_1_1Cookie.html#a1665b572906849ecd7d4f26cbec6409b">kurlyk::Cookie::name</a></div><div class="ttdeci">std::string name</div><div class="ttdoc">The name of the cookie.</div><div class="ttdef"><b>Definition</b> <a href="Cookie_8hpp_source.html#l00014">Cookie.hpp:14</a></div></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html"><div class="ttname"><a href="namespacekurlyk_1_1utils.html">kurlyk::utils</a></div><div class="ttdef"><b>Definition</b> <a href="Base64Url_8hpp_source.html#l00013">Base64Url.hpp:13</a></div></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html_a0f1c389206408eed954a5a761683aec7"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a0f1c389206408eed954a5a761683aec7">kurlyk::utils::CaseInsensitiveMultimap</a></div><div class="ttdeci">std::unordered_multimap&lt; std::string, std::string, CaseInsensitiveHash, CaseInsensitiveEqual &gt; CaseInsensitiveMultimap</div><div class="ttdoc">A case-insensitive unordered multimap for storing HTTP headers.</div><div class="ttdef"><b>Definition</b> <a href="CaseInsensitiveMultimap_8hpp_source.html#l00052">CaseInsensitiveMultimap.hpp:52</a></div></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html_a125022fed5cdd591ddf93d5937eaef7b"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">kurlyk::utils::case_insensitive_equal</a></div><div class="ttdeci">bool case_insensitive_equal(const std::string &amp;str1, const std::string &amp;str2) noexcept</div><div class="ttdoc">Compares two strings case-insensitively.</div><div class="ttdef"><b>Definition</b> <a href="CaseInsensitiveMultimap_8hpp_source.html#l00014">CaseInsensitiveMultimap.hpp:14</a></div></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html_a3a6b0153542da563fc0a485031428ecc"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a3a6b0153542da563fc0a485031428ecc">kurlyk::utils::to_cookie_string</a></div><div class="ttdeci">std::string to_cookie_string(const CaseInsensitiveMultimap &amp;cookies)</div><div class="ttdoc">Converts a CaseInsensitiveMultimap to a string format suitable for HTTP Cookie headers.</div><div class="ttdef"><b>Definition</b> <a href="#l00098">http_parser.hpp:98</a></div></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html_a3b1cd5f15fb69272985ebb3a0f903c2c"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a3b1cd5f15fb69272985ebb3a0f903c2c">kurlyk::utils::parse_http_header_pair</a></div><div class="ttdeci">void parse_http_header_pair(const char *buffer, const size_t &amp;size, std::string &amp;key, std::string &amp;value)</div><div class="ttdoc">Parses a header pair from a buffer.</div><div class="ttdef"><b>Definition</b> <a href="#l00015">http_parser.hpp:15</a></div></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html_a61950d982ba8304ba8d78dcd940c24ef"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a61950d982ba8304ba8d78dcd940c24ef">kurlyk::utils::to_query_string</a></div><div class="ttdeci">std::string to_query_string(const QueryParams &amp;query, const std::string &amp;prefix=std::string()) noexcept</div><div class="ttdoc">Converts a map of query parameters into a URL query string.</div><div class="ttdef"><b>Definition</b> <a href="#l00076">http_parser.hpp:76</a></div></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html_a92fee5e5e25268a121d64900b0f09bbd"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a92fee5e5e25268a121d64900b0f09bbd">kurlyk::utils::parse_cookie</a></div><div class="ttdeci">Cookies parse_cookie(std::string cookie)</div><div class="ttdoc">Parses a cookie string into a Cookies object.</div><div class="ttdef"><b>Definition</b> <a href="#l00138">http_parser.hpp:138</a></div></div>
-<div class="ttc" id="anamespacekurlyk_1_1utils_html_aca3e430ae5956e098c633a214e6c1fb9"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#aca3e430ae5956e098c633a214e6c1fb9">kurlyk::utils::percent_encode</a></div><div class="ttdeci">std::string percent_encode(const std::string &amp;value) noexcept</div><div class="ttdoc">Encodes a string using Percent Encoding according to RFC 3986.</div><div class="ttdef"><b>Definition</b> <a href="percent__encoding_8hpp_source.html#l00017">percent_encoding.hpp:17</a></div></div>
-<div class="ttc" id="anamespacekurlyk_html_ab07e33df3720a507c4116c70f0f16b6d"><div class="ttname"><a href="namespacekurlyk.html#ab07e33df3720a507c4116c70f0f16b6d">kurlyk::Cookies</a></div><div class="ttdeci">utils::CaseInsensitiveCookieMultimap Cookies</div><div class="ttdoc">Alias for HTTP cookies, stored case-insensitively.</div><div class="ttdef"><b>Definition</b> <a href="CaseInsensitiveMultimap_8hpp_source.html#l00068">CaseInsensitiveMultimap.hpp:68</a></div></div>
-<div class="ttc" id="anamespacekurlyk_html_ae6eb5e4e8f3237dc0b1b57f78adcfe5f"><div class="ttname"><a href="namespacekurlyk.html#ae6eb5e4e8f3237dc0b1b57f78adcfe5f">kurlyk::QueryParams</a></div><div class="ttdeci">utils::CaseInsensitiveMultimap QueryParams</div><div class="ttdoc">Alias for query parameters in HTTP requests, stored case-insensitively.</div><div class="ttdef"><b>Definition</b> <a href="CaseInsensitiveMultimap_8hpp_source.html#l00065">CaseInsensitiveMultimap.hpp:65</a></div></div>
+<div class="ttc" id="anamespacekurlyk_1_1utils_html_a0f1c389206408eed954a5a761683aec7"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a0f1c389206408eed954a5a761683aec7">kurlyk::utils::CaseInsensitiveMultimap</a></div><div class="ttdeci">std::unordered_multimap&lt; std::string, std::string, CaseInsensitiveHash, CaseInsensitiveEqual &gt; CaseInsensitiveMultimap</div><div class="ttdoc">A case-insensitive unordered multimap for storing HTTP headers.</div><div class="ttdef"><b>Definition</b> <a href="CaseInsensitiveMultimap_8hpp_source.html#l00053">CaseInsensitiveMultimap.hpp:53</a></div></div>
+<div class="ttc" id="anamespacekurlyk_1_1utils_html_a125022fed5cdd591ddf93d5937eaef7b"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a125022fed5cdd591ddf93d5937eaef7b">kurlyk::utils::case_insensitive_equal</a></div><div class="ttdeci">bool case_insensitive_equal(const std::string &amp;str1, const std::string &amp;str2) noexcept</div><div class="ttdoc">Compares two strings case-insensitively.</div><div class="ttdef"><b>Definition</b> <a href="CaseInsensitiveMultimap_8hpp_source.html#l00015">CaseInsensitiveMultimap.hpp:15</a></div></div>
+<div class="ttc" id="anamespacekurlyk_1_1utils_html_a3a6b0153542da563fc0a485031428ecc"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a3a6b0153542da563fc0a485031428ecc">kurlyk::utils::to_cookie_string</a></div><div class="ttdeci">std::string to_cookie_string(const CaseInsensitiveMultimap &amp;cookies)</div><div class="ttdoc">Converts a CaseInsensitiveMultimap to a string format suitable for HTTP Cookie headers.</div><div class="ttdef"><b>Definition</b> <a href="#l00099">http_parser.hpp:99</a></div></div>
+<div class="ttc" id="anamespacekurlyk_1_1utils_html_a3b1cd5f15fb69272985ebb3a0f903c2c"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a3b1cd5f15fb69272985ebb3a0f903c2c">kurlyk::utils::parse_http_header_pair</a></div><div class="ttdeci">void parse_http_header_pair(const char *buffer, const size_t &amp;size, std::string &amp;key, std::string &amp;value)</div><div class="ttdoc">Parses a header pair from a buffer.</div><div class="ttdef"><b>Definition</b> <a href="#l00016">http_parser.hpp:16</a></div></div>
+<div class="ttc" id="anamespacekurlyk_1_1utils_html_a61950d982ba8304ba8d78dcd940c24ef"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a61950d982ba8304ba8d78dcd940c24ef">kurlyk::utils::to_query_string</a></div><div class="ttdeci">std::string to_query_string(const QueryParams &amp;query, const std::string &amp;prefix=std::string()) noexcept</div><div class="ttdoc">Converts a map of query parameters into a URL query string.</div><div class="ttdef"><b>Definition</b> <a href="#l00077">http_parser.hpp:77</a></div></div>
+<div class="ttc" id="anamespacekurlyk_1_1utils_html_a92fee5e5e25268a121d64900b0f09bbd"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#a92fee5e5e25268a121d64900b0f09bbd">kurlyk::utils::parse_cookie</a></div><div class="ttdeci">Cookies parse_cookie(std::string cookie)</div><div class="ttdoc">Parses a cookie string into a Cookies object.</div><div class="ttdef"><b>Definition</b> <a href="#l00139">http_parser.hpp:139</a></div></div>
+<div class="ttc" id="anamespacekurlyk_1_1utils_html_aca3e430ae5956e098c633a214e6c1fb9"><div class="ttname"><a href="namespacekurlyk_1_1utils.html#aca3e430ae5956e098c633a214e6c1fb9">kurlyk::utils::percent_encode</a></div><div class="ttdeci">std::string percent_encode(const std::string &amp;value) noexcept</div><div class="ttdoc">Encodes a string using Percent Encoding according to RFC 3986.</div><div class="ttdef"><b>Definition</b> <a href="percent__encoding_8hpp_source.html#l00018">percent_encoding.hpp:18</a></div></div>
+<div class="ttc" id="anamespacekurlyk_html"><div class="ttname"><a href="namespacekurlyk.html">kurlyk</a></div><div class="ttdoc">Primary namespace for the Kurlyk library, encompassing initialization, request management,...</div></div>
+<div class="ttc" id="anamespacekurlyk_html_ab07e33df3720a507c4116c70f0f16b6d"><div class="ttname"><a href="namespacekurlyk.html#ab07e33df3720a507c4116c70f0f16b6d">kurlyk::Cookies</a></div><div class="ttdeci">utils::CaseInsensitiveCookieMultimap Cookies</div><div class="ttdoc">Alias for HTTP cookies, stored case-insensitively.</div><div class="ttdef"><b>Definition</b> <a href="CaseInsensitiveMultimap_8hpp_source.html#l00070">CaseInsensitiveMultimap.hpp:70</a></div></div>
+<div class="ttc" id="anamespacekurlyk_html_ae6eb5e4e8f3237dc0b1b57f78adcfe5f"><div class="ttname"><a href="namespacekurlyk.html#ae6eb5e4e8f3237dc0b1b57f78adcfe5f">kurlyk::QueryParams</a></div><div class="ttdeci">utils::CaseInsensitiveMultimap QueryParams</div><div class="ttdoc">Alias for query parameters in HTTP requests, stored case-insensitively.</div><div class="ttdef"><b>Definition</b> <a href="CaseInsensitiveMultimap_8hpp_source.html#l00067">CaseInsensitiveMultimap.hpp:67</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
