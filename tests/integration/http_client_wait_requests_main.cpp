@@ -162,8 +162,6 @@ int main() {
 
     // --- Test 4: per-client max_in_flight ---
     {
-        ProcessorGuard pg;
-
         auto client = std::make_unique<kurlyk::HttpClient>(base_url);
         client->set_max_in_flight(1);
         std::atomic<int> callback_count{0};
@@ -180,6 +178,7 @@ int main() {
         require(first, "first request should be accepted");
         require(!second, "second request should be rejected by per-client in-flight limit");
 
+        ProcessorGuard pg;
         client->wait_requests();
         require(callback_count.load() == 1, "only first callback should be delivered");
 
