@@ -61,6 +61,10 @@ add_executable(http_client_destructor_test
 	http_client_destructor_main.cpp
 )
 
+add_executable(proxy_checker_test
+	proxy_checker_main.cpp
+)
+
 list(APPEND CMAKE_MODULE_PATH 
 	"${CMAKE_CURRENT_LIST_DIR}/../../cmake/deps"
 	"${CMAKE_CURRENT_LIST_DIR}/../../cmake"
@@ -110,11 +114,13 @@ target_link_libraries(rate_limit_partition_test PRIVATE kurlyk)
 target_link_libraries(http_local_test PRIVATE kurlyk)
 target_link_libraries(http_retry_streaming_test PRIVATE kurlyk)
 target_link_libraries(http_client_destructor_test PRIVATE kurlyk)
+target_link_libraries(proxy_checker_test PRIVATE kurlyk)
 
 include(fallbacks/load_simple_web_server)
 load_simple_web_server(http_local_test)
 load_simple_web_server(http_retry_streaming_test)
 load_simple_web_server(http_client_destructor_test)
+load_simple_web_server(proxy_checker_test)
 
 target_compile_features(integr_test PRIVATE cxx_std_17)
 target_compile_features(ws_local_test PRIVATE cxx_std_17)
@@ -129,12 +135,14 @@ target_compile_features(rate_limit_partition_test PRIVATE cxx_std_17)
 target_compile_features(http_local_test PRIVATE cxx_std_17)
 target_compile_features(http_retry_streaming_test PRIVATE cxx_std_17)
 target_compile_features(http_client_destructor_test PRIVATE cxx_std_17)
+target_compile_features(proxy_checker_test PRIVATE cxx_std_17)
 
 if(MINGW)
 	target_compile_options(ws_local_test PRIVATE -Wa,-mbig-obj)
 	target_compile_options(http_local_test PRIVATE -Wa,-mbig-obj)
 	target_compile_options(http_retry_streaming_test PRIVATE -Wa,-mbig-obj)
 	target_compile_options(http_client_destructor_test PRIVATE -Wa,-mbig-obj)
+	target_compile_options(proxy_checker_test PRIVATE -Wa,-mbig-obj)
 endif()
 
 include(copy_runtime_dlls)
@@ -151,6 +159,7 @@ copy_runtime_dlls(rate_limit_partition_test)
 copy_runtime_dlls(http_local_test)
 copy_runtime_dlls(http_retry_streaming_test)
 copy_runtime_dlls(http_client_destructor_test)
+copy_runtime_dlls(proxy_checker_test)
 
 add_test(NAME integr_test COMMAND integr_test)
 add_test(NAME ws_local_test COMMAND ws_local_test)
@@ -165,3 +174,4 @@ add_test(NAME rate_limit_partition_test COMMAND rate_limit_partition_test)
 add_test(NAME http_local_test COMMAND http_local_test)
 add_test(NAME http_retry_streaming_test COMMAND http_retry_streaming_test)
 add_test(NAME http_client_destructor_test COMMAND http_client_destructor_test)
+add_test(NAME proxy_checker_test COMMAND proxy_checker_test)
