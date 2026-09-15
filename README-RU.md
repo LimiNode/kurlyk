@@ -6,9 +6,9 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-blue)
 ![C++ Standard](https://img.shields.io/badge/C++-11--17-orange)
-![CI Windows](https://img.shields.io/github/actions/workflow/status/NewYaroslav/kurlyk/ci.yml?branch=main&label=Windows&logo=windows)
-![CI Linux](https://img.shields.io/github/actions/workflow/status/NewYaroslav/kurlyk/ci.yml?branch=main&label=Linux&logo=linux)
-![CI macOS](https://img.shields.io/github/actions/workflow/status/NewYaroslav/kurlyk/ci.yml?branch=main&label=macOS&logo=apple)
+![CI Windows](https://img.shields.io/github/actions/workflow/status/LimiNode/kurlyk/ci.yml?branch=main&label=Windows&logo=windows)
+![CI Linux](https://img.shields.io/github/actions/workflow/status/LimiNode/kurlyk/ci.yml?branch=main&label=Linux&logo=linux)
+![CI macOS](https://img.shields.io/github/actions/workflow/status/LimiNode/kurlyk/ci.yml?branch=main&label=macOS&logo=apple)
 
 [Do you speak English?](README.md)
 
@@ -52,7 +52,7 @@ int main() {
 }
 ```
 
-Для C++11/14 или ручного управления жизненным циклом используйте `kurlyk::init()` / `kurlyk::deinit()`.
+Используйте `kurlyk::init()` / `kurlyk::deinit()`, если требуется явное управление жизненным циклом.
 
 ### Минимальный WebSocket echo
 
@@ -102,11 +102,11 @@ cmake -S . -B build-examples-mingw -G "MinGW Makefiles" `
 cmake --build build-examples-mingw --config Release
 ```
 
-Для MinGW зависимости уже есть в репозитории как git submodules в папке `libs`, а fallback CMake-опции ниже позволяют собрать отсутствующие зависимости автоматически.
+Для MinGW зависимости уже есть в репозитории как git submodules в папке `external`, а fallback CMake-опции ниже позволяют собрать отсутствующие зависимости автоматически.
 
 ## Базовое использование HTTP
 
-HTTP-клиент можно использовать через callbacks, futures или низкоуровневые helper'ы. При auto-init, включённом по умолчанию, `HttpClient` можно создавать без ручных `kurlyk::init()` / `kurlyk::deinit()`; ручной lifecycle нужен для C++11/14, синхронного режима или явного управления worker'ом.
+HTTP-клиент можно использовать через callbacks, futures или низкоуровневые helper'ы. При auto-init, включённом по умолчанию, `HttpClient` можно создавать без ручных `kurlyk::init()` / `kurlyk::deinit()`; используйте lifecycle-функции для синхронного режима или явного управления worker'ом.
 
 ### Общий helper для примеров
 
@@ -179,7 +179,7 @@ int main() {
 int main() {
     kurlyk::HttpClient client("https://httpbin.org");
 
-    client.set_proxy("127.0.0.1", 8080, "username", "password", kurlyk::ProxyType::HTTP);
+    client.set_proxy("127.0.0.1", 8080, "username", "password", kurlyk::ProxyType::PROXY_HTTP);
 
     client.get("/ip", kurlyk::QueryParams(), kurlyk::Headers(),
         [](const kurlyk::HttpResponsePtr response) {
@@ -304,7 +304,7 @@ client.set_max_send_queue_size(32);
 
 ## Инициализация
 
-В C++17+ по умолчанию доступна автоинициализация, поэтому простые примеры могут сразу создавать `HttpClient` или `WebSocketClient`. Для C++11/14 или ручного режима отключите auto init и вызовите `init()` / `deinit()` самостоятельно.
+Автоинициализация доступна по умолчанию в C++11 и новее, поэтому простые примеры могут сразу создавать `HttpClient` или `WebSocketClient`. Отключите auto init и вызовите `init()` / `deinit()`, если требуется явное управление жизненным циклом.
 
 ```cpp
 #define KURLYK_AUTO_INIT 0
@@ -494,7 +494,7 @@ Proxy можно настроить на уровне `HttpClient`, после �
 
 ```cpp
 kurlyk::HttpClient client("https://httpbin.org");
-client.set_proxy("127.0.0.1", 8080, "username", "password", kurlyk::ProxyType::HTTP);
+client.set_proxy("127.0.0.1", 8080, "username", "password", kurlyk::ProxyType::PROXY_HTTP);
 ```
 
 ## Установка и зависимости
@@ -503,8 +503,9 @@ client.set_proxy("127.0.0.1", 8080, "username", "password", kurlyk::ProxyType::H
 
 - **MSVC**
 - **MinGW (GCC)**
+- **AppleClang (macOS)**
 
-Сборка под MSVC пока нестабильна; подтверждённая конфигурация: **C++17** с **Visual Studio 2022 (generator: Visual Studio 17 2022)**.
+Базовый поддерживаемый стандарт языка — **C++11**. Примеры и integration-тесты используют **C++17**, если этого требует исходный код. MSVC, MinGW и AppleClang покрываются CI; зависимости macOS предоставляются системой или Homebrew.
 
 ### Подключение kurlyk
 
@@ -528,7 +529,7 @@ kurlyk/include
 2. Для HTTP:
    - [libcurl](https://curl.se/windows/)
 
-Все зависимости также добавлены в проект в виде субмодулей, находящихся в папке `libs`.
+Все зависимости также добавлены в проект в виде субмодулей, находящихся в папке `external`. Asio и Simple-WebSocket-Server используются из checkout субмодулей, если они доступны.
 
 ### OpenSSL
 
@@ -608,10 +609,10 @@ crypt32
 
 Библиотека поддерживает автоматическую загрузку зависимостей в случае их отсутствия. Наличие fallback'а зависит от компилятора и типа линковки.
 
-| Dependency | MinGW (Shared) | MinGW (Static) | MSVC (Shared) | MSVC (Static) |
-|------------|---------------|---------------|---------------|---------------|
-| OpenSSL    | yes           | yes           | yes           | yes           |
-| curl       | yes           | yes           | yes           | no            |
+| Dependency | MinGW (Shared) | MinGW (Static) | MSVC (Shared) | MSVC (Static) | macOS (system/Homebrew) |
+|------------|---------------|---------------|---------------|---------------|-------------------------|
+| OpenSSL    | yes           | yes           | yes           | yes           | yes                     |
+| curl       | yes           | yes           | yes           | no            | yes                     |
 
 Asio и Simple-WebSocket-Server — header-only библиотеки и подходят для всех указанных вариантов сборок.
 
@@ -651,7 +652,7 @@ Asio и Simple-WebSocket-Server — header-only библиотеки и подх
 | `include/kurlyk/websocket` | WebSocket client и connection management. |
 | `include/kurlyk/types` | Общие enum, cookie, proxy config и helpers. |
 | `include/kurlyk/utils` | Encoding, URL, HTTP, path и error helpers. |
-| `tests/integration` | Windows dependency и integration build checks. |
+| `tests/integration` | Кроссплатформенные локальные HTTP/WebSocket integration build checks. |
 | `tests/odr` | Header-only ODR checks. |
 | `tests/smoke` | Portable header smoke checks. |
 | `examples/` | Примеры использования. |
@@ -693,11 +694,28 @@ powershell -ExecutionPolicy Bypass -File tests/odr/run_odr_tests.ps1
 Запуск unit-тестов авторизации:
 
 ```bash
-cmake -S tests/auth -B build-auth-tests -G "MinGW Makefiles" -DKURLYK_BUILD_EXAMPLES=OFF
--DKURLYK_USE_FALLBACK_OPENSSL=ON -DKURLYK_USE_FALLBACK_CURL=ON
--DKURLYK_USE_FALLBACK_ASIO=ON -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON
-cmake --build build-auth-tests --config Release
+cmake -S tests/auth -B build-auth-tests -G Ninja \
+    -DKURLYK_BUILD_EXAMPLES=OFF \
+    -DKURLYK_USE_FALLBACK_ASIO=ON \
+    -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON
+cmake --build build-auth-tests
 ctest --test-dir build-auth-tests
+```
+
+На macOS установите системные зависимости через Homebrew и укажите CMake
+keg-only установку OpenSSL:
+
+```bash
+brew install ninja curl openssl@3
+OSSL="$(brew --prefix openssl@3)"
+CURL="$(brew --prefix curl)"
+PATH="$CURL/bin:$PATH" cmake -S tests/integration -B build-macos -G Ninja \
+    -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+    -DOPENSSL_ROOT_DIR="$OSSL" -DCMAKE_PREFIX_PATH="$OSSL;$CURL" \
+    -DKURLYK_USE_FALLBACK_ASIO=ON \
+    -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON
+cmake --build build-macos
+ctest --test-dir build-macos --output-on-failure
 ```
 
 Ручная сборка portable smoke test:
@@ -708,6 +726,19 @@ c++ tests/smoke/header_smoke.cpp -Iinclude -std=c++11 -o header_smoke
 
 c++ tests/smoke/header_smoke.cpp -Iinclude -std=c++17 -o header_smoke
 ./header_smoke
+
+c++ tests/smoke/http_header_smoke.cpp -Iinclude -std=c++11 -o http_header_smoke
+./http_header_smoke
+
+c++ tests/smoke/proxy_config_smoke.cpp -Iinclude -std=c++11 -o proxy_config_smoke
+./proxy_config_smoke
+
+cmake -S tests/smoke -B build-full-cpp11-smoke -G Ninja \
+    -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+    -DKURLYK_USE_STANDALONE_ASIO=ON \
+    -DKURLYK_USE_FALLBACK_ASIO=ON \
+    -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON
+cmake --build build-full-cpp11-smoke
 ```
 
 ## Хелперы авторизации
@@ -729,8 +760,8 @@ c++ tests/smoke/header_smoke.cpp -Iinclude -std=c++17 -o header_smoke
 |-----------|-----------------|
 | Windows | Integration-сборки MinGW и MSVC с fallback-зависимостями, HTTP backpressure regression и локальным WebSocket integration coverage. |
 | Windows extras | ODR-проверки singleton и auto-init заголовков. |
-| Linux | C++11/C++17 header smoke test с отключенными HTTP/WebSocket. |
-| macOS | C++11/C++17 header smoke test с отключенными HTTP/WebSocket. |
+| Linux | C++11/C++17 header smoke, C++11 HTTP/proxy checks, полный C++11 compile-only smoke HTTP/WebSocket и C++17 integration examples. |
+| macOS | C++11/C++17 header smoke, C++11 HTTP/proxy checks, полный C++11 compile-only smoke HTTP/WebSocket и C++17 integration tests. |
 
 ## Документация
 

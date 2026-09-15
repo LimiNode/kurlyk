@@ -5,7 +5,8 @@
 /// \file url_utils.hpp
 /// \brief Provides utility functions for parsing and validating URLs and their components.
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \brief Extracts the protocol from a URL.
     /// \param url The URL string.
@@ -167,6 +168,7 @@ namespace kurlyk::utils {
         return true;
     }
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_UTILS_URL_UTILS_HPP_INCLUDED

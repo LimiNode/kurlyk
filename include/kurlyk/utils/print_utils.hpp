@@ -7,7 +7,8 @@
 
 #define KURLYK_PRINT kurlyk::utils::ThreadSafePrintStream{}
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \brief Thread-safe stream class for printing to console from multiple threads.
     class ThreadSafePrintStream : public std::ostringstream {
@@ -36,6 +37,7 @@ namespace kurlyk::utils {
         }
     };
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_UTILS_PRINT_UTILS_HPP_INCLUDED

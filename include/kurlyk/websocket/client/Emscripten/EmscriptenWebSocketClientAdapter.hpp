@@ -97,14 +97,14 @@ namespace kurlyk {
 
         /// \brief Checks if the WebSocket is connected.
         /// \return True if the WebSocket is connected.
-        const bool is_connected() override final {
+        bool is_connected() override final {
             std::lock_guard<std::mutex> lock(m_client_mutex);
             return m_ws_state == WebSocketState::WORKING;
         }
 
         /// \brief Checks if the client is currently running.
         /// \return True if the client is running.
-        const bool is_running() override final {
+        bool is_running() override final {
             return m_is_running;
         }
 

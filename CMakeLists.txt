@@ -23,8 +23,11 @@ option(KURLYK_CURL_SHARED "For falllback option: libcurl shared" ON)
 
 # Our header-only library
 add_library(kurlyk INTERFACE)
-target_include_directories(kurlyk INTERFACE 
-	"${CMAKE_CURRENT_SOURCE_DIR}/include"
+add_library(kurlyk::kurlyk ALIAS kurlyk)
+target_compile_features(kurlyk INTERFACE cxx_std_11)
+target_include_directories(kurlyk INTERFACE
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    "$<INSTALL_INTERFACE:include>"
 )
 
 # Deps
@@ -66,11 +69,9 @@ endif()
 
 # OS-specific dependencies
 if (WIN32)
-	include(cmake/deps/win_deps.cmake)
-elseif(UNIX AND NOT APPLE)
-	include(cmake/deps/unix_deps.cmake)
-elseif(APPLE)
-	message(FATAL_ERROR "Full CMake build for macOS is not supported yet.")
+    include(cmake/deps/win_deps.cmake)
+elseif(UNIX)
+    include(cmake/deps/unix_deps.cmake)
 else()
 	message(FATAL_ERROR "Unsupported platform.")
 endif()

@@ -5,7 +5,8 @@
 /// \file email_utils.hpp
 /// \brief Provides utility functions for validating email address formats.
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \brief Validates an email address format.
     /// \param str The email address to validate.
@@ -18,6 +19,7 @@ namespace kurlyk::utils {
         return std::regex_match(str, email_regex);
     }
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_UTILS_EMAIL_UTILS_HPP_INCLUDED

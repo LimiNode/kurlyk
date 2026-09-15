@@ -5,7 +5,8 @@
 /// \file user_agent_utils.hpp
 /// \brief Provides functions for converting User-Agent strings to sec-ch-ua format.
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \brief Converts a User-Agent string to a sec-ch-ua header value.
     /// \param user_agent The User-Agent string.
@@ -26,6 +27,7 @@ namespace kurlyk::utils {
         return sec_ch_ua;
     }
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_UTILS_USER_AGENT_UTILS_HPP_INCLUDED

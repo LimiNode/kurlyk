@@ -1,5 +1,19 @@
 function(load_asio target)
-#Fallback: FetchContent
+    # Prefer the checked-out submodule for deterministic/offline builds.
+    set(_asio_include_dir "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../../../external/asio/include")
+    if(EXISTS "${_asio_include_dir}/asio.hpp")
+        message(STATUS "Asio: using local submodule")
+        if(NOT TARGET asio)
+            add_library(asio INTERFACE)
+            target_include_directories(asio INTERFACE "${_asio_include_dir}")
+            target_compile_definitions(asio INTERFACE ASIO_STANDALONE)
+            add_library(asio::asio ALIAS asio)
+        endif()
+        target_link_libraries(${target} INTERFACE asio)
+        return()
+    endif()
+
+    # Fallback: FetchContent
 
 	message(STATUS "Asio: using fallback standalone Asio from remote repository")
 	include(FetchContent)

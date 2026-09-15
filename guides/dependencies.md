@@ -11,6 +11,10 @@
 | nlohmann/json | Optional JSON support behind `KURLYK_JSON_SUPPORT` | None (disabled by default) |
 | Emscripten | Alternative transport for web builds | Enabled automatically when compiling for Emscripten |
 
+On macOS, use system or Homebrew `curl` and `openssl@3`; the Windows binary
+fallbacks for libcurl and OpenSSL are not used on Apple platforms. Asio and
+Simple-WebSocket-Server can use the checked-out headers in `external/`.
+
 ## Policy
 
 - Prefer system packages; use bundled copies in `external/` only when the system

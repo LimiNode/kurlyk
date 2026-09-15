@@ -192,7 +192,7 @@ namespace kurlyk {
 
         /// \brief Checks if the WebSocket is connected.
         /// \return True if the WebSocket is connected, false otherwise.
-        const bool is_connected() const {
+        bool is_connected() const {
             return m_client->is_connected();
         }
 
@@ -481,7 +481,9 @@ namespace kurlyk {
         static void ensure_initialized() {
             static std::once_flag once;
             std::call_once(once, []() {
+#               if KURLYK_HTTP_SUPPORT
                 HttpRequestManager::get_instance();
+#               endif
                 WebSocketManager::get_instance();
                 core::NetworkWorker::get_instance().start(KURLYK_AUTO_INIT_USE_ASYNC);
             });

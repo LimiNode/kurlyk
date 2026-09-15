@@ -5,7 +5,7 @@ function(load_simple_web_server target)
 		  CACHE BOOL "Synchronization for Simple-Web-Server" FORCE)
 	endif()
 
-	set(simple_web_server_submodule_dir "${CMAKE_CURRENT_LIST_DIR}/../../../external/Simple-Web-Server")
+	set(simple_web_server_submodule_dir "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../../../external/Simple-Web-Server")
 
 	if(EXISTS "${simple_web_server_submodule_dir}/server_http.hpp")
 		message(STATUS "Simple-Web-Server: using pinned submodule")

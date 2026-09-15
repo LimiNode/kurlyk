@@ -5,7 +5,8 @@
 /// \file ClientErrorCategory.hpp
 /// \brief Declares the ClientError enumeration and error category for internal client-side failures.
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \enum ClientError
     /// \brief Defines errors related to the internal state or lifecycle of the HTTP/WebSocket client.
@@ -63,7 +64,8 @@ namespace kurlyk::utils {
         return {static_cast<int>(e), client_error_category()};
     }
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 /// \brief Enables use of ClientError with std::error_code.
 namespace std {

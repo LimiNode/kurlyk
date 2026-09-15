@@ -144,16 +144,8 @@ namespace kurlyk {
             const std::string& general_key,
             const std::string& specific_key
             ) {
-            auto delay = m_rate_limiter.time_until_next_allowed<Duration>(
+            return m_rate_limiter.time_until_next_allowed<Duration>(
                 general_limit, specific_limit, general_key, specific_key);
-            RateLimitDelay<Duration> result;
-            if constexpr (std::is_same_v<decltype(delay), RateLimitDelay<Duration>>) {
-                result = delay;
-            } else {
-                result.duration = delay;
-                result.sequential_blocked = (delay == Duration::max());
-            }
-            return result;
         }
 
         /// \brief Generates a new unique request ID.
@@ -283,7 +275,7 @@ namespace kurlyk {
 
         /// \brief Checks if there are active, pending, or failed requests.
         /// \return True if there are requests still being managed, otherwise false.
-        const bool is_loaded() const override {
+        bool is_loaded() const override {
             std::lock_guard<std::mutex> lock(m_mutex);
             return
                 !m_pending_requests.empty() ||

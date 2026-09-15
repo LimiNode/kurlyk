@@ -5,7 +5,8 @@
 /// \file CurlErrorCategory.hpp
 /// \brief Defines the CurlErrorCategory class for handling CURL error codes.
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \class CurlErrorCategory
     /// \brief Represents a custom error category for CURL errors, enabling integration with std::error_code.
@@ -33,6 +34,7 @@ namespace kurlyk::utils {
         return {static_cast<int>(e), category};
     }
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_UTILS_CURL_ERROR_CATEGORY_HPP_INCLUDED

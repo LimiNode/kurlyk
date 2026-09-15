@@ -5,7 +5,8 @@
 /// \file HttpErrorCategory.hpp
 /// \brief Defines the HttpErrorCategory class for interpreting HTTP status codes as std::error_code values.
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \class HttpErrorCategory
     /// \brief Custom error category that maps HTTP status codes (e.g., 404, 500) to human-readable error messages.
@@ -47,6 +48,7 @@ namespace kurlyk::utils {
         return ec.category().name() == std::string("http");
     }
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_UTILS_HTTP_ERROR_CATEGORY_HPP_INCLUDED

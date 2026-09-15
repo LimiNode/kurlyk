@@ -7,8 +7,10 @@
 
 #include <string>
 #include <algorithm>
+#include <cctype>
 
-namespace kurlyk::utils {
+namespace kurlyk {
+namespace utils {
 
     /// \brief Converts a string to uppercase.
     /// \param str Input string.
@@ -30,6 +32,7 @@ namespace kurlyk::utils {
         return str;
     }
 
-} // namespace kurlyk::utils
+} // namespace utils
+} // namespace kurlyk
 
 #endif // KURLYK_HEADER_KURLYK_UTILS_STRING_UTILS_HPP_INCLUDED

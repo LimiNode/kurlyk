@@ -7,7 +7,7 @@
 - **Boost.Asio** or **standalone Asio** — WebSocket I/O
 - **Simple-WebSocket-Server** — WebSocket protocol layer
 
-All dependencies are bundled as git submodules under `libs/` and can also be provided by the system.
+All dependencies are bundled as git submodules under `external/` and can also be provided by the system.
 
 ## Quick Build
 
@@ -42,10 +42,10 @@ g++ examples/simple_http_request_example.cpp -Iinclude -std=c++17 \
 
 CMake can automatically download missing dependencies. Availability depends on the compiler and linkage type.
 
-| Dependency | MinGW (Shared) | MinGW (Static) | MSVC (Shared) | MSVC (Static) |
-|------------|---------------|---------------|---------------|---------------|
-| OpenSSL    | yes           | yes           | yes           | yes           |
-| curl       | yes           | yes           | yes           | no            |
+| Dependency | MinGW (Shared) | MinGW (Static) | MSVC (Shared) | MSVC (Static) | macOS (system/Homebrew) |
+|------------|---------------|---------------|---------------|---------------|-------------------------|
+| OpenSSL    | yes           | yes           | yes           | yes           | yes                     |
+| curl       | yes           | yes           | yes           | no            | yes                     |
 
 Asio and Simple-WebSocket-Server are header-only and work for all build variants.
 
@@ -63,12 +63,27 @@ Asio and Simple-WebSocket-Server are header-only and work for all build variants
 
 ## Testing
 
-There is no dedicated unit test suite. When modifying library headers, compile at least one example from `examples/` (e.g., `simple_http_request_example.cpp`) to ensure the code still builds.
+The repository includes auth unit tests, integration tests, ODR checks, and portable smoke checks. When modifying library headers, compile at least one example from `examples/` (e.g., `simple_http_request_example.cpp`) to ensure the code still builds.
 
 ### Windows integration suite
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File tests/integration/run_integration_tests.ps1
+```
+
+### macOS integration suite
+
+```bash
+brew install ninja curl openssl@3
+OSSL="$(brew --prefix openssl@3)"
+CURL="$(brew --prefix curl)"
+PATH="$CURL/bin:$PATH" cmake -S tests/integration -B build-macos -G Ninja \
+    -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+    -DOPENSSL_ROOT_DIR="$OSSL" -DCMAKE_PREFIX_PATH="$OSSL;$CURL" \
+    -DKURLYK_USE_FALLBACK_ASIO=ON \
+    -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON
+cmake --build build-macos
+ctest --test-dir build-macos --output-on-failure
 ```
 
 ### ODR suite
@@ -85,6 +100,19 @@ c++ tests/smoke/header_smoke.cpp -Iinclude -std=c++11 -o header_smoke
 
 c++ tests/smoke/header_smoke.cpp -Iinclude -std=c++17 -o header_smoke
 ./header_smoke
+
+c++ tests/smoke/http_header_smoke.cpp -Iinclude -std=c++11 -o http_header_smoke
+./http_header_smoke
+
+c++ tests/smoke/proxy_config_smoke.cpp -Iinclude -std=c++11 -o proxy_config_smoke
+./proxy_config_smoke
+
+cmake -S tests/smoke -B build-full-cpp11-smoke -G Ninja \
+    -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+    -DKURLYK_USE_STANDALONE_ASIO=ON \
+    -DKURLYK_USE_FALLBACK_ASIO=ON \
+    -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON
+cmake --build build-full-cpp11-smoke
 ```
 
 ## CI Coverage
@@ -93,8 +121,8 @@ c++ tests/smoke/header_smoke.cpp -Iinclude -std=c++17 -o header_smoke
 |----------|----------|
 | Windows | MinGW and MSVC integration builds with fallback dependencies, HTTP backpressure regression, and local WebSocket integration coverage. |
 | Windows extras | ODR checks for singleton and auto-initialization headers. |
-| Linux | C++11/C++17 header smoke test with HTTP/WebSocket disabled. |
-| macOS | C++11/C++17 header smoke test with HTTP/WebSocket disabled. |
+| Linux | C++11/C++17 header smoke, C++11 HTTP/proxy checks, full C++11 HTTP/WebSocket compile-only smoke, and C++17 integration examples. |
+| macOS | C++11/C++17 header smoke, C++11 HTTP/proxy checks, full C++11 HTTP/WebSocket compile-only smoke, and C++17 integration tests. |
 
 ## Documentation
 
