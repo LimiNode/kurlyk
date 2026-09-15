@@ -199,7 +199,7 @@ int main() {
                 kurlyk::utils::make_error_code(kurlyk::utils::ClientError::InvalidConfiguration),
             "invalid proxy returned the wrong error code");
 
-    HttpsServer https_server(KURLYK_TEST_SSL_FILE, KURLYK_TEST_SSL_FILE);
+    HttpsServer https_server(KURLYK_TEST_SSL_CERT_FILE, KURLYK_TEST_SSL_KEY_FILE);
     https_server.config.address = "127.0.0.1";
     https_server.config.port = 0;
     https_server.config.thread_pool_size = 1;
@@ -293,9 +293,9 @@ int main() {
 
     proxy.set_proxy("127.0.0.1", static_cast<int>(connect_proxy.port()), kurlyk::ProxyType::PROXY_HTTP);
     kurlyk::ProxyCheckOptions https_options;
-    https_options.test_url = "https://server.example:" +
+    https_options.test_url = "https://127.0.0.1:" +
         std::to_string(static_cast<unsigned long>(https_port)) + "/probe";
-    https_options.ca_file = KURLYK_TEST_SSL_FILE;
+    https_options.ca_file = KURLYK_TEST_SSL_CA_FILE;
     https_options.connect_timeout = std::chrono::milliseconds(2000);
     https_options.request_timeout = std::chrono::milliseconds(3000);
     https_options.proxy_tunnel = true;
@@ -304,7 +304,7 @@ int main() {
     require(connect_target.wait_for(std::chrono::seconds(1)) == std::future_status::ready,
             "CONNECT proxy did not receive the HTTPS request");
     require(connect_target.get() ==
-                "server.example:" + std::to_string(static_cast<unsigned long>(https_port)),
+                "127.0.0.1:" + std::to_string(static_cast<unsigned long>(https_port)),
             "CONNECT proxy received an unexpected target");
     require(https_request.wait_for(std::chrono::seconds(1)) == std::future_status::ready,
             "HTTPS origin did not receive the proxy check request");
