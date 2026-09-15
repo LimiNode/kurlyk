@@ -56,9 +56,7 @@ namespace auth {
                 return std::string();
             }
 
-            if (m_state.empty()) {
-                m_state = utils::generate_code_verifier(64);
-            }
+            m_state = utils::generate_code_verifier(64);
 
             QueryParams params;
             params.emplace("response_type", "code");

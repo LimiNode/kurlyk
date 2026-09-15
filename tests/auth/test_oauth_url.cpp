@@ -38,10 +38,14 @@ int main() {
     // State and verifier must be non-empty
     if (oauth.state().empty()) return 1;
     if (oauth.code_verifier().empty()) return 1;
+    const std::string state1 = oauth.state();
+    const std::string verifier1 = oauth.code_verifier();
 
     // Two consecutive calls must regenerate state and verifier
     std::string url2 = oauth.build_authorization_url();
     if (url == url2) return 1;
+    if (state1 == oauth.state()) return 1;
+    if (verifier1 == oauth.code_verifier()) return 1;
 
     // Missing required config returns empty
     kurlyk::OAuthConfig bad_config;
