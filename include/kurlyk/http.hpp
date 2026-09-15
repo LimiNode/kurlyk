@@ -21,6 +21,7 @@
 #include "http/HttpRequestManager.hpp"
 #include "http/HttpClient.hpp"
 #include "http/utils.hpp"
+#include "http/ProxyChecker.hpp"
 
 #if KURLYK_AUTH_SUPPORT
 #include "http/auth.hpp"

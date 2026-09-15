@@ -8,5 +8,7 @@
 #include "HttpRequestManager/HttpRateLimitHandle.hpp"
 #include "data/HttpRequest.hpp"
 #include "data/HttpResponse.hpp"
+#include "data/ProxyCheckOptions.hpp"
+#include "data/ProxyCheckResult.hpp"
 
 #endif // KURLYK_HEADER_KURLYK_HTTP_DATA_HPP_INCLUDED

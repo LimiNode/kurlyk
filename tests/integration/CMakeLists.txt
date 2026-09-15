@@ -61,6 +61,33 @@ add_executable(http_client_destructor_test
 	http_client_destructor_main.cpp
 )
 
+add_executable(proxy_checker_test
+	proxy_checker_main.cpp
+)
+
+set(proxy_checker_test_ssl_cert
+	"${CMAKE_CURRENT_SOURCE_DIR}/data/proxy_checker_server.pem")
+set(proxy_checker_test_ssl_key
+	"${CMAKE_CURRENT_SOURCE_DIR}/data/proxy_checker_server.key")
+set(proxy_checker_test_ssl_ca
+	"${CMAKE_CURRENT_SOURCE_DIR}/data/proxy_checker_ca.pem")
+foreach(proxy_checker_test_ssl_file
+		${proxy_checker_test_ssl_cert}
+		${proxy_checker_test_ssl_key}
+		${proxy_checker_test_ssl_ca})
+	if(NOT EXISTS "${proxy_checker_test_ssl_file}")
+		message(FATAL_ERROR "Proxy checker HTTPS test file is missing: ${proxy_checker_test_ssl_file}")
+	endif()
+endforeach()
+file(TO_CMAKE_PATH "${proxy_checker_test_ssl_cert}" proxy_checker_test_ssl_cert)
+file(TO_CMAKE_PATH "${proxy_checker_test_ssl_key}" proxy_checker_test_ssl_key)
+file(TO_CMAKE_PATH "${proxy_checker_test_ssl_ca}" proxy_checker_test_ssl_ca)
+target_compile_definitions(proxy_checker_test PRIVATE
+	KURLYK_TEST_SSL_CERT_FILE="${proxy_checker_test_ssl_cert}"
+	KURLYK_TEST_SSL_KEY_FILE="${proxy_checker_test_ssl_key}"
+	KURLYK_TEST_SSL_CA_FILE="${proxy_checker_test_ssl_ca}"
+)
+
 list(APPEND CMAKE_MODULE_PATH 
 	"${CMAKE_CURRENT_LIST_DIR}/../../cmake/deps"
 	"${CMAKE_CURRENT_LIST_DIR}/../../cmake"
@@ -110,11 +137,13 @@ target_link_libraries(rate_limit_partition_test PRIVATE kurlyk)
 target_link_libraries(http_local_test PRIVATE kurlyk)
 target_link_libraries(http_retry_streaming_test PRIVATE kurlyk)
 target_link_libraries(http_client_destructor_test PRIVATE kurlyk)
+target_link_libraries(proxy_checker_test PRIVATE kurlyk)
 
 include(fallbacks/load_simple_web_server)
 load_simple_web_server(http_local_test)
 load_simple_web_server(http_retry_streaming_test)
 load_simple_web_server(http_client_destructor_test)
+load_simple_web_server(proxy_checker_test)
 
 target_compile_features(integr_test PRIVATE cxx_std_17)
 target_compile_features(ws_local_test PRIVATE cxx_std_17)
@@ -129,12 +158,14 @@ target_compile_features(rate_limit_partition_test PRIVATE cxx_std_17)
 target_compile_features(http_local_test PRIVATE cxx_std_17)
 target_compile_features(http_retry_streaming_test PRIVATE cxx_std_17)
 target_compile_features(http_client_destructor_test PRIVATE cxx_std_17)
+target_compile_features(proxy_checker_test PRIVATE cxx_std_17)
 
 if(MINGW)
 	target_compile_options(ws_local_test PRIVATE -Wa,-mbig-obj)
 	target_compile_options(http_local_test PRIVATE -Wa,-mbig-obj)
 	target_compile_options(http_retry_streaming_test PRIVATE -Wa,-mbig-obj)
 	target_compile_options(http_client_destructor_test PRIVATE -Wa,-mbig-obj)
+	target_compile_options(proxy_checker_test PRIVATE -Wa,-mbig-obj)
 endif()
 
 include(copy_runtime_dlls)
@@ -151,6 +182,7 @@ copy_runtime_dlls(rate_limit_partition_test)
 copy_runtime_dlls(http_local_test)
 copy_runtime_dlls(http_retry_streaming_test)
 copy_runtime_dlls(http_client_destructor_test)
+copy_runtime_dlls(proxy_checker_test)
 
 add_test(NAME integr_test COMMAND integr_test)
 add_test(NAME ws_local_test COMMAND ws_local_test)
@@ -165,3 +197,4 @@ add_test(NAME rate_limit_partition_test COMMAND rate_limit_partition_test)
 add_test(NAME http_local_test COMMAND http_local_test)
 add_test(NAME http_retry_streaming_test COMMAND http_retry_streaming_test)
 add_test(NAME http_client_destructor_test COMMAND http_client_destructor_test)
+add_test(NAME proxy_checker_test COMMAND proxy_checker_test)

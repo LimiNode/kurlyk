@@ -11,6 +11,7 @@ set(KURLYK_EXAMPLE_SOURCES
 	http_streaming_example.cpp
 	interrupted_requests_example.cpp
 	nested_http_requests_example.cpp
+	proxy_checker_example.cpp
 	redirect_handling_example.cpp
 	sequential_rate_limit_example.cpp
 	simple_http_request_example.cpp

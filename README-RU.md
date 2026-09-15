@@ -24,6 +24,7 @@
 - Фоновый worker или синхронная обработка через `kurlyk::process()`.
 - HTTP callback API и `std::future` API.
 - Rate limits (с разбиением по ключу), retry, proxy, пользовательские заголовки, cookie и таймауты.
+- Проверка HTTP/HTTPS proxy через запросы без body и timing-метрики curl.
 - Streaming HTTP responses с callback'ом на каждый chunk.
 - WebSocket events, отправка сообщений и автоматическое переподключение.
 - Bounded admission/backpressure для HTTP pending queue и WebSocket send queue.
@@ -191,6 +192,34 @@ int main() {
     return 0;
 }
 ```
+
+### Проверка proxy
+
+`ProxyChecker` проверяет пассивный `ProxyConfig` одним асинхронным `HEAD`-запросом через proxy. Тестовый URL настраивается и по умолчанию равен `https://example.com/`; для воспроизводимой проверки доступности лучше указывать контролируемый endpoint. Следование перенаправлениям и туннелирование через proxy по умолчанию отключены, поэтому проверка измеряет один endpoint через обычный HTTP proxy; для режима CONNECT явно установите `options.proxy_tunnel`. Для HTTPS endpoint с приватным центром сертификации задайте путь к набору сертификатов через `options.ca_file`. Checker отключает retry и не загружает response body — это тот же облегчённый подход, который используется при поиске доступного host.
+
+```cpp
+int main() {
+    kurlyk::ProxyConfig proxy;
+    proxy.set_proxy("127.0.0.1", 8080, kurlyk::ProxyType::PROXY_HTTP);
+    proxy.set_proxy_auth("username", "password");
+    proxy.use = true;
+
+    kurlyk::ProxyCheckOptions options;
+    options.test_url = "https://service.example/health";
+
+    kurlyk::ProxyCheckResult result =
+        kurlyk::check_proxy(proxy, options).get();
+
+    std::cout << "HTTP: " << result.http_ok << '\n'
+              << "HTTPS: " << result.https_ok << '\n'
+              << "connect: " << result.connect_latency.count() << " ms\n"
+              << "TLS/CONNECT: " << result.tls_latency.count() << " ms\n"
+              << "TTFB: " << result.ttfb.count() << " ms\n"
+              << "total: " << result.total_latency.count() << " ms\n";
+}
+```
+
+`connect_latency` — время curl от начала проверки до установки TCP-соединения с proxy, включая разрешение имени. `tls_latency` — интервал после TCP connect до завершения TLS; для HTTPS через HTTP proxy он также включает согласование CONNECT. TTFB и total latency измеряются от начала запроса. Текущий HTTP transport округляет значения timeout вверх до целых секунд. `reachable` означает, что через proxy получен HTTP-ответ; это не ICMP ping. Вызов `check(...)` явно проверяет переданный DTO, поэтому поле `ProxyConfig::use` не учитывается.
 
 ### Low-level helpers
 
