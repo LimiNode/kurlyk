@@ -16,5 +16,15 @@ int main() {
     kurlyk::OAuthConfig oauth_config;
     (void)oauth_config;
 
+    kurlyk::ProxyCheckOptions proxy_check_options;
+    kurlyk::ProxyCheckResult proxy_check_result;
+    kurlyk::ProxyChecker proxy_checker;
+    std::future<kurlyk::ProxyCheckResult> proxy_check_future =
+        proxy_checker.check(kurlyk::ProxyConfig());
+    (void)proxy_check_options;
+    (void)proxy_check_result;
+    (void)proxy_checker;
+    (void)proxy_check_future;
+
     return 0;
 }

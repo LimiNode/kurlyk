@@ -24,6 +24,7 @@ If, for some reason, other libraries such as *easyhttp-cpp, curl_request, curlpp
 - Background worker or synchronous processing via `kurlyk::process()`.
 - HTTP callback API and `std::future` API.
 - Rate limits (partitioned by key), retry, proxy, custom headers, cookies, and timeouts.
+- HTTP/HTTPS proxy checks using no-body requests and curl timing metrics.
 - Streaming HTTP responses with a callback for each chunk.
 - WebSocket events, message sending, and automatic reconnection.
 - Bounded admission/backpressure for the HTTP pending queue and WebSocket send queue.
@@ -191,6 +192,34 @@ int main() {
     return 0;
 }
 ```
+
+### Proxy checks
+
+`ProxyChecker` checks a passive `ProxyConfig` with one asynchronous `HEAD` request through the proxy. The test URL is configurable and defaults to `https://example.com/`; use an endpoint you control when reproducible availability checks matter. The checker disables retries and does not download the response body, matching the lightweight availability probe used for host discovery.
+
+```cpp
+int main() {
+    kurlyk::ProxyConfig proxy;
+    proxy.set_proxy("127.0.0.1", 8080, kurlyk::ProxyType::PROXY_HTTP);
+    proxy.set_proxy_auth("username", "password");
+    proxy.use = true;
+
+    kurlyk::ProxyCheckOptions options;
+    options.test_url = "https://service.example/health";
+
+    kurlyk::ProxyCheckResult result =
+        kurlyk::check_proxy(proxy, options).get();
+
+    std::cout << "HTTP: " << result.http_ok << '\n'
+              << "HTTPS: " << result.https_ok << '\n'
+              << "connect: " << result.connect_latency.count() << " ms\n"
+              << "TLS/CONNECT: " << result.tls_latency.count() << " ms\n"
+              << "TTFB: " << result.ttfb.count() << " ms\n"
+              << "total: " << result.total_latency.count() << " ms\n";
+}
+```
+
+`connect_latency` is the elapsed curl time until the proxy TCP connection is established and includes name resolution. `tls_latency` is the interval after TCP connect until TLS setup completes; for HTTPS through an HTTP proxy it also includes CONNECT negotiation. TTFB and total latency are measured from the beginning of the request. Timeout values are rounded up to whole seconds by the current HTTP transport. `reachable` means that an HTTP response was received through the proxy; it is not an ICMP ping. Calling `check(...)` explicitly checks the supplied DTO, so `ProxyConfig::use` is not consulted.
 
 ### Low-level helpers
 
