@@ -274,8 +274,6 @@ int main() {
 
     // --- Test 8: concurrent same-client max_in_flight submission ---
     {
-        ProcessorGuard pg;
-
         auto client = std::make_unique<kurlyk::HttpClient>(base_url);
         client->set_max_in_flight(1);
         std::atomic<int> callback_count{0};
@@ -284,13 +282,13 @@ int main() {
         std::atomic<int> accepted{0};
         std::atomic<int> rejected{0};
 
-        auto submit_fn = [&]() {
+        auto submit_fn = [&start, &client, &callback_count, &accepted, &rejected]() {
             while (!start.load(std::memory_order_acquire)) {
                 std::this_thread::yield();
             }
 
             bool ok = client->get("/slow", kurlyk::QueryParams(), kurlyk::Headers(),
-                [&](kurlyk::HttpResponsePtr response) {
+                [&callback_count](kurlyk::HttpResponsePtr response) {
                     if (response && response->ready) ++callback_count;
                 });
 
@@ -314,6 +312,7 @@ int main() {
         require(rejected.load() == 1,
                 "one request should be rejected by client-side max_in_flight");
 
+        ProcessorGuard pg;
         client->wait_requests();
         require(callback_count.load() == 1, "only accepted request callback should be delivered");
         require(client->in_flight_requests() == 0, "client group must be idle after wait_requests()");
