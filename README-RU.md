@@ -517,6 +517,31 @@ kurlyk/include
 
 **kurlyk** — header-only библиотека, поэтому достаточно подключить её через `#include <kurlyk.hpp>` и начать использовать.
 
+### Установка как CMake-пакета
+
+Установите заголовки и метаданные CMake в staging-префикс:
+
+```bash
+cmake -S . -B build-package \
+    -DKURLYK_BUILD_EXAMPLES=OFF
+cmake --build build-package
+cmake --install build-package --prefix /path/to/kurlyk-install
+```
+
+Внешний проект CMake может использовать экспортируемую цель `kurlyk::kurlyk`:
+
+```cmake
+find_package(kurlyk CONFIG REQUIRED)
+target_link_libraries(my_app PRIVATE kurlyk::kurlyk)
+```
+
+Установленный пакет по-прежнему требует транспортные зависимости выбранной
+конфигурации: OpenSSL, libcurl, standalone Asio или Boost.Asio, заголовки
+Simple-WebSocket-Server и hmac-cpp при включённой поддержке OAuth. Если Asio
+или Simple-WebSocket-Server не находятся через менеджер пакетов, передайте
+`KURLYK_ASIO_INCLUDE_DIR` и `KURLYK_SIMPLE_WS_INCLUDE_DIR` при конфигурации
+потребителя.
+
 ### Зависимости
 
 Для работы библиотеки **kurlyk** в среде MinGW потребуются следующие зависимости:
@@ -655,6 +680,7 @@ Asio и Simple-WebSocket-Server — header-only библиотеки и подх
 | `tests/integration` | Кроссплатформенные локальные HTTP/WebSocket integration build checks. |
 | `tests/odr` | Header-only ODR checks. |
 | `tests/smoke` | Portable header smoke checks. |
+| `tests/package` | Проверки install-tree и внешнего потребителя CMake. |
 | `examples/` | Примеры использования. |
 
 ## Инструменты для AI-агентов
@@ -762,6 +788,7 @@ cmake --build build-full-cpp11-smoke
 | Windows extras | ODR-проверки singleton и auto-init заголовков. |
 | Linux | C++11/C++17 header smoke, C++11 HTTP/proxy checks, полный C++11 compile-only smoke HTTP/WebSocket и C++17 integration examples. |
 | macOS | C++11/C++17 header smoke, C++11 HTTP/proxy checks, полный C++11 compile-only smoke HTTP/WebSocket и C++17 integration tests. |
+| Packaging | Проверка install-tree CMake и внешнего потребителя C++11. |
 
 ## Документация
 
