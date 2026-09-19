@@ -23,7 +23,7 @@ namespace detail {
     /// \param data Destination buffer.
     /// \param size Number of bytes to generate.
     inline void random_bytes(uint8_t* data, std::size_t size) {
-        if (size > static_cast<std::size_t>(std::numeric_limits<int>::max()) ||
+        if (size > static_cast<std::size_t>((std::numeric_limits<int>::max)()) ||
             RAND_bytes(
                 reinterpret_cast<unsigned char*>(data),
                 static_cast<int>(size)) != 1) {
