@@ -24,7 +24,6 @@ All notable changes to this project will be documented in this file.
 - Replaced dual `KURLYK_ENABLE_JSON` / `KURLYK_USE_JSON` macros with unified `KURLYK_JSON_SUPPORT`.
   Legacy aliases map automatically for backward compatibility.
 
-## [v1.1.0] - 2026-04-23
 - Added `HttpClient::wait_requests()` to block until all callbacks for the client's request group are delivered.
 - Added `HttpClient::wait_requests_for(timeout)` to block with a timeout; returns `false` on timeout.
 - Added per-client in-flight admission cap via `HttpClient::set_max_in_flight()`, `max_in_flight()`, and `in_flight_requests()`; requests exceeding the cap are rejected with `QueueLimitExceeded`.

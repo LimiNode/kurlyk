@@ -29,10 +29,19 @@ vcpkg_cmake_configure(
 vcpkg_cmake_install()
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/kurlyk)
 
+# Keep the port usage guidance next to the installed package metadata.
+file(INSTALL
+    "${CMAKE_CURRENT_LIST_DIR}/usage"
+    DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}"
+)
+
 # kurlyk is header-only; a debug tree would only contain duplicate headers and
 # package metadata. Keep the vcpkg package free of that unused tree.
 file(REMOVE "${CURRENT_PACKAGES_DIR}/include/AGENTS.md")
-file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug")
+file(REMOVE_RECURSE
+    "${CURRENT_PACKAGES_DIR}/debug"
+    "${CURRENT_PACKAGES_DIR}/lib"
+)
 
 vcpkg_install_copyright(
     FILE_LIST
