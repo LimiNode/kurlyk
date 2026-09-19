@@ -51,7 +51,7 @@
 #endif
 
 /// \def KURLYK_OAUTH_SUPPORT
-/// \brief Enables OAuth2 PKCE client and crypto dependencies (requires hmac-cpp).
+/// \brief Enables OAuth2 PKCE client and crypto dependencies (requires OpenSSL).
 #ifndef KURLYK_OAUTH_SUPPORT
 #   define KURLYK_OAUTH_SUPPORT KURLYK_AUTH_SUPPORT
 #endif
