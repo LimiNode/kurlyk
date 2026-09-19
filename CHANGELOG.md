@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file.
 - Added `OAuthPkceClient` for OAuth2 Authorization Code + PKCE (RFC 7636) flow:
   - `build_authorization_url()`, `exchange_code()`, `refresh_access_token()`, `validate_state()`.
   - Uses standalone `kurlyk::http_post` / `kurlyk::http_request` helpers (no `HttpClient` coupling).
-  - SHA-256 via `hmac-cpp`; Base64Url implemented inline.
+  - SHA-256 and secure random bytes via OpenSSL; Base64Url implemented inline.
   - Custom token parser fallback for non-JSON builds.
 - Added `ITokenStorage` interface for caller-provided token persistence.
 - Added `OAuthToken`, `OAuthConfig`, `AuthResult` data types with `AuthError` enum.

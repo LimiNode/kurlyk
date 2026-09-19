@@ -5,8 +5,8 @@
 #include <kurlyk.hpp>
 #include <iostream>
 
-/// Minimal example showing BearerTokenAuthProvider without OAuth/hmac-cpp.
-/// KURLYK_OAUTH_SUPPORT=0 keeps the hmac-cpp dependency out of the build.
+/// Minimal example showing BearerTokenAuthProvider without OAuth.
+/// KURLYK_OAUTH_SUPPORT=0 excludes the OAuth2 PKCE client from the build.
 int main() {
     kurlyk::init(true);
 
