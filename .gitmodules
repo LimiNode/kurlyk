@@ -19,6 +19,3 @@
 [submodule "external/asio"]
 	path = external/asio
 	url = https://github.com/chriskohlhoff/asio.git
-[submodule "external/hmac-cpp"]
-	path = external/hmac-cpp
-	url = https://github.com/NewYaroslav/hmac-cpp.git
