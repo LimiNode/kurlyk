@@ -298,7 +298,6 @@ int main() {
     https_options.ca_file = KURLYK_TEST_SSL_CA_FILE;
     https_options.connect_timeout = std::chrono::milliseconds(2000);
     https_options.request_timeout = std::chrono::milliseconds(3000);
-    https_options.proxy_tunnel = true;
 
     const kurlyk::ProxyCheckResult https_result = checker.check(proxy, https_options).get();
     require(connect_target.wait_for(std::chrono::seconds(1)) == std::future_status::ready,
