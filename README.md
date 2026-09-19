@@ -517,6 +517,31 @@ kurlyk/include
 
 **kurlyk** is a header-only library, so including it with `#include <kurlyk.hpp>` is enough to start using it.
 
+### CMake package installation
+
+Install the headers and CMake package metadata into a staging prefix:
+
+```bash
+cmake -S . -B build-package \
+    -DKURLYK_BUILD_EXAMPLES=OFF
+cmake --build build-package
+cmake --install build-package --prefix /path/to/kurlyk-install
+```
+
+An external CMake project can then use the exported `kurlyk::kurlyk` target:
+
+```cmake
+find_package(kurlyk CONFIG REQUIRED)
+target_link_libraries(my_app PRIVATE kurlyk::kurlyk)
+```
+
+The installed package still requires the transport dependencies used by the
+selected configuration: OpenSSL, libcurl, standalone Asio or Boost.Asio,
+Simple-WebSocket-Server headers. OAuth PKCE uses the existing OpenSSL dependency.
+If Asio or Simple-WebSocket-Server are not discoverable through a package
+manager, set `KURLYK_ASIO_INCLUDE_DIR` and
+`KURLYK_SIMPLE_WS_INCLUDE_DIR` when configuring the consumer.
+
 ### Dependencies
 
 To use **kurlyk** in a MinGW environment, you need these dependencies:
@@ -655,6 +680,7 @@ Define these macros before including `kurlyk.hpp` to configure the library:
 | `tests/integration` | Cross-platform local HTTP/WebSocket integration build checks. |
 | `tests/odr` | Header-only ODR checks. |
 | `tests/smoke` | Portable header smoke checks. |
+| `tests/package` | Install-tree and external CMake consumer checks. |
 | `examples/` | Usage examples. |
 
 ## AI agent tooling
@@ -762,6 +788,7 @@ See the full guides for details:
 | Windows extras | ODR checks for singleton and auto-initialization headers. |
 | Linux | C++11/C++17 header smoke, C++11 HTTP/proxy checks, full C++11 HTTP/WebSocket compile-only smoke, and C++17 integration examples. |
 | macOS | C++11/C++17 header smoke, C++11 HTTP/proxy checks, full C++11 HTTP/WebSocket compile-only smoke, and C++17 integration tests. |
+| Packaging | CMake install-tree validation and an external C++11 consumer check. |
 
 ## Documentation
 

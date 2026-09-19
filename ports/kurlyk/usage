@@ -1,0 +1,4 @@
+The package kurlyk provides the CMake target:
+
+    find_package(kurlyk CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE kurlyk::kurlyk)

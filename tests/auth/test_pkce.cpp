@@ -1,4 +1,4 @@
-#include <kurlyk/utils/Pkce.hpp>
+#include <kurlyk/utils/pkce.hpp>
 #include <string>
 #include <set>
 #include <cctype>
@@ -27,6 +27,15 @@ int main() {
     if (challenge == verifier) return 1;
     if (challenge.empty()) return 1;
     if (challenge.find('=') != std::string::npos) return 1;
+
+    // RFC 7636 Appendix B S256 test vector.
+    const std::string rfc_verifier =
+        "dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk";
+    const std::string expected_challenge =
+        "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM";
+    if (kurlyk::utils::make_s256_code_challenge(rfc_verifier) != expected_challenge) {
+        return 1;
+    }
 
     // make_pkce_pair consistency
     kurlyk::utils::PkcePair pair = kurlyk::utils::make_pkce_pair();

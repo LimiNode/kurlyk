@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file.
 - Added `OAuthPkceClient` for OAuth2 Authorization Code + PKCE (RFC 7636) flow:
   - `build_authorization_url()`, `exchange_code()`, `refresh_access_token()`, `validate_state()`.
   - Uses standalone `kurlyk::http_post` / `kurlyk::http_request` helpers (no `HttpClient` coupling).
-  - SHA-256 via `hmac-cpp`; Base64Url implemented inline.
+  - SHA-256 and secure random bytes via OpenSSL; Base64Url implemented inline.
   - Custom token parser fallback for non-JSON builds.
 - Added `ITokenStorage` interface for caller-provided token persistence.
 - Added `OAuthToken`, `OAuthConfig`, `AuthResult` data types with `AuthError` enum.
@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file.
 - Replaced dual `KURLYK_ENABLE_JSON` / `KURLYK_USE_JSON` macros with unified `KURLYK_JSON_SUPPORT`.
   Legacy aliases map automatically for backward compatibility.
 
-## [v1.0.2] - 2026-04-23
+## [v1.1.0] - 2026-04-23
 - Added `HttpClient::wait_requests()` to block until all callbacks for the client's request group are delivered.
 - Added `HttpClient::wait_requests_for(timeout)` to block with a timeout; returns `false` on timeout.
 - Added per-client in-flight admission cap via `HttpClient::set_max_in_flight()`, `max_in_flight()`, and `in_flight_requests()`; requests exceeding the cap are rejected with `QueueLimitExceeded`.

@@ -61,6 +61,64 @@ jobs:
       - name: Build Linux CMake examples
         run: cmake --build build-linux-cmake-${{ matrix.std }}
 
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - run: git submodule update --init --recursive
+      - name: Install package test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev ninja-build
+      - name: Configure packaging build
+        run: |
+          cmake -S . \
+                -B build-package \
+                -G Ninja \
+                -DKURLYK_BUILD_EXAMPLES=OFF \
+                -DKURLYK_USE_FALLBACK_ASIO=ON \
+                -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON \
+                -Wno-dev
+      - name: Install package to staging
+        run: cmake --install build-package --prefix "$PWD/build-package-stage"
+      - name: Verify installed package contents
+        run: cmake -DKURLYK_STAGE_DIR="$PWD/build-package-stage" -P tests/package/verify_install.cmake
+      - name: Configure external package consumer
+        run: |
+          cmake -S tests/package/consumer \
+                -B build-package-consumer \
+                -G Ninja \
+                -DCMAKE_PREFIX_PATH="$PWD/build-package-stage" \
+                -DKURLYK_ASIO_INCLUDE_DIR="$PWD/external/asio/include" \
+                -DCMAKE_CXX_STANDARD=11 \
+                -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+                -Wno-dev
+      - name: Build external package consumer
+        run: cmake --build build-package-consumer
+      - name: Set up vcpkg
+        run: |
+          git clone --depth 1 https://github.com/microsoft/vcpkg.git "$RUNNER_TEMP/vcpkg"
+          "$RUNNER_TEMP/vcpkg/bootstrap-vcpkg.sh" -disableMetrics
+      - name: Install overlay vcpkg port
+        run: |
+          "$RUNNER_TEMP/vcpkg/vcpkg" install kurlyk \
+            --overlay-ports="$PWD/ports" \
+            --triplet=x64-linux
+      - name: Configure vcpkg package consumer
+        run: |
+          cmake -S tests/package/consumer \
+                -B build-vcpkg-consumer \
+                -G Ninja \
+                -DCMAKE_TOOLCHAIN_FILE="$RUNNER_TEMP/vcpkg/scripts/buildsystems/vcpkg.cmake" \
+                -DVCPKG_TARGET_TRIPLET=x64-linux \
+                -DCMAKE_CXX_STANDARD=11 \
+                -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+                -Wno-dev
+      - name: Build vcpkg package consumer
+        run: cmake --build build-vcpkg-consumer
+
   macos:
     runs-on: macos-latest
     steps:
@@ -320,7 +378,7 @@ jobs:
         run: cmake --build build-auth-tests
       - name: Run auth tests
         run: ctest --test-dir build-auth-tests --output-on-failure
-      - name: Configure bearer-only example (no hmac-cpp)
+      - name: Configure bearer-only example (OAuth disabled)
         run: |
           cmake -S . \
                 -B build-bearer-only \
