@@ -3,6 +3,6 @@ project(kurlyk_package_consumer LANGUAGES CXX)
 
 find_package(kurlyk CONFIG REQUIRED)
 
-add_library(kurlyk_package_consumer OBJECT main.cpp)
+add_executable(kurlyk_package_consumer main.cpp)
 target_compile_features(kurlyk_package_consumer PRIVATE cxx_std_11)
 target_link_libraries(kurlyk_package_consumer PRIVATE kurlyk::kurlyk)
