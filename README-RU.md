@@ -537,7 +537,7 @@ target_link_libraries(my_app PRIVATE kurlyk::kurlyk)
 
 Установленный пакет по-прежнему требует транспортные зависимости выбранной
 конфигурации: OpenSSL, libcurl, standalone Asio или Boost.Asio, заголовки
-Simple-WebSocket-Server и hmac-cpp при включённой поддержке OAuth. Если Asio
+Simple-WebSocket-Server. OAuth PKCE использует существующую зависимость OpenSSL. Если Asio
 или Simple-WebSocket-Server не находятся через менеджер пакетов, передайте
 `KURLYK_ASIO_INCLUDE_DIR` и `KURLYK_SIMPLE_WS_INCLUDE_DIR` при конфигурации
 потребителя.

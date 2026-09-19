@@ -78,7 +78,6 @@ jobs:
                 -B build-package \
                 -G Ninja \
                 -DKURLYK_BUILD_EXAMPLES=OFF \
-                -DKURLYK_OAUTH_SUPPORT=OFF \
                 -DKURLYK_USE_FALLBACK_ASIO=ON \
                 -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON \
                 -Wno-dev
@@ -98,6 +97,27 @@ jobs:
                 -Wno-dev
       - name: Build external package consumer
         run: cmake --build build-package-consumer
+      - name: Set up vcpkg
+        run: |
+          git clone --depth 1 https://github.com/microsoft/vcpkg.git "$RUNNER_TEMP/vcpkg"
+          "$RUNNER_TEMP/vcpkg/bootstrap-vcpkg.sh" -disableMetrics
+      - name: Install overlay vcpkg port
+        run: |
+          "$RUNNER_TEMP/vcpkg/vcpkg" install kurlyk \
+            --overlay-ports="$PWD/ports" \
+            --triplet=x64-linux
+      - name: Configure vcpkg package consumer
+        run: |
+          cmake -S tests/package/consumer \
+                -B build-vcpkg-consumer \
+                -G Ninja \
+                -DCMAKE_TOOLCHAIN_FILE="$RUNNER_TEMP/vcpkg/scripts/buildsystems/vcpkg.cmake" \
+                -DVCPKG_TARGET_TRIPLET=x64-linux \
+                -DCMAKE_CXX_STANDARD=11 \
+                -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+                -Wno-dev
+      - name: Build vcpkg package consumer
+        run: cmake --build build-vcpkg-consumer
 
   macos:
     runs-on: macos-latest

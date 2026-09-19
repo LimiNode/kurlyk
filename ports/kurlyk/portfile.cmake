@@ -34,4 +34,8 @@ vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/kurlyk)
 file(REMOVE "${CURRENT_PACKAGES_DIR}/include/AGENTS.md")
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug")
 
-vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
+vcpkg_install_copyright(
+    FILE_LIST
+        "${SOURCE_PATH}/LICENSE"
+        "${SIMPLE_WS_SOURCE_PATH}/LICENSE"
+)

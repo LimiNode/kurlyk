@@ -537,7 +537,7 @@ target_link_libraries(my_app PRIVATE kurlyk::kurlyk)
 
 The installed package still requires the transport dependencies used by the
 selected configuration: OpenSSL, libcurl, standalone Asio or Boost.Asio,
-Simple-WebSocket-Server headers, and hmac-cpp when OAuth support is enabled.
+Simple-WebSocket-Server headers. OAuth PKCE uses the existing OpenSSL dependency.
 If Asio or Simple-WebSocket-Server are not discoverable through a package
 manager, set `KURLYK_ASIO_INCLUDE_DIR` and
 `KURLYK_SIMPLE_WS_INCLUDE_DIR` when configuring the consumer.
