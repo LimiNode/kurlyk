@@ -42,7 +42,7 @@ function(use_or_fetch_asio out_target)
 		endif()
 	
 # if consumer has package
-		find_package(asio 1.34.2 QUIET)
+		find_package(asio QUIET)
 		if (asio_FOUND AND TARGET asio::asio)
 			message(STATUS "Asio: using standalone asio::asio (KURLYK_USE_STANDALONE_ASIO=ON)")
 			target_link_libraries(${out_target} INTERFACE asio::asio)
