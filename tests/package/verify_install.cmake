@@ -5,6 +5,8 @@ endif()
 foreach(required_path IN ITEMS
     "${KURLYK_STAGE_DIR}/include/kurlyk.hpp"
     "${KURLYK_STAGE_DIR}/include/kurlyk/types/ProxyConfig.hpp"
+    "${KURLYK_STAGE_DIR}/share/licenses/kurlyk/LICENSE"
+    "${KURLYK_STAGE_DIR}/share/licenses/kurlyk/Simple-WebSocket-Server-LICENSE"
     "${KURLYK_STAGE_DIR}/lib/cmake/kurlyk/kurlykConfig.cmake"
     "${KURLYK_STAGE_DIR}/lib/cmake/kurlyk/kurlykConfigVersion.cmake"
     "${KURLYK_STAGE_DIR}/lib/cmake/kurlyk/kurlykTargets.cmake"

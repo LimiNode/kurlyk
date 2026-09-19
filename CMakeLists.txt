@@ -6,7 +6,7 @@ if(POLICY CMP0169)
     cmake_policy(SET CMP0169 OLD)
 endif()
 
-project(kurlyk VERSION 1.0.2 LANGUAGES CXX)
+project(kurlyk VERSION 1.1.0 LANGUAGES CXX)
 
 include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
@@ -109,10 +109,6 @@ endif()
 
 kurlyk_add_package_dependency_proxy(kurlyk_package_simple_ws simple_ws_server)
 
-if(KURLYK_OAUTH_SUPPORT)
-    kurlyk_add_package_dependency_proxy(kurlyk_package_hmac hmac_cpp::hmac_cpp)
-endif()
-
 add_library(kurlyk_package INTERFACE)
 set_target_properties(kurlyk_package PROPERTIES EXPORT_NAME kurlyk)
 target_compile_features(kurlyk_package INTERFACE cxx_std_11)
@@ -135,9 +131,6 @@ target_link_libraries(kurlyk_package INTERFACE
     kurlyk_package_asio
     kurlyk_package_simple_ws
 )
-if(KURLYK_OAUTH_SUPPORT)
-    target_link_libraries(kurlyk_package INTERFACE kurlyk_package_hmac)
-endif()
 if(CMAKE_DL_LIBS)
     target_link_libraries(kurlyk_package INTERFACE ${CMAKE_DL_LIBS})
 endif()
@@ -150,6 +143,10 @@ if(KURLYK_BUILD_EXAMPLES)
 endif()
 
 install(TARGETS kurlyk_package EXPORT kurlykTargets)
+install(FILES
+    "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/licenses/kurlyk"
+)
 file(GLOB_RECURSE KURLYK_PUBLIC_HEADERS CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp"
@@ -185,6 +182,11 @@ if(EXISTS "${KURLYK_SIMPLE_WS_HEADERS_DIR}/client_ws.hpp")
         "${KURLYK_SIMPLE_WS_HEADERS_DIR}/status_code.hpp"
         "${KURLYK_SIMPLE_WS_HEADERS_DIR}/mutex.hpp"
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/kurlyk/third_party/simple-websocket-server"
+    )
+    install(FILES
+        "${KURLYK_SIMPLE_WS_HEADERS_DIR}/LICENSE"
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/licenses/kurlyk"
+        RENAME Simple-WebSocket-Server-LICENSE
     )
 endif()
 
