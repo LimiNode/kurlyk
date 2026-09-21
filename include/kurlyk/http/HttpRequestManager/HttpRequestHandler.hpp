@@ -38,8 +38,9 @@ namespace kurlyk {
                 m_response->error_code = utils::make_error_code(utils::ClientError::AbortedDuringDestruction);
                 m_response->status_code = 499; // Client closed request
                 m_response->ready = true;
-                m_request_context->callback(std::move(m_response));
-                m_request_context->complete();
+                m_callback_called = true;
+                m_done = true;
+                m_request_context->invoke_final_callback(std::move(m_response));
             }
         }
 
@@ -107,15 +108,14 @@ namespace kurlyk {
             if (!should_retry) {
                 fill_response_timings();
                 m_response->ready = true;
-                m_request_context->callback(std::move(m_response));
                 m_callback_called = true;
                 m_done = true;
-                if (m_request_context) m_request_context->complete();
+                m_request_context->invoke_final_callback(std::move(m_response));
                 return true;
             }
             m_request_context->start_time = std::chrono::steady_clock::now();
-            m_request_context->callback(std::move(m_response));
             m_callback_called = true;
+            m_request_context->invoke_callback(std::move(m_response));
             return false;
         }
 
@@ -149,12 +149,11 @@ namespace kurlyk {
                 m_response->error_code = utils::make_error_code(utils::ClientError::CancelledByUser);
                 m_response->status_code = 499; // Client closed request
                 m_response->ready = true;
-                if (m_request_context) {
-                    m_request_context->callback(std::move(m_response));
-                }
                 m_callback_called = true;
                 m_done = true;
-                if (m_request_context) m_request_context->complete();
+                if (m_request_context) {
+                    m_request_context->invoke_final_callback(std::move(m_response));
+                }
             }
         }
 

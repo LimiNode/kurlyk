@@ -487,8 +487,7 @@ namespace kurlyk {
                     response->error_code = utils::make_error_code(CURLE_OK);
                     response->status_code = BAD_REQUEST;
                     response->ready = true;
-                    context->callback(std::move(response));
-                    context->complete();
+                    context->invoke_final_callback(std::move(response));
                 }
                 failed_requests.clear();
             }
@@ -503,7 +502,7 @@ namespace kurlyk {
 #               endif
             } catch (...) {
                 for (auto& context : pending_request) {
-                    if (!context || !context->callback) continue;
+                    if (!context) continue;
 #                   if __cplusplus >= 201402L
                     auto response = std::make_unique<HttpResponse>();
 #                   else
@@ -512,8 +511,7 @@ namespace kurlyk {
                     response->error_code = utils::make_error_code(utils::ClientError::AbortedDuringDestruction);
                     response->status_code = 499; // Client closed request
                     response->ready = true;
-                    context->callback(std::move(response));
-                    context->complete();
+                    context->invoke_final_callback(std::move(response));
                 }
                 return;
             }
@@ -584,8 +582,7 @@ namespace kurlyk {
             lock.unlock();
 
             for (const auto& request_context : canceled_pending_requests) {
-                request_context->callback(make_cancelled_response());
-                request_context->complete();
+                request_context->invoke_final_callback(make_cancelled_response());
             }
 
             auto failed_it = m_failed_requests.begin();
@@ -595,8 +592,7 @@ namespace kurlyk {
                     ++failed_it;
                     continue;
                 }
-                request_context->callback(make_cancelled_response());
-                request_context->complete();
+                request_context->invoke_final_callback(make_cancelled_response());
                 failed_it = m_failed_requests.erase(failed_it);
             }
 
@@ -659,8 +655,7 @@ namespace kurlyk {
                 response->error_code = utils::make_error_code(CURLE_OK);
                 response->status_code = CANCELED_REQUEST_CODE;
                 response->ready = true;
-                request_context->callback(std::move(response));
-                request_context->complete();
+                request_context->invoke_final_callback(std::move(response));
             }
             for (const auto &request_context : failed_requests) {
 #               if __cplusplus >= 201402L
@@ -672,8 +667,7 @@ namespace kurlyk {
                 response->error_code = utils::make_error_code(CURLE_OK);
                 response->status_code = CANCELED_REQUEST_CODE;
                 response->ready = true;
-                request_context->callback(std::move(response));
-                request_context->complete();
+                request_context->invoke_final_callback(std::move(response));
             }
         }
 

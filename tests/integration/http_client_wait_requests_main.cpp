@@ -7,6 +7,8 @@
 #include <future>
 #include <iostream>
 #include <memory>
+#include <stdexcept>
+#include <string>
 #include <thread>
 
 namespace {
@@ -376,10 +378,92 @@ int main() {
         client.reset();
     }
 
+    // --- Test 12: throwing response callback still completes group accounting ---
+    {
+        auto callback_error_count = std::make_shared<std::atomic<int>>(0);
+        kurlyk::core::NetworkWorker::get_instance().add_error_handler(
+            [callback_error_count](
+                    const std::exception&,
+                    const char* message,
+                    const char*,
+                    int,
+                    const char*) {
+                if (message && std::string(message) ==
+                        "Unhandled exception in HttpRequestContext response callback") {
+                    ++(*callback_error_count);
+                }
+            });
+
+        ProcessorGuard pg;
+        auto client = std::make_unique<kurlyk::HttpClient>(base_url);
+
+        bool accepted = client->get(
+            "/fast",
+            kurlyk::QueryParams(),
+            kurlyk::Headers(),
+            [](kurlyk::HttpResponsePtr response) {
+                if (response && response->ready) {
+                    throw std::runtime_error("intentional callback failure");
+                }
+            });
+        require(accepted, "request with throwing callback should be accepted");
+        require(client->wait_requests_for(std::chrono::seconds(2)),
+                "throwing callback must not prevent group completion");
+        require(callback_error_count->load() == 1,
+                "throwing callback must be dispatched to the error handler");
+        require(client->in_flight_requests() == 0,
+                "throwing callback must release outstanding group accounting");
+
+        std::atomic<int> continuation_count{0};
+        accepted = client->get(
+            "/fast",
+            kurlyk::QueryParams(),
+            kurlyk::Headers(),
+            [&continuation_count](kurlyk::HttpResponsePtr response) {
+                if (response && response->ready) ++continuation_count;
+            });
+        require(accepted, "request after throwing callback should be accepted");
+        require(client->wait_requests_for(std::chrono::seconds(2)),
+                "worker must continue after a callback exception");
+        require(continuation_count.load() == 1,
+                "request after throwing callback must complete");
+    }
+
+    // --- Test 13: completion callbacks are exception-isolated ---
+    {
+        kurlyk::HttpRequestContext context;
+        std::atomic<int> group_complete_count{0};
+        context.on_complete = []() {
+            throw std::runtime_error("intentional completion failure");
+        };
+        context.on_group_complete = [&group_complete_count]() {
+            ++group_complete_count;
+        };
+
+        context.complete();
+        context.complete();
+        require(group_complete_count.load() == 1,
+                "group completion must run exactly once after completion callback failure");
+    }
+
     server.stop();
     server_thread.join();
 
     kurlyk::deinit();
+
+    // --- Test 14: waiter registration after shutdown completes immediately ---
+    {
+        auto& manager = kurlyk::HttpRequestManager::get_instance();
+        std::atomic<int> waiter_count{0};
+        const uint64_t waiter_id = manager.wait_requests_by_group_id(
+            manager.generate_group_id(),
+            [&waiter_count]() { ++waiter_count; });
+        require(waiter_id == 0,
+                "waiter registered after shutdown must not remain stored");
+        require(waiter_count.load() == 1,
+                "waiter registered after shutdown must complete immediately");
+    }
+
     std::cout << "HttpClient wait_requests and max_in_flight integration test passed" << std::endl;
     return 0;
 }

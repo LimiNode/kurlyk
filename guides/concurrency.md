@@ -27,8 +27,8 @@ logic, or any code that runs on `core::NetworkWorker`.
 
 ### Exception Safety in Callbacks
 
-- Callbacks may throw. `NetworkWorker` catches exceptions, dispatches to the
-  error path, and continues processing the next task.
+- Callbacks may throw. Callback invocation boundaries catch exceptions,
+  dispatch them through the `NetworkWorker` error path, and continue processing.
 - RAII guards inside `process()` must survive an exception without leaking state.
 
 ### Cancellation and Shutdown
