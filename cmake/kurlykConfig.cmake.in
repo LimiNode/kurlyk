@@ -28,7 +28,7 @@ if(@KURLYK_USE_STANDALONE_ASIO@)
         add_library(asio::asio ALIAS kurlyk_package_asio_headers)
     endif()
 else()
-    find_dependency(Boost 1.88)
+    find_dependency(Boost)
 endif()
 
 if(NOT TARGET simple_ws_server)

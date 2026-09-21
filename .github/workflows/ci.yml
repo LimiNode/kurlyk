@@ -71,7 +71,7 @@ jobs:
       - name: Install package test dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libcurl4-openssl-dev libssl-dev ninja-build
+          sudo apt-get install -y libboost-dev libcurl4-openssl-dev libssl-dev ninja-build
       - name: Configure packaging build
         run: |
           cmake -S . \
@@ -118,16 +118,11 @@ jobs:
                 -Wno-dev
       - name: Build vcpkg package consumer
         run: cmake --build build-vcpkg-consumer
-      - name: Install Boost.Asio smoke dependency
-        run: |
-          "$RUNNER_TEMP/vcpkg/vcpkg" install boost:x64-linux
       - name: Configure Boost.Asio C++11 smoke
         run: |
           cmake -S tests/smoke \
                 -B build-boost-cpp11 \
                 -G Ninja \
-                -DCMAKE_TOOLCHAIN_FILE="$RUNNER_TEMP/vcpkg/scripts/buildsystems/vcpkg.cmake" \
-                -DVCPKG_TARGET_TRIPLET=x64-linux \
                 -DKURLYK_USE_STANDALONE_ASIO=OFF \
                 -DKURLYK_USE_FALLBACK_ASIO=OFF \
                 -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON \
