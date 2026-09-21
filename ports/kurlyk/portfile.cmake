@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO LimiNode/kurlyk
-    REF 8d25825b9de5e9157f52388a083d1a36a5080605
-    SHA512 ed4765a9175a97c56b8de9875e98390215a900a732f11c3d5f8a68749f0d50d2cbbcaa0dcf88ec2fd5c46a2502de48947fc727e38d612fd73b4485ff9a0aff01
+    REF 41071c5bedd9d99d996556e88178db8960347c14
+    SHA512 486942a0d77b974a3e44141caf408848718b78c9c82c205c829e45a180093b6e7e1cf1aed1e23f15814f4f1afa432a8274b6a10e936657062eb9db0f8046def1
 )
 
 # Simple-WebSocket-Server is used as a header-only dependency and is not a
