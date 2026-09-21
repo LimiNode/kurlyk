@@ -67,12 +67,12 @@ var NAVTREEINDEX =
 "classkurlyk_1_1BaseWebSocketClient.html#a72a2e27d7ad5c63656e7c5bcf7443501",
 "classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af41d639af9e1347c69385b1b1d38f2a6",
 "classkurlyk_1_1HttpRateLimiter.html#a1b0ae8afc3a8d16afaf948d541565cb4",
-"classkurlyk_1_1HttpRequestHandler.html#a582e14525aab6f737da78ee25321b1b6",
-"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a706e3a3c7b260ea4e47586de0ec95918",
-"classkurlyk_1_1WebSocketConfig.html#ad605d2a76f321542a52039c3d1e10a0e",
-"classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#ac4ed8a995552ff5760378cdb0a4157c8",
-"kurlyk_8hpp.html#a579201de2b5c9ead25f761a41bd0209e",
-"structkurlyk_1_1HttpRateLimiter_1_1KeyState.html#a23b14b60bdd30a15c56e2baee9b4b215"
+"classkurlyk_1_1HttpRequestHandler.html#a438a862fef6d7dde73edd901f7f75515",
+"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a384eac2270ecba2f8e5ca92279720cf6",
+"classkurlyk_1_1WebSocketConfig.html#aa5bf033c568b524d018cd7f2f597910f",
+"classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#a7cd63cd0172a402d991fe551cf778761",
+"kurlyk_8hpp.html#a293fd762b21eec6bfc4b75957826b4f8",
+"structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html#ae9ec79dd64358a00c62c286bfaf4a689"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

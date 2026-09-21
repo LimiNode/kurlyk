@@ -1,5 +1,11 @@
 var NAVTREEINDEX8 =
 {
+"kurlyk_8hpp.html#a293fd762b21eec6bfc4b75957826b4f8":[3,0,2,1,6],
+"kurlyk_8hpp.html#a372e65e8b39c6631b25aabcb58e7bb84":[3,0,2,1,1],
+"kurlyk_8hpp.html#a462403ec7b4b0b715ff45fd89c8edfb4":[3,0,2,1,3],
+"kurlyk_8hpp.html#a51e571afd5a9ba1054b85786163eb2bb":[3,0,2,1,7],
+"kurlyk_8hpp.html#a53e6ff380917d51db382cedd85d3a5ef":[3,0,2,1,5],
+"kurlyk_8hpp.html#a55ea0075f5a7aaffe7884891874481f6":[3,0,2,1,2],
 "kurlyk_8hpp.html#a579201de2b5c9ead25f761a41bd0209e":[3,0,2,1,4],
 "kurlyk_8hpp.html#a834d5ca366d54e6fe2aa587896933beb":[3,0,2,1,9],
 "kurlyk_8hpp.html#aa99dbe01ea0953b305a7f4d31424c5b5":[3,0,2,1,8],
@@ -243,11 +249,5 @@ var NAVTREEINDEX8 =
 "structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html#aa677094420891931b48dac5c698a8cf6":[2,0,0,5,0,7],
 "structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html#ae84d2fe04ed8eda186fceb8e9971d912":[1,0,1,5,0,3],
 "structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html#ae84d2fe04ed8eda186fceb8e9971d912":[2,0,0,5,0,3],
-"structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html#ae9ec79dd64358a00c62c286bfaf4a689":[1,0,1,5,0,11],
-"structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html#ae9ec79dd64358a00c62c286bfaf4a689":[2,0,0,5,0,11],
-"structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html#aed4ecd72f0560e3e95b34f7b0c9022c4":[1,0,1,5,0,9],
-"structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html#aed4ecd72f0560e3e95b34f7b0c9022c4":[2,0,0,5,0,9],
-"structkurlyk_1_1HttpRateLimiter_1_1KeyState.html":[1,0,1,10,0],
-"structkurlyk_1_1HttpRateLimiter_1_1KeyState.html":[2,0,0,10,0],
-"structkurlyk_1_1HttpRateLimiter_1_1KeyState.html#a23b14b60bdd30a15c56e2baee9b4b215":[1,0,1,10,0,1]
+"structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html#ae9ec79dd64358a00c62c286bfaf4a689":[1,0,1,5,0,11]
 };

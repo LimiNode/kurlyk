@@ -1,5 +1,11 @@
 var NAVTREEINDEX5 =
 {
+"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a384eac2270ecba2f8e5ca92279720cf6":[2,0,0,23,23],
+"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a4f698042657cc4ea4e954c3275b14bf6":[1,0,1,23,12],
+"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a4f698042657cc4ea4e954c3275b14bf6":[2,0,0,23,12],
+"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a56fe1a535e051f46d8fc32d1435e3ed4":[1,0,1,23,21],
+"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a56fe1a535e051f46d8fc32d1435e3ed4":[2,0,0,23,21],
+"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a706e3a3c7b260ea4e47586de0ec95918":[1,0,1,23,27],
 "classkurlyk_1_1SimpleWebSocketClientAdapter.html#a706e3a3c7b260ea4e47586de0ec95918":[2,0,0,23,27],
 "classkurlyk_1_1SimpleWebSocketClientAdapter.html#a7907e4c8792084b46f589a246622aa5e":[1,0,1,23,0],
 "classkurlyk_1_1SimpleWebSocketClientAdapter.html#a7907e4c8792084b46f589a246622aa5e":[2,0,0,23,0],
@@ -243,11 +249,5 @@ var NAVTREEINDEX5 =
 "classkurlyk_1_1WebSocketConfig.html#a95dbcf1f55aff12286b94ef2c42dac89":[2,0,0,27,5],
 "classkurlyk_1_1WebSocketConfig.html#a9b91ffb65b8f4bab5701cd0ca4f687f1":[1,0,1,27,27],
 "classkurlyk_1_1WebSocketConfig.html#a9b91ffb65b8f4bab5701cd0ca4f687f1":[2,0,0,27,27],
-"classkurlyk_1_1WebSocketConfig.html#aa5bf033c568b524d018cd7f2f597910f":[1,0,1,27,43],
-"classkurlyk_1_1WebSocketConfig.html#aa5bf033c568b524d018cd7f2f597910f":[2,0,0,27,43],
-"classkurlyk_1_1WebSocketConfig.html#ac9456c842e4f08990af58130f0bdfa2a":[1,0,1,27,9],
-"classkurlyk_1_1WebSocketConfig.html#ac9456c842e4f08990af58130f0bdfa2a":[2,0,0,27,9],
-"classkurlyk_1_1WebSocketConfig.html#ad47f898af5bc5f7cac2ad00bfce24183":[1,0,1,27,12],
-"classkurlyk_1_1WebSocketConfig.html#ad47f898af5bc5f7cac2ad00bfce24183":[2,0,0,27,12],
-"classkurlyk_1_1WebSocketConfig.html#ad605d2a76f321542a52039c3d1e10a0e":[1,0,1,27,33]
+"classkurlyk_1_1WebSocketConfig.html#aa5bf033c568b524d018cd7f2f597910f":[1,0,1,27,43]
 };

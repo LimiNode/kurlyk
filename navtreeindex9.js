@@ -1,5 +1,11 @@
 var NAVTREEINDEX9 =
 {
+"structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html#ae9ec79dd64358a00c62c286bfaf4a689":[2,0,0,5,0,11],
+"structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html#aed4ecd72f0560e3e95b34f7b0c9022c4":[1,0,1,5,0,9],
+"structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html#aed4ecd72f0560e3e95b34f7b0c9022c4":[2,0,0,5,0,9],
+"structkurlyk_1_1HttpRateLimiter_1_1KeyState.html":[1,0,1,10,0],
+"structkurlyk_1_1HttpRateLimiter_1_1KeyState.html":[2,0,0,10,0],
+"structkurlyk_1_1HttpRateLimiter_1_1KeyState.html#a23b14b60bdd30a15c56e2baee9b4b215":[1,0,1,10,0,1],
 "structkurlyk_1_1HttpRateLimiter_1_1KeyState.html#a23b14b60bdd30a15c56e2baee9b4b215":[2,0,0,10,0,1],
 "structkurlyk_1_1HttpRateLimiter_1_1KeyState.html#a24ff66d1eb972a3f6e45355fb2705b6f":[1,0,1,10,0,0],
 "structkurlyk_1_1HttpRateLimiter_1_1KeyState.html#a24ff66d1eb972a3f6e45355fb2705b6f":[2,0,0,10,0,0],
