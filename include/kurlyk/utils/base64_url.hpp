@@ -2,7 +2,7 @@
 #ifndef KURLYK_HEADER_KURLYK_UTILS_BASE64_URL_HPP_INCLUDED
 #define KURLYK_HEADER_KURLYK_UTILS_BASE64_URL_HPP_INCLUDED
 
-/// \file Base64Url.hpp
+/// \file base64_url.hpp
 /// \brief Provides Base64url encoding and decoding (RFC 4648, no padding).
 
 #include <string>

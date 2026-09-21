@@ -5,7 +5,7 @@
 /// \file pkce.hpp
 /// \brief Provides PKCE (Proof Key for Code Exchange) utilities per RFC 7636.
 
-#include "Base64Url.hpp"
+#include "base64_url.hpp"
 #include <openssl/evp.h>
 #include <openssl/rand.h>
 #include <limits>
