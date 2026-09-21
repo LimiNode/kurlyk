@@ -12,7 +12,7 @@
 #include <string>
 #include <utility>
 
-#include "../core.hpp"
+#include <kurlyk/core.hpp>
 #include "data.hpp"
 #include "HttpRequestManager.hpp"
 #include "utils.hpp"
