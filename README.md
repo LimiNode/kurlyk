@@ -212,10 +212,10 @@ int main() {
 
     std::cout << "HTTP: " << result.http_ok << '\n'
               << "HTTPS: " << result.https_ok << '\n'
-        << "connect: " << result.connect_latency_ms << " ms\n"
-        << "TLS/CONNECT: " << result.tls_latency_ms << " ms\n"
-        << "TTFB: " << result.ttfb_ms << " ms\n"
-        << "total: " << result.total_latency_ms << " ms\n";
+              << "connect: " << result.connect_latency_ms << " ms\n"
+              << "TLS/CONNECT: " << result.tls_latency_ms << " ms\n"
+              << "TTFB: " << result.ttfb_ms << " ms\n"
+              << "total: " << result.total_latency_ms << " ms\n";
 }
 ```
 
