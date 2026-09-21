@@ -578,7 +578,7 @@ To use **kurlyk** in a MinGW environment, you need these dependencies:
 1. For WebSocket:
    - [Simple-WebSocket-Server](https://gitlab.com/eidheim/Simple-WebSocket-Server)
    - Boost.Asio or [standalone Asio](https://github.com/chriskohlhoff/asio/tree/master)
-   - [OpenSSL](https://slproweb.com/products/Win32OpenSSL.html) (*LTS version Win64 OpenSSL v3.0.15*)
+   - [OpenSSL](https://slproweb.com/products/Win32OpenSSL.html) (*LTS version Win64 OpenSSL v3.5.8*)
 
 2. For HTTP:
    - [libcurl](https://curl.se/windows/)
@@ -587,24 +587,21 @@ All dependencies are also included as submodules in the `external` folder. Asio 
 
 ### OpenSSL
 
-Add OpenSSL paths to the project, for example for version *3.4.0*:
+Add OpenSSL paths to the project, for example for version *3.5.8*:
 
 ```text
-OpenSSL-Win64/include
-OpenSSL-Win64/lib/VC/x64/MD
-OpenSSL-Win64/bin
+openssl-win64-v3.5.8/include
+openssl-win64-v3.5.8/lib/VC/x64/MD
+openssl-win64-v3.5.8/bin
 ```
 
 Link OpenSSL libraries from `lib/VC/x64/MD`:
 
 ```text
-capi.lib
-dasync.lib
 libcrypto.lib
 libssl.lib
-openssl.lib
-ossltest.lib
-padlock.lib
+libcrypto_static.lib
+libssl_static.lib
 ```
 
 ### Asio
@@ -626,18 +623,17 @@ For Boost.Asio, you do not need to define `ASIO_STANDALONE`.
 
 ### curl
 
-Add paths for `curl`, for example for version *8.11.0*:
+Add paths for `curl`, for example for version *8.22.0*:
 
 ```text
-curl-8.11.0_1-win64-mingw/bin
-curl-8.11.0_1-win64-mingw/include
-curl-8.11.0_1-win64-mingw/lib
+curl-8.22.0_1-win64-mingw/bin
+curl-8.22.0_1-win64-mingw/include
+curl-8.22.0_1-win64-mingw/lib
 ```
 
 Link the `curl` libraries from the `lib` folder:
 
 ```text
-libcurl.a
 libcurl.dll.a
 ```
 

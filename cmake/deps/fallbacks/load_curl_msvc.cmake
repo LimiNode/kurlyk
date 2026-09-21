@@ -2,8 +2,8 @@ function(load_curl target)
 #MSVC
 	include(FetchContent)
 	FetchContent_Declare(curl_dep
-		GIT_REPOSITORY https://github.com/NewYaroslav/curl-8.11.0_1-win64-mingw.git
-		GIT_TAG 840e56c6b2a11076ad5d15526bd2d4cedc8cdb9d
+		GIT_REPOSITORY https://github.com/LimiNode/curl-8.22.0_1-win64-mingw.git
+		GIT_TAG 95dd501489c6c015443f2737c19102e6ae4b7c86
 	)
 	FetchContent_GetProperties(curl_dep)
 	if (NOT curl_dep_POPULATED)
