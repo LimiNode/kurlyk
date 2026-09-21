@@ -93,7 +93,7 @@ namespace kurlyk {
             if (worker.is_worker_thread()) {
                 throw std::logic_error("HttpClient::wait_requests() must not be called from the network worker thread");
             }
-            auto future = make_wait_requests_future();
+            auto future = make_wait_requests_future(nullptr);
             worker.notify();
             try {
                 future.get();
@@ -106,16 +106,18 @@ namespace kurlyk {
         /// \param timeout Maximum time to wait.
         /// \return True if all requests finished; false on timeout or when called from the network worker thread.
         /// \warning Must not be called from the network worker thread.
-        /// \todo A timed-out waiter callback remains registered in HttpRequestManager until the group
-        ///       becomes idle or shutdown fires. For rapid repeated calls this may accumulate callbacks.
         bool wait_requests_for(std::chrono::milliseconds timeout) {
             auto& worker = core::NetworkWorker::get_instance();
             if (worker.is_worker_thread()) {
                 return false;
             }
-            auto future = make_wait_requests_future();
+            uint64_t waiter_id = 0;
+            auto future = make_wait_requests_future(&waiter_id);
             worker.notify();
             if (future.wait_for(timeout) == std::future_status::timeout) {
+                HttpRequestManager::get_instance().cancel_wait_requests_by_group_id(
+                    m_request.group_id,
+                    waiter_id);
                 return false;
             }
             try {
@@ -146,8 +148,8 @@ namespace kurlyk {
             return m_max_in_flight;
         }
 
-        /// \brief Returns number of pending, active, and retry requests currently observed for this client group.
-        /// \return Number of currently managed requests with this client's group ID.
+        /// \brief Returns the number of admitted requests whose final callback is still pending for this group.
+        /// \return Number of outstanding requests with this client's group ID.
         /// \note This is a snapshot of HttpRequestManager state and may change immediately in concurrent code.
         std::size_t in_flight_requests() const {
             return HttpRequestManager::get_instance().group_request_count(m_request.group_id);
@@ -986,11 +988,12 @@ namespace kurlyk {
 
         /// \brief Creates a future that becomes ready when all requests in this client group finish.
         /// \return A future that is satisfied when the group becomes idle.
-        std::future<void> make_wait_requests_future() {
+        std::future<void> make_wait_requests_future(uint64_t* waiter_id) {
             auto promise = std::make_shared<std::promise<void>>();
             auto future = promise->get_future();
 
-            HttpRequestManager::get_instance().wait_requests_by_group_id(
+            const uint64_t registered_waiter_id =
+                HttpRequestManager::get_instance().wait_requests_by_group_id(
                 m_request.group_id,
                 [promise]() {
                     try {
@@ -1007,6 +1010,9 @@ namespace kurlyk {
                         // Unknown fatal error in wait callback
                     }
                 });
+            if (waiter_id) {
+                *waiter_id = registered_waiter_id;
+            }
 
             return future;
         }
