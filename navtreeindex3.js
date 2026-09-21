@@ -1,8 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"classkurlyk_1_1HttpRateLimiter.html#a1b0ae8afc3a8d16afaf948d541565cb4":[2,0,0,10,19],
-"classkurlyk_1_1HttpRateLimiter.html#a2265668e6e070bf678151d5618abddb9":[1,0,1,10,14],
-"classkurlyk_1_1HttpRateLimiter.html#a2265668e6e070bf678151d5618abddb9":[2,0,0,10,14],
 "classkurlyk_1_1HttpRateLimiter.html#a2683750241817e3e26885d5a755ea81c":[1,0,1,10,5],
 "classkurlyk_1_1HttpRateLimiter.html#a2683750241817e3e26885d5a755ea81c":[2,0,0,10,5],
 "classkurlyk_1_1HttpRateLimiter.html#a26bad67a0d2892271ae462119f516911":[1,0,1,10,2],
@@ -249,5 +246,8 @@ var NAVTREEINDEX3 =
 "classkurlyk_1_1HttpRequestHandler.html#a32f9dde0cb3b990844fc60974e484d04":[2,0,0,14,5],
 "classkurlyk_1_1HttpRequestHandler.html#a41df5519b062b0680a373a0d938814bc":[1,0,1,14,20],
 "classkurlyk_1_1HttpRequestHandler.html#a41df5519b062b0680a373a0d938814bc":[2,0,0,14,20],
-"classkurlyk_1_1HttpRequestHandler.html#a438a862fef6d7dde73edd901f7f75515":[1,0,1,14,30]
+"classkurlyk_1_1HttpRequestHandler.html#a438a862fef6d7dde73edd901f7f75515":[1,0,1,14,30],
+"classkurlyk_1_1HttpRequestHandler.html#a438a862fef6d7dde73edd901f7f75515":[2,0,0,14,30],
+"classkurlyk_1_1HttpRequestHandler.html#a455aeef540ea9cbd8a42d16fbf2a66e9":[1,0,1,14,15],
+"classkurlyk_1_1HttpRequestHandler.html#a455aeef540ea9cbd8a42d16fbf2a66e9":[2,0,0,14,15]
 };

@@ -5,5 +5,6 @@ var searchData=
   ['kurlyk_3a_3ahttp_2',['http',['../namespacekurlyk_1_1http.html',1,'kurlyk']]],
   ['kurlyk_3a_3ahttp_3a_3aauth_3',['auth',['../namespacekurlyk_1_1http_1_1auth.html',1,'kurlyk::http']]],
   ['kurlyk_3a_3astartup_4',['startup',['../namespacekurlyk_1_1startup.html',1,'kurlyk']]],
-  ['kurlyk_3a_3autils_5',['utils',['../namespacekurlyk_1_1utils.html',1,'kurlyk']]]
+  ['kurlyk_3a_3autils_5',['utils',['../namespacekurlyk_1_1utils.html',1,'kurlyk']]],
+  ['kurlyk_3a_3autils_3a_3adetail_6',['detail',['../namespacekurlyk_1_1utils_1_1detail.html',1,'kurlyk::utils']]]
 ];

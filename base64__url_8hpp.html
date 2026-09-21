@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Kurlyk: kurlyk::utils::PkcePair Class Reference</title>
+<title>Kurlyk: include/kurlyk/utils/base64_url.hpp File Reference</title>
 <link rel="icon" href="logo.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 <script type="text/javascript">
-document.addEventListener('DOMContentLoaded',() => { initNavTree('structkurlyk_1_1utils_1_1PkcePair.html','','structkurlyk_1_1utils_1_1PkcePair-members'); });
+document.addEventListener('DOMContentLoaded',() => { initNavTree('base64__url_8hpp.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -124,86 +124,58 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structkurlyk_1
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">kurlyk::utils::PkcePair Class Reference</div></div>
+  <div class="headertitle"><div class="title">base64_url.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Stores PKCE verifier and challenge values.  
- <a href="#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="pkce_8hpp_source.html">pkce.hpp</a>&gt;</code></p>
+<p>Provides Base64url encoding and decoding (RFC 4648, no padding).  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
+</div>
+<p><a href="base64__url_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a41b243dd7673ef1c2296e66800160589" id="r_a41b243dd7673ef1c2296e66800160589"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a41b243dd7673ef1c2296e66800160589">code_verifier</a></td></tr>
-<tr class="memdesc:a41b243dd7673ef1c2296e66800160589"><td class="mdescLeft">&#160;</td><td class="mdescRight">Randomly generated code verifier.  <br /></td></tr>
-<tr class="memitem:a52ad118da55ff913a6f2dc8d88eaa64d" id="r_a52ad118da55ff913a6f2dc8d88eaa64d"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a52ad118da55ff913a6f2dc8d88eaa64d">code_challenge</a></td></tr>
-<tr class="memdesc:a52ad118da55ff913a6f2dc8d88eaa64d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derived S256 code challenge.  <br /></td></tr>
-<tr class="memitem:a40ef6ea88b2dd1549e5a4ff989c91896" id="r_a40ef6ea88b2dd1549e5a4ff989c91896"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a40ef6ea88b2dd1549e5a4ff989c91896">code_challenge_method</a> = &quot;S256&quot;</td></tr>
-<tr class="memdesc:a40ef6ea88b2dd1549e5a4ff989c91896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Challenge method, always "S256".  <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:kurlyk" id="r_kurlyk"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk.html">kurlyk</a></td></tr>
+<tr class="memdesc:namespacekurlyk"><td class="mdescLeft">&#160;</td><td class="mdescRight">Primary namespace for the Kurlyk library, encompassing initialization, request management, and utility functions. <br /></td></tr>
+<tr class="memitem:kurlyk_3A_3Autils" id="r_kurlyk_3A_3Autils"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1utils.html">kurlyk::utils</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ab3d607a1e3f4b70541ac273e7bf3d98e" id="r_ab3d607a1e3f4b70541ac273e7bf3d98e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab3d607a1e3f4b70541ac273e7bf3d98e">KURLYK_HEADER_KURLYK_UTILS_BASE64_URL_HPP_INCLUDED</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a4cd9ffc10257a9e342f8eb38200d69c9" id="r_a4cd9ffc10257a9e342f8eb38200d69c9"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1utils.html#a4cd9ffc10257a9e342f8eb38200d69c9">kurlyk::utils::base64url_encode</a> (const uint8_t *data, std::size_t length)</td></tr>
+<tr class="memdesc:a4cd9ffc10257a9e342f8eb38200d69c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes a byte buffer using Base64url (RFC 4648) without padding.  <br /></td></tr>
+<tr class="memitem:a735b8d7828bd52aa715b9442043d4733" id="r_a735b8d7828bd52aa715b9442043d4733"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1utils.html#a735b8d7828bd52aa715b9442043d4733">kurlyk::utils::base64url_encode</a> (const std::string &amp;value)</td></tr>
+<tr class="memdesc:a735b8d7828bd52aa715b9442043d4733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes a string using Base64url (RFC 4648) without padding.  <br /></td></tr>
+<tr class="memitem:a2df05450956addc94e9eccddc8ebaa9c" id="r_a2df05450956addc94e9eccddc8ebaa9c"><td class="memItemLeft">std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1utils.html#a2df05450956addc94e9eccddc8ebaa9c">kurlyk::utils::base64url_decode</a> (const std::string &amp;value)</td></tr>
+<tr class="memdesc:a2df05450956addc94e9eccddc8ebaa9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes a Base64url string (RFC 4648, no padding) into bytes.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Stores PKCE verifier and challenge values. </p>
+<div class="textblock"><p>Provides Base64url encoding and decoding (RFC 4648, no padding). </p>
 
-<p class="definition">Definition at line <a class="el" href="pkce_8hpp_source.html#l00060">60</a> of file <a class="el" href="pkce_8hpp_source.html">pkce.hpp</a>.</p>
-</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
-<a id="a52ad118da55ff913a6f2dc8d88eaa64d" name="a52ad118da55ff913a6f2dc8d88eaa64d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52ad118da55ff913a6f2dc8d88eaa64d">&#9670;&#160;</a></span>code_challenge</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string kurlyk::utils::PkcePair::code_challenge</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Derived S256 code challenge. </p>
-
-<p class="definition">Definition at line <a class="el" href="pkce_8hpp_source.html#l00062">62</a> of file <a class="el" href="pkce_8hpp_source.html">pkce.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a40ef6ea88b2dd1549e5a4ff989c91896" name="a40ef6ea88b2dd1549e5a4ff989c91896"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40ef6ea88b2dd1549e5a4ff989c91896">&#9670;&#160;</a></span>code_challenge_method</h2>
+<p class="definition">Definition in file <a class="el" href="base64__url_8hpp_source.html">base64_url.hpp</a>.</p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="ab3d607a1e3f4b70541ac273e7bf3d98e" name="ab3d607a1e3f4b70541ac273e7bf3d98e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3d607a1e3f4b70541ac273e7bf3d98e">&#9670;&#160;</a></span>KURLYK_HEADER_KURLYK_UTILS_BASE64_URL_HPP_INCLUDED</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string kurlyk::utils::PkcePair::code_challenge_method = &quot;S256&quot;</td>
+          <td class="memname">#define KURLYK_HEADER_KURLYK_UTILS_BASE64_URL_HPP_INCLUDED</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Challenge method, always "S256". </p>
-
-<p class="definition">Definition at line <a class="el" href="pkce_8hpp_source.html#l00063">63</a> of file <a class="el" href="pkce_8hpp_source.html">pkce.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base64__url_8hpp_source.html#l00003">3</a> of file <a class="el" href="base64__url_8hpp_source.html">base64_url.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a41b243dd7673ef1c2296e66800160589" name="a41b243dd7673ef1c2296e66800160589"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41b243dd7673ef1c2296e66800160589">&#9670;&#160;</a></span>code_verifier</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string kurlyk::utils::PkcePair::code_verifier</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Randomly generated code verifier. </p>
-
-<p class="definition">Definition at line <a class="el" href="pkce_8hpp_source.html#l00061">61</a> of file <a class="el" href="pkce_8hpp_source.html">pkce.hpp</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/kurlyk/utils/<a class="el" href="pkce_8hpp_source.html">pkce.hpp</a></li>
-</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
@@ -217,7 +189,7 @@ Public Attributes</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekurlyk.html">kurlyk</a></li><li class="navelem"><a href="namespacekurlyk_1_1utils.html">utils</a></li><li class="navelem"><a href="structkurlyk_1_1utils_1_1PkcePair.html">PkcePair</a></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_ae12a7c1d79b11abd366085d5888e018.html">kurlyk</a></li><li class="navelem"><a href="dir_ee890d520c8243477213c38edf4f39a5.html">utils</a></li><li class="navelem"><a href="base64__url_8hpp.html">base64_url.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

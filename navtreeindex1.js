@@ -1,8 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"classkurlyk_1_1BaseWebSocketClient.html#a72a2e27d7ad5c63656e7c5bcf7443501":[2,0,0,5,19],
-"classkurlyk_1_1BaseWebSocketClient.html#a758fff88dbb8c04134077819cc366c16":[1,0,1,5,28],
-"classkurlyk_1_1BaseWebSocketClient.html#a758fff88dbb8c04134077819cc366c16":[2,0,0,5,28],
 "classkurlyk_1_1BaseWebSocketClient.html#a82fe9d0f094e0d6909efce0ba393d9d7":[1,0,1,5,40],
 "classkurlyk_1_1BaseWebSocketClient.html#a82fe9d0f094e0d6909efce0ba393d9d7":[2,0,0,5,40],
 "classkurlyk_1_1BaseWebSocketClient.html#a89ee97514b3ab4369ed2123fad75d704":[1,0,1,5,35],
@@ -249,5 +246,8 @@ var NAVTREEINDEX1 =
 "classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af2c8dce65e87d56ad030c8a885ff6d39":[2,0,0,7,0],
 "classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af41ab797f81fd9ce376fef0969f36f85":[1,0,1,7,59],
 "classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af41ab797f81fd9ce376fef0969f36f85":[2,0,0,7,59],
-"classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af41d639af9e1347c69385b1b1d38f2a6":[1,0,1,7,43]
+"classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af41d639af9e1347c69385b1b1d38f2a6":[1,0,1,7,43],
+"classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af41d639af9e1347c69385b1b1d38f2a6":[2,0,0,7,43],
+"classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af86ce671581b381b0a3b35d69ae2ce7a":[1,0,1,7,26],
+"classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af86ce671581b381b0a3b35d69ae2ce7a":[2,0,0,7,26]
 };

@@ -1,8 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af41d639af9e1347c69385b1b1d38f2a6":[2,0,0,7,43],
-"classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af86ce671581b381b0a3b35d69ae2ce7a":[1,0,1,7,26],
-"classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af86ce671581b381b0a3b35d69ae2ce7a":[2,0,0,7,26],
 "classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af940c003889fd6458a7b2794aa5d9029":[1,0,1,7,14],
 "classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af940c003889fd6458a7b2794aa5d9029":[2,0,0,7,14],
 "classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#afa39c84bc5f2083a6093afc2745f54bb":[1,0,1,7,47],
@@ -249,5 +246,8 @@ var NAVTREEINDEX2 =
 "classkurlyk_1_1HttpRateLimiter.html#a03327dd013d59e6378e41f787339da64":[2,0,0,10,29],
 "classkurlyk_1_1HttpRateLimiter.html#a18f846698e2f4e056650f96e5ce19104":[1,0,1,10,12],
 "classkurlyk_1_1HttpRateLimiter.html#a18f846698e2f4e056650f96e5ce19104":[2,0,0,10,12],
-"classkurlyk_1_1HttpRateLimiter.html#a1b0ae8afc3a8d16afaf948d541565cb4":[1,0,1,10,19]
+"classkurlyk_1_1HttpRateLimiter.html#a1b0ae8afc3a8d16afaf948d541565cb4":[1,0,1,10,19],
+"classkurlyk_1_1HttpRateLimiter.html#a1b0ae8afc3a8d16afaf948d541565cb4":[2,0,0,10,19],
+"classkurlyk_1_1HttpRateLimiter.html#a2265668e6e070bf678151d5618abddb9":[1,0,1,10,14],
+"classkurlyk_1_1HttpRateLimiter.html#a2265668e6e070bf678151d5618abddb9":[2,0,0,10,14]
 };

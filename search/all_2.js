@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['base64url_2ehpp_0',['Base64Url.hpp',['../Base64Url_8hpp.html',1,'']]],
+  ['base64_5furl_2ehpp_0',['base64_url.hpp',['../base64__url_8hpp.html',1,'']]],
   ['base64url_5fdecode_1',['base64url_decode',['../namespacekurlyk_1_1utils.html#a2df05450956addc94e9eccddc8ebaa9c',1,'kurlyk::utils']]],
   ['base64url_5fencode_2',['base64url_encode',['../namespacekurlyk_1_1utils.html#a4cd9ffc10257a9e342f8eb38200d69c9',1,'kurlyk::utils::base64url_encode(const uint8_t *data, std::size_t length)'],['../namespacekurlyk_1_1utils.html#a735b8d7828bd52aa715b9442043d4733',1,'kurlyk::utils::base64url_encode(const std::string &amp;value)']]],
   ['basewebsocketclient_3',['BaseWebSocketClient',['../classkurlyk_1_1BaseWebSocketClient.html',1,'kurlyk::BaseWebSocketClient'],['../classkurlyk_1_1BaseWebSocketClient.html#a1d721031aff869374237cd446e160582',1,'kurlyk::BaseWebSocketClient::BaseWebSocketClient()']]],

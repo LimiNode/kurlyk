@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['base64url_2ehpp_0',['Base64Url.hpp',['../Base64Url_8hpp.html',1,'']]],
+  ['base64_5furl_2ehpp_0',['base64_url.hpp',['../base64__url_8hpp.html',1,'']]],
   ['basewebsocketclient_2ehpp_1',['BaseWebSocketClient.hpp',['../BaseWebSocketClient_8hpp.html',1,'']]],
   ['bearer_5ftoken_5fauth_5fprovider_5fexample_2ecpp_2',['bearer_token_auth_provider_example.cpp',['../bearer__token__auth__provider__example_8cpp.html',1,'']]],
   ['bearertokenauthprovider_2ehpp_3',['BearerTokenAuthProvider.hpp',['../BearerTokenAuthProvider_8hpp.html',1,'']]],

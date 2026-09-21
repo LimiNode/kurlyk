@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Kurlyk: include/kurlyk/utils/Pkce.hpp File Reference</title>
+<title>Kurlyk: kurlyk::utils::detail Namespace Reference</title>
 <link rel="icon" href="logo.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 <script type="text/javascript">
-document.addEventListener('DOMContentLoaded',() => { initNavTree('Pkce_8hpp.html','',''); });
+document.addEventListener('DOMContentLoaded',() => { initNavTree('namespacekurlyk_1_1utils_1_1detail.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -124,64 +124,96 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('Pkce_8hpp.html
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Pkce.hpp File Reference</div></div>
+  <div class="headertitle"><div class="title">kurlyk::utils::detail Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Provides PKCE (Proof Key for Code Exchange) utilities per RFC 7636.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="Base64Url_8hpp_source.html">Base64Url.hpp</a>&quot;</code><br />
-<code>#include &lt;hmac_cpp/sha256.hpp&gt;</code><br />
-<code>#include &lt;hmac_cpp/hmac_utils.hpp&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;cstdint&gt;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
-</div>
-<p><a href="Pkce_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:kurlyk_3A_3Autils_3A_3APkcePair" id="r_kurlyk_3A_3Autils_3A_3APkcePair"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="structkurlyk_1_1utils_1_1PkcePair.html">kurlyk::utils::PkcePair</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores PKCE verifier and challenge values.  <a href="structkurlyk_1_1utils_1_1PkcePair.html#details">More...</a><br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:kurlyk" id="r_kurlyk"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk.html">kurlyk</a></td></tr>
-<tr class="memdesc:namespacekurlyk"><td class="mdescLeft">&#160;</td><td class="mdescRight">Primary namespace for the Kurlyk library, encompassing initialization, request management, and utility functions. <br /></td></tr>
-<tr class="memitem:kurlyk_3A_3Autils" id="r_kurlyk_3A_3Autils"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1utils.html">kurlyk::utils</a></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a7d056185f7d50d584f10b8cd1da7bcad" id="r_a7d056185f7d50d584f10b8cd1da7bcad"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7d056185f7d50d584f10b8cd1da7bcad">KURLYK_HEADER_KURLYK_UTILS_PKCE_HPP_INCLUDED</a></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af5588ce6e105cb135356d7c58a760935" id="r_af5588ce6e105cb135356d7c58a760935"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1utils.html#af5588ce6e105cb135356d7c58a760935">kurlyk::utils::generate_code_verifier</a> (std::size_t length=64)</td></tr>
-<tr class="memdesc:af5588ce6e105cb135356d7c58a760935"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a cryptographically strong PKCE code verifier.  <br /></td></tr>
-<tr class="memitem:a6a241a14f4997276b41b7f44be5beab0" id="r_a6a241a14f4997276b41b7f44be5beab0"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1utils.html#a6a241a14f4997276b41b7f44be5beab0">kurlyk::utils::make_s256_code_challenge</a> (const std::string &amp;verifier)</td></tr>
-<tr class="memdesc:a6a241a14f4997276b41b7f44be5beab0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an S256 code challenge from a verifier.  <br /></td></tr>
-<tr class="memitem:aef533e2794bccd98dd88b04927ac526e" id="r_aef533e2794bccd98dd88b04927ac526e"><td class="memItemLeft"><a class="el" href="structkurlyk_1_1utils_1_1PkcePair.html">PkcePair</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1utils.html#aef533e2794bccd98dd88b04927ac526e">kurlyk::utils::make_pkce_pair</a> ()</td></tr>
-<tr class="memdesc:aef533e2794bccd98dd88b04927ac526e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a PKCE pair with a freshly generated verifier.  <br /></td></tr>
+<tr class="memitem:a387d8f775b668d62f750feb9d261fbc0" id="r_a387d8f775b668d62f750feb9d261fbc0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a387d8f775b668d62f750feb9d261fbc0">random_bytes</a> (uint8_t *data, std::size_t size)</td></tr>
+<tr class="memdesc:a387d8f775b668d62f750feb9d261fbc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills a byte buffer with cryptographically secure random data.  <br /></td></tr>
+<tr class="memitem:a47e213d6061be705bdd08e1394811a67" id="r_a47e213d6061be705bdd08e1394811a67"><td class="memItemLeft">std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a47e213d6061be705bdd08e1394811a67">sha256</a> (const void *data, std::size_t size)</td></tr>
+<tr class="memdesc:a47e213d6061be705bdd08e1394811a67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a SHA-256 digest.  <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Provides PKCE (Proof Key for Code Exchange) utilities per RFC 7636. </p>
-
-<p class="definition">Definition in file <a class="el" href="Pkce_8hpp_source.html">Pkce.hpp</a>.</p>
-</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
-<a id="a7d056185f7d50d584f10b8cd1da7bcad" name="a7d056185f7d50d584f10b8cd1da7bcad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d056185f7d50d584f10b8cd1da7bcad">&#9670;&#160;</a></span>KURLYK_HEADER_KURLYK_UTILS_PKCE_HPP_INCLUDED</h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a387d8f775b668d62f750feb9d261fbc0" name="a387d8f775b668d62f750feb9d261fbc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a387d8f775b668d62f750feb9d261fbc0">&#9670;&#160;</a></span>random_bytes()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">#define KURLYK_HEADER_KURLYK_UTILS_PKCE_HPP_INCLUDED</td>
+          <td class="memname">void kurlyk::utils::detail::random_bytes </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Pkce_8hpp_source.html#l00003">3</a> of file <a class="el" href="Pkce_8hpp_source.html">Pkce.hpp</a>.</p>
+<p>Fills a byte buffer with cryptographically secure random data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Destination buffer. </td></tr>
+    <tr><td class="paramname">size</td><td>Number of bytes to generate. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="pkce_8hpp_source.html#l00025">25</a> of file <a class="el" href="pkce_8hpp_source.html">pkce.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a47e213d6061be705bdd08e1394811a67" name="a47e213d6061be705bdd08e1394811a67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47e213d6061be705bdd08e1394811a67">&#9670;&#160;</a></span>sha256()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; uint8_t &gt; kurlyk::utils::detail::sha256 </td>
+          <td>(</td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates a SHA-256 digest. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Input data. </td></tr>
+    <tr><td class="paramname">size</td><td>Input size in bytes. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>SHA-256 digest bytes. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="pkce_8hpp_source.html#l00038">38</a> of file <a class="el" href="pkce_8hpp_source.html">pkce.hpp</a>.</p>
 
 </div>
 </div>
@@ -198,7 +230,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_ae12a7c1d79b11abd366085d5888e018.html">kurlyk</a></li><li class="navelem"><a href="dir_ee890d520c8243477213c38edf4f39a5.html">utils</a></li><li class="navelem"><a href="Pkce_8hpp.html">Pkce.hpp</a></li>
+    <li class="navelem"><a href="namespacekurlyk.html">kurlyk</a></li><li class="navelem"><a href="namespacekurlyk_1_1utils.html">utils</a></li><li class="navelem"><a href="namespacekurlyk_1_1utils_1_1detail.html">detail</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>
