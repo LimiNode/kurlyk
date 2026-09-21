@@ -19,7 +19,7 @@ namespace kurlyk {
             if (!m_multi_handle) {
                 // libcurl multi handle creation failed: fail all requests immediately.
                 for (auto& context : context_list) {
-                    if (!context || !context->callback) continue;
+                    if (!context) continue;
 #                   if __cplusplus >= 201402L
                     auto response = std::make_unique<HttpResponse>();
 #                   else
@@ -28,8 +28,7 @@ namespace kurlyk {
                     response->error_code = utils::make_error_code(utils::ClientError::AbortedDuringDestruction);
                     response->status_code = 499; // Client closed request
                     response->ready = true;
-                    context->callback(std::move(response));
-                    context->complete();
+                    context->invoke_final_callback(std::move(response));
                     context.reset();
                 }
                 return;
@@ -45,7 +44,7 @@ namespace kurlyk {
                 if (!curl) {
                     // curl_easy_init failed: deliver error immediately.
                     auto ctx = handler->get_request_context();
-                    if (ctx && ctx->callback) {
+                    if (ctx) {
 #                       if __cplusplus >= 201402L
                         auto response = std::make_unique<HttpResponse>();
 #                       else
@@ -54,8 +53,7 @@ namespace kurlyk {
                         response->error_code = utils::make_error_code(utils::ClientError::AbortedDuringDestruction);
                         response->status_code = 499; // Client closed request
                         response->ready = true;
-                        ctx->callback(std::move(response));
-                        ctx->complete();
+                        ctx->invoke_final_callback(std::move(response));
                     }
                     continue;
                 }
@@ -88,7 +86,7 @@ namespace kurlyk {
                 // Multi handle was never created: fail all handlers immediately.
                 for (auto& handler : m_handlers) {
                     auto ctx = handler->get_request_context();
-                    if (ctx && ctx->callback) {
+                    if (ctx) {
 #                       if __cplusplus >= 201402L
                         auto response = std::make_unique<HttpResponse>();
 #                       else
@@ -97,8 +95,7 @@ namespace kurlyk {
                         response->error_code = utils::make_error_code(utils::ClientError::AbortedDuringDestruction);
                         response->status_code = 499; // Client closed request
                         response->ready = true;
-                        ctx->callback(std::move(response));
-                        ctx->complete();
+                        ctx->invoke_final_callback(std::move(response));
                     }
                 }
                 m_handlers.clear();
