@@ -11,13 +11,20 @@ All notable changes to this project will be documented in this file.
 - Added `OAuthPkceClient` for OAuth2 Authorization Code + PKCE (RFC 7636) flow:
   - `build_authorization_url()`, `exchange_code()`, `refresh_access_token()`, `validate_state()`.
   - Uses standalone `kurlyk::http_post` / `kurlyk::http_request` helpers (no `HttpClient` coupling).
-  - SHA-256 and secure random bytes via OpenSSL; Base64Url implemented inline.
+  - SHA-256 and secure random bytes via OpenSSL; Base64url helpers are provided
+    by the public utility header `base64_url.hpp`.
   - Custom token parser fallback for non-JSON builds.
 - Added `ITokenStorage` interface for caller-provided token persistence.
 - Added `OAuthToken`, `OAuthConfig`, `AuthResult` data types with `AuthError` enum.
 - Added `KURLYK_AUTH_SUPPORT`, `KURLYK_OAUTH_SUPPORT`, and `KURLYK_JSON_SUPPORT` feature macros.
 - Added `tests/auth/` standalone test suite: Base64Url, PKCE, auth providers, URL construction, token parsing.
 - Added auth examples: OpenRouter OAuth PKCE, Gemini API key (query), ChatGPT Bearer token.
+- Added asynchronous `ProxyChecker` with HTTP/HTTPS no-body probes and
+  curl timing metrics.
+- Added relocatable CMake package installation and an overlay vcpkg port,
+  including bundled Simple-WebSocket-Server license metadata.
+- Added package consumers and C++11 install-tree checks for the public HTTP,
+  proxy, PKCE, and Base64url headers.
 - Added `guides/oauth.md` and `guides/auth-providers.md` documentation.
 
 - Added `HttpClient::wait_requests()` to block until all callbacks for the client's request group are delivered.
@@ -42,6 +49,8 @@ All notable changes to this project will be documented in this file.
 - Added integration test coverage for partitioned rate limits covering key independence, same-key blocking, empty-key global fallback, sequential partitioning, per-key release, and per-key delay calculation.
 
 ### Changed
+- OAuth authorization flows now rotate the `state` value and PKCE
+  verifier whenever `build_authorization_url()` starts a new flow.
 - Replaced dual `KURLYK_ENABLE_JSON` / `KURLYK_USE_JSON` macros with unified `KURLYK_JSON_SUPPORT`.
   Legacy aliases map automatically for backward compatibility.
 - Documented retry chain callback contract: intermediate callbacks fire on each retry attempt; the final callback fires on success or retry exhaustion.
@@ -57,6 +66,10 @@ All notable changes to this project will be documented in this file.
 - Added in-flight token tracking so sequential rate-limit locks are only released when `HttpRequestContext::complete()` is called (success, retry exhaustion, cancellation, or handler destruction).
 
 ### Fixed
+- Fixed group wait accounting across pending-to-active transitions and
+  timeout/shutdown cleanup.
+- Fixed HTTP response, completion, and streaming callback exception handling so
+  request accounting is completed even when user callbacks throw.
 - Fixed `HttpRequestManager::time_until_next_allowed()` wrapper to correctly handle `RateLimitDelay<Duration>` vs raw `Duration` return types.
 - Fixed `HttpBatchRequestHandler::process()` batch completion to use `still_running == 0` as the source of truth instead of `m_handlers.empty()`.
 - Fixed HTTP retry decisions so curl transfer errors can retry even when an HTTP status code was already received.

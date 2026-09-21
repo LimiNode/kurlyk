@@ -4,7 +4,12 @@ endif()
 
 foreach(required_path IN ITEMS
     "${KURLYK_STAGE_DIR}/include/kurlyk.hpp"
+    "${KURLYK_STAGE_DIR}/include/kurlyk/http/ProxyChecker.hpp"
+    "${KURLYK_STAGE_DIR}/include/kurlyk/http/data/ProxyCheckOptions.hpp"
+    "${KURLYK_STAGE_DIR}/include/kurlyk/http/data/ProxyCheckResult.hpp"
     "${KURLYK_STAGE_DIR}/include/kurlyk/types/ProxyConfig.hpp"
+    "${KURLYK_STAGE_DIR}/include/kurlyk/utils/pkce.hpp"
+    "${KURLYK_STAGE_DIR}/include/kurlyk/utils/base64_url.hpp"
     "${KURLYK_STAGE_DIR}/share/licenses/kurlyk/LICENSE"
     "${KURLYK_STAGE_DIR}/share/licenses/kurlyk/Simple-WebSocket-Server-LICENSE"
     "${KURLYK_STAGE_DIR}/lib/cmake/kurlyk/kurlykConfig.cmake"
