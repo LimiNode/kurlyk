@@ -320,7 +320,7 @@ jobs:
         run: cmake --build build-auth-tests
       - name: Run auth tests
         run: ctest --test-dir build-auth-tests --output-on-failure
-      - name: Configure bearer-only example (no hmac-cpp)
+      - name: Configure bearer-only example (OAuth disabled)
         run: |
           cmake -S . \
                 -B build-bearer-only \
