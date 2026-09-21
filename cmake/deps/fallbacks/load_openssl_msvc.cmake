@@ -4,7 +4,7 @@ function(load_openssl target)
 	include(FetchContent)
 	FetchContent_Declare(openssl_dep
 		GIT_REPOSITORY https://github.com/LimiNode/openssl-win64-v3.5.8.git
-		GIT_TAG 19d9b5267e9ab108122feb3cac258ecb6d21cfd3
+		GIT_TAG d7528b3ade4da0ab445c8bdb34b65907595d27f5
 	)
 	FetchContent_GetProperties(openssl_dep)
 	if (NOT openssl_dep_POPULATED)
