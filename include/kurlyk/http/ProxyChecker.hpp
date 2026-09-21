@@ -5,7 +5,6 @@
 /// \file ProxyChecker.hpp
 /// \brief Defines an asynchronous HTTP-based proxy checker.
 
-#include <chrono>
 #include <future>
 #include <limits>
 #include <memory>
@@ -38,26 +37,14 @@ namespace detail {
                proxy_check_has_scheme(url, "https://");
     }
 
-    inline long proxy_check_timeout_seconds(std::chrono::milliseconds timeout) {
-        if (timeout.count() <= 0) return 0;
-        const std::chrono::seconds whole_seconds =
-            std::chrono::duration_cast<std::chrono::seconds>(timeout);
-        long long seconds = whole_seconds.count();
-        if (std::chrono::duration_cast<std::chrono::milliseconds>(whole_seconds) < timeout) {
-            ++seconds;
-        }
-        const long long maximum = static_cast<long long>((std::numeric_limits<long>::max)());
-        return seconds > maximum ? (std::numeric_limits<long>::max)() : static_cast<long>(seconds);
-    }
-
-    inline std::chrono::milliseconds proxy_check_milliseconds(double seconds) {
-        if (seconds <= 0.0) return std::chrono::milliseconds(0);
+    inline long proxy_check_milliseconds(double seconds) {
+        if (seconds <= 0.0) return 0;
         const double milliseconds = seconds * 1000.0;
-        const double maximum = static_cast<double>((std::numeric_limits<long long>::max)());
+        const double maximum = static_cast<double>((std::numeric_limits<long>::max)());
         if (milliseconds >= maximum) {
-            return std::chrono::milliseconds((std::numeric_limits<long long>::max)());
+            return (std::numeric_limits<long>::max)();
         }
-        return std::chrono::milliseconds(static_cast<long long>(milliseconds + 0.5));
+        return static_cast<long>(milliseconds + 0.5);
     }
 
     inline ProxyCheckResult make_proxy_check_error(
@@ -94,15 +81,15 @@ namespace detail {
             response->status_code >= 200 && response->status_code < 400;
         result.https_ok = is_https && result.http_ok;
 
-        result.connect_latency = proxy_check_milliseconds(response->connect_time);
+        result.connect_latency_ms = proxy_check_milliseconds(response->connect_time);
         if (response->appconnect_time > 0.0 &&
             response->connect_time >= 0.0 &&
             response->appconnect_time >= response->connect_time) {
-            result.tls_latency = proxy_check_milliseconds(
+            result.tls_latency_ms = proxy_check_milliseconds(
                 response->appconnect_time - response->connect_time);
         }
-        result.ttfb = proxy_check_milliseconds(response->starttransfer_time);
-        result.total_latency = proxy_check_milliseconds(response->total_time);
+        result.ttfb_ms = proxy_check_milliseconds(response->starttransfer_time);
+        result.total_latency_ms = proxy_check_milliseconds(response->total_time);
         return result;
     }
 
@@ -148,8 +135,8 @@ namespace detail {
             }
 
             if (!detail::proxy_check_is_http_url(options.test_url) ||
-                options.connect_timeout.count() < 0 ||
-                options.request_timeout.count() < 0) {
+                options.connect_timeout < 0 ||
+                options.request_timeout < 0) {
                 detail::set_proxy_check_promise(
                     promise,
                     detail::make_proxy_check_error(
@@ -172,8 +159,8 @@ namespace detail {
             request->proxy_auth = proxy.proxy_auth;
             request->proxy_type = proxy.proxy_type;
             request->proxy_tunnel = options.proxy_tunnel;
-            request->connect_timeout = detail::proxy_check_timeout_seconds(options.connect_timeout);
-            request->timeout = detail::proxy_check_timeout_seconds(options.request_timeout);
+            request->connect_timeout = options.connect_timeout;
+            request->timeout = options.request_timeout;
             request->retry_attempts = 0;
 
             const bool is_https = detail::proxy_check_has_scheme(options.test_url, "https://");

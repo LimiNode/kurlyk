@@ -212,14 +212,14 @@ int main() {
 
     std::cout << "HTTP: " << result.http_ok << '\n'
               << "HTTPS: " << result.https_ok << '\n'
-              << "connect: " << result.connect_latency.count() << " ms\n"
-              << "TLS/CONNECT: " << result.tls_latency.count() << " ms\n"
-              << "TTFB: " << result.ttfb.count() << " ms\n"
-              << "total: " << result.total_latency.count() << " ms\n";
+              << "connect: " << result.connect_latency_ms << " ms\n"
+              << "TLS/CONNECT: " << result.tls_latency_ms << " ms\n"
+              << "TTFB: " << result.ttfb_ms << " ms\n"
+              << "total: " << result.total_latency_ms << " ms\n";
 }
 ```
 
-`connect_latency` — время curl от начала проверки до установки TCP-соединения с proxy, включая разрешение имени. `tls_latency` — интервал после TCP connect до завершения TLS; для HTTPS через HTTP proxy он также включает согласование CONNECT. TTFB и total latency измеряются от начала запроса. Текущий HTTP transport округляет значения timeout вверх до целых секунд. `reachable` означает, что через proxy получен HTTP-ответ; это не ICMP ping. Вызов `check(...)` явно проверяет переданный DTO, поэтому поле `ProxyConfig::use` не учитывается.
+`connect_latency_ms` — время curl от начала проверки до установки TCP-соединения с proxy, включая разрешение имени. `tls_latency_ms` — интервал после TCP connect до завершения TLS; для HTTPS через HTTP proxy он также включает согласование CONNECT. `ttfb_ms` и `total_latency_ms` измеряются от начала запроса. Значения timeout задаются в секундах и напрямую передаются HTTP transport. `reachable` означает, что через proxy получен HTTP-ответ; это не ICMP ping. Вызов `check(...)` явно проверяет переданный DTO, поэтому поле `ProxyConfig::use` не учитывается.
 
 ### Low-level helpers
 

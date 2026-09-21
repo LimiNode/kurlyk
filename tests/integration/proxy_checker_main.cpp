@@ -192,6 +192,10 @@ int main() {
             "proxy checker follows redirects by default");
     require(!default_options.proxy_tunnel,
             "proxy checker enables proxy tunneling by default");
+    require(default_options.connect_timeout == 3,
+            "proxy checker has an unexpected default connect timeout");
+    require(default_options.request_timeout == 5,
+            "proxy checker has an unexpected default request timeout");
 
     kurlyk::ProxyCheckResult invalid = checker.check(kurlyk::ProxyConfig()).get();
     require(!invalid.reachable, "invalid proxy unexpectedly reported reachable");
@@ -264,8 +268,8 @@ int main() {
 
     kurlyk::ProxyCheckOptions http_options;
     http_options.test_url = "http://proxy-check.invalid/probe";
-    http_options.connect_timeout = std::chrono::milliseconds(2000);
-    http_options.request_timeout = std::chrono::milliseconds(3000);
+    http_options.connect_timeout = 2;
+    http_options.request_timeout = 3;
 
     const kurlyk::ProxyCheckResult http_result = checker.check(proxy, http_options).get();
     require(http_target.wait_for(std::chrono::seconds(1)) == std::future_status::ready,
@@ -277,11 +281,11 @@ int main() {
     require(!http_result.https_ok, "plain HTTP check unexpectedly reported HTTPS success");
     require(!http_result.error_code, "local HTTP proxy check returned an error");
     require(http_result.http_status == 200, "local HTTP proxy returned unexpected status");
-    require(http_result.connect_latency.count() >= 0, "connect latency is negative");
-    require(http_result.tls_latency.count() == 0, "plain HTTP check reported TLS latency");
-    require(http_result.ttfb.count() >= http_result.connect_latency.count(),
+    require(http_result.connect_latency_ms >= 0, "connect latency is negative");
+    require(http_result.tls_latency_ms == 0, "plain HTTP check reported TLS latency");
+    require(http_result.ttfb_ms >= http_result.connect_latency_ms,
             "TTFB is earlier than the connection milestone");
-    require(http_result.total_latency.count() >= http_result.ttfb.count(),
+    require(http_result.total_latency_ms >= http_result.ttfb_ms,
             "total latency is earlier than TTFB");
 
     http_proxy_server.stop();
@@ -296,8 +300,8 @@ int main() {
     https_options.test_url = "https://127.0.0.1:" +
         std::to_string(static_cast<unsigned long>(https_port)) + "/probe";
     https_options.ca_file = KURLYK_TEST_SSL_CA_FILE;
-    https_options.connect_timeout = std::chrono::milliseconds(2000);
-    https_options.request_timeout = std::chrono::milliseconds(3000);
+    https_options.connect_timeout = 2;
+    https_options.request_timeout = 3;
 
     const kurlyk::ProxyCheckResult https_result = checker.check(proxy, https_options).get();
     require(connect_target.wait_for(std::chrono::seconds(1)) == std::future_status::ready,
@@ -314,7 +318,7 @@ int main() {
     require(https_result.https_ok, "HTTPS proxy check did not report HTTPS success");
     require(!https_result.error_code, "HTTPS proxy check returned an error");
     require(https_result.http_status == 200, "HTTPS proxy returned unexpected status");
-    require(https_result.tls_latency.count() > 0, "HTTPS proxy check did not report TLS latency");
+    require(https_result.tls_latency_ms > 0, "HTTPS proxy check did not report TLS latency");
 
     connect_proxy.stop();
     kurlyk::deinit();

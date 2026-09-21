@@ -25,10 +25,10 @@ int main(int argc, char* argv[]) {
         << "http_ok: " << result.http_ok << '\n'
         << "https_ok: " << result.https_ok << '\n'
         << "status: " << result.http_status << '\n'
-        << "connect: " << result.connect_latency.count() << " ms\n"
-        << "tls/connect: " << result.tls_latency.count() << " ms\n"
-        << "ttfb: " << result.ttfb.count() << " ms\n"
-        << "total: " << result.total_latency.count() << " ms\n";
+        << "connect: " << result.connect_latency_ms << " ms\n"
+        << "tls/connect: " << result.tls_latency_ms << " ms\n"
+        << "ttfb: " << result.ttfb_ms << " ms\n"
+        << "total: " << result.total_latency_ms << " ms\n";
 
     if (result.error_code) {
         std::cerr << "error: " << result.error_code.message();
