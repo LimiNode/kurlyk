@@ -19,6 +19,7 @@ namespace kurlyk {
         time_point_t                 start_time;    ///< Time when the request was initially created or last retried.
         uint64_t                     in_flight_token = 0; ///< Token for sequential rate-limit tracking.
         std::function<void()>        on_complete;   ///< Callback invoked once when the request finishes (including retries).
+        std::function<void()>        on_group_complete; ///< Callback invoked after the final user callback for the group.
         std::atomic<bool>            complete_called{false};  ///< True after on_complete has been invoked.
 
         /// \brief Constructs a HttpRequestContext with the specified request and callback.
@@ -44,6 +45,9 @@ namespace kurlyk {
             }
             if (on_complete) {
                 on_complete();
+            }
+            if (on_group_complete) {
+                on_group_complete();
             }
         }
     }; // HttpRequestContext

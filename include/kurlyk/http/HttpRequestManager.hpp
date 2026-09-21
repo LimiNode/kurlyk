@@ -64,7 +64,28 @@ namespace kurlyk {
                 new HttpRequestContext(std::move(request_ptr), std::move(callback)));
 #           endif
             context->in_flight_token = m_next_in_flight_token.fetch_add(1, std::memory_order_relaxed);
-            m_pending_requests.push_back(std::move(context));
+            const uint64_t group_id = context->request ? context->request->group_id : 0;
+            if (group_id != 0) {
+                context->on_group_complete = [this, group_id]() {
+                    complete_group_request(group_id);
+                };
+                ++m_group_request_counts[group_id];
+            }
+            try {
+                m_pending_requests.push_back(std::move(context));
+            } catch (...) {
+                if (group_id != 0) {
+                    auto count_it = m_group_request_counts.find(group_id);
+                    if (count_it != m_group_request_counts.end()) {
+                        if (count_it->second > 1) {
+                            --count_it->second;
+                        } else {
+                            m_group_request_counts.erase(count_it);
+                        }
+                    }
+                }
+                throw;
+            }
             return SubmitResult{true, std::error_code()};
         }
 
@@ -172,14 +193,14 @@ namespace kurlyk {
             return m_max_pending_requests.load();
         }
 
-        /// \brief Checks whether pending, failed, or active requests exist for a group.
+        /// \brief Checks whether an admitted request remains outstanding for a group.
         /// \param group_id Group ID to inspect.
         /// \return True if at least one managed request belongs to this group.
         bool has_requests_by_group_id(uint64_t group_id) const {
             return group_request_count(group_id) != 0;
         }
 
-        /// \brief Counts pending, failed, and active requests for a group.
+        /// \brief Counts admitted requests that have not delivered their final callback for a group.
         /// \param group_id Group ID to inspect.
         /// \return Number of managed requests that belong to this group.
         std::size_t group_request_count(uint64_t group_id) const {
@@ -190,25 +211,47 @@ namespace kurlyk {
         /// \brief Registers a callback invoked after all requests from a group finish.
         /// \param group_id Group ID to wait for.
         /// \param callback Callback invoked when the group becomes idle.
-        void wait_requests_by_group_id(uint64_t group_id, std::function<void()> callback) {
-            if (m_shutdown || group_id == 0) {
-                if (callback) callback();
-                return;
-            }
-
+        /// \return Waiter ID that can be passed to cancel_wait_requests_by_group_id(), or zero when
+        ///          the callback was invoked immediately.
+        uint64_t wait_requests_by_group_id(uint64_t group_id, std::function<void()> callback) {
             bool invoke_now = false;
+            uint64_t waiter_id = 0;
             {
                 std::lock_guard<std::mutex> lock(m_mutex);
-                if (group_request_count_unlocked(group_id) == 0) {
+                if (m_shutdown || group_id == 0 || group_request_count_unlocked(group_id) == 0) {
                     invoke_now = true;
                 } else {
-                    m_group_waiters[group_id].push_back(std::move(callback));
+                    waiter_id = m_waiter_id_counter++;
+                    m_group_waiters[group_id].push_back(
+                        GroupWaiter{waiter_id, std::move(callback)});
                 }
             }
 
             if (invoke_now && callback) {
                 callback();
             }
+            return waiter_id;
+        }
+
+        /// \brief Removes a previously registered group waiter.
+        /// \param group_id Group ID associated with the waiter.
+        /// \param waiter_id ID returned by wait_requests_by_group_id().
+        /// \return True if the waiter was removed before notification.
+        bool cancel_wait_requests_by_group_id(uint64_t group_id, uint64_t waiter_id) {
+            if (group_id == 0 || waiter_id == 0) return false;
+
+            std::lock_guard<std::mutex> lock(m_mutex);
+            auto group_it = m_group_waiters.find(group_id);
+            if (group_it == m_group_waiters.end()) return false;
+
+            auto& waiters = group_it->second;
+            for (auto waiter_it = waiters.begin(); waiter_it != waiters.end(); ++waiter_it) {
+                if (waiter_it->id != waiter_id) continue;
+                waiters.erase(waiter_it);
+                if (waiters.empty()) m_group_waiters.erase(group_it);
+                return true;
+            }
+            return false;
         }
 
         /// \brief Cancels one request by request ID.
@@ -281,6 +324,7 @@ namespace kurlyk {
                 !m_pending_requests.empty() ||
                 !m_failed_requests.empty() ||
                 !m_active_request_batches.empty() ||
+                !m_group_request_counts.empty() ||
                 !m_requests_to_cancel_by_id.empty() ||
                 !m_groups_to_cancel.empty();
         }
@@ -292,40 +336,33 @@ namespace kurlyk {
         std::list<std::unique_ptr<HttpBatchRequestHandler>> m_active_request_batches; ///< List of currently active HTTP request batches.
         using callback_list_t = std::list<std::function<void()>>;
         using cancel_map_t = std::unordered_map<uint64_t, callback_list_t>;
+        struct GroupWaiter {
+            uint64_t id;
+            std::function<void()> callback;
+        };
+        using waiter_list_t = std::list<GroupWaiter>;
+        using waiter_map_t = std::unordered_map<uint64_t, waiter_list_t>;
         cancel_map_t                                       m_requests_to_cancel_by_id; ///< Map of request IDs to their associated cancellation callbacks.
         cancel_map_t                                       m_groups_to_cancel;         ///< Map of group IDs to their associated cancellation callbacks.
-        cancel_map_t                                       m_group_waiters;            ///< Map of group IDs to callbacks waiting until a group becomes idle.
+        waiter_map_t                                       m_group_waiters;            ///< Map of group IDs to callbacks waiting until a group becomes idle.
+        std::unordered_map<uint64_t, std::size_t>           m_group_request_counts;     ///< Outstanding admitted requests by group.
         HttpRateLimiter                                     m_rate_limiter;           ///< Rate limiter for controlling request frequency.
         std::atomic<uint64_t>                               m_next_in_flight_token{1}; ///< Atomic counter for sequential rate-limit tokens.
         std::atomic<uint64_t>                               m_request_id_counter = ATOMIC_VAR_INIT(1); ///< Atomic counter for unique request IDs.
         std::atomic<uint64_t>                               m_group_id_counter = ATOMIC_VAR_INIT(1); ///< Atomic counter for group IDs.
+        uint64_t                                            m_waiter_id_counter = 1;    ///< Counter for group waiter IDs.
         std::atomic<bool>                                   m_shutdown = ATOMIC_VAR_INIT(false); ///< Flag indicating if shutdown has been requested.
         std::atomic<std::size_t>                            m_max_pending_requests = ATOMIC_VAR_INIT(0); ///< Maximum number of requests accepted into the pending queue, or zero if unbounded.
 
         std::size_t group_request_count_unlocked(uint64_t group_id) const {
             if (group_id == 0) return 0;
 
-            std::size_t count = 0;
-            for (const auto& context : m_pending_requests) {
-                if (context && context->request && context->request->group_id == group_id) {
-                    ++count;
-                }
-            }
-            for (const auto& context : m_failed_requests) {
-                if (context && context->request && context->request->group_id == group_id) {
-                    ++count;
-                }
-            }
-            for (const auto& batch : m_active_request_batches) {
-                if (batch) {
-                    count += batch->group_request_count(group_id);
-                }
-            }
-            return count;
+            auto it = m_group_request_counts.find(group_id);
+            return it == m_group_request_counts.end() ? 0 : it->second;
         }
 
         void notify_group_waiters_if_idle() {
-            cancel_map_t ready_waiters;
+            waiter_map_t ready_waiters;
             {
                 std::lock_guard<std::mutex> lock(m_mutex);
                 auto it = m_group_waiters.begin();
@@ -340,14 +377,14 @@ namespace kurlyk {
             }
 
             for (const auto& item : ready_waiters) {
-                for (const auto& callback : item.second) {
-                    if (callback) callback();
+                for (const auto& waiter : item.second) {
+                    if (waiter.callback) waiter.callback();
                 }
             }
         }
 
         void notify_all_group_waiters() {
-            cancel_map_t waiters;
+            waiter_map_t waiters;
             {
                 std::lock_guard<std::mutex> lock(m_mutex);
                 waiters = std::move(m_group_waiters);
@@ -355,9 +392,34 @@ namespace kurlyk {
             }
 
             for (const auto& item : waiters) {
-                for (const auto& callback : item.second) {
-                    if (callback) callback();
+                for (const auto& waiter : item.second) {
+                    if (waiter.callback) waiter.callback();
                 }
+            }
+        }
+
+        void complete_group_request(uint64_t group_id) {
+            if (group_id == 0) return;
+
+            waiter_list_t ready_waiters;
+            {
+                std::lock_guard<std::mutex> lock(m_mutex);
+                auto count_it = m_group_request_counts.find(group_id);
+                if (count_it == m_group_request_counts.end()) return;
+                if (count_it->second > 1) {
+                    --count_it->second;
+                } else {
+                    m_group_request_counts.erase(count_it);
+                    auto waiter_it = m_group_waiters.find(group_id);
+                    if (waiter_it != m_group_waiters.end()) {
+                        ready_waiters = std::move(waiter_it->second);
+                        m_group_waiters.erase(waiter_it);
+                    }
+                }
+            }
+
+            for (const auto& waiter : ready_waiters) {
+                if (waiter.callback) waiter.callback();
             }
         }
 

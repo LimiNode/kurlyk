@@ -95,6 +95,8 @@ int main() {
                 }
             });
         require(ok, "request should be accepted");
+        require(client->in_flight_requests() == 1,
+                "accepted request must remain outstanding before its final callback");
 
         client->wait_requests();
         require(callback_count.load() == 1, "wait_requests() must wait until callback is delivered");
@@ -160,7 +162,43 @@ int main() {
         client.reset();
     }
 
-    // --- Test 4: per-client max_in_flight ---
+    // --- Test 4: timed-out group waiter is removed ---
+    {
+        auto& manager = kurlyk::HttpRequestManager::get_instance();
+        const uint64_t group_id = manager.generate_group_id();
+        std::promise<void> request_done;
+        auto request_done_future = request_done.get_future();
+        std::atomic<int> waiter_count{0};
+
+        auto request = std::unique_ptr<kurlyk::HttpRequest>(new kurlyk::HttpRequest());
+        request->url = base_url + "/slow";
+        request->group_id = group_id;
+        request->timeout = 2;
+        request->connect_timeout = 2;
+        const kurlyk::SubmitResult submit_result = manager.submit_request(
+            std::move(request),
+            [&request_done](kurlyk::HttpResponsePtr response) {
+                if (response && response->ready) {
+                    request_done.set_value();
+                }
+            });
+        require(static_cast<bool>(submit_result), "direct manager request should be accepted");
+
+        const uint64_t waiter_id = manager.wait_requests_by_group_id(
+            group_id,
+            [&waiter_count]() { ++waiter_count; });
+        require(waiter_id != 0, "busy group waiter should receive an ID");
+        require(manager.cancel_wait_requests_by_group_id(group_id, waiter_id),
+                "timed-out group waiter should be removable");
+
+        ProcessorGuard pg;
+        require(request_done_future.wait_for(std::chrono::seconds(2)) == std::future_status::ready,
+                "direct manager request should finish");
+        require(waiter_count.load() == 0,
+                "removed group waiter must not run after the request finishes");
+    }
+
+    // --- Test 5: per-client max_in_flight ---
     {
         auto client = std::make_unique<kurlyk::HttpClient>(base_url);
         client->set_max_in_flight(1);
@@ -194,7 +232,7 @@ int main() {
         client.reset();
     }
 
-    // --- Test 5: future-based API with max_in_flight ---
+    // --- Test 6: future-based API with max_in_flight ---
     {
         auto client = std::make_unique<kurlyk::HttpClient>(base_url);
         client->set_max_in_flight(1);
@@ -214,7 +252,7 @@ int main() {
         client.reset();
     }
 
-    // --- Test 6: wait_requests() waits through retry chain ---
+    // --- Test 7: wait_requests() waits through retry chain ---
     {
         ProcessorGuard pg;
         flaky_counter.store(0);
@@ -243,7 +281,7 @@ int main() {
         client.reset();
     }
 
-    // --- Test 7: sequential rate limit does not self-block retry ---
+    // --- Test 8: sequential rate limit does not self-block retry ---
     {
         ProcessorGuard pg;
         flaky_counter.store(0);
@@ -270,7 +308,7 @@ int main() {
         client.reset();
     }
 
-    // --- Test 8: concurrent same-client max_in_flight submission ---
+    // --- Test 9: concurrent same-client max_in_flight submission ---
     {
         auto client = std::make_unique<kurlyk::HttpClient>(base_url);
         client->set_max_in_flight(1);
@@ -318,7 +356,7 @@ int main() {
         client.reset();
     }
 
-    // --- Test 9: wait_requests() on empty group returns immediately ---
+    // --- Test 10: wait_requests() on empty group returns immediately ---
     {
         ProcessorGuard pg;
         auto client = std::make_unique<kurlyk::HttpClient>(base_url);
@@ -330,7 +368,7 @@ int main() {
         client.reset();
     }
 
-    // --- Test 10: wait_requests_for() on empty group returns true immediately ---
+    // --- Test 11: wait_requests_for() on empty group returns true immediately ---
     {
         auto client = std::make_unique<kurlyk::HttpClient>(base_url);
         bool done = client->wait_requests_for(std::chrono::milliseconds(10));
