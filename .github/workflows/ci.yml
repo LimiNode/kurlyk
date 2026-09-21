@@ -116,26 +116,26 @@ jobs:
                 -DCMAKE_CXX_STANDARD=11 \
                 -DCMAKE_CXX_STANDARD_REQUIRED=ON \
                 -Wno-dev
-        - name: Build vcpkg package consumer
-          run: cmake --build build-vcpkg-consumer
-        - name: Install Boost.Asio smoke dependency
-          run: |
-            "$RUNNER_TEMP/vcpkg/vcpkg" install boost:x64-linux
-        - name: Configure Boost.Asio C++11 smoke
-          run: |
-            cmake -S tests/smoke \
-                  -B build-boost-cpp11 \
-                  -G Ninja \
-                  -DCMAKE_TOOLCHAIN_FILE="$RUNNER_TEMP/vcpkg/scripts/buildsystems/vcpkg.cmake" \
-                  -DVCPKG_TARGET_TRIPLET=x64-linux \
-                  -DKURLYK_USE_STANDALONE_ASIO=OFF \
-                  -DKURLYK_USE_FALLBACK_ASIO=OFF \
-                  -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON \
-                  -DCMAKE_CXX_STANDARD=11 \
-                  -DCMAKE_CXX_STANDARD_REQUIRED=ON \
-                  -Wno-dev
-        - name: Build Boost.Asio C++11 smoke
-          run: cmake --build build-boost-cpp11
+      - name: Build vcpkg package consumer
+        run: cmake --build build-vcpkg-consumer
+      - name: Install Boost.Asio smoke dependency
+        run: |
+          "$RUNNER_TEMP/vcpkg/vcpkg" install boost:x64-linux
+      - name: Configure Boost.Asio C++11 smoke
+        run: |
+          cmake -S tests/smoke \
+                -B build-boost-cpp11 \
+                -G Ninja \
+                -DCMAKE_TOOLCHAIN_FILE="$RUNNER_TEMP/vcpkg/scripts/buildsystems/vcpkg.cmake" \
+                -DVCPKG_TARGET_TRIPLET=x64-linux \
+                -DKURLYK_USE_STANDALONE_ASIO=OFF \
+                -DKURLYK_USE_FALLBACK_ASIO=OFF \
+                -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON \
+                -DCMAKE_CXX_STANDARD=11 \
+                -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+                -Wno-dev
+      - name: Build Boost.Asio C++11 smoke
+        run: cmake --build build-boost-cpp11
 
   macos:
     runs-on: macos-latest
