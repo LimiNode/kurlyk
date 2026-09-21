@@ -51,7 +51,7 @@ namespace kurlyk {
             }
         }
 
-        /// \brief Invokes the final response callback and completes the request exactly once.
+        /// \brief Invokes the final response callback, then performs idempotent request completion.
         /// \param response Final response passed to the callback.
         void invoke_final_callback(HttpResponsePtr response) noexcept {
             invoke_callback(std::move(response));

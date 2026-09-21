@@ -231,13 +231,7 @@ namespace kurlyk {
 
             m_has_stream_chunk = true;
 
-            try {
-                m_request_context->callback(std::move(chunk));
-            } catch (const std::exception& e) {
-                KURLYK_HANDLE_ERROR(e, "Unhandled exception in HttpRequestHandler streaming callback");
-            } catch (...) {
-                // Unknown fatal error in streaming callback
-            }
+            m_request_context->invoke_callback(std::move(chunk));
         }
         
         void fill_response_timings() {
