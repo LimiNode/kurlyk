@@ -1,6 +1,14 @@
 var namespacekurlyk =
 [
     [ "core", "namespacekurlyk_1_1core.html", "namespacekurlyk_1_1core" ],
+    [ "detail", "namespacekurlyk_1_1detail.html", [
+      [ "make_proxy_check_error", "namespacekurlyk_1_1detail.html#aef173e09eb5dcec0901a1f3838172783", null ],
+      [ "make_proxy_check_result", "namespacekurlyk_1_1detail.html#adf165706b51df53cc2b34a98bda82b37", null ],
+      [ "proxy_check_has_scheme", "namespacekurlyk_1_1detail.html#ab6d1055eec1005395c8053f582a6ad7d", null ],
+      [ "proxy_check_is_http_url", "namespacekurlyk_1_1detail.html#ab92ca632894a1626de8eb1e77793804f", null ],
+      [ "proxy_check_milliseconds", "namespacekurlyk_1_1detail.html#a896ed9a15c89f4dd70c87bd3d566dd42", null ],
+      [ "set_proxy_check_promise", "namespacekurlyk_1_1detail.html#aed94150e0f244d0530e07d74193417c4", null ]
+    ] ],
     [ "http", "namespacekurlyk_1_1http.html", "namespacekurlyk_1_1http" ],
     [ "startup", "namespacekurlyk_1_1startup.html", "namespacekurlyk_1_1startup" ],
     [ "utils", "namespacekurlyk_1_1utils.html", "namespacekurlyk_1_1utils" ],
@@ -21,6 +29,9 @@ var namespacekurlyk =
     [ "IWebSocketSender", "classkurlyk_1_1IWebSocketSender.html", "classkurlyk_1_1IWebSocketSender" ],
     [ "OAuthConfig", "structkurlyk_1_1OAuthConfig.html", "structkurlyk_1_1OAuthConfig" ],
     [ "OAuthToken", "structkurlyk_1_1OAuthToken.html", "structkurlyk_1_1OAuthToken" ],
+    [ "ProxyChecker", "classkurlyk_1_1ProxyChecker.html", "classkurlyk_1_1ProxyChecker" ],
+    [ "ProxyCheckOptions", "structkurlyk_1_1ProxyCheckOptions.html", "structkurlyk_1_1ProxyCheckOptions" ],
+    [ "ProxyCheckResult", "structkurlyk_1_1ProxyCheckResult.html", "structkurlyk_1_1ProxyCheckResult" ],
     [ "ProxyConfig", "structkurlyk_1_1ProxyConfig.html", "structkurlyk_1_1ProxyConfig" ],
     [ "RateLimitDelay", "structkurlyk_1_1RateLimitDelay.html", "structkurlyk_1_1RateLimitDelay" ],
     [ "SimpleWebSocketClientAdapter", "classkurlyk_1_1SimpleWebSocketClientAdapter.html", "classkurlyk_1_1SimpleWebSocketClientAdapter" ],
@@ -76,6 +87,7 @@ var namespacekurlyk =
     [ "cancel_request_by_id", "namespacekurlyk.html#af4e359b92f64aabd5129cc30b1c5f715", null ],
     [ "cancel_requests_by_group_id", "namespacekurlyk.html#a2da7af3ac634138be6073b9bd4f33f5c", null ],
     [ "cancel_requests_by_group_id", "namespacekurlyk.html#a7ef5f6c72118ed0a25193bc87613191d", null ],
+    [ "check_proxy", "namespacekurlyk.html#abab59356f789c17d3a84dfa431b13855", null ],
     [ "create_rate_limit", "namespacekurlyk.html#a05093698df5a2f4d1c1a951acc87a570", null ],
     [ "create_rate_limit_rpm", "namespacekurlyk.html#add9d09fa6395c22f4ed07b50d5e61e07", null ],
     [ "create_rate_limit_rps", "namespacekurlyk.html#acef313e32a8c115a160b92cd6cbc3682", null ],

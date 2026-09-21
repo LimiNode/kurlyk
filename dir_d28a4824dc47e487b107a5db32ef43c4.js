@@ -13,6 +13,7 @@ var dir_d28a4824dc47e487b107a5db32ef43c4 =
     [ "interrupted_requests_example.cpp", "interrupted__requests__example_8cpp.html", "interrupted__requests__example_8cpp" ],
     [ "nested_http_requests_example.cpp", "nested__http__requests__example_8cpp.html", "nested__http__requests__example_8cpp" ],
     [ "openrouter_oauth_pkce_example.cpp", "openrouter__oauth__pkce__example_8cpp.html", "openrouter__oauth__pkce__example_8cpp" ],
+    [ "proxy_checker_example.cpp", "proxy__checker__example_8cpp.html", "proxy__checker__example_8cpp" ],
     [ "redirect_handling_example.cpp", "redirect__handling__example_8cpp.html", "redirect__handling__example_8cpp" ],
     [ "sequential_rate_limit_example.cpp", "sequential__rate__limit__example_8cpp.html", "sequential__rate__limit__example_8cpp" ],
     [ "simple_bearer_auth_example.cpp", "simple__bearer__auth__example_8cpp.html", "simple__bearer__auth__example_8cpp" ],

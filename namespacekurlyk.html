@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespacekurly
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:core" id="r_core"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1core.html">core</a></td></tr>
+<tr class="memitem:detail" id="r_detail"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1detail.html">detail</a></td></tr>
 <tr class="memitem:http" id="r_http"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1http.html">http</a></td></tr>
 <tr class="memitem:startup" id="r_startup"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1startup.html">startup</a></td></tr>
 <tr class="memitem:utils" id="r_utils"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1utils.html">utils</a></td></tr>
@@ -174,6 +175,12 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores client configuration for an OAuth2 Authorization Code + PKCE flow.  <a href="structkurlyk_1_1OAuthConfig.html#details">More...</a><br /></td></tr>
 <tr class="memitem:OAuthToken" id="r_OAuthToken"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structkurlyk_1_1OAuthToken.html">OAuthToken</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds the result of an OAuth2 token exchange.  <a href="structkurlyk_1_1OAuthToken.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ProxyChecker" id="r_ProxyChecker"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classkurlyk_1_1ProxyChecker.html">ProxyChecker</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a proxy can complete an HTTP or HTTPS no-body request.  <a href="classkurlyk_1_1ProxyChecker.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ProxyCheckOptions" id="r_ProxyCheckOptions"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structkurlyk_1_1ProxyCheckOptions.html">ProxyCheckOptions</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the no-body request used to check a proxy.  <a href="structkurlyk_1_1ProxyCheckOptions.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ProxyCheckResult" id="r_ProxyCheckResult"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structkurlyk_1_1ProxyCheckResult.html">ProxyCheckResult</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores proxy reachability, protocol status, errors, and curl timing metrics.  <a href="structkurlyk_1_1ProxyCheckResult.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ProxyConfig" id="r_ProxyConfig"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structkurlyk_1_1ProxyConfig.html">ProxyConfig</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores proxy server, authentication, and transport settings.  <a href="structkurlyk_1_1ProxyConfig.html#details">More...</a><br /></td></tr>
 <tr class="memitem:RateLimitDelay" id="r_RateLimitDelay"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structkurlyk_1_1RateLimitDelay.html">RateLimitDelay</a></td></tr>
@@ -261,6 +268,8 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:abab59356f789c17d3a84dfa431b13855" id="r_abab59356f789c17d3a84dfa431b13855"><td class="memItemLeft">std::future&lt; <a class="el" href="structkurlyk_1_1ProxyCheckResult.html">ProxyCheckResult</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#abab59356f789c17d3a84dfa431b13855">check_proxy</a> (const <a class="el" href="structkurlyk_1_1ProxyConfig.html">ProxyConfig</a> &amp;proxy, const <a class="el" href="structkurlyk_1_1ProxyCheckOptions.html">ProxyCheckOptions</a> &amp;options=<a class="el" href="structkurlyk_1_1ProxyCheckOptions.html">ProxyCheckOptions</a>())</td></tr>
+<tr class="memdesc:abab59356f789c17d3a84dfa431b13855"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts an asynchronous no-body request through a proxy.  <br /></td></tr>
 <tr class="memitem:a05093698df5a2f4d1c1a951acc87a570" id="r_a05093698df5a2f4d1c1a951acc87a570"><td class="memItemLeft"><a class="el" href="#add287752edc6bc19d26a46274b8d524d">HttpRateLimitHandlePtr</a>&#160;</td><td class="memItemRight"><a class="el" href="#a05093698df5a2f4d1c1a951acc87a570">create_rate_limit</a> (long requests_per_period, long period_ms, bool sequential=false)</td></tr>
 <tr class="memdesc:a05093698df5a2f4d1c1a951acc87a570"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a RAII rate-limit handle with specified parameters.  <br /></td></tr>
 <tr class="memitem:add9d09fa6395c22f4ed07b50d5e61e07" id="r_add9d09fa6395c22f4ed07b50d5e61e07"><td class="memItemLeft"><a class="el" href="#add287752edc6bc19d26a46274b8d524d">HttpRateLimitHandlePtr</a>&#160;</td><td class="memItemRight"><a class="el" href="#add9d09fa6395c22f4ed07b50d5e61e07">create_rate_limit_rpm</a> (long requests_per_minute, bool sequential=false)</td></tr>
@@ -896,6 +905,47 @@ Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="http_2utils_8hpp_source.html#l00123">123</a> of file <a class="el" href="http_2utils_8hpp_source.html">utils.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abab59356f789c17d3a84dfa431b13855" name="abab59356f789c17d3a84dfa431b13855"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abab59356f789c17d3a84dfa431b13855">&#9670;&#160;</a></span>check_proxy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::future&lt; <a class="el" href="structkurlyk_1_1ProxyCheckResult.html">ProxyCheckResult</a> &gt; kurlyk::check_proxy </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structkurlyk_1_1ProxyConfig.html">ProxyConfig</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>proxy</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structkurlyk_1_1ProxyCheckOptions.html">ProxyCheckOptions</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>options</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="structkurlyk_1_1ProxyCheckOptions.html">ProxyCheckOptions</a>()</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Starts an asynchronous no-body request through a proxy. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">proxy</td><td>Passive proxy configuration to check. </td></tr>
+    <tr><td class="paramname">options</td><td>Test URL and request behavior. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Future containing the proxy check result. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ProxyChecker_8hpp_source.html#l00189">189</a> of file <a class="el" href="ProxyChecker_8hpp_source.html">ProxyChecker.hpp</a>.</p>
 
 </div>
 </div>
