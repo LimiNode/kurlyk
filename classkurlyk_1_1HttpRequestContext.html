@@ -159,6 +159,8 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:aab248d756472d3bb87659489a2b67825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Token for sequential rate-limit tracking.  <br /></td></tr>
 <tr class="memitem:a58aee02b90e694efac461b93afe61f0a" id="r_a58aee02b90e694efac461b93afe61f0a"><td class="memItemLeft">std::function&lt; void()&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a58aee02b90e694efac461b93afe61f0a">on_complete</a></td></tr>
 <tr class="memdesc:a58aee02b90e694efac461b93afe61f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked once when the request finishes (including retries).  <br /></td></tr>
+<tr class="memitem:a130352af7f67a41f6f7a3bfe3f381c4d" id="r_a130352af7f67a41f6f7a3bfe3f381c4d"><td class="memItemLeft">std::function&lt; void()&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a130352af7f67a41f6f7a3bfe3f381c4d">on_group_complete</a></td></tr>
+<tr class="memdesc:a130352af7f67a41f6f7a3bfe3f381c4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked after the final user callback for the group.  <br /></td></tr>
 <tr class="memitem:a4f4717974f98931dab9223e4a522af1e" id="r_a4f4717974f98931dab9223e4a522af1e"><td class="memItemLeft">std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a4f4717974f98931dab9223e4a522af1e">complete_called</a> {false}</td></tr>
 <tr class="memdesc:a4f4717974f98931dab9223e4a522af1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">True after on_complete has been invoked.  <br /></td></tr>
 </table>
@@ -220,7 +222,7 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="HttpRequestContext_8hpp_source.html#l00027">27</a> of file <a class="el" href="HttpRequestContext_8hpp_source.html">HttpRequestContext.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HttpRequestContext_8hpp_source.html#l00028">28</a> of file <a class="el" href="HttpRequestContext_8hpp_source.html">HttpRequestContext.hpp</a>.</p>
 
 </div>
 </div>
@@ -275,7 +277,7 @@ Public Attributes</h2></td></tr>
 
 <p>Invokes on_complete exactly once. Thread-safe and idempotent. </p>
 
-<p class="definition">Definition at line <a class="el" href="HttpRequestContext_8hpp_source.html#l00040">40</a> of file <a class="el" href="HttpRequestContext_8hpp_source.html">HttpRequestContext.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HttpRequestContext_8hpp_source.html#l00041">41</a> of file <a class="el" href="HttpRequestContext_8hpp_source.html">HttpRequestContext.hpp</a>.</p>
 
 </div>
 </div>
@@ -312,7 +314,7 @@ Public Attributes</h2></td></tr>
 
 <p>True after on_complete has been invoked. </p>
 
-<p class="definition">Definition at line <a class="el" href="HttpRequestContext_8hpp_source.html#l00022">22</a> of file <a class="el" href="HttpRequestContext_8hpp_source.html">HttpRequestContext.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HttpRequestContext_8hpp_source.html#l00023">23</a> of file <a class="el" href="HttpRequestContext_8hpp_source.html">HttpRequestContext.hpp</a>.</p>
 
 </div>
 </div>
@@ -349,6 +351,24 @@ Public Attributes</h2></td></tr>
 <p>Callback invoked once when the request finishes (including retries). </p>
 
 <p class="definition">Definition at line <a class="el" href="HttpRequestContext_8hpp_source.html#l00021">21</a> of file <a class="el" href="HttpRequestContext_8hpp_source.html">HttpRequestContext.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a130352af7f67a41f6f7a3bfe3f381c4d" name="a130352af7f67a41f6f7a3bfe3f381c4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a130352af7f67a41f6f7a3bfe3f381c4d">&#9670;&#160;</a></span>on_group_complete</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void()&gt; kurlyk::HttpRequestContext::on_group_complete</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Callback invoked after the final user callback for the group. </p>
+
+<p class="definition">Definition at line <a class="el" href="HttpRequestContext_8hpp_source.html#l00022">22</a> of file <a class="el" href="HttpRequestContext_8hpp_source.html">HttpRequestContext.hpp</a>.</p>
 
 </div>
 </div>

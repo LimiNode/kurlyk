@@ -8,7 +8,7 @@ var searchData=
   ['make_5frequest_5',['make_request',['../classkurlyk_1_1HttpClient.html#a0b858f95787afa5654001f7a7137ec39',1,'kurlyk::HttpClient']]],
   ['make_5fs256_5fcode_5fchallenge_6',['make_s256_code_challenge',['../namespacekurlyk_1_1utils.html#a6a241a14f4997276b41b7f44be5beab0',1,'kurlyk::utils']]],
   ['make_5fsubmit_5ferror_5fresponse_7',['make_submit_error_response',['../classkurlyk_1_1HttpClient.html#aafc313ea4491aec9277f8366d6323272',1,'kurlyk::HttpClient::make_submit_error_response()'],['../namespacekurlyk.html#afe56f68e2137cdd7e79144fdd8405ac3',1,'kurlyk::make_submit_error_response()']]],
-  ['make_5fwait_5frequests_5ffuture_8',['make_wait_requests_future',['../classkurlyk_1_1HttpClient.html#aac32b264db2c8d18a99210a78bffe1bd',1,'kurlyk::HttpClient']]],
+  ['make_5fwait_5frequests_5ffuture_8',['make_wait_requests_future',['../classkurlyk_1_1HttpClient.html#af2be4371dcd00487ffe2244d1220f651',1,'kurlyk::HttpClient']]],
   ['mark_5fdone_9',['mark_done',['../classkurlyk_1_1HttpRequestHandler.html#a91ba146cb712f94c4f66358cb1c0bcd2',1,'kurlyk::HttpRequestHandler']]],
   ['matches_5fcancel_10',['matches_cancel',['../classkurlyk_1_1HttpRequestManager.html#a2a7c2f7109609764e9a3b1512de3eb4a',1,'kurlyk::HttpRequestManager']]],
   ['max_5fin_5fflight_11',['max_in_flight',['../classkurlyk_1_1HttpClient.html#a15e48e130d9fcc8f2b2d4f1cc7f49642',1,'kurlyk::HttpClient']]],

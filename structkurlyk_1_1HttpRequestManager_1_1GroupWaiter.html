@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Kurlyk: Todo List</title>
+<title>Kurlyk: kurlyk::HttpRequestManager::GroupWaiter Struct Reference</title>
 <link rel="icon" href="logo.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 <script type="text/javascript">
-document.addEventListener('DOMContentLoaded',() => { initNavTree('todo.html','',''); });
+document.addEventListener('DOMContentLoaded',() => { initNavTree('structkurlyk_1_1HttpRequestManager_1_1GroupWaiter.html','','structkurlyk_1_1HttpRequestManager_1_1GroupWaiter-members'); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -123,21 +123,69 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('todo.html','',
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">Todo List </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">kurlyk::HttpRequestManager::GroupWaiter Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><dl class="reflist">
-<dt>Member <a class="el" href="classkurlyk_1_1HttpClient.html#a155dce13a9a5ebb9dc7f51618718a4f3">kurlyk::HttpClient::wait_requests_for</a>  (std::chrono::milliseconds timeout)</dt>
-<dd><a class="anchor" id="_todo000001"></a>A timed-out waiter callback remains registered in <a class="el" href="classkurlyk_1_1HttpRequestManager.html" title="Manages and processes HTTP requests using a singleton pattern.">HttpRequestManager</a> until the group becomes idle or shutdown fires. For rapid repeated calls this may accumulate callbacks. </dd>
-</dl>
-</div></div><!-- contents -->
-</div><!-- PageDoc -->
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a1764633a21429f04d39e2e3211b618b9" id="r_a1764633a21429f04d39e2e3211b618b9"><td class="memItemLeft">uint64_t&#160;</td><td class="memItemRight"><a class="el" href="#a1764633a21429f04d39e2e3211b618b9">id</a></td></tr>
+<tr class="memitem:a626d3ed1bf784963e1a83b9c83b73ffb" id="r_a626d3ed1bf784963e1a83b9c83b73ffb"><td class="memItemLeft">std::function&lt; void()&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a626d3ed1bf784963e1a83b9c83b73ffb">callback</a></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="HttpRequestManager_8hpp_source.html#l00339">339</a> of file <a class="el" href="HttpRequestManager_8hpp_source.html">HttpRequestManager.hpp</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a626d3ed1bf784963e1a83b9c83b73ffb" name="a626d3ed1bf784963e1a83b9c83b73ffb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a626d3ed1bf784963e1a83b9c83b73ffb">&#9670;&#160;</a></span>callback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void()&gt; kurlyk::HttpRequestManager::GroupWaiter::callback</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="HttpRequestManager_8hpp_source.html#l00341">341</a> of file <a class="el" href="HttpRequestManager_8hpp_source.html">HttpRequestManager.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1764633a21429f04d39e2e3211b618b9" name="a1764633a21429f04d39e2e3211b618b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1764633a21429f04d39e2e3211b618b9">&#9670;&#160;</a></span>id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t kurlyk::HttpRequestManager::GroupWaiter::id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="HttpRequestManager_8hpp_source.html#l00340">340</a> of file <a class="el" href="HttpRequestManager_8hpp_source.html">HttpRequestManager.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/kurlyk/http/<a class="el" href="HttpRequestManager_8hpp_source.html">HttpRequestManager.hpp</a></li>
+</ul>
+</div><!-- contents -->
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a href="namespacekurlyk.html">kurlyk</a></li><li class="navelem"><a href="classkurlyk_1_1HttpRequestManager.html">HttpRequestManager</a></li><li class="navelem"><a href="structkurlyk_1_1HttpRequestManager_1_1GroupWaiter.html">GroupWaiter</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

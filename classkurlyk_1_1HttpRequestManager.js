@@ -1,14 +1,19 @@
 var classkurlyk_1_1HttpRequestManager =
 [
+    [ "GroupWaiter", "structkurlyk_1_1HttpRequestManager_1_1GroupWaiter.html", "structkurlyk_1_1HttpRequestManager_1_1GroupWaiter" ],
     [ "callback_list_t", "classkurlyk_1_1HttpRequestManager.html#a90f6cdaee6c2fb0a09686d2a508f48ec", null ],
     [ "cancel_map_t", "classkurlyk_1_1HttpRequestManager.html#ad5e6659d4391ed49bc1859f424f2da6b", null ],
+    [ "waiter_list_t", "classkurlyk_1_1HttpRequestManager.html#a61a4995fe7723c91bf720fe782d9fbf2", null ],
+    [ "waiter_map_t", "classkurlyk_1_1HttpRequestManager.html#a0d07348ff6e2dfcd1e1a7327aeaf1b77", null ],
     [ "HttpRequestManager", "classkurlyk_1_1HttpRequestManager.html#ae6c2f231d0f409c063790da8f2beb750", null ],
     [ "HttpRequestManager", "classkurlyk_1_1HttpRequestManager.html#a170994edf58afcceffd6e45e79c6497d", null ],
     [ "add_request", "classkurlyk_1_1HttpRequestManager.html#adf98c0d06ec63678e5d6f54a8039d8bc", null ],
     [ "allow_request", "classkurlyk_1_1HttpRequestManager.html#ab5fa35b00c9f7ef2fcfb14d7bf03473b", null ],
     [ "cancel_request_by_id", "classkurlyk_1_1HttpRequestManager.html#a5e8849699dbbb491da1e735173a166ef", null ],
     [ "cancel_requests_by_group_id", "classkurlyk_1_1HttpRequestManager.html#ab1a790c9b870c4d51466fbda26f2cbfe", null ],
+    [ "cancel_wait_requests_by_group_id", "classkurlyk_1_1HttpRequestManager.html#ad06c39bf1d985d8a220abf2cba5dde22", null ],
     [ "cleanup_pending_requests", "classkurlyk_1_1HttpRequestManager.html#ae7083563835bfdab0e3213c784a8f7d2", null ],
+    [ "complete_group_request", "classkurlyk_1_1HttpRequestManager.html#a16c6e91748f1699729256c7eabe42b9a", null ],
     [ "create_rate_limit", "classkurlyk_1_1HttpRequestManager.html#aea005ef020919f7b3ddc2a76607bc405", null ],
     [ "generate_group_id", "classkurlyk_1_1HttpRequestManager.html#a32ce938812059e06f50fcc3f1af684eb", null ],
     [ "generate_request_id", "classkurlyk_1_1HttpRequestManager.html#ad7f4e416b72e1cff0b400101351bcb51", null ],
@@ -37,12 +42,13 @@ var classkurlyk_1_1HttpRequestManager =
     [ "shutdown", "classkurlyk_1_1HttpRequestManager.html#ae3479e04261351ce34a7c367e3eb7b27", null ],
     [ "submit_request", "classkurlyk_1_1HttpRequestManager.html#a83264905f878949114168d2b69f67533", null ],
     [ "time_until_next_allowed", "classkurlyk_1_1HttpRequestManager.html#a7c07919226bfc36a87bccc034fb32ee9", null ],
-    [ "wait_requests_by_group_id", "classkurlyk_1_1HttpRequestManager.html#a6b86b1de8c20528e118687614459277c", null ],
+    [ "wait_requests_by_group_id", "classkurlyk_1_1HttpRequestManager.html#a73605110677e77d8fb2d395bd093022a", null ],
     [ "~HttpRequestManager", "classkurlyk_1_1HttpRequestManager.html#a74758f6e78a33bd9a61abd2f69e6dd22", null ],
     [ "m_active_request_batches", "classkurlyk_1_1HttpRequestManager.html#a60031cd9f921ad9c8d57113b1d053687", null ],
     [ "m_failed_requests", "classkurlyk_1_1HttpRequestManager.html#a47282135a13c1319bd53dac2aae29a42", null ],
     [ "m_group_id_counter", "classkurlyk_1_1HttpRequestManager.html#a57ab42fdf7e88eeb1912a5c3b1c25f24", null ],
-    [ "m_group_waiters", "classkurlyk_1_1HttpRequestManager.html#a1c9e67d57917be6c094d6f1e120e6469", null ],
+    [ "m_group_request_counts", "classkurlyk_1_1HttpRequestManager.html#adcfa628d0553ce80b9877bc1e43da7a7", null ],
+    [ "m_group_waiters", "classkurlyk_1_1HttpRequestManager.html#ace70abc7a50cca0f851918e6cce7cc4c", null ],
     [ "m_groups_to_cancel", "classkurlyk_1_1HttpRequestManager.html#a46d2e09ca7d60832f52423791d1a2c8d", null ],
     [ "m_max_pending_requests", "classkurlyk_1_1HttpRequestManager.html#a681170ca7f367000290cd55b2a4c25ba", null ],
     [ "m_mutex", "classkurlyk_1_1HttpRequestManager.html#aa479c3f06a50501d142952aac7583c4b", null ],
@@ -51,5 +57,6 @@ var classkurlyk_1_1HttpRequestManager =
     [ "m_rate_limiter", "classkurlyk_1_1HttpRequestManager.html#a895aa7bdd653baf9ad5ab8c7dea3a8de", null ],
     [ "m_request_id_counter", "classkurlyk_1_1HttpRequestManager.html#a60897c4b408fd059e8f7c160f82b72c4", null ],
     [ "m_requests_to_cancel_by_id", "classkurlyk_1_1HttpRequestManager.html#abb3b5821585844828a3fb39bc39a8a5f", null ],
-    [ "m_shutdown", "classkurlyk_1_1HttpRequestManager.html#a266e73ee86c323785ea0898528b8ad89", null ]
+    [ "m_shutdown", "classkurlyk_1_1HttpRequestManager.html#a266e73ee86c323785ea0898528b8ad89", null ],
+    [ "m_waiter_id_counter", "classkurlyk_1_1HttpRequestManager.html#ae7f5e6e751cf42f6adfe2a6baacba66e", null ]
 ];

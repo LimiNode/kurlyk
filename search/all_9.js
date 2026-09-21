@@ -2,7 +2,7 @@ var searchData=
 [
   ['iauthprovider_0',['IAuthProvider',['../classkurlyk_1_1http_1_1auth_1_1IAuthProvider.html',1,'kurlyk::http::auth']]],
   ['iauthprovider_2ehpp_1',['IAuthProvider.hpp',['../IAuthProvider_8hpp.html',1,'']]],
-  ['id_2',['id',['../classkurlyk_1_1HttpRateLimitHandle.html#abfc831bf33236474444cccb21fd197e3',1,'kurlyk::HttpRateLimitHandle']]],
+  ['id_2',['id',['../structkurlyk_1_1HttpRequestManager_1_1GroupWaiter.html#a1764633a21429f04d39e2e3211b618b9',1,'kurlyk::HttpRequestManager::GroupWaiter::id'],['../classkurlyk_1_1HttpRateLimitHandle.html#abfc831bf33236474444cccb21fd197e3',1,'kurlyk::HttpRateLimitHandle::id()']]],
   ['idle_5ftimeout_3',['idle_timeout',['../classkurlyk_1_1WebSocketConfig.html#a51d6dca089e4e219a3ff325209a07576',1,'kurlyk::WebSocketConfig']]],
   ['in_5fflight_5frequests_4',['in_flight_requests',['../classkurlyk_1_1HttpClient.html#aa2add123fd64a2fa8c664d3363c9e43a',1,'kurlyk::HttpClient']]],
   ['in_5fflight_5ftoken_5',['in_flight_token',['../classkurlyk_1_1HttpRequestContext.html#aab248d756472d3bb87659489a2b67825',1,'kurlyk::HttpRequestContext']]],

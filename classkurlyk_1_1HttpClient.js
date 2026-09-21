@@ -21,7 +21,7 @@ var classkurlyk_1_1HttpClient =
     [ "in_flight_requests", "classkurlyk_1_1HttpClient.html#aa2add123fd64a2fa8c664d3363c9e43a", null ],
     [ "make_request", "classkurlyk_1_1HttpClient.html#a0b858f95787afa5654001f7a7137ec39", null ],
     [ "make_submit_error_response", "classkurlyk_1_1HttpClient.html#aafc313ea4491aec9277f8366d6323272", null ],
-    [ "make_wait_requests_future", "classkurlyk_1_1HttpClient.html#aac32b264db2c8d18a99210a78bffe1bd", null ],
+    [ "make_wait_requests_future", "classkurlyk_1_1HttpClient.html#af2be4371dcd00487ffe2244d1220f651", null ],
     [ "max_in_flight", "classkurlyk_1_1HttpClient.html#a15e48e130d9fcc8f2b2d4f1cc7f49642", null ],
     [ "operator=", "classkurlyk_1_1HttpClient.html#ad7667f3dff792b3561e54966b3f46503", null ],
     [ "operator=", "classkurlyk_1_1HttpClient.html#ac319104035ef5e2eb2f36b8f4df7283e", null ],

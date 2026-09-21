@@ -29,5 +29,6 @@ var searchData=
   ['get_5fusername_26',['get_username',['../structkurlyk_1_1ProxyConfig.html#a95aa8a3df8a31ea206ad70978d5daa08',1,'kurlyk::ProxyConfig']]],
   ['group_5fid_27',['group_id',['../classkurlyk_1_1HttpRequest.html#ade463edde7ca9e4e339ad3dc31533e50',1,'kurlyk::HttpRequest']]],
   ['group_5frequest_5fcount_28',['group_request_count',['../classkurlyk_1_1HttpRequestManager.html#a5bf00cd0f207f79896aec1945896834d',1,'kurlyk::HttpRequestManager::group_request_count()'],['../classkurlyk_1_1HttpBatchRequestHandler.html#ad7e017143bd3d721639d3253868272da',1,'kurlyk::HttpBatchRequestHandler::group_request_count()']]],
-  ['group_5frequest_5fcount_5funlocked_29',['group_request_count_unlocked',['../classkurlyk_1_1HttpRequestManager.html#aaab4f9320e4f7223eddf1ef5c3254ca0',1,'kurlyk::HttpRequestManager']]]
+  ['group_5frequest_5fcount_5funlocked_29',['group_request_count_unlocked',['../classkurlyk_1_1HttpRequestManager.html#aaab4f9320e4f7223eddf1ef5c3254ca0',1,'kurlyk::HttpRequestManager']]],
+  ['groupwaiter_30',['GroupWaiter',['../structkurlyk_1_1HttpRequestManager_1_1GroupWaiter.html',1,'kurlyk::HttpRequestManager']]]
 ];

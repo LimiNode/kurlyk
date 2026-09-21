@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['networkworker_0',['NetworkWorker',['../classkurlyk_1_1core_1_1NetworkWorker.html',1,'kurlyk::core']]]
+  ['limitdata_0',['LimitData',['../structkurlyk_1_1HttpRateLimiter_1_1LimitData.html',1,'kurlyk::HttpRateLimiter::LimitData'],['../structkurlyk_1_1WebSocketRateLimiter_1_1LimitData.html',1,'kurlyk::WebSocketRateLimiter::LimitData']]]
 ];

@@ -26,7 +26,6 @@ var NAVTREE =
 [
   [ "Kurlyk", "index.html", [
     [ "Kurlyk Library", "index.html", "index" ],
-    [ "Todo List", "todo.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -68,12 +67,12 @@ var NAVTREEINDEX =
 "classkurlyk_1_1BaseWebSocketClient.html#a72a2e27d7ad5c63656e7c5bcf7443501",
 "classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#af41d639af9e1347c69385b1b1d38f2a6",
 "classkurlyk_1_1HttpRateLimiter.html#a1b0ae8afc3a8d16afaf948d541565cb4",
-"classkurlyk_1_1HttpRequestHandler.html#a6251acfa297b2d54d5fd9a25fe7c61f8",
-"classkurlyk_1_1SimpleWebSocketClientAdapter.html#ab70025bd3a9ad09ca1e37a509bc583c6",
-"classkurlyk_1_1WebSocketConfig.html#ae539bf1796067b4b55c8ab79bd8878d3",
-"classkurlyk_1_1utils_1_1CaseInsensitiveHash.html",
-"namespacekurlyk.html#a0f462a8938544ddea65307a63b036f25",
-"structkurlyk_1_1HttpRateLimiter_1_1LimitData.html#a8e4df7ba3cb3a98e71aa013618fbe40b"
+"classkurlyk_1_1HttpRequestHandler.html#a582e14525aab6f737da78ee25321b1b6",
+"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a706e3a3c7b260ea4e47586de0ec95918",
+"classkurlyk_1_1WebSocketConfig.html#ad605d2a76f321542a52039c3d1e10a0e",
+"classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#ac4ed8a995552ff5760378cdb0a4157c8",
+"kurlyk_8hpp.html#a579201de2b5c9ead25f761a41bd0209e",
+"structkurlyk_1_1HttpRateLimiter_1_1KeyState.html#a23b14b60bdd30a15c56e2baee9b4b215"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

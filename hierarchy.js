@@ -19,6 +19,7 @@ var hierarchy =
     ] ],
     [ "kurlyk::utils::EventQueue&lt; T &gt;", "classkurlyk_1_1utils_1_1EventQueue.html", null ],
     [ "kurlyk::BaseWebSocketClient::FSMEventData", "structkurlyk_1_1BaseWebSocketClient_1_1FSMEventData.html", null ],
+    [ "kurlyk::HttpRequestManager::GroupWaiter", "structkurlyk_1_1HttpRequestManager_1_1GroupWaiter.html", null ],
     [ "kurlyk::HttpBatchRequestHandler", "classkurlyk_1_1HttpBatchRequestHandler.html", null ],
     [ "kurlyk::HttpClient", "classkurlyk_1_1HttpClient.html", null ],
     [ "kurlyk::HttpRateLimiter", "classkurlyk_1_1HttpRateLimiter.html", null ],
