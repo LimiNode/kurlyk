@@ -249,9 +249,20 @@ jobs:
                 -DKURLYK_TEST_PRELOAD_DEPS=${{ matrix.preload_deps }} \
                 -DKURLYK_OPENSSL_SHARED=${{ matrix.openssl_shared }} \
                 -DKURLYK_CURL_SHARED=${{ matrix.curl_shared }} \
+                -DCMAKE_DISABLE_FIND_PACKAGE_OpenSSL=TRUE \
+                -DCMAKE_DISABLE_FIND_PACKAGE_CURL=TRUE \
                 -DCMAKE_CXX_STANDARD=17 \
                 -DCMAKE_CXX_STANDARD_REQUIRED=ON \
                 -Wno-dev
+
+      - name: Verify MinGW fallback snapshots
+        if: matrix.suite == 'mingw-integration'
+        shell: msys2 {0}
+        run: |
+          test -f build-${{ matrix.suite }}/_deps/curl_dep-src/bin/libcurl-x64.dll
+          test -f build-${{ matrix.suite }}/_deps/curl_dep-src/lib/libcurl.dll.a
+          test -f build-${{ matrix.suite }}/_deps/openssl_dep-src/bin/libssl-3-x64.dll
+          test -f build-${{ matrix.suite }}/_deps/openssl_dep-src/bin/libcrypto-3-x64.dll
 
       - name: Configure MSVC integration
         if: matrix.suite == 'msvc-integration'
