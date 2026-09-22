@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.1.0] - 2026-09-22
+
 ### Added
 - Added lightweight HTTP authentication providers:
   - `BearerTokenAuthProvider` — injects `Authorization: Bearer <token>` header.
