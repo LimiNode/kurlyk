@@ -7,7 +7,9 @@
 - **Boost.Asio** or **standalone Asio** — WebSocket I/O
 - **Simple-WebSocket-Server** — WebSocket protocol layer
 
-All dependencies are bundled as git submodules under `external/` and can also be provided by the system.
+Header-only dependencies such as Asio and Simple-WebSocket-Server are bundled
+as git submodules under `external/`. libcurl and OpenSSL can be provided by the
+system or fetched through the platform-specific fallback snapshot repositories.
 
 ## Quick Build
 

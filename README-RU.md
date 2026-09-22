@@ -103,7 +103,10 @@ cmake -S . -B build-examples-mingw -G "MinGW Makefiles" `
 cmake --build build-examples-mingw --config Release
 ```
 
-Для MinGW зависимости уже есть в репозитории как git submodules в папке `external`, а fallback CMake-опции ниже позволяют собрать отсутствующие зависимости автоматически.
+Для MinGW заголовочные зависимости находятся в репозитории как git
+submodules в папке `external`. Fallback CMake-опции ниже загружают
+отсутствующие бинарные зависимости, включая закреплённые Windows-снимки curl
+и OpenSSL.
 
 ## Базовое использование HTTP
 

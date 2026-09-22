@@ -103,7 +103,10 @@ cmake -S . -B build-examples-mingw -G "MinGW Makefiles" `
 cmake --build build-examples-mingw --config Release
 ```
 
-For MinGW, dependencies are available in the repository as git submodules in the `external` folder, and the fallback CMake options below can build missing dependencies automatically.
+For MinGW, header-only dependencies are available in the repository as git
+submodules in the `external` folder. The fallback CMake options below can
+fetch missing binary dependencies, including the pinned Windows curl and
+OpenSSL snapshots.
 
 ## Basic HTTP usage
 
