@@ -583,7 +583,11 @@ To use **kurlyk** in a MinGW environment, you need these dependencies:
 2. For HTTP:
    - [libcurl](https://curl.se/windows/)
 
-All dependencies are also included as submodules in the `external` folder. Asio and Simple-WebSocket-Server are used from the checked-out submodules when available.
+Header-only dependencies such as Asio and Simple-WebSocket-Server are included
+as submodules in the `external` folder and are used from the checkout when
+available. Windows curl and OpenSSL fallback binaries are fetched from their
+pinned dependency snapshot repositories when the corresponding fallback option
+is enabled.
 
 ### OpenSSL
 
@@ -595,11 +599,16 @@ openssl-win64-v3.5.8/lib/VC/x64/MD
 openssl-win64-v3.5.8/bin
 ```
 
-Link OpenSSL libraries from `lib/VC/x64/MD`:
+For shared OpenSSL builds, link these libraries from `lib/VC/x64/MD`:
 
 ```text
 libcrypto.lib
 libssl.lib
+```
+
+For static OpenSSL builds, link these libraries instead:
+
+```text
 libcrypto_static.lib
 libssl_static.lib
 ```

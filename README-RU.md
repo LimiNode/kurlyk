@@ -583,7 +583,10 @@ Simple-WebSocket-Server. OAuth PKCE использует существующу�
 2. Для HTTP:
    - [libcurl](https://curl.se/windows/)
 
-Все зависимости также добавлены в проект в виде субмодулей, находящихся в папке `external`. Asio и Simple-WebSocket-Server используются из checkout субмодулей, если они доступны.
+Заголовочные зависимости, включая Asio и Simple-WebSocket-Server, находятся в
+папке `external` как субмодули и используются из checkout, если он доступен.
+Windows-сборки curl и OpenSSL для fallback-режима загружаются из закреплённых
+репозиториев snapshot-зависимостей, когда включены соответствующие fallback-опции.
 
 ### OpenSSL
 
@@ -595,11 +598,16 @@ openssl-win64-v3.5.8/lib/VC/x64/MD
 openssl-win64-v3.5.8/bin
 ```
 
-Подключите библиотеки OpenSSL из папки `lib/VC/x64/MD`:
+Для shared-сборки OpenSSL подключите из `lib/VC/x64/MD`:
 
 ```text
 libcrypto.lib
 libssl.lib
+```
+
+Для static-сборки OpenSSL вместо них подключите:
+
+```text
 libcrypto_static.lib
 libssl_static.lib
 ```
