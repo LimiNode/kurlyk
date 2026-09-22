@@ -4,15 +4,9 @@
 [submodule "external/Simple-Web-Server"]
 	path = external/Simple-Web-Server
 	url = https://gitlab.com/eidheim/Simple-Web-Server.git
-[submodule "external/curl-8.11.0_1-win64-mingw"]
-	path = external/curl-8.11.0_1-win64-mingw
-	url = https://github.com/NewYaroslav/curl-8.11.0_1-win64-mingw.git
 [submodule "external/json"]
 	path = external/json
 	url = https://github.com/nlohmann/json.git
-[submodule "external/openssl-win64-v3.4.0"]
-	path = external/openssl-win64-v3.4.0
-	url = https://github.com/NewYaroslav/openssl-win64-v3.4.0.git
 [submodule ".github/doxygen-awesome-css"]
 	path = .github/doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git

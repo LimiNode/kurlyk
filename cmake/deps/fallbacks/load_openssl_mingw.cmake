@@ -6,8 +6,8 @@ function(load_openssl target)
 		message(STATUS "OpenSSL: using fallback (MinGW SHARED) from remote repository")
 		include(FetchContent)
 		FetchContent_Declare(openssl_dep
-			GIT_REPOSITORY https://github.com/NewYaroslav/openssl-win64-v3.4.0.git
-			GIT_TAG 635bbfe81230fcf4c3579f9e9f13fdeff71e8d70
+			GIT_REPOSITORY https://github.com/LimiNode/openssl-win64-v3.5.8.git
+			GIT_TAG d7528b3ade4da0ab445c8bdb34b65907595d27f5
 		)
 		FetchContent_GetProperties(openssl_dep)
 		if (NOT openssl_dep_POPULATED)
