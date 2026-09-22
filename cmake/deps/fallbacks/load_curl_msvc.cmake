@@ -3,7 +3,7 @@ function(load_curl target)
 	include(FetchContent)
 	FetchContent_Declare(curl_dep
 		GIT_REPOSITORY https://github.com/LimiNode/curl-8.22.0_1-win64-mingw.git
-		GIT_TAG ed887b0d8eab7b235dc46664cd309a649a3061f5
+		GIT_TAG 5a639c3fbe1c322a9048f4d54f66ba48f48a2d7d
 	)
 	FetchContent_GetProperties(curl_dep)
 	if (NOT curl_dep_POPULATED)
