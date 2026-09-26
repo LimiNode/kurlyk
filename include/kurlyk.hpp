@@ -5,6 +5,8 @@
 /// \file kurlyk.hpp
 /// \brief Main header file for the Kurlyk library, providing HTTP and WebSocket support.
 
+#include "kurlyk/config.hpp"
+
 /// \def KURLYK_AUTO_INIT
 /// \brief Enables automatic registration of managers during static initialization.
 /// Define to 0 before including kurlyk headers to disable automatic registration.

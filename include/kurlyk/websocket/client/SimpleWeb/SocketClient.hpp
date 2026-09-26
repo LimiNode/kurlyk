@@ -11,6 +11,7 @@
 /// For more details on the Simple-Web-Server library, see:
 /// \see https://gitlab.com/eidheim/Simple-Web-Server
 
+#include "../../../config.hpp"
 #include <client_ws.hpp>
 
 #ifdef ASIO_STANDALONE

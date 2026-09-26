@@ -624,14 +624,23 @@ Add the path to asio:
 asio/asio/include
 ```
 
-For standalone Asio, define `ASIO_STANDALONE` in project settings or before including `kurlyk.hpp`:
+Standalone Asio is the default backend for native WebSocket support. The public
+configuration header defines `ASIO_STANDALONE` automatically, so no extra macro
+is required:
 
 ```cpp
-#define ASIO_STANDALONE
 #include <kurlyk.hpp>
 ```
 
-For Boost.Asio, you do not need to define `ASIO_STANDALONE`.
+To select Boost.Asio for a direct header consumer, define
+`KURLYK_USE_BOOST_ASIO=1` before including `kurlyk.hpp`:
+
+```cpp
+#define KURLYK_USE_BOOST_ASIO 1
+#include <kurlyk.hpp>
+```
+
+Do not define `ASIO_STANDALONE` together with `KURLYK_USE_BOOST_ASIO=1`.
 
 ### curl
 
@@ -684,6 +693,7 @@ Asio and Simple-WebSocket-Server are header-only libraries and work for all list
 |--------|-------------|
 | `KURLYK_USE_FALLBACK_OPENSSL` | Enables OpenSSL fallback. |
 | `KURLYK_USE_FALLBACK_CURL` | Enables libcurl fallback. |
+| `KURLYK_USE_STANDALONE_ASIO` | Selects standalone Asio when enabled (default); set to `OFF` to use Boost.Asio. |
 | `KURLYK_USE_FALLBACK_ASIO` | Enables Asio fallback. |
 | `KURLYK_USE_FALLBACK_SIMPLE_WS_SERVER` | Enables Simple-WebSocket-Server fallback. |
 | `KURLYK_OPENSSL_SHARED` | Loads OpenSSL as a shared library when fallback is enabled. |
@@ -700,6 +710,7 @@ Define these macros before including `kurlyk.hpp` to configure the library:
 | `KURLYK_AUTO_INIT_USE_ASYNC` | `1` | Starts the network thread in the background when auto init is enabled. Set to `0` for manual processing. |
 | `KURLYK_HTTP_SUPPORT` | `1` | Enables or disables the HTTP subsystem. |
 | `KURLYK_WEBSOCKET_SUPPORT` | `1` | Enables or disables the WebSocket subsystem. |
+| `KURLYK_USE_BOOST_ASIO` | `0` | Selects Boost.Asio for native WebSocket support. `0` selects standalone Asio and automatically defines `ASIO_STANDALONE`. |
 | `KURLYK_AUTH_SUPPORT` | `1` | Enables authentication providers (`BearerTokenAuthProvider`, `ApiKeyAuthProvider`). |
 | `KURLYK_OAUTH_SUPPORT` | `KURLYK_AUTH_SUPPORT` | Enables the OAuth2 PKCE client (`OAuthPkceClient`). Requires `KURLYK_AUTH_SUPPORT=1`. |
 | `KURLYK_JSON_SUPPORT` | `0` | Enables nlohmann::json include and JSON-aware types, plus enum-to-JSON helpers in `type_utils.hpp`. |
