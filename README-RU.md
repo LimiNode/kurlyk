@@ -623,9 +623,9 @@ libssl_static.lib
 asio/asio/include
 ```
 
-Standalone Asio — backend по умолчанию для native WebSocket. Публичный
-конфигурационный заголовок автоматически определяет `ASIO_STANDALONE`, поэтому
-дополнительный макрос не требуется:
+Standalone Asio — backend по умолчанию для native WebSocket. Заголовки Kurlyk
+для native WebSocket определяют `ASIO_STANDALONE` перед подключением
+Simple-WebSocket-Server, поэтому дополнительный макрос не требуется:
 
 ```cpp
 #include <kurlyk.hpp>
@@ -640,6 +640,8 @@ Standalone Asio — backend по умолчанию для native WebSocket. П�
 ```
 
 Не определяйте `ASIO_STANDALONE` одновременно с `KURLYK_USE_BOOST_ASIO=1`.
+Используйте одинаковое значение `KURLYK_USE_BOOST_ASIO` во всех translation
+units, подключающих WebSocket-заголовки Kurlyk.
 
 ### curl
 

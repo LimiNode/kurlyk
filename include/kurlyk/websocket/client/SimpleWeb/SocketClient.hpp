@@ -12,6 +12,13 @@
 /// \see https://gitlab.com/eidheim/Simple-Web-Server
 
 #include "../../../config.hpp"
+
+#if !KURLYK_USE_BOOST_ASIO
+#   ifndef ASIO_STANDALONE
+#       define ASIO_STANDALONE
+#   endif
+#endif
+
 #include <client_ws.hpp>
 
 #ifdef ASIO_STANDALONE

@@ -42,3 +42,26 @@ else()
         KURLYK_USE_BOOST_ASIO=1
     )
 endif()
+
+add_library(http_only_backend_config_smoke OBJECT http_only_backend_config_smoke.cpp)
+target_include_directories(http_only_backend_config_smoke PRIVATE
+    "${CMAKE_CURRENT_LIST_DIR}/../../include"
+)
+target_compile_features(http_only_backend_config_smoke PRIVATE cxx_std_11)
+set_target_properties(http_only_backend_config_smoke PROPERTIES
+    CXX_EXTENSIONS NO
+)
+
+try_compile(KURLYK_CONFLICT_COMPILES
+    "${CMAKE_CURRENT_BINARY_DIR}/asio_backend_conflict"
+    "${CMAKE_CURRENT_LIST_DIR}/asio_backend_conflict.cpp"
+    CMAKE_FLAGS
+        "-DCMAKE_CXX_STANDARD=11"
+        "-DCMAKE_CXX_STANDARD_REQUIRED=ON"
+    OUTPUT_VARIABLE KURLYK_CONFLICT_OUTPUT
+)
+if(KURLYK_CONFLICT_COMPILES)
+    message(FATAL_ERROR
+        "KURLYK_USE_BOOST_ASIO/ASIO_STANDALONE conflict was not rejected"
+    )
+endif()

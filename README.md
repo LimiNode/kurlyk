@@ -624,9 +624,9 @@ Add the path to asio:
 asio/asio/include
 ```
 
-Standalone Asio is the default backend for native WebSocket support. The public
-configuration header defines `ASIO_STANDALONE` automatically, so no extra macro
-is required:
+Standalone Asio is the default backend for native WebSocket support. Kurlyk's
+native WebSocket headers define `ASIO_STANDALONE` before including
+Simple-WebSocket-Server, so no extra macro is required:
 
 ```cpp
 #include <kurlyk.hpp>
@@ -641,6 +641,8 @@ To select Boost.Asio for a direct header consumer, define
 ```
 
 Do not define `ASIO_STANDALONE` together with `KURLYK_USE_BOOST_ASIO=1`.
+Use the same `KURLYK_USE_BOOST_ASIO` value in every translation unit that
+includes Kurlyk WebSocket headers.
 
 ### curl
 
