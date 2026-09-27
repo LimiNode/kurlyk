@@ -47,6 +47,7 @@ add_library(http_only_backend_config_smoke OBJECT http_only_backend_config_smoke
 target_include_directories(http_only_backend_config_smoke PRIVATE
     "${CMAKE_CURRENT_LIST_DIR}/../../include"
 )
+target_link_libraries(http_only_backend_config_smoke PRIVATE CURL::libcurl)
 target_compile_features(http_only_backend_config_smoke PRIVATE cxx_std_11)
 set_target_properties(http_only_backend_config_smoke PROPERTIES
     CXX_EXTENSIONS NO
@@ -63,5 +64,12 @@ try_compile(KURLYK_CONFLICT_COMPILES
 if(KURLYK_CONFLICT_COMPILES)
     message(FATAL_ERROR
         "KURLYK_USE_BOOST_ASIO/ASIO_STANDALONE conflict was not rejected"
+    )
+endif()
+if(NOT KURLYK_CONFLICT_OUTPUT MATCHES
+        "KURLYK_USE_BOOST_ASIO conflicts with ASIO_STANDALONE")
+    message(FATAL_ERROR
+        "Conflict test failed without the expected diagnostic. Output:\n"
+        "${KURLYK_CONFLICT_OUTPUT}"
     )
 endif()

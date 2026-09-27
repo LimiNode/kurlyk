@@ -1,6 +1,8 @@
 #define KURLYK_AUTO_INIT 0
-#define KURLYK_HTTP_SUPPORT 0
+#define KURLYK_HTTP_SUPPORT 1
 #define KURLYK_WEBSOCKET_SUPPORT 0
+#define KURLYK_AUTH_SUPPORT 0
+#define KURLYK_OAUTH_SUPPORT 0
 
 #include <kurlyk.hpp>
 
