@@ -4,6 +4,22 @@
 
 #include <kurlyk.hpp>
 
+#if defined(KURLYK_EXPECT_STANDALONE)
+#   if KURLYK_USE_BOOST_ASIO
+#       error "CMake target selected Boost.Asio in standalone mode"
+#   endif
+#   ifndef ASIO_STANDALONE
+#       error "CMake target did not select ASIO_STANDALONE"
+#   endif
+#else
+#   if !KURLYK_USE_BOOST_ASIO
+#       error "CMake target did not select Boost.Asio"
+#   endif
+#   if defined(ASIO_STANDALONE)
+#       error "CMake target selected ASIO_STANDALONE in Boost mode"
+#   endif
+#endif
+
 #include <memory>
 
 int main() {

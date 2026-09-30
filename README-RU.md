@@ -623,14 +623,25 @@ libssl_static.lib
 asio/asio/include
 ```
 
-Для standalone Asio задайте макрос `ASIO_STANDALONE` в параметрах проекта или перед подключением `kurlyk.hpp`:
+Standalone Asio — backend по умолчанию для native WebSocket. Заголовки Kurlyk
+для native WebSocket определяют `ASIO_STANDALONE` перед подключением
+Simple-WebSocket-Server, поэтому дополнительный макрос не требуется:
 
 ```cpp
-#define ASIO_STANDALONE
 #include <kurlyk.hpp>
 ```
 
-Для Boost.Asio указывать макрос `ASIO_STANDALONE` не нужно.
+Чтобы выбрать Boost.Asio для direct header consumer, определите
+`KURLYK_USE_BOOST_ASIO=1` до подключения `kurlyk.hpp`:
+
+```cpp
+#define KURLYK_USE_BOOST_ASIO 1
+#include <kurlyk.hpp>
+```
+
+Не определяйте `ASIO_STANDALONE` одновременно с `KURLYK_USE_BOOST_ASIO=1`.
+Используйте одинаковое значение `KURLYK_USE_BOOST_ASIO` во всех translation
+units, подключающих WebSocket-заголовки Kurlyk.
 
 ### curl
 
@@ -683,6 +694,7 @@ Asio и Simple-WebSocket-Server — header-only библиотеки и подх
 |-------|----------|
 | `KURLYK_USE_FALLBACK_OPENSSL` | Включает fallback OpenSSL. |
 | `KURLYK_USE_FALLBACK_CURL` | Включает fallback libcurl. |
+| `KURLYK_USE_STANDALONE_ASIO` | Выбирает standalone Asio при включённой опции (по умолчанию); установите `OFF`, чтобы использовать Boost.Asio. |
 | `KURLYK_USE_FALLBACK_ASIO` | Включает fallback Asio. |
 | `KURLYK_USE_FALLBACK_SIMPLE_WS_SERVER` | Включает fallback Simple-WebSocket-Server. |
 | `KURLYK_OPENSSL_SHARED` | Загружает OpenSSL как shared library, если fallback включён. |
@@ -699,6 +711,7 @@ Asio и Simple-WebSocket-Server — header-only библиотеки и подх
 | `KURLYK_AUTO_INIT_USE_ASYNC` | `1` | При включённом auto init запускает сетевой поток в фоне. Установите `0`, если требуется выполнять обработку вручную. |
 | `KURLYK_HTTP_SUPPORT` | `1` | Включает или отключает HTTP-подсистему. |
 | `KURLYK_WEBSOCKET_SUPPORT` | `1` | Включает или отключает WebSocket-подсистему. |
+| `KURLYK_USE_BOOST_ASIO` | `0` | Выбирает Boost.Asio для native WebSocket. `0` выбирает standalone Asio и автоматически определяет `ASIO_STANDALONE`. |
 | `KURLYK_AUTH_SUPPORT` | `1` | Включает auth-провайдеры (`BearerTokenAuthProvider`, `ApiKeyAuthProvider`). |
 | `KURLYK_OAUTH_SUPPORT` | `KURLYK_AUTH_SUPPORT` | Включает OAuth2 PKCE клиент (`OAuthPkceClient`). Требует `KURLYK_AUTH_SUPPORT=1`. |
 | `KURLYK_JSON_SUPPORT` | `0` | Включает nlohmann::json и JSON-aware типы, а также enum-to-JSON helpers в `type_utils.hpp`. |

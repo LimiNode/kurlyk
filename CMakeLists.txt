@@ -50,6 +50,12 @@ use_or_fetch_asio(kurlyk)
 include(cmake/deps/simple_ws_server.cmake)
 use_or_fetch_simple_ws_server(kurlyk)
 
+if(KURLYK_USE_STANDALONE_ASIO)
+    target_compile_definitions(kurlyk INTERFACE KURLYK_USE_BOOST_ASIO=0)
+else()
+    target_compile_definitions(kurlyk INTERFACE KURLYK_USE_BOOST_ASIO=1)
+endif()
+
 # Authentication helpers (lightweight — no extra deps)
 if(KURLYK_AUTH_SUPPORT)
     target_compile_definitions(kurlyk INTERFACE KURLYK_AUTH_SUPPORT=1)
@@ -121,7 +127,12 @@ target_compile_definitions(kurlyk_package INTERFACE
     KURLYK_OAUTH_SUPPORT=$<BOOL:${KURLYK_OAUTH_SUPPORT}>
 )
 if(KURLYK_USE_STANDALONE_ASIO)
-    target_compile_definitions(kurlyk_package INTERFACE ASIO_STANDALONE)
+    target_compile_definitions(kurlyk_package INTERFACE
+        ASIO_STANDALONE
+        KURLYK_USE_BOOST_ASIO=0
+    )
+else()
+    target_compile_definitions(kurlyk_package INTERFACE KURLYK_USE_BOOST_ASIO=1)
 endif()
 target_link_libraries(kurlyk_package INTERFACE
     kurlyk_package_curl
