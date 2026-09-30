@@ -9,6 +9,24 @@ function(use_or_fetch_simple_ws_server out_target)
 		target_link_libraries(${out_target} INTERFACE simple_ws_server)
 		return()
 	endif()
+
+	# Header-only SWS ports may install the upstream headers without exporting a
+	# CMake target. Discover both the namespaced installed layout and the flat
+	# source-tree layout before falling back to FetchContent.
+	find_path(KURLYK_SIMPLE_WS_INCLUDE_DIR
+		NAMES
+			simple-websocket-server/client_ws.hpp
+			client_ws.hpp
+	)
+	if(KURLYK_SIMPLE_WS_INCLUDE_DIR)
+		message(STATUS "Simple-Websocket-Server: using discovered headers at ${KURLYK_SIMPLE_WS_INCLUDE_DIR}")
+		add_library(simple_ws_server INTERFACE)
+		target_include_directories(simple_ws_server INTERFACE
+			"${KURLYK_SIMPLE_WS_INCLUDE_DIR}"
+		)
+		target_link_libraries(${out_target} INTERFACE simple_ws_server)
+		return()
+	endif()
 	
 	if(KURLYK_USE_FALLBACK_SIMPLE_WS_SERVER)
 		include(cmake/deps/fallbacks/load_simple_ws_server.cmake)

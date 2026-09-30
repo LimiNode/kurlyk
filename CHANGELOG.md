@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- Added installed direct-consumer coverage for native WebSocket headers without
+  linking the exported `kurlyk::kurlyk` CMake target.
+
+### Changed
+- Added `KURLYK_USE_BOOST_ASIO` as the public native WebSocket backend selector
+  and limited `ASIO_STANDALONE` configuration to the Simple-WebSocket-Server
+  integration header.
+- Installed bundled Simple-WebSocket-Server headers under the conventional
+  `include/simple-websocket-server` layout while retaining compatibility with
+  the flat upstream source-tree layout.
+
 ## [v1.1.0] - 2026-09-22
 
 ### Added

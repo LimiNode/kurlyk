@@ -34,10 +34,15 @@ endif()
 if(NOT TARGET simple_ws_server)
     if(@KURLYK_PACKAGE_BUNDLED_SIMPLE_WS@)
         set(KURLYK_SIMPLE_WS_INCLUDE_DIR
-            "${PACKAGE_PREFIX_DIR}/include/kurlyk/third_party/simple-websocket-server"
+            "${PACKAGE_PREFIX_DIR}/include"
         )
     else()
-        find_path(KURLYK_SIMPLE_WS_INCLUDE_DIR client_ws.hpp)
+        find_path(KURLYK_SIMPLE_WS_INCLUDE_DIR
+            NAMES simple-websocket-server/client_ws.hpp
+        )
+        if(NOT KURLYK_SIMPLE_WS_INCLUDE_DIR)
+            find_path(KURLYK_SIMPLE_WS_INCLUDE_DIR client_ws.hpp)
+        endif()
     endif()
     if(NOT KURLYK_SIMPLE_WS_INCLUDE_DIR)
         message(FATAL_ERROR

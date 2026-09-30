@@ -573,6 +573,10 @@ Simple-WebSocket-Server. OAuth PKCE использует существующу�
 или Simple-WebSocket-Server не находятся через менеджер пакетов, передайте
 `KURLYK_ASIO_INCLUDE_DIR` и `KURLYK_SIMPLE_WS_INCLUDE_DIR` при конфигурации
 потребителя.
+`KURLYK_SIMPLE_WS_INCLUDE_DIR` может указывать либо на корневой include-каталог,
+содержащий `simple-websocket-server/client_ws.hpp`, либо на upstream-каталог с
+плоской раскладкой заголовков. Встроенные заголовки устанавливаются в
+пространство имён `simple-websocket-server`.
 
 ### Зависимости
 

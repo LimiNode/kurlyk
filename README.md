@@ -573,6 +573,9 @@ Simple-WebSocket-Server headers. OAuth PKCE uses the existing OpenSSL dependency
 If Asio or Simple-WebSocket-Server are not discoverable through a package
 manager, set `KURLYK_ASIO_INCLUDE_DIR` and
 `KURLYK_SIMPLE_WS_INCLUDE_DIR` when configuring the consumer.
+`KURLYK_SIMPLE_WS_INCLUDE_DIR` may name either an include root containing
+`simple-websocket-server/client_ws.hpp` or the upstream flat header directory.
+Bundled headers are installed in the namespaced layout.
 
 ### Dependencies
 

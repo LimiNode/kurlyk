@@ -192,7 +192,7 @@ if(EXISTS "${KURLYK_SIMPLE_WS_HEADERS_DIR}/client_ws.hpp")
         "${KURLYK_SIMPLE_WS_HEADERS_DIR}/utility.hpp"
         "${KURLYK_SIMPLE_WS_HEADERS_DIR}/status_code.hpp"
         "${KURLYK_SIMPLE_WS_HEADERS_DIR}/mutex.hpp"
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/kurlyk/third_party/simple-websocket-server"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/simple-websocket-server"
     )
     install(FILES
         "${KURLYK_SIMPLE_WS_HEADERS_DIR}/LICENSE"

@@ -10,6 +10,8 @@ foreach(required_path IN ITEMS
     "${KURLYK_STAGE_DIR}/include/kurlyk/types/ProxyConfig.hpp"
     "${KURLYK_STAGE_DIR}/include/kurlyk/utils/pkce.hpp"
     "${KURLYK_STAGE_DIR}/include/kurlyk/utils/base64_url.hpp"
+    "${KURLYK_STAGE_DIR}/include/simple-websocket-server/client_ws.hpp"
+    "${KURLYK_STAGE_DIR}/include/simple-websocket-server/client_wss.hpp"
     "${KURLYK_STAGE_DIR}/share/licenses/kurlyk/LICENSE"
     "${KURLYK_STAGE_DIR}/share/licenses/kurlyk/Simple-WebSocket-Server-LICENSE"
     "${KURLYK_STAGE_DIR}/lib/cmake/kurlyk/kurlykConfig.cmake"
@@ -24,6 +26,7 @@ endforeach()
 foreach(forbidden_path IN ITEMS
     "${KURLYK_STAGE_DIR}/include/.codebase-memory"
     "${KURLYK_STAGE_DIR}/include/AGENTS.md"
+    "${KURLYK_STAGE_DIR}/include/kurlyk/third_party/simple-websocket-server"
     "${KURLYK_STAGE_DIR}/tests"
     "${KURLYK_STAGE_DIR}/examples"
     "${KURLYK_STAGE_DIR}/docs"
