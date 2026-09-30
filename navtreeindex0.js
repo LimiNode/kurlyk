@@ -113,7 +113,8 @@ var NAVTREEINDEX0 =
 "SimpleWeb_8hpp.html#aa8fa198908cbe1328ca9866225d8979a":[3,0,2,0,5,0,4,0],
 "SimpleWeb_8hpp_source.html":[3,0,2,0,5,0,4],
 "SocketClient_8hpp.html":[3,0,2,0,5,0,2,2],
-"SocketClient_8hpp.html#ab6f343b8929ccc33d72575c0186300af":[3,0,2,0,5,0,2,2,1],
+"SocketClient_8hpp.html#a5b90f4adb6bc09ca319c35c3448ee67a":[3,0,2,0,5,0,2,2,1],
+"SocketClient_8hpp.html#ab6f343b8929ccc33d72575c0186300af":[3,0,2,0,5,0,2,2,2],
 "SocketClient_8hpp_source.html":[3,0,2,0,5,0,2,2],
 "SubmitResult_8hpp.html":[3,0,2,0,3,3],
 "SubmitResult_8hpp.html#a42877c50c1b8c0709be5fcdb971d45cf":[3,0,2,0,3,3,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classkurlyk_1_1BaseWebSocketClient.html#a671df48c879ca8a37ba35fd2786483d1":[1,0,1,6,33],
 "classkurlyk_1_1BaseWebSocketClient.html#a671df48c879ca8a37ba35fd2786483d1":[2,0,0,5,33],
 "classkurlyk_1_1BaseWebSocketClient.html#a67df576b664401768818c74e372db0b3":[1,0,1,6,47],
-"classkurlyk_1_1BaseWebSocketClient.html#a67df576b664401768818c74e372db0b3":[2,0,0,5,47],
-"classkurlyk_1_1BaseWebSocketClient.html#a6989274a614a436bafe98c747374241f":[1,0,1,6,11]
+"classkurlyk_1_1BaseWebSocketClient.html#a67df576b664401768818c74e372db0b3":[2,0,0,5,47]
 };

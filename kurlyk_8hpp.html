@@ -130,7 +130,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('kurlyk_8hpp.ht
 
 <p>Main header file for the Kurlyk library, providing HTTP and WebSocket support.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="core_8hpp_source.html">kurlyk/core.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="config_8hpp_source.html">kurlyk/config.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="core_8hpp_source.html">kurlyk/core.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="http_8hpp_source.html">kurlyk/http.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="auth_8hpp_source.html">kurlyk/http/auth.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="websocket_8hpp_source.html">kurlyk/websocket.hpp</a>&quot;</code><br />
@@ -184,7 +185,7 @@ Macros</h2></td></tr>
 
 <p>Enables HTTP authentication helpers (Bearer, API-key providers). </p>
 
-<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00050">50</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00052">52</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
 
 </div>
 </div>
@@ -203,7 +204,7 @@ Macros</h2></td></tr>
 <p>Enables automatic registration of managers during static initialization. </p>
 <p>Define to 0 before including kurlyk headers to disable automatic registration. </p>
 
-<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00012">12</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00014">14</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
 
 </div>
 </div>
@@ -222,7 +223,7 @@ Macros</h2></td></tr>
 <p>Determines whether the NetworkWorker runs in a background thread during automatic initialization. </p>
 <p>Set to 1 to enable asynchronous execution, or 0 to require manual processing (synchronous mode). Ignored if KURLYK_AUTO_INIT is not enabled. </p>
 
-<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00020">20</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00022">22</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
 
 </div>
 </div>
@@ -257,7 +258,7 @@ Macros</h2></td></tr>
 <p>Enables HTTP request support in the Kurlyk library. </p>
 <p>Set to 1 to enable, or 0 to disable HTTP functionality. </p>
 
-<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00027">27</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00029">29</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
 
 </div>
 </div>
@@ -275,7 +276,7 @@ Macros</h2></td></tr>
 
 <p>Enables JSON serialization support for enums and types. </p>
 
-<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00043">43</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00045">45</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
 
 </div>
 </div>
@@ -293,7 +294,7 @@ Macros</h2></td></tr>
 
 <p>Enables OAuth2 PKCE client and crypto dependencies (requires OpenSSL). </p>
 
-<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00056">56</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00058">58</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
 
 </div>
 </div>
@@ -311,7 +312,7 @@ Macros</h2></td></tr>
 
 <p>Enables the use of libcurl for HTTP support on non-Emscripten platforms. </p>
 
-<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00063">63</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00065">65</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
 
 </div>
 </div>
@@ -329,7 +330,7 @@ Macros</h2></td></tr>
 
 <p>Enables the use of Simple-WebSocket-Server for WebSocket support on non-Emscripten platforms. </p>
 
-<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00066">66</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00068">68</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
 
 </div>
 </div>
@@ -348,7 +349,7 @@ Macros</h2></td></tr>
 <p>Enables WebSocket support in the Kurlyk library. </p>
 <p>Set to 1 to enable, or 0 to disable WebSocket functionality. </p>
 
-<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00034">34</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kurlyk_8hpp_source.html#l00036">36</a> of file <a class="el" href="kurlyk_8hpp_source.html">kurlyk.hpp</a>.</p>
 
 </div>
 </div>

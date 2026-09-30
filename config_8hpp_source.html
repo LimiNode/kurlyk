@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Kurlyk: SimpleWeb Namespace Reference</title>
+<title>Kurlyk: include/kurlyk/config.hpp Source File</title>
 <link rel="icon" href="logo.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 <script type="text/javascript">
-document.addEventListener('DOMContentLoaded',() => { initNavTree('namespaceSimpleWeb.html','',''); });
+document.addEventListener('DOMContentLoaded',() => { initNavTree('config_8hpp_source.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -124,50 +124,30 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespaceSimpl
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">SimpleWeb Namespace Reference</div></div>
+  <div class="headertitle"><div class="title">config.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:SocketClient_3C_20WSS_20_3E" id="r_SocketClient_3C_20WSS_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classSimpleWeb_1_1SocketClient_3_01WSS_01_4.html">SocketClient&lt; WSS &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A WebSocket client with SSL support.  <a href="classSimpleWeb_1_1SocketClient_3_01WSS_01_4.html#details">More...</a><br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a3cea9596d402f19a3dab130e03536b17" id="r_a3cea9596d402f19a3dab130e03536b17"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a3cea9596d402f19a3dab130e03536b17">WSS</a> = asio::ssl::stream&lt;asio::ip::tcp::socket&gt;</td></tr>
-</table>
-<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="a3cea9596d402f19a3dab130e03536b17" name="a3cea9596d402f19a3dab130e03536b17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cea9596d402f19a3dab130e03536b17">&#9670;&#160;</a></span>WSS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="#a3cea9596d402f19a3dab130e03536b17">SimpleWeb::WSS</a> = asio::ssl::stream&lt;asio::ip::tcp::socket&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="SocketClient_8hpp_source.html#l00039">39</a> of file <a class="el" href="SocketClient_8hpp_source.html">SocketClient.hpp</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<a href="config_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#ifndef KURLYK_HEADER_KURLYK_CONFIG_HPP_INCLUDED</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="config_8hpp.html#a29de20080a538f1752099bfbe254ed03">    3</a></span><span class="preprocessor">#define KURLYK_HEADER_KURLYK_CONFIG_HPP_INCLUDED</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#ifndef KURLYK_USE_BOOST_ASIO</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="config_8hpp.html#a15793b6ea0195fa7866df1ceae68cb6a">   18</a></span><span class="preprocessor">#   define KURLYK_USE_BOOST_ASIO 0</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#if KURLYK_USE_BOOST_ASIO &amp;&amp; defined(ASIO_STANDALONE)</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#   error &quot;KURLYK_USE_BOOST_ASIO conflicts with ASIO_STANDALONE&quot;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif </span><span class="comment">// KURLYK_HEADER_KURLYK_CONFIG_HPP_INCLUDED</span></div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div id="page-nav" class="page-nav-panel">
-<div id="page-nav-resize-handle"></div>
-<div id="page-nav-tree">
-<div id="page-nav-contents">
-</div><!-- page-nav-contents -->
-</div><!-- page-nav-tree -->
-</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespaceSimpleWeb.html">SimpleWeb</a></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_ae12a7c1d79b11abd366085d5888e018.html">kurlyk</a></li><li class="navelem"><a href="config_8hpp.html">config.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

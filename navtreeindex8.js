@@ -1,5 +1,10 @@
 var NAVTREEINDEX8 =
 {
+"index.html#http_variants":[0,2,0,4],
+"index.html#install_sec":[0,4],
+"index.html#intro_sec":[0,0],
+"index.html#license_sec":[0,6],
+"index.html#repo_sec":[0,5],
 "index.html#usage_sec":[0,2],
 "index.html#ws_backpressure":[0,2,1,0],
 "index.html#ws_sec":[0,2,1],
@@ -233,9 +238,9 @@ var NAVTREEINDEX8 =
 "simple__http__request__example_8cpp.html#a372e65e8b39c6631b25aabcb58e7bb84":[3,0,1,17,0],
 "simple__http__request__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4":[3,0,1,17,1],
 "simple__http__request__example_8cpp_source.html":[3,0,1,17],
-"startup_8hpp.html":[3,0,2,0,8],
-"startup_8hpp.html#a6879483ae88df7e849619f676368b125":[3,0,2,0,8,0],
-"startup_8hpp_source.html":[3,0,2,0,8],
+"startup_8hpp.html":[3,0,2,0,9],
+"startup_8hpp.html#a6879483ae88df7e849619f676368b125":[3,0,2,0,9,0],
+"startup_8hpp_source.html":[3,0,2,0,9],
 "storage_8hpp.html":[3,0,2,0,1,0,7],
 "storage_8hpp.html#affa1af6d61805543de917b719d64c879":[3,0,2,0,1,0,7,0],
 "storage_8hpp_source.html":[3,0,2,0,1,0,7],
@@ -244,10 +249,5 @@ var NAVTREEINDEX8 =
 "string__utils_8hpp_source.html":[3,0,2,0,4,14],
 "structkurlyk_1_1AuthResult.html":[1,0,1,5],
 "structkurlyk_1_1AuthResult.html":[2,0,0,4],
-"structkurlyk_1_1AuthResult.html#a0e6bcd61fb66b2bdeb8e8d4e93b9efd1":[1,0,1,5,1],
-"structkurlyk_1_1AuthResult.html#a0e6bcd61fb66b2bdeb8e8d4e93b9efd1":[2,0,0,4,1],
-"structkurlyk_1_1AuthResult.html#a40f167c2b4bb0a098071b759d87c40a2":[1,0,1,5,0],
-"structkurlyk_1_1AuthResult.html#a40f167c2b4bb0a098071b759d87c40a2":[2,0,0,4,0],
-"structkurlyk_1_1AuthResult.html#a5ef6275bbe0eb1cbbad14d32d9e123ad":[1,0,1,5,2],
-"structkurlyk_1_1AuthResult.html#a5ef6275bbe0eb1cbbad14d32d9e123ad":[2,0,0,4,2]
+"structkurlyk_1_1AuthResult.html#a0e6bcd61fb66b2bdeb8e8d4e93b9efd1":[1,0,1,5,1]
 };

@@ -6,6 +6,7 @@ var dir_ae12a7c1d79b11abd366085d5888e018 =
     [ "types", "dir_5e5107f397f0236427cf8b630731441a.html", "dir_5e5107f397f0236427cf8b630731441a" ],
     [ "utils", "dir_ee890d520c8243477213c38edf4f39a5.html", "dir_ee890d520c8243477213c38edf4f39a5" ],
     [ "websocket", "dir_f084e18705b461dd6d2c82b0c268cd27.html", "dir_f084e18705b461dd6d2c82b0c268cd27" ],
+    [ "config.hpp", "config_8hpp.html", "config_8hpp" ],
     [ "core.hpp", "core_8hpp.html", "core_8hpp" ],
     [ "http.hpp", "http_8hpp.html", "http_8hpp" ],
     [ "startup.hpp", "startup_8hpp.html", "startup_8hpp" ],

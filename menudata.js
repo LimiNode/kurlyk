@@ -142,6 +142,7 @@ var menudata={children:[
 {text:"File List",url:"files.html"},
 {text:"File Members",url:"globals.html",children:[
 {text:"All",url:"globals.html",children:[
+{text:"a",url:"globals.html#index_a"},
 {text:"h",url:"globals.html#index_h"},
 {text:"j",url:"globals.html#index_j"},
 {text:"k",url:"globals.html#index_k"},
@@ -159,4 +160,5 @@ var menudata={children:[
 {text:"t",url:"globals_func.html#index_t"}]},
 {text:"Typedefs",url:"globals_type.html"},
 {text:"Macros",url:"globals_defs.html",children:[
+{text:"a",url:"globals_defs.html#index_a"},
 {text:"k",url:"globals_defs.html#index_k"}]}]}]}]}

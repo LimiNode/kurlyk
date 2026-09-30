@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"classkurlyk_1_1HttpRequestHandler.html#a2cbcadf813fd1a419a0110556ae59596":[1,0,1,15,21],
 "classkurlyk_1_1HttpRequestHandler.html#a2cbcadf813fd1a419a0110556ae59596":[2,0,0,14,21],
 "classkurlyk_1_1HttpRequestHandler.html#a32f9dde0cb3b990844fc60974e484d04":[1,0,1,15,5],
 "classkurlyk_1_1HttpRequestHandler.html#a32f9dde0cb3b990844fc60974e484d04":[2,0,0,14,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "classkurlyk_1_1SimpleWebSocketClientAdapter.html#a082a9a28596db3104bdd4c8c34a9f482":[1,0,1,27,28],
 "classkurlyk_1_1SimpleWebSocketClientAdapter.html#a082a9a28596db3104bdd4c8c34a9f482":[2,0,0,26,28],
 "classkurlyk_1_1SimpleWebSocketClientAdapter.html#a0d68eb256b18834cbd6916d23ebacc0d":[1,0,1,27,20],
-"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a0d68eb256b18834cbd6916d23ebacc0d":[2,0,0,26,20],
-"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a0ee6ea4c6a71c40821d258340505c905":[1,0,1,27,19]
+"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a0d68eb256b18834cbd6916d23ebacc0d":[2,0,0,26,20]
 };

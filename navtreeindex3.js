@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"classkurlyk_1_1HttpRateLimiter.html":[1,0,1,11],
 "classkurlyk_1_1HttpRateLimiter.html":[2,0,0,10],
 "classkurlyk_1_1HttpRateLimiter.html#a03327dd013d59e6378e41f787339da64":[1,0,1,11,29],
 "classkurlyk_1_1HttpRateLimiter.html#a03327dd013d59e6378e41f787339da64":[2,0,0,10,29],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "classkurlyk_1_1HttpRequestHandler.html#a1c0624663ba6d2ab711ff14635cc9d29":[1,0,1,15,0],
 "classkurlyk_1_1HttpRequestHandler.html#a1c0624663ba6d2ab711ff14635cc9d29":[2,0,0,14,0],
 "classkurlyk_1_1HttpRequestHandler.html#a23b653d244ea6b8bc9b7348cfb3402e7":[1,0,1,15,17],
-"classkurlyk_1_1HttpRequestHandler.html#a23b653d244ea6b8bc9b7348cfb3402e7":[2,0,0,14,17],
-"classkurlyk_1_1HttpRequestHandler.html#a2cbcadf813fd1a419a0110556ae59596":[1,0,1,15,21]
+"classkurlyk_1_1HttpRequestHandler.html#a23b653d244ea6b8bc9b7348cfb3402e7":[2,0,0,14,17]
 };
