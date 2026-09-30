@@ -26,7 +26,7 @@ target_include_directories(direct_websocket_backend_smoke PRIVATE
     "${CMAKE_CURRENT_LIST_DIR}/../../external/Simple-WebSocket-Server"
     "${CMAKE_CURRENT_LIST_DIR}/../../external/asio/include"
 )
-target_link_libraries(direct_websocket_backend_smoke PRIVATE OpenSSL::SSL)
+target_link_libraries(direct_websocket_backend_smoke PRIVATE kurlyk_package_ssl)
 target_compile_features(direct_websocket_backend_smoke PRIVATE cxx_std_11)
 set_target_properties(direct_websocket_backend_smoke PROPERTIES
     CXX_EXTENSIONS NO
@@ -47,7 +47,7 @@ add_library(http_only_backend_config_smoke OBJECT http_only_backend_config_smoke
 target_include_directories(http_only_backend_config_smoke PRIVATE
     "${CMAKE_CURRENT_LIST_DIR}/../../include"
 )
-target_link_libraries(http_only_backend_config_smoke PRIVATE CURL::libcurl)
+target_link_libraries(http_only_backend_config_smoke PRIVATE kurlyk_package_curl)
 target_compile_features(http_only_backend_config_smoke PRIVATE cxx_std_11)
 set_target_properties(http_only_backend_config_smoke PROPERTIES
     CXX_EXTENSIONS NO
