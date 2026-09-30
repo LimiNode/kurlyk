@@ -36,7 +36,7 @@ if(KURLYK_USE_STANDALONE_ASIO)
         KURLYK_EXPECT_STANDALONE=1
     )
 else()
-    target_link_libraries(direct_websocket_backend_smoke PRIVATE Boost::boost)
+    target_link_libraries(direct_websocket_backend_smoke PRIVATE kurlyk_package_asio)
     target_compile_definitions(direct_websocket_backend_smoke PRIVATE
         KURLYK_EXPECT_BOOST=1
         KURLYK_USE_BOOST_ASIO=1
