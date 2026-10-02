@@ -19,7 +19,7 @@
 #   endif
 #endif
 
-#include <client_ws.hpp>
+#include "../../../detail/simple_websocket_server_client.hpp"
 
 #ifdef ASIO_STANDALONE
 #include <asio/ssl.hpp>

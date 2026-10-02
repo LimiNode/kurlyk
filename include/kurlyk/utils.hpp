@@ -32,6 +32,9 @@
 
 #ifdef _WIN32
 // For Windows systems
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
 #include <direct.h>
 #include <windows.h>
 #include <locale>

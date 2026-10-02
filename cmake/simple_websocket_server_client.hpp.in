@@ -1,0 +1,10 @@
+#pragma once
+#ifndef KURLYK_HEADER_KURLYK_DETAIL_SIMPLE_WEBSOCKET_SERVER_CLIENT_HPP_INCLUDED
+#define KURLYK_HEADER_KURLYK_DETAIL_SIMPLE_WEBSOCKET_SERVER_CLIENT_HPP_INCLUDED
+
+/// \file simple_websocket_server_client.hpp
+/// \brief Includes the installed Simple-WebSocket-Server client header.
+
+#include @KURLYK_SIMPLE_WS_CLIENT_INCLUDE@
+
+#endif // KURLYK_HEADER_KURLYK_DETAIL_SIMPLE_WEBSOCKET_SERVER_CLIENT_HPP_INCLUDED

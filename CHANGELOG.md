@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- Added installed direct-consumer coverage for native WebSocket headers without
+  linking the exported `kurlyk::kurlyk` CMake target.
+
+### Changed
+- Added `KURLYK_USE_BOOST_ASIO` as the public native WebSocket backend selector
+  and limited `ASIO_STANDALONE` configuration to the Simple-WebSocket-Server
+  integration header.
+- Installed bundled Simple-WebSocket-Server headers under the conventional
+  `include/simple-websocket-server` layout while retaining compatibility with
+  the flat upstream source-tree layout.
+- Added a separate installed direct-consumer smoke that does not load the
+  Kurlyk CMake package or exported targets.
+- Defined `WIN32_LEAN_AND_MEAN` before Windows SDK headers in public utility
+  headers so direct Asio consumers do not see a WinSock header-order conflict.
+
 ## [v1.1.0] - 2026-09-22
 
 ### Added

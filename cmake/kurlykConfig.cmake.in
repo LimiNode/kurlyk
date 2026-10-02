@@ -34,14 +34,21 @@ endif()
 if(NOT TARGET simple_ws_server)
     if(@KURLYK_PACKAGE_BUNDLED_SIMPLE_WS@)
         set(KURLYK_SIMPLE_WS_INCLUDE_DIR
-            "${PACKAGE_PREFIX_DIR}/include/kurlyk/third_party/simple-websocket-server"
+            "${PACKAGE_PREFIX_DIR}/include"
         )
     else()
-        find_path(KURLYK_SIMPLE_WS_INCLUDE_DIR client_ws.hpp)
+        if(KURLYK_SIMPLE_WS_INCLUDE_DIR AND NOT EXISTS
+                "${KURLYK_SIMPLE_WS_INCLUDE_DIR}/simple-websocket-server/client_ws.hpp")
+            unset(KURLYK_SIMPLE_WS_INCLUDE_DIR CACHE)
+            unset(KURLYK_SIMPLE_WS_INCLUDE_DIR)
+        endif()
+        find_path(KURLYK_SIMPLE_WS_INCLUDE_DIR
+            NAMES simple-websocket-server/client_ws.hpp
+        )
     endif()
     if(NOT KURLYK_SIMPLE_WS_INCLUDE_DIR)
         message(FATAL_ERROR
-            "Kurlyk requires Simple-WebSocket-Server. Install it or set KURLYK_SIMPLE_WS_INCLUDE_DIR."
+            "Kurlyk requires Simple-WebSocket-Server in the namespaced installed layout. Install it or set KURLYK_SIMPLE_WS_INCLUDE_DIR to an include root containing simple-websocket-server/client_ws.hpp."
         )
     endif()
     add_library(kurlyk_package_simple_ws_headers INTERFACE IMPORTED)

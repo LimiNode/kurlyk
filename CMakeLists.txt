@@ -163,6 +163,10 @@ file(GLOB_RECURSE KURLYK_PUBLIC_HEADERS CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp"
 )
 foreach(public_header IN LISTS KURLYK_PUBLIC_HEADERS)
+    if(public_header STREQUAL
+            "${CMAKE_CURRENT_SOURCE_DIR}/include/kurlyk/detail/simple_websocket_server_client.hpp")
+        continue()
+    endif()
     file(RELATIVE_PATH public_header_relative
         "${CMAKE_CURRENT_SOURCE_DIR}/include"
         "${public_header}"
@@ -175,6 +179,19 @@ foreach(public_header IN LISTS KURLYK_PUBLIC_HEADERS)
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${public_header_directory}"
     )
 endforeach()
+
+set(KURLYK_SIMPLE_WS_CLIENT_INCLUDE "<simple-websocket-server/client_ws.hpp>")
+set(KURLYK_GENERATED_SIMPLE_WS_CLIENT_HEADER
+    "${CMAKE_CURRENT_BINARY_DIR}/generated/kurlyk/detail/simple_websocket_server_client.hpp"
+)
+configure_file(
+    cmake/simple_websocket_server_client.hpp.in
+    "${KURLYK_GENERATED_SIMPLE_WS_CLIENT_HEADER}"
+    @ONLY
+)
+install(FILES "${KURLYK_GENERATED_SIMPLE_WS_CLIENT_HEADER}"
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/kurlyk/detail"
+)
 
 set(KURLYK_PACKAGE_BUNDLED_SIMPLE_WS OFF)
 set(KURLYK_SIMPLE_WS_HEADERS_DIR
@@ -192,7 +209,7 @@ if(EXISTS "${KURLYK_SIMPLE_WS_HEADERS_DIR}/client_ws.hpp")
         "${KURLYK_SIMPLE_WS_HEADERS_DIR}/utility.hpp"
         "${KURLYK_SIMPLE_WS_HEADERS_DIR}/status_code.hpp"
         "${KURLYK_SIMPLE_WS_HEADERS_DIR}/mutex.hpp"
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/kurlyk/third_party/simple-websocket-server"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/simple-websocket-server"
     )
     install(FILES
         "${KURLYK_SIMPLE_WS_HEADERS_DIR}/LICENSE"
