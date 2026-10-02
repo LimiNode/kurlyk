@@ -19,16 +19,7 @@
 #   endif
 #endif
 
-#if defined(__has_include)
-// Prefer the installed upstream layout and retain the flat checkout layout.
-#   if __has_include(<simple-websocket-server/client_ws.hpp>)
-#       include <simple-websocket-server/client_ws.hpp>
-#   else
-#       include <client_ws.hpp>
-#   endif
-#else
-#   include <client_ws.hpp>
-#endif
+#include "../../../detail/simple_websocket_server_client.hpp"
 
 #ifdef ASIO_STANDALONE
 #include <asio/ssl.hpp>

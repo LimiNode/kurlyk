@@ -10,6 +10,7 @@ foreach(required_path IN ITEMS
     "${KURLYK_STAGE_DIR}/include/kurlyk/types/ProxyConfig.hpp"
     "${KURLYK_STAGE_DIR}/include/kurlyk/utils/pkce.hpp"
     "${KURLYK_STAGE_DIR}/include/kurlyk/utils/base64_url.hpp"
+    "${KURLYK_STAGE_DIR}/include/kurlyk/detail/simple_websocket_server_client.hpp"
     "${KURLYK_STAGE_DIR}/include/simple-websocket-server/client_ws.hpp"
     "${KURLYK_STAGE_DIR}/include/simple-websocket-server/client_wss.hpp"
     "${KURLYK_STAGE_DIR}/share/licenses/kurlyk/LICENSE"

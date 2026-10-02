@@ -97,6 +97,18 @@ jobs:
                 -Wno-dev
       - name: Build external package consumer
         run: cmake --build build-package-consumer
+      - name: Configure installed direct WebSocket consumer
+        run: |
+          cmake -S tests/package/direct_consumer \
+                -B build-package-direct-consumer \
+                -G Ninja \
+                -DKURLYK_INCLUDE_DIR="$PWD/build-package-stage/include" \
+                -DCMAKE_PREFIX_PATH="$PWD/external/asio;$PWD/build-package-stage" \
+                -DCMAKE_CXX_STANDARD=11 \
+                -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+                -Wno-dev
+      - name: Build installed direct WebSocket consumer
+        run: cmake --build build-package-direct-consumer
       - name: Set up vcpkg
         run: |
           git clone --depth 1 https://github.com/microsoft/vcpkg.git "$RUNNER_TEMP/vcpkg"

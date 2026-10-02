@@ -15,6 +15,10 @@ All notable changes to this project will be documented in this file.
 - Installed bundled Simple-WebSocket-Server headers under the conventional
   `include/simple-websocket-server` layout while retaining compatibility with
   the flat upstream source-tree layout.
+- Added a separate installed direct-consumer smoke that does not load the
+  Kurlyk CMake package or exported targets.
+- Defined `WIN32_LEAN_AND_MEAN` before Windows SDK headers in public utility
+  headers so direct Asio consumers do not see a WinSock header-order conflict.
 
 ## [v1.1.0] - 2026-09-22
 
