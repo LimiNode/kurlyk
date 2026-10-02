@@ -71,9 +71,9 @@ var NAVTREEINDEX =
 "classkurlyk_1_1SimpleWebSocketClientAdapter.html#a0ee6ea4c6a71c40821d258340505c905",
 "classkurlyk_1_1WebSocketConfig.html#a739ad424467f4525b1f72b363ddc8a62",
 "classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#a54c84e0ef129337287aacfe1c9a25e3c",
-"index.html#http_variants",
-"structkurlyk_1_1AuthResult.html#a0e6bcd61fb66b2bdeb8e8d4e93b9efd1",
-"websocket__client__lifecycle__test_8cpp_source.html"
+"index.html#http_streaming",
+"string__utils_8hpp_source.html",
+"websocket_8hpp_source.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

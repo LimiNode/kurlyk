@@ -1,6 +1,7 @@
 var dir_ae12a7c1d79b11abd366085d5888e018 =
 [
     [ "core", "dir_c3bd87b40726f57c917bca0f992c2b33.html", "dir_c3bd87b40726f57c917bca0f992c2b33" ],
+    [ "detail", "dir_1e6a8ba0b7f1063266a21ca07c1056b4.html", "dir_1e6a8ba0b7f1063266a21ca07c1056b4" ],
     [ "http", "dir_cee047dec63b1350c8bb0599c4d7b33d.html", "dir_cee047dec63b1350c8bb0599c4d7b33d" ],
     [ "startup", "dir_2a4867823cc12ff2223bc1a82d864ed9.html", "dir_2a4867823cc12ff2223bc1a82d864ed9" ],
     [ "types", "dir_5e5107f397f0236427cf8b630731441a.html", "dir_5e5107f397f0236427cf8b630731441a" ],
