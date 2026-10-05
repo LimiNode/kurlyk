@@ -1,6 +1,8 @@
 function(load_simple_ws_server target)
 	set(_simple_ws_server_include_dir "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../../../external/Simple-WebSocket-Server")
-	if(EXISTS "${_simple_ws_server_include_dir}/client_ws.hpp")
+	if((NOT DEFINED KURLYK_USE_BUNDLED_SIMPLE_WS_SERVER OR
+		KURLYK_USE_BUNDLED_SIMPLE_WS_SERVER) AND
+		EXISTS "${_simple_ws_server_include_dir}/client_ws.hpp")
 		message(STATUS "Simple-Websocket-Server: using local submodule")
 		if(NOT TARGET simple_ws_server)
 			add_library(simple_ws_server INTERFACE)
