@@ -583,7 +583,7 @@ and build-tree dependency discovery.
 To use **kurlyk** in a MinGW environment, you need these dependencies:
 
 1. For WebSocket:
-   - [Simple-WebSocket-Server](https://gitlab.com/eidheim/Simple-WebSocket-Server)
+   - [Simple-WebSocket-Server](https://github.com/LimiNode/Simple-WebSocket-Server)
    - Boost.Asio or [standalone Asio](https://github.com/chriskohlhoff/asio/tree/master)
    - [OpenSSL](https://slproweb.com/products/Win32OpenSSL.html) (*LTS version Win64 OpenSSL v3.5.8*)
 

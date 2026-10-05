@@ -16,8 +16,8 @@ function(load_simple_ws_server target)
 	endif()
 	include(FetchContent)
 	FetchContent_Declare(simple_ws_server
-		GIT_REPOSITORY https://gitlab.com/eidheim/Simple-WebSocket-Server.git
-		GIT_TAG 7bb2867b9d50ff559c60b99178fd46531daa2c7e
+		GIT_REPOSITORY https://github.com/LimiNode/Simple-WebSocket-Server.git
+		GIT_TAG fc59880073a45bbd4670b61be0321c777d9b697c
 	)
 	FetchContent_GetProperties(simple_ws_server)
 	if (NOT simple_ws_server_POPULATED)

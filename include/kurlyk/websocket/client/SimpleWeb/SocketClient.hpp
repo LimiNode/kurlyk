@@ -136,7 +136,8 @@ namespace SimpleWeb {
         /// the necessary SSL/TLS handshake.
         void connect() override {
             LockGuard connection_lock(connection_mutex);
-            auto connection = this->connection = std::shared_ptr<Connection>(new Connection(handler_runner, config.timeout_idle, *io_service, context));
+            auto connection = this->connection = std::shared_ptr<Connection>(new Connection(
+                handler_runner, config.timeout_idle, config.max_handshake_size, *io_service, context));
             connection_lock.unlock();
 
             std::pair<std::string, std::string> host_port;
