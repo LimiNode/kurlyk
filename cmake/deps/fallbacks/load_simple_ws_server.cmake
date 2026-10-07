@@ -19,7 +19,7 @@ function(load_simple_ws_server target)
 	include(FetchContent)
 	FetchContent_Declare(simple_ws_server
 		GIT_REPOSITORY https://github.com/LimiNode/Simple-WebSocket-Server.git
-		GIT_TAG fc59880073a45bbd4670b61be0321c777d9b697c
+		GIT_TAG de7cb7c39edd6b4178adcc3f5f17d219720b3cdb
 	)
 	FetchContent_GetProperties(simple_ws_server)
 	if (NOT simple_ws_server_POPULATED)
