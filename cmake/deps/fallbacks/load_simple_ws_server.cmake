@@ -1,6 +1,8 @@
 function(load_simple_ws_server target)
 	set(_simple_ws_server_include_dir "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../../../external/Simple-WebSocket-Server")
-	if(EXISTS "${_simple_ws_server_include_dir}/client_ws.hpp")
+	if((NOT DEFINED KURLYK_USE_BUNDLED_SIMPLE_WS_SERVER OR
+		KURLYK_USE_BUNDLED_SIMPLE_WS_SERVER) AND
+		EXISTS "${_simple_ws_server_include_dir}/client_ws.hpp")
 		message(STATUS "Simple-Websocket-Server: using local submodule")
 		if(NOT TARGET simple_ws_server)
 			add_library(simple_ws_server INTERFACE)
@@ -16,8 +18,8 @@ function(load_simple_ws_server target)
 	endif()
 	include(FetchContent)
 	FetchContent_Declare(simple_ws_server
-		GIT_REPOSITORY https://gitlab.com/eidheim/Simple-WebSocket-Server.git
-		GIT_TAG 7bb2867b9d50ff559c60b99178fd46531daa2c7e
+		GIT_REPOSITORY https://github.com/LimiNode/Simple-WebSocket-Server.git
+		GIT_TAG de7cb7c39edd6b4178adcc3f5f17d219720b3cdb
 	)
 	FetchContent_GetProperties(simple_ws_server)
 	if (NOT simple_ws_server_POPULATED)

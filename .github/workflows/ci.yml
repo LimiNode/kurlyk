@@ -61,6 +61,39 @@ jobs:
       - name: Build Linux CMake examples
         run: cmake --build build-linux-cmake-${{ matrix.std }}
 
+  remote-fallback:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        backend: [standalone, boost]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - run: git submodule update --init --recursive
+      - name: Remove checked-out SWS
+        run: rm -rf external/Simple-WebSocket-Server
+      - name: Install fallback smoke dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libboost-dev libcurl4-openssl-dev libssl-dev ninja-build
+      - name: Configure remote FetchContent smoke
+        run: |
+          cmake -S tests/smoke \
+                -B build-remote-fallback-${{ matrix.backend }} \
+                -G Ninja \
+                -DKURLYK_USE_BUNDLED_SIMPLE_WS_SERVER=OFF \
+                -DCMAKE_DISABLE_FIND_PACKAGE_SimpleWebSocketServer=TRUE \
+                -DKURLYK_USE_STANDALONE_ASIO=${{ matrix.backend == 'standalone' && 'ON' || 'OFF' }} \
+                -DKURLYK_USE_FALLBACK_ASIO=ON \
+                -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON \
+                -DCMAKE_CXX_STANDARD=11 \
+                -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+                -Wno-dev
+      - name: Build remote FetchContent smoke
+        run: cmake --build build-remote-fallback-${{ matrix.backend }} --target full_cpp11_smoke
+
   package:
     runs-on: ubuntu-latest
     steps:
@@ -71,7 +104,7 @@ jobs:
       - name: Install package test dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libboost-dev libcurl4-openssl-dev libssl-dev ninja-build
+          sudo apt-get install -y libasio-dev libboost-dev libcurl4-openssl-dev libssl-dev ninja-build
       - name: Configure packaging build
         run: |
           cmake -S . \
@@ -109,6 +142,71 @@ jobs:
                 -Wno-dev
       - name: Build installed direct WebSocket consumer
         run: cmake --build build-package-direct-consumer
+      - name: Configure standalone SWS package
+        run: |
+          cmake -S external/Simple-WebSocket-Server \
+                -B build-sws-standalone \
+                -G Ninja \
+                -DUSE_STANDALONE_ASIO=ON \
+                -DBUILD_TESTING=OFF \
+                -DCMAKE_INSTALL_PREFIX="$PWD/build-sws-standalone-stage" \
+                -DCMAKE_PREFIX_PATH="$PWD/external/asio;$PWD/build-package-stage" \
+                -Wno-dev
+          cmake --install build-sws-standalone
+      - name: Configure Kurlyk with installed standalone SWS
+        run: |
+          cmake -S tests/package/installed_sws \
+                -B build-installed-sws-standalone \
+                -G Ninja \
+                -DKURLYK_SOURCE_DIR="$PWD" \
+                -DKURLYK_USE_STANDALONE_ASIO=ON \
+                -DKURLYK_USE_FALLBACK_ASIO=ON \
+                -DCMAKE_PREFIX_PATH="$PWD/external/asio;$PWD/build-sws-standalone-stage;$PWD/build-package-stage" \
+                -DCMAKE_CXX_STANDARD=11 \
+                -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+                -Wno-dev
+      - name: Build Kurlyk with installed standalone SWS
+        run: cmake --build build-installed-sws-standalone
+      - name: Configure Boost SWS package
+        run: |
+          cmake -S external/Simple-WebSocket-Server \
+                -B build-sws-boost \
+                -G Ninja \
+                -DUSE_STANDALONE_ASIO=OFF \
+                -DBUILD_TESTING=OFF \
+                -DCMAKE_INSTALL_PREFIX="$PWD/build-sws-boost-stage" \
+                -Wno-dev
+          cmake --install build-sws-boost
+      - name: Configure Kurlyk with installed Boost SWS
+        run: |
+          cmake -S tests/package/installed_sws \
+                -B build-installed-sws-boost \
+                -G Ninja \
+                -DKURLYK_SOURCE_DIR="$PWD" \
+                -DKURLYK_USE_STANDALONE_ASIO=OFF \
+                -DCMAKE_PREFIX_PATH="$PWD/build-sws-boost-stage;$PWD/build-package-stage" \
+                -DCMAKE_CXX_STANDARD=11 \
+                -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+                -Wno-dev
+      - name: Build Kurlyk with installed Boost SWS
+        run: cmake --build build-installed-sws-boost
+      - name: Reject installed SWS backend mismatch
+        shell: bash
+        run: |
+          set +e
+          cmake -S tests/package/installed_sws \
+                -B build-installed-sws-mismatch \
+                -G Ninja \
+                -DKURLYK_SOURCE_DIR="$PWD" \
+                -DKURLYK_USE_STANDALONE_ASIO=OFF \
+                -DCMAKE_PREFIX_PATH="$PWD/build-sws-standalone-stage;$PWD/build-package-stage" \
+                -DCMAKE_CXX_STANDARD=11 \
+                -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+                -Wno-dev > mismatch.log 2>&1
+          status=$?
+          set -e
+          test "$status" -ne 0
+          grep -F "Simple-WebSocket-Server backend mismatch" mismatch.log
       - name: Set up vcpkg
         run: |
           git clone --depth 1 https://github.com/microsoft/vcpkg.git "$RUNNER_TEMP/vcpkg"

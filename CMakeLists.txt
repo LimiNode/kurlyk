@@ -21,6 +21,7 @@ option(KURLYK_USE_FALLBACK_OPENSSL "Use fallback for OpenSSL" OFF)
 option(KURLYK_USE_FALLBACK_CURL "Use fallback for libcurl" OFF)
 option(KURLYK_USE_FALLBACK_ASIO "Use fallback for asio" OFF)
 option(KURLYK_USE_FALLBACK_SIMPLE_WS_SERVER "Use fallback for simple websocket server" OFF)
+option(KURLYK_USE_BUNDLED_SIMPLE_WS_SERVER "Prefer the checked-out Simple-WebSocket-Server" ON)
 option(KURLYK_OPENSSL_SHARED "For falllback option: OpenSSL shared" ON)
 option(KURLYK_CURL_SHARED "For falllback option: libcurl shared" ON)
 

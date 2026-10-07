@@ -583,7 +583,7 @@ and build-tree dependency discovery.
 To use **kurlyk** in a MinGW environment, you need these dependencies:
 
 1. For WebSocket:
-   - [Simple-WebSocket-Server](https://gitlab.com/eidheim/Simple-WebSocket-Server)
+   - [Simple-WebSocket-Server](https://github.com/LimiNode/Simple-WebSocket-Server)
    - Boost.Asio or [standalone Asio](https://github.com/chriskohlhoff/asio/tree/master)
    - [OpenSSL](https://slproweb.com/products/Win32OpenSSL.html) (*LTS version Win64 OpenSSL v3.5.8*)
 
@@ -702,6 +702,7 @@ Asio and Simple-WebSocket-Server are header-only libraries and work for all list
 | `KURLYK_USE_STANDALONE_ASIO` | Selects standalone Asio when enabled (default); set to `OFF` to use Boost.Asio. |
 | `KURLYK_USE_FALLBACK_ASIO` | Enables Asio fallback. |
 | `KURLYK_USE_FALLBACK_SIMPLE_WS_SERVER` | Enables Simple-WebSocket-Server fallback. |
+| `KURLYK_USE_BUNDLED_SIMPLE_WS_SERVER` | Prefers the checked-out Simple-WebSocket-Server when building from the source tree (default: enabled). |
 | `KURLYK_OPENSSL_SHARED` | Loads OpenSSL as a shared library when fallback is enabled. |
 | `KURLYK_CURL_SHARED` | Loads libcurl as a shared library when fallback is enabled. |
 | `KURLYK_BUILD_EXAMPLES` | Builds all targets from the `examples/` directory. |

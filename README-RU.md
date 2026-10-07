@@ -583,7 +583,7 @@ Simple-WebSocket-Server. OAuth PKCE использует существующу�
 Для работы библиотеки **kurlyk** в среде MinGW потребуются следующие зависимости:
 
 1. Для WebSocket:
-   - [Simple-WebSocket-Server](https://gitlab.com/eidheim/Simple-WebSocket-Server)
+   - [Simple-WebSocket-Server](https://github.com/LimiNode/Simple-WebSocket-Server)
    - Boost.Asio или [standalone Asio](https://github.com/chriskohlhoff/asio/tree/master)
    - [OpenSSL](https://slproweb.com/products/Win32OpenSSL.html) (*LTS версия Win64 OpenSSL v3.5.8*)
 
@@ -701,6 +701,7 @@ Asio и Simple-WebSocket-Server — header-only библиотеки и подх
 | `KURLYK_USE_STANDALONE_ASIO` | Выбирает standalone Asio при включённой опции (по умолчанию); установите `OFF`, чтобы использовать Boost.Asio. |
 | `KURLYK_USE_FALLBACK_ASIO` | Включает fallback Asio. |
 | `KURLYK_USE_FALLBACK_SIMPLE_WS_SERVER` | Включает fallback Simple-WebSocket-Server. |
+| `KURLYK_USE_BUNDLED_SIMPLE_WS_SERVER` | Предпочитает checkout Simple-WebSocket-Server при сборке из исходного дерева (по умолчанию включено). |
 | `KURLYK_OPENSSL_SHARED` | Загружает OpenSSL как shared library, если fallback включён. |
 | `KURLYK_CURL_SHARED` | Загружает libcurl как shared library, если fallback включён. |
 | `KURLYK_BUILD_EXAMPLES` | Собирает все targets из каталога `examples/`. |

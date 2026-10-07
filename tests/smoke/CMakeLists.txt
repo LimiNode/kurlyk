@@ -20,27 +20,32 @@ else()
     )
 endif()
 
-add_library(direct_websocket_backend_smoke OBJECT websocket_backend_smoke.cpp)
-target_include_directories(direct_websocket_backend_smoke PRIVATE
-    "${CMAKE_CURRENT_LIST_DIR}/../../include"
-    "${CMAKE_CURRENT_LIST_DIR}/../../external/Simple-WebSocket-Server"
-    "${CMAKE_CURRENT_LIST_DIR}/../../external/asio/include"
-)
-target_link_libraries(direct_websocket_backend_smoke PRIVATE kurlyk_package_ssl)
-target_compile_features(direct_websocket_backend_smoke PRIVATE cxx_std_11)
-set_target_properties(direct_websocket_backend_smoke PROPERTIES
-    CXX_EXTENSIONS NO
-)
-if(KURLYK_USE_STANDALONE_ASIO)
-    target_compile_definitions(direct_websocket_backend_smoke PRIVATE
-        KURLYK_EXPECT_STANDALONE=1
+if(KURLYK_USE_BUNDLED_SIMPLE_WS_SERVER AND
+        EXISTS "${CMAKE_CURRENT_LIST_DIR}/../../external/Simple-WebSocket-Server/client_ws.hpp")
+    add_library(direct_websocket_backend_smoke OBJECT websocket_backend_smoke.cpp)
+    target_include_directories(direct_websocket_backend_smoke PRIVATE
+        "${CMAKE_CURRENT_LIST_DIR}/../../include"
+        "${CMAKE_CURRENT_LIST_DIR}/../../external/Simple-WebSocket-Server"
+        "${CMAKE_CURRENT_LIST_DIR}/../../external/asio/include"
     )
+    target_link_libraries(direct_websocket_backend_smoke PRIVATE kurlyk_package_ssl)
+    target_compile_features(direct_websocket_backend_smoke PRIVATE cxx_std_11)
+    set_target_properties(direct_websocket_backend_smoke PROPERTIES
+        CXX_EXTENSIONS NO
+    )
+    if(KURLYK_USE_STANDALONE_ASIO)
+        target_compile_definitions(direct_websocket_backend_smoke PRIVATE
+            KURLYK_EXPECT_STANDALONE=1
+        )
+    else()
+        target_link_libraries(direct_websocket_backend_smoke PRIVATE kurlyk_package_asio)
+        target_compile_definitions(direct_websocket_backend_smoke PRIVATE
+            KURLYK_EXPECT_BOOST=1
+            KURLYK_USE_BOOST_ASIO=1
+        )
+    endif()
 else()
-    target_link_libraries(direct_websocket_backend_smoke PRIVATE kurlyk_package_asio)
-    target_compile_definitions(direct_websocket_backend_smoke PRIVATE
-        KURLYK_EXPECT_BOOST=1
-        KURLYK_USE_BOOST_ASIO=1
-    )
+    message(STATUS "Skipping source-tree direct WebSocket smoke: SWS submodule is not checked out")
 endif()
 
 add_library(http_only_backend_config_smoke OBJECT http_only_backend_config_smoke.cpp)
