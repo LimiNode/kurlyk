@@ -6,7 +6,7 @@ if(POLICY CMP0169)
     cmake_policy(SET CMP0169 OLD)
 endif()
 
-project(kurlyk VERSION 1.1.0 LANGUAGES CXX)
+project(kurlyk VERSION 1.1.1 LANGUAGES CXX)
 
 include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
