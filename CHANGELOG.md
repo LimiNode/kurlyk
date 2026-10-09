@@ -4,14 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## [v1.1.1] - 2026-10-07
+## [v1.1.1] - 2026-10-09
 
 ### Added
 - Added support for an installed `Simple-WebSocket-Server` package with the
   canonical `simple-websocket-server` include layout.
-- Added direct installed-consumer coverage and remote `FetchContent` smoke tests
-  for standalone Asio and Boost.Asio in C++11 mode without linking the exported
-  `kurlyk::kurlyk` CMake target.
+- Added direct installed-consumer coverage for native WebSocket headers without
+  linking the exported `kurlyk::kurlyk` CMake target.
+- Added remote `FetchContent` C++11 smoke tests for standalone Asio and
+  Boost.Asio.
 
 ### Changed
 - Added `KURLYK_USE_BOOST_ASIO` as the public native WebSocket backend selector
