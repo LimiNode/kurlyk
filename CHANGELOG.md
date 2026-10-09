@@ -4,21 +4,33 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.1.1] - 2026-10-10
+
 ### Added
-- Added installed direct-consumer coverage for native WebSocket headers without
+- Added support for an installed `Simple-WebSocket-Server` package with the
+  canonical `simple-websocket-server` include layout.
+- Added direct installed-consumer coverage for native WebSocket headers without
   linking the exported `kurlyk::kurlyk` CMake target.
+- Added remote `FetchContent` C++11 smoke tests for standalone Asio and
+  Boost.Asio.
 
 ### Changed
 - Added `KURLYK_USE_BOOST_ASIO` as the public native WebSocket backend selector
-  and limited `ASIO_STANDALONE` configuration to the Simple-WebSocket-Server
-  integration header.
+  and limited backend implementation macros to the SWS integration boundary.
+- Pinned the bundled and fallback Simple-WebSocket-Server dependency to the
+  maintained downstream commit released as `v2.0.3-ln.1`.
+- Added dependency backend compatibility checks so an installed
+  Simple-WebSocket-Server target cannot be combined with a conflicting Kurlyk
+  Asio backend.
 - Installed bundled Simple-WebSocket-Server headers under the conventional
   `include/simple-websocket-server` layout while retaining compatibility with
-  the flat upstream source-tree layout.
-- Added a separate installed direct-consumer smoke that does not load the
-  Kurlyk CMake package or exported targets.
+  flat source-tree layouts.
 - Defined `WIN32_LEAN_AND_MEAN` before Windows SDK headers in public utility
   headers so direct Asio consumers do not see a WinSock header-order conflict.
+
+### Fixed
+- Fixed the MinGW WebSocket shutdown heap-corruption regression by consuming the
+  maintained Simple-WebSocket-Server ScopeRunner cleanup fix.
 
 ## [v1.1.0] - 2026-09-22
 
