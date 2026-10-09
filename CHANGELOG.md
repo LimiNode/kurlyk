@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## [v1.1.1] - 2026-10-09
+## [v1.1.1] - 2026-10-10
 
 ### Added
 - Added support for an installed `Simple-WebSocket-Server` package with the
