@@ -9,7 +9,7 @@ namespace kurlyk {
 namespace utils {
 
     /// \enum ClientError
-    /// \brief Defines errors related to the internal state or lifecycle of the HTTP/WebSocket client.
+    /// \brief Defines client-side HTTP/WebSocket configuration, lifecycle and resource-limit errors.
     enum class ClientError {
         CancelledByUser = 1,        ///< Request was cancelled explicitly by the user via cancel().
         AbortedDuringDestruction,   ///< Request handler was destroyed before completion, causing the request to abort.
@@ -18,6 +18,7 @@ namespace utils {
         NotConnected,               ///< Operation requires an active connection but none exists.
         QueueLimitExceeded,         ///< Operation was rejected because the bounded queue is already full.
         ShuttingDown,               ///< Operation was rejected because the owning subsystem is shutting down.
+        ResponseTooLarge,           ///< Actual HTTP response body bytes exceeded the request's configured limit.
     };
 
     /// \class ClientErrorCategory
@@ -44,6 +45,8 @@ namespace utils {
                     return "Operation was rejected because the queue limit was exceeded";
                 case ClientError::ShuttingDown:
                     return "Operation was rejected because the client is shutting down";
+                case ClientError::ResponseTooLarge:
+                    return "HTTP response body exceeded the configured limit";
                 default:
                     return "Unknown HTTP client error";
             }

@@ -60,6 +60,20 @@ jobs:
                 -Wno-dev
       - name: Build Linux CMake examples
         run: cmake --build build-linux-cmake-${{ matrix.std }}
+      - name: Configure response body limit integration test
+        run: |
+          cmake -S tests/integration \
+                -B build/linux-response-limit-${{ matrix.std }} \
+                -G Ninja \
+                -DCMAKE_CXX_STANDARD=${{ matrix.std }} \
+                -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+                -DKURLYK_USE_FALLBACK_ASIO=ON \
+                -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON \
+                -Wno-dev
+      - name: Build and run response body limit integration test
+        run: |
+          cmake --build build/linux-response-limit-${{ matrix.std }} --target http_response_body_limit_test
+          ctest --test-dir build/linux-response-limit-${{ matrix.std }} -R '^http_response_body_limit_test$' --output-on-failure
 
   remote-fallback:
     runs-on: ubuntu-latest

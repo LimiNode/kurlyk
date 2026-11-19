@@ -2,7 +2,7 @@
 
 Use this file when changing `HttpRateLimiter`, `HttpRateLimitHandle`,
 `HttpBatchRequestHandler`, `HttpRequestManager::process_pending_requests()`,
-or any HTTP streaming callback (`on_stream_chunk`, `on_stream_complete`).
+or any HTTP response streaming callback.
 
 ## Core Vocabulary
 
@@ -216,22 +216,54 @@ particular request be allowed".
 
 ## Streaming Callbacks
 
-`HttpRequest` supports streaming response processing:
+`HttpRequest::streaming` (or `HttpClient::set_streaming(true)`) enables
+intermediate responses through the normal request callback:
 
 ```cpp
-request->on_stream_chunk = [](const char* data, size_t len) -> size_t {
-    // Process chunk. Return bytes consumed.
-    return len;
-};
-request->on_stream_complete = [](const HttpResponsePtr& response) {
-    // Final response after all chunks.
-};
+client.set_streaming(true);
+client.get("/events", kurlyk::QueryParams(), kurlyk::Headers(),
+    [](kurlyk::HttpResponsePtr response) {
+        if (response->stream_chunk) {
+            // Process response->content; ready is false.
+        } else if (response->ready) {
+            // Final accumulated response or terminal error.
+        }
+    });
 ```
 
-These run on the `NetworkWorker` thread inside `HttpBatchRequestHandler`.
-They must not block. If a chunk callback throws, exception handling is the
-same as for normal request callbacks: `NetworkWorker` catches, dispatches to
-the error path, and continues.
+These run on the `NetworkWorker` thread inside `HttpBatchRequestHandler` and
+must not block. `HttpRequestContext` catches callback exceptions and reports
+them through the worker error handler. A request receives one final callback;
+group completion and sequential-token release happen after that callback returns.
+
+### Response body budget
+
+`HttpRequest::max_response_body_bytes`, `HttpRequest::set_max_response_body_bytes()`
+and `HttpClient::set_max_response_body_bytes()` configure a per-attempt limit.
+The default value `0` preserves the existing unlimited behavior. Set a finite
+value when handling untrusted response bodies:
+
+```cpp
+client.set_max_response_body_bytes(1024 * 1024);
+```
+
+The libcurl write callback checks actual received bytes before appending them
+to the accumulated response or emitting a streaming chunk. The count applies
+after transfer decoding and any content decoding enabled for that request; it
+does not trust `Content-Length`, so chunked and connection-close responses have
+the same bound. Redirect response bodies in the same attempt share the budget.
+When `debug_header` is enabled, libcurl also sends headers through that callback,
+so those diagnostic bytes count against the budget too.
+
+If an incoming chunk would exceed the remaining budget, the whole chunk is
+rejected and reception stops. The final response has
+`utils::ClientError::ResponseTooLarge` and a stable explanatory message. Its
+content may retain the previously accepted prefix, never more than the limit;
+it is not a successful or complete payload. The configured retry policy is
+ignored for this error, including when no streaming chunk was emitted. The
+normal final-callback, cancellation, group completion and resource cleanup
+contracts still apply. This is a body-byte bound, not a total process-memory,
+header-size or response-time bound.
 
 ## Safety Invariants
 
