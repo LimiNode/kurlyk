@@ -1,26 +1,46 @@
 function(load_simple_web_server target)
+	get_target_property(target_type ${target} TYPE)
+	if(target_type STREQUAL "INTERFACE_LIBRARY")
+		set(link_scope INTERFACE)
+	else()
+		set(link_scope PRIVATE)
+	endif()
+	if(TARGET simple_web_server)
+		target_link_libraries(${target} ${link_scope} simple_web_server)
+		return()
+	endif()
 
 	if(NOT DEFINED USE_STANDALONE_ASIO)
 		set(USE_STANDALONE_ASIO ${KURLYK_USE_STANDALONE_ASIO}
 		  CACHE BOOL "Synchronization for Simple-Web-Server" FORCE)
 	endif()
 
-	set(simple_web_server_submodule_dir "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../../../external/Simple-Web-Server")
+	if(KURLYK_SIMPLE_WEB_SERVER_SOURCE_DIR)
+		set(simple_web_server_submodule_dir "${KURLYK_SIMPLE_WEB_SERVER_SOURCE_DIR}")
+		if(NOT EXISTS "${simple_web_server_submodule_dir}/server_http.hpp")
+			message(FATAL_ERROR "KURLYK_SIMPLE_WEB_SERVER_SOURCE_DIR must contain server_http.hpp")
+		endif()
+	else()
+		set(simple_web_server_submodule_dir "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../../../external/Simple-Web-Server")
+	endif()
 
 	if(EXISTS "${simple_web_server_submodule_dir}/server_http.hpp")
-		message(STATUS "Simple-Web-Server: using pinned submodule")
+		message(STATUS "Simple-Web-Server: using local source at ${simple_web_server_submodule_dir}")
 		if (NOT TARGET simple_web_server)
 			add_library(simple_web_server INTERFACE)
 			target_include_directories(simple_web_server INTERFACE "${simple_web_server_submodule_dir}")
 		endif()
-		target_link_libraries(${target} PRIVATE simple_web_server)
+		target_link_libraries(${target} ${link_scope} simple_web_server)
 		return()
 	endif()
 
+	if(DEFINED KURLYK_ALLOW_DOWNLOADS AND NOT KURLYK_ALLOW_DOWNLOADS)
+		message(FATAL_ERROR "Simple-Web-Server is unavailable and KURLYK_ALLOW_DOWNLOADS=OFF. Provide simple_web_server or KURLYK_SIMPLE_WEB_SERVER_SOURCE_DIR.")
+	endif()
 	include(FetchContent)
 	FetchContent_Declare(simple_web_server
 		GIT_REPOSITORY https://gitlab.com/eidheim/Simple-Web-Server.git
-		GIT_TAG master
+		GIT_TAG 546895a93a29062bb178367b46c7afb72da9881e
 	)
 	FetchContent_GetProperties(simple_web_server)
 	if (NOT simple_web_server_POPULATED)
@@ -31,6 +51,6 @@ function(load_simple_web_server target)
 		add_library(simple_web_server INTERFACE)
 		target_include_directories(simple_web_server INTERFACE "${simple_web_server_SOURCE_DIR}")
 	endif()
-	target_link_libraries(${target} PRIVATE simple_web_server)
+	target_link_libraries(${target} ${link_scope} simple_web_server)
 
 endfunction()

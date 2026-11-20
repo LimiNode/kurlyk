@@ -62,6 +62,8 @@ Asio and Simple-WebSocket-Server are header-only and work for all build variants
 | `KURLYK_OPENSSL_SHARED` | Loads OpenSSL as a shared library when fallback is enabled. |
 | `KURLYK_CURL_SHARED` | Loads libcurl as a shared library when fallback is enabled. |
 | `KURLYK_BUILD_EXAMPLES` | Builds all targets from the `examples/` directory. |
+| `KURLYK_ALLOW_DOWNLOADS` | Allows pinned remote fallbacks (default `ON`); set `OFF` for fail-closed offline configuration. |
+| `KURLYK_SIMPLE_WEB_SERVER_SOURCE_DIR` | Uses a local HTTP-server checkout when no `simple_web_server` target exists. |
 
 ## Testing
 

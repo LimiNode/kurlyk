@@ -5,6 +5,10 @@
 /// \file simple_websocket_server_client.hpp
 /// \brief Includes the installed Simple-WebSocket-Server client header.
 
-#include @KURLYK_SIMPLE_WS_CLIENT_INCLUDE@
+#if defined(KURLYK_SIMPLE_WS_CLIENT_USE_FLAT)
+#   include <client_ws.hpp>
+#else
+#   include @KURLYK_SIMPLE_WS_CLIENT_INCLUDE@
+#endif
 
 #endif // KURLYK_HEADER_KURLYK_DETAIL_SIMPLE_WEBSOCKET_SERVER_CLIENT_HPP_INCLUDED

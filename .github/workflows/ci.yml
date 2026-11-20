@@ -4,9 +4,73 @@ on:
   push:
     branches: [ main, stable, wip/raw-development ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, fix/http-response-body-limit, fix/flat-dependency-resolution ]
 
 jobs:
+  flat-offline:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        std: [11, 17]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Install linked providers
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev ninja-build
+      - name: Create source snapshot without nested submodules
+        run: |
+          mkdir -p build/flat-source
+          git archive HEAD | tar -x -C build/flat-source
+          test ! -f build/flat-source/external/Simple-Web-Server/server_http.hpp
+          test ! -f build/flat-source/external/Simple-WebSocket-Server/client_ws.hpp
+      - name: Verify fail-closed missing dependencies
+        run: |
+          cmake -DKURLYK_SOURCE_DIR="$PWD/build/flat-source" \
+            -DKURLYK_TEST_BUILD_DIR="$PWD/build/offline-failures" \
+            -P tests/flat/check_offline_failures.cmake
+      - name: Configure parent-provided targets without downloads
+        run: |
+          cmake -S tests/flat -B build/flat-${{ matrix.std }} -G Ninja \
+            -DKURLYK_SOURCE_DIR="$PWD/build/flat-source" \
+            -DKURLYK_TEST_ASIO_INCLUDE_DIR="$PWD/external/asio/include" \
+            -DKURLYK_TEST_SWS_SOURCE_DIR="$PWD/external/Simple-WebSocket-Server" \
+            -DKURLYK_TEST_JSON_INCLUDE_DIR="$PWD/external/json/include" \
+            -DKURLYK_SIMPLE_WEB_SERVER_SOURCE_DIR="$PWD/external/Simple-Web-Server" \
+            -DKURLYK_BUILD_EXAMPLES=ON -DCMAKE_CXX_STANDARD=${{ matrix.std }} \
+            -DCMAKE_CXX_STANDARD_REQUIRED=ON
+      - name: Build and exercise flat profile
+        run: |
+          cmake --build build/flat-${{ matrix.std }} --target http_response_body_limit_test \
+            http_client_wait_requests_test http_client_auth_provider_test \
+            simple_http_request_example bearer_token_auth_provider_example
+          ctest --test-dir build/flat-${{ matrix.std }} \
+            -R '^(http_response_body_limit_test|http_client_wait_requests_test|http_client_auth_provider_test)$' --output-on-failure
+      - name: Configure explicit local HTTP provider
+        run: |
+          cmake -S tests/flat -B build/flat-local-${{ matrix.std }} -G Ninja \
+            -DKURLYK_SOURCE_DIR="$PWD/build/flat-source" \
+            -DKURLYK_TEST_ASIO_INCLUDE_DIR="$PWD/external/asio/include" \
+            -DKURLYK_TEST_SWS_SOURCE_DIR="$PWD/external/Simple-WebSocket-Server" \
+            -DKURLYK_TEST_JSON_INCLUDE_DIR="$PWD/external/json/include" \
+            -DKURLYK_SIMPLE_WEB_SERVER_SOURCE_DIR="$PWD/external/Simple-Web-Server" \
+            -DKURLYK_TEST_LOCAL_HTTP_PROVIDER=ON
+      - name: Install and build parent-provided package consumer
+        run: |
+          cmake --install build/flat-${{ matrix.std }} --prefix "$PWD/build/flat-stage-${{ matrix.std }}"
+          cmake -S tests/flat -B build/flat-consumer-${{ matrix.std }} -G Ninja \
+            -DKURLYK_TEST_INSTALLED=ON \
+            -DCMAKE_PREFIX_PATH="$PWD/build/flat-stage-${{ matrix.std }}" \
+            -DKURLYK_TEST_ASIO_INCLUDE_DIR="$PWD/external/asio/include" \
+            -DKURLYK_TEST_SWS_SOURCE_DIR="$PWD/external/Simple-WebSocket-Server" \
+            -DKURLYK_TEST_JSON_INCLUDE_DIR="$PWD/external/json/include" \
+            -DCMAKE_CXX_STANDARD=${{ matrix.std }} -DCMAKE_CXX_STANDARD_REQUIRED=ON
+          cmake --build build/flat-consumer-${{ matrix.std }}
+          build/flat-consumer-${{ matrix.std }}/flat_installed_consumer
+
   linux:
     runs-on: ubuntu-latest
     strategy:
