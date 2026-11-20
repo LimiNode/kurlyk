@@ -1,0 +1,46 @@
+name: Optional HTTP server
+on:
+  pull_request:
+  push:
+    branches: [feat/http-server-foundation]
+jobs:
+  loopback:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        std: [11, 17]
+        config: [Debug, Release]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: git submodule update --init external/asio external/Simple-Web-Server
+      - uses: ilammy/msvc-dev-cmd@v1
+        if: runner.os == 'Windows'
+      - run: cmake -S tests/http_server -B build/server -G Ninja -DCMAKE_CXX_STANDARD=${{ matrix.std }} -DCMAKE_CXX_STANDARD_REQUIRED=ON -DCMAKE_BUILD_TYPE=${{ matrix.config }}
+      - run: cmake --build build/server
+      - run: ctest --test-dir build/server --output-on-failure
+  installed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: git submodule update --init external/asio external/Simple-Web-Server external/Simple-WebSocket-Server
+      - run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev ninja-build
+      - name: Configure with optional server enabled
+        run: >-
+          cmake -S . -B build/package -G Ninja
+          -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=11
+          -DKURLYK_ALLOW_DOWNLOADS=OFF -DKURLYK_HTTP_SERVER_SUPPORT=ON
+          -DKURLYK_USE_FALLBACK_ASIO=ON -DKURLYK_USE_FALLBACK_SIMPLE_WS_SERVER=ON
+          -DKURLYK_BUILD_EXAMPLES=ON
+          -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/build/stage
+      - run: cmake --build build/package --target simple_http_request_example
+      - run: cmake --install build/package
+      - name: Configure independent installed consumer
+        run: >-
+          cmake -S tests/http_server/installed -B build/consumer -G Ninja
+          -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=11
+          -DCMAKE_PREFIX_PATH=${{ github.workspace }}/build/stage
+          -DKURLYK_ASIO_INCLUDE_DIR=${{ github.workspace }}/external/asio/include
+      - run: cmake --build build/consumer
+      - run: ctest --test-dir build/consumer --output-on-failure

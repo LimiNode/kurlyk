@@ -19,6 +19,7 @@ set(KURLYK_SIMPLE_WEB_SERVER_SOURCE_DIR "" CACHE PATH
     "Local Simple-Web-Server source directory (used when no target is provided)")
 option(KURLYK_AUTH_SUPPORT "Enable HTTP authentication helpers (Bearer, API-key)" ON)
 option(KURLYK_OAUTH_SUPPORT "Enable OAuth2 PKCE client (requires OpenSSL)" ON)
+option(KURLYK_HTTP_SERVER_SUPPORT "Enable optional bounded plain HTTP listener" OFF)
 
 option(KURLYK_USE_FALLBACK_OPENSSL "Use fallback for OpenSSL" OFF)
 option(KURLYK_USE_FALLBACK_CURL "Use fallback for libcurl" OFF)
@@ -157,6 +158,10 @@ if(KURLYK_BUILD_EXAMPLES)
 	add_subdirectory(examples)
 endif()
 
+if(KURLYK_HTTP_SERVER_SUPPORT)
+    include(cmake/http_server.cmake)
+endif()
+
 install(TARGETS kurlyk_package EXPORT kurlykTargets)
 install(FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE"
@@ -168,7 +173,9 @@ file(GLOB_RECURSE KURLYK_PUBLIC_HEADERS CONFIGURE_DEPENDS
 )
 foreach(public_header IN LISTS KURLYK_PUBLIC_HEADERS)
     if(public_header STREQUAL
-            "${CMAKE_CURRENT_SOURCE_DIR}/include/kurlyk/detail/simple_websocket_server_client.hpp")
+            "${CMAKE_CURRENT_SOURCE_DIR}/include/kurlyk/detail/simple_websocket_server_client.hpp" OR
+       public_header STREQUAL
+            "${CMAKE_CURRENT_SOURCE_DIR}/include/kurlyk/detail/simple_web_server.hpp")
         continue()
     endif()
     file(RELATIVE_PATH public_header_relative

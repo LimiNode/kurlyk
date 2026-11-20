@@ -88,4 +88,5 @@ endforeach()
 
 include("${CMAKE_CURRENT_LIST_DIR}/kurlykTargets.cmake")
 
+set(kurlyk_http_server_FOUND @KURLYK_HTTP_SERVER_SUPPORT@)
 check_required_components(kurlyk)
