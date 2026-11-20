@@ -10,6 +10,28 @@ TLS configuration, Telegram authentication and acknowledgements belong to
 separate adapters/deployment work. It does not register webhooks, parse
 Telegram JSON, persist an inbox, or promise crash durability.
 
+## Backend framing requirement
+
+The pinned backend is the [LimiNode Simple-Web-Server corrective](https://github.com/LimiNode/Simple-Web-Server/pull/1)
+at `f74866e83ae103cc6b40bb9f9f07d30e8ac09c28`, based on upstream
+`546895a93a29062bb178367b46c7afb72da9881e`. It validates the complete chunk-size
+token and extensions, checks every chunk-data CRLF across fragmented reads,
+and rejects chunk sizes exceeding remaining buffer capacity without overflow.
+The previous upstream pin accepted malformed chunk sizes and delimiters; a
+receive-byte limit alone does not validate HTTP framing.
+
+Only an empty trailer section is supported: after the zero-size chunk, the
+backend requires the final CRLF. Nonempty trailers and malformed/truncated
+terminators are rejected before an application handler is called. Valid token,
+quoted, and escaped chunk extensions remain supported within configured bounds.
+
+A custom `simple_web_server` parent target or
+`KURLYK_SIMPLE_WEB_SERVER_SOURCE_DIR` provider must include equivalent framing
+corrections. CMake cannot automatically determine the version or semantic
+behavior behind an arbitrary parent-provided target; reusing that target is not
+proof that its parser is corrected. Run the server conformance checks against
+the chosen provider before accepting it.
+
 ## Ownership and lifecycle
 
 1. Construct `HttpServer` with finite positive bounds and register exact
@@ -88,7 +110,12 @@ ctest --test-dir build/server-cpp11-debug --output-on-failure
 ```
 
 Repeat with C++17/Release. The loopback tests cover declared/fragmented/chunked
-oversize requests, oversized headers, malformed framing, retained owned
+oversize requests, oversized headers, malformed chunk-size/extension/CRLF
+framing, overflow, retained owned
 requests, response bounds, disconnects, read/write timeouts, overload, in-flight stop,
 stop before run, destruction from a callback, and fresh repeated lifecycles.
+Chunk regressions assert zero application dispatch for malformed input and
+verify that a valid request still succeeds after each rejection. Loopback
+fragmented writes complement the backend's deterministic scripted-read tests;
+TCP packet boundaries are not treated as parser-read boundaries.
 CTest sets an independent 30-second liveness timeout.

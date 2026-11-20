@@ -6,6 +6,7 @@
 #include <iostream>
 #include <mutex>
 #include <thread>
+#include <vector>
 
 #define CHECK(condition) do { if (!(condition)) { std::cerr << "CHECK failed line " << __LINE__ << ": " #condition << std::endl; std::abort(); } } while (false)
 
@@ -46,10 +47,78 @@ std::string round_trip(unsigned short port, const std::string& request) {
     send(socket, request);
     return read_closed(socket);
 }
+std::string chunked_round_trip(unsigned short port, const std::vector<std::string>& fragments, bool finish_input = false) {
+    SimpleWeb::io_context io;
+    Socket socket = connect(io, port);
+    socket.set_option(net::ip::tcp::no_delay(true));
+    send(socket, "POST /echo HTTP/1.1\r\nTransfer-Encoding: chunked\r\n\r\n");
+    for (const auto& fragment : fragments) {
+        SimpleWeb::error_code error;
+        net::write(socket, net::buffer(fragment), error);
+        if (error) break; // Early rejection may close before all invalid fragments are sent.
+    }
+    if (finish_input) {
+        SimpleWeb::error_code ignored;
+        socket.shutdown(Socket::shutdown_send, ignored);
+    }
+    return read_closed(socket);
+}
 kurlyk::HttpServerResponse echo(kurlyk::HttpServerRequest request) {
     kurlyk::HttpServerResponse response;
     response.body = request.body;
     return response;
+}
+void chunked_grammar() {
+    kurlyk::HttpServerConfig config;
+    config.max_request_bytes = 256;
+    kurlyk::HttpServer server(config);
+    std::atomic<int> calls{0};
+    server.set_handler("POST", "/echo", [&calls](kurlyk::HttpServerRequest request) {
+        ++calls;
+        return echo(std::move(request));
+    });
+    const auto port = server.start();
+    std::thread runner([&server] { server.run(); });
+    struct Case {
+        const char* name;
+        std::vector<std::string> fragments;
+    };
+    const Case invalid[] = {
+        {"chunk-size suffix", {"1junk\r\nx\r\n0\r\n\r\n"}},
+        {"invalid coalesced data CRLF", {"1\r\nx!!0\r\n\r\n"}},
+        {"leading chunk-size whitespace", {" 1\r\nx\r\n0\r\n\r\n"}},
+        {"signed chunk-size", {"+1\r\nx\r\n0\r\n\r\n"}},
+        {"hexadecimal prefix", {"0x1\r\nx\r\n0\r\n\r\n"}},
+        {"empty chunk-size", {"\r\nx\r\n0\r\n\r\n"}},
+        {"empty extension name", {"1;=value\r\nx\r\n0\r\n\r\n"}},
+        {"unterminated quoted extension", {"1;name=\"value\r\nx\r\n0\r\n\r\n"}},
+        {"extension value suffix", {"1;name=value junk\r\nx\r\n0\r\n\r\n"}},
+        {"overflowing chunk-size", {"10000000000000000\r\n"}},
+        {"chunk-size exceeds remaining capacity", {"1\r\nx\r\nffffffffffffffff\r\n"}},
+        {"invalid zero-chunk terminator", {"0\r\n!!"}},
+        {"unsupported nonempty trailer section", {"0\r\nX-Trailer: value\r\n\r\n"}},
+        {"fragmented chunk-size suffix", {"1", "junk\r", "\nx\r\n0\r\n\r\n"}},
+        {"fragmented invalid first delimiter byte", {"1\r\n", "x", "!", "\n0\r\n\r\n"}},
+        {"fragmented invalid second delimiter byte", {"1\r\nx\r", "!0\r\n\r\n"}},
+        {"fragmented invalid both delimiter bytes", {"1\r\nx", "!", "!0\r\n\r\n"}}
+    };
+    for (const auto& test : invalid) {
+        std::cout << "Reject chunk framing: " << test.name << std::endl;
+        const int before = calls.load();
+        const auto response = chunked_round_trip(port, test.fragments);
+        CHECK(response.find("HTTP/1.1 200 ") == std::string::npos);
+        CHECK(calls.load() == before);
+        // A rejected request must not dispatch later or damage the listener.
+        CHECK(chunked_round_trip(port, {"1\r\nx\r\n0\r\n\r\n"}).find("\r\n\r\nx") != std::string::npos);
+        CHECK(calls.load() == before + 1);
+    }
+    const int before_truncated = calls.load();
+    CHECK(chunked_round_trip(port, {"0\r\n"}, true).find("HTTP/1.1 200 ") == std::string::npos);
+    CHECK(calls.load() == before_truncated);
+    CHECK(chunked_round_trip(port, {"1\r", "\nx", "\r", "\n", "2\r\nyz\r\n", "0\r", "\n\r", "\n"}).find("\r\n\r\nxyz") != std::string::npos);
+    CHECK(chunked_round_trip(port, {"1;name=value;quoted=\"a\\\"b\"\r\nx\r\n0\r\n\r\n"}).find("\r\n\r\nx") != std::string::npos);
+    server.request_stop();
+    runner.join();
 }
 void request_bounds() {
     kurlyk::HttpServerConfig config;
@@ -213,6 +282,7 @@ void write_timeout() {
 }
 }
 int main() {
+    chunked_grammar();
     request_bounds();
     overload_and_stop();
     reentrant_destruction();

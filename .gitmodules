@@ -3,7 +3,7 @@
 	url = https://github.com/LimiNode/Simple-WebSocket-Server.git
 [submodule "external/Simple-Web-Server"]
 	path = external/Simple-Web-Server
-	url = https://gitlab.com/eidheim/Simple-Web-Server.git
+	url = https://github.com/LimiNode/Simple-Web-Server.git
 [submodule "external/json"]
 	path = external/json
 	url = https://github.com/nlohmann/json.git
