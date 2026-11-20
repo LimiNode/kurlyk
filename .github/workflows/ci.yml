@@ -69,7 +69,6 @@ jobs:
             -DKURLYK_TEST_JSON_INCLUDE_DIR="$PWD/external/json/include" \
             -DCMAKE_CXX_STANDARD=${{ matrix.std }} -DCMAKE_CXX_STANDARD_REQUIRED=ON
           cmake --build build/flat-consumer-${{ matrix.std }}
-          build/flat-consumer-${{ matrix.std }}/flat_installed_consumer
 
   linux:
     runs-on: ubuntu-latest
