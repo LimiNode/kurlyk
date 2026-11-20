@@ -42,12 +42,7 @@ namespace kurlyk {
         bool head_only       = false;    ///< If `true`, does not download the response body (HEAD-like behavior).
         bool streaming       = false;    ///< Enable intermediate callbacks for response body chunks.
 
-        /// \brief Maximum response body bytes accepted per attempt; zero preserves unlimited downloads.
-        /// \details Counts actual bytes passed by libcurl after transfer/content decoding, not Content-Length.
-        /// A chunk exceeding the remaining budget is neither stored nor emitted. The accepted prefix may
-        /// remain in the final response, which completes with ResponseTooLarge and is never retried.
-        /// Diagnostic headers also count when debug_header routes them through the body callback.
-        std::size_t max_response_body_bytes = 0;
+        std::size_t max_response_body_bytes = 0; ///< Body byte limit per attempt; 0 means unlimited.
 
         long timeout         = 30;       ///< Request timeout in seconds.
         long connect_timeout = 10;       ///< Connection timeout in seconds.

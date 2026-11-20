@@ -9,7 +9,7 @@ namespace kurlyk {
 namespace utils {
 
     /// \enum ClientError
-    /// \brief Defines client-side HTTP/WebSocket configuration, lifecycle and resource-limit errors.
+    /// \brief Defines client-side errors for HTTP and WebSocket operations.
     enum class ClientError {
         CancelledByUser = 1,        ///< Request was cancelled explicitly by the user via cancel().
         AbortedDuringDestruction,   ///< Request handler was destroyed before completion, causing the request to abort.

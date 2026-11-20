@@ -251,7 +251,8 @@ The libcurl write callback checks actual received bytes before appending them
 to the accumulated response or emitting a streaming chunk. The count applies
 after transfer decoding and any content decoding enabled for that request; it
 does not trust `Content-Length`, so chunked and connection-close responses have
-the same bound. Redirect response bodies in the same attempt share the budget.
+the same bound. The budget counts bytes delivered to the write callback.
+Intermediate redirect bodies skipped by libcurl do not count toward it.
 When `debug_header` is enabled, libcurl also sends headers through that callback,
 so those diagnostic bytes count against the budget too.
 

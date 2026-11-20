@@ -47,11 +47,12 @@ namespace kurlyk {
         /// \brief Processes body data received from server and appends it to response content.
         static size_t write_http_response_body(char* data, size_t size, size_t nmemb, void* userdata) {
             auto* handler = static_cast<HttpRequestHandler*>(userdata);
-            if (size != 0 && nmemb > static_cast<size_t>(-1) / size) {
+            const size_t max_size = (std::numeric_limits<size_t>::max)();
+            if (size != 0 && nmemb > max_size / size) {
                 if (handler) handler->m_response_too_large = true;
                 return 0;
             }
-            size_t total_size = size * nmemb;
+            const size_t total_size = size * nmemb;
             if (handler) return handler->write_response_body(data, total_size);
             return total_size;
         }
