@@ -89,6 +89,6 @@ ctest --test-dir build/server-cpp11-debug --output-on-failure
 
 Repeat with C++17/Release. The loopback tests cover declared/fragmented/chunked
 oversize requests, oversized headers, malformed framing, retained owned
-requests, response bounds, disconnects, read timeout, overload, in-flight stop,
+requests, response bounds, disconnects, read/write timeouts, overload, in-flight stop,
 stop before run, destruction from a callback, and fresh repeated lifecycles.
 CTest sets an independent 30-second liveness timeout.

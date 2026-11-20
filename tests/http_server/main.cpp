@@ -35,7 +35,7 @@ std::string read_closed(Socket& socket) {
         result.append(buffer, count);
         if (error == net::error::eof || error == net::error::connection_reset || error == net::error::connection_aborted) return result;
         CHECK(!error || error == net::error::would_block || error == net::error::try_again);
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        if (error) std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
     CHECK(false && "socket was not closed");
     return result;
@@ -185,11 +185,38 @@ void lifecycle_validation() {
     server.request_stop();
     server.run(); // Stop before the runner starts does not hang.
 }
+void write_timeout() {
+    kurlyk::HttpServerConfig config;
+    const std::size_t body_size = 16 * 1024 * 1024;
+    config.max_response_body_bytes = body_size;
+    config.content_timeout_seconds = 1;
+    kurlyk::HttpServer server(config);
+    server.set_handler("GET", "/large", [body_size](kurlyk::HttpServerRequest) {
+        kurlyk::HttpServerResponse response;
+        response.body.assign(body_size, 'x');
+        return response;
+    });
+    const auto port = server.start();
+    std::thread runner([&server] { server.run(); });
+    SimpleWeb::io_context io;
+    Socket slow(io);
+    slow.open(net::ip::tcp::v4());
+    slow.set_option(net::socket_base::receive_buffer_size(1024));
+    slow.connect(net::ip::tcp::endpoint(SimpleWeb::make_address("127.0.0.1"), port));
+    send(slow, "GET /large HTTP/1.1\r\n\r\n");
+    // No reads while the server's finite write deadline expires.
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    const auto response = read_closed(slow);
+    CHECK(response.size() < body_size);
+    server.request_stop();
+    runner.join();
+}
 }
 int main() {
     request_bounds();
     overload_and_stop();
     reentrant_destruction();
     lifecycle_validation();
+    write_timeout();
     std::cout << "HTTP server foundation checks passed\n";
 }

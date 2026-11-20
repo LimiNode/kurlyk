@@ -44,3 +44,15 @@ jobs:
           -DKURLYK_ASIO_INCLUDE_DIR=${{ github.workspace }}/external/asio/include
       - run: cmake --build build/consumer
       - run: ctest --test-dir build/consumer --output-on-failure
+  sanitizers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: git submodule update --init external/asio external/Simple-Web-Server
+      - run: >-
+          cmake -S tests/http_server -B build/sanitizers -G Ninja
+          -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Debug
+          -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer"
+          -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address,undefined"
+      - run: cmake --build build/sanitizers
+      - run: ctest --test-dir build/sanitizers --output-on-failure

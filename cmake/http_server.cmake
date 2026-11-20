@@ -18,10 +18,11 @@ if(WIN32)
     target_link_libraries(kurlyk_http_server INTERFACE ws2_32 mswsock)
 endif()
 
-# Build-tree provider targets stay out of installed exports.
+# Imported dependency proxy keeps build-tree providers out of installed exports.
+kurlyk_add_package_dependency_proxy(kurlyk_package_http_server simple_web_server)
 get_target_property(server_links kurlyk_http_server INTERFACE_LINK_LIBRARIES)
 list(REMOVE_ITEM server_links simple_web_server)
-list(APPEND server_links "$<BUILD_INTERFACE:simple_web_server>")
+list(APPEND server_links kurlyk_package_http_server)
 set_property(TARGET kurlyk_http_server PROPERTY INTERFACE_LINK_LIBRARIES "${server_links}")
 install(TARGETS kurlyk_http_server EXPORT kurlykTargets)
 

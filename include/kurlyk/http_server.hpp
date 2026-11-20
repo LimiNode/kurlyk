@@ -184,8 +184,7 @@ public:
     /// \details I/O stops after the current handler returns; the runner closes sockets before returning.
     void request_stop() noexcept {
         auto state = m_state;
-        state->m_stopping.store(true);
-        state->m_io->stop();
+        if (!state->m_stopping.exchange(true)) state->m_io->stop();
     }
 
 private:
