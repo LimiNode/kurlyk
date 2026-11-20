@@ -77,6 +77,14 @@ else()
     _kurlyk_define_package_proxy(kurlyk_package_asio Boost::boost)
 endif()
 _kurlyk_define_package_proxy(kurlyk_package_simple_ws simple_ws_server)
+get_target_property(_kurlyk_sws_include_dirs simple_ws_server INTERFACE_INCLUDE_DIRECTORIES)
+foreach(_kurlyk_sws_include_dir IN LISTS _kurlyk_sws_include_dirs)
+    if(EXISTS "${_kurlyk_sws_include_dir}/client_ws.hpp")
+        set_property(TARGET kurlyk_package_simple_ws APPEND PROPERTY
+            INTERFACE_COMPILE_DEFINITIONS KURLYK_SIMPLE_WS_CLIENT_USE_FLAT)
+        break()
+    endif()
+endforeach()
 
 include("${CMAKE_CURRENT_LIST_DIR}/kurlykTargets.cmake")
 

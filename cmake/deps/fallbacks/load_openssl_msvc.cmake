@@ -1,4 +1,11 @@
 function(load_openssl target)
+	if(TARGET OpenSSL::SSL AND TARGET OpenSSL::Crypto)
+		target_link_libraries(${target} INTERFACE OpenSSL::SSL OpenSSL::Crypto)
+		return()
+	endif()
+	if(DEFINED KURLYK_ALLOW_DOWNLOADS AND NOT KURLYK_ALLOW_DOWNLOADS)
+		message(FATAL_ERROR "OpenSSL fallback requires downloads but KURLYK_ALLOW_DOWNLOADS=OFF. Provide OpenSSL::SSL and OpenSSL::Crypto.")
+	endif()
 #MSVC
 	
 	include(FetchContent)

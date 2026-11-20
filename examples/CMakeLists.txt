@@ -46,9 +46,13 @@ foreach(example_source IN LISTS KURLYK_EXAMPLE_SOURCES)
 
 	if(example_target STREQUAL "chatgpt_request_example" OR
 	   example_target STREQUAL "bearer_token_auth_provider_example")
-		target_include_directories(${example_target} PRIVATE
-			"${PROJECT_SOURCE_DIR}/external/json/include"
-		)
+		if(TARGET nlohmann_json::nlohmann_json)
+			target_link_libraries(${example_target} PRIVATE nlohmann_json::nlohmann_json)
+		else()
+			target_include_directories(${example_target} PRIVATE
+				"${CMAKE_CURRENT_LIST_DIR}/../external/json/include"
+			)
+		endif()
 	endif()
 
 	if(WIN32)

@@ -14,6 +14,9 @@ include(GNUInstallDirs)
 
 option(KURLYK_USE_STANDALONE_ASIO "Use Asio standalone instead of Boost.Asio" ON)
 option(KURLYK_BUILD_EXAMPLES "Build repository examples" OFF)
+option(KURLYK_ALLOW_DOWNLOADS "Allow remote dependency fallback downloads" ON)
+set(KURLYK_SIMPLE_WEB_SERVER_SOURCE_DIR "" CACHE PATH
+    "Local Simple-Web-Server source directory (used when no target is provided)")
 option(KURLYK_AUTH_SUPPORT "Enable HTTP authentication helpers (Bearer, API-key)" ON)
 option(KURLYK_OAUTH_SUPPORT "Enable OAuth2 PKCE client (requires OpenSSL)" ON)
 

@@ -1,4 +1,11 @@
 function(load_curl target)
+	if(TARGET CURL::libcurl)
+		target_link_libraries(${target} INTERFACE CURL::libcurl)
+		return()
+	endif()
+	if(DEFINED KURLYK_ALLOW_DOWNLOADS AND NOT KURLYK_ALLOW_DOWNLOADS)
+		message(FATAL_ERROR "libcurl fallback requires downloads but KURLYK_ALLOW_DOWNLOADS=OFF. Provide CURL::libcurl.")
+	endif()
 #MSVC
 	include(FetchContent)
 	FetchContent_Declare(curl_dep

@@ -23,3 +23,26 @@ Simple-WebSocket-Server can use the checked-out headers in `external/`.
   dependency update.
 - Optional features stay behind compile definitions:
   `KURLYK_JSON_SUPPORT`, `KURLYK_WEBSOCKET_SUPPORT`.
+
+## Flat parent-provided dependencies
+
+Kurlyk reuses existing `CURL::libcurl`, `OpenSSL::SSL`, `OpenSSL::Crypto`,
+`asio::asio` (or `Boost::boost`) and `simple_ws_server` targets before selecting
+its own providers. Examples also reuse `nlohmann_json::nlohmann_json` when supplied.
+Integration tests reuse `simple_web_server` before inspecting any source directory.
+Alternatively, set `KURLYK_SIMPLE_WEB_SERVER_SOURCE_DIR` to a local checkout
+containing `server_http.hpp`. Nested Kurlyk submodules need not be initialized
+when the parent provides the used dependencies.
+
+Set `KURLYK_ALLOW_DOWNLOADS=OFF` for an offline configure. Missing dependencies
+then fail with an actionable error instead of downloading. The default `ON`
+preserves standalone fallback behavior; remote fallbacks use pinned commits,
+including Simple-Web-Server `546895a93a29062bb178367b46c7afb72da9881e`.
+Offline mode does not acquire or initialize dependencies: provide their targets,
+installed packages, or local checkouts beforehand.
+
+The installed package also reuses existing dependency targets. Its default SWS
+header layout is `simple-websocket-server/client_ws.hpp`. A parent-provided
+`simple_ws_server` with a direct include directory containing `client_ws.hpp`
+is detected as flat. For a flat include path hidden behind generator expressions
+or transitive targets, propagate `KURLYK_SIMPLE_WS_CLIENT_USE_FLAT` from that target.

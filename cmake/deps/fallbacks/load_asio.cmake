@@ -1,4 +1,8 @@
 function(load_asio target)
+    if(TARGET asio::asio)
+        target_link_libraries(${target} INTERFACE asio::asio)
+        return()
+    endif()
     # Prefer the checked-out submodule for deterministic/offline builds.
     set(_asio_include_dir "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../../../external/asio/include")
     if(EXISTS "${_asio_include_dir}/asio.hpp")
@@ -13,6 +17,9 @@ function(load_asio target)
         return()
     endif()
 
+    if(DEFINED KURLYK_ALLOW_DOWNLOADS AND NOT KURLYK_ALLOW_DOWNLOADS)
+        message(FATAL_ERROR "Asio is unavailable and KURLYK_ALLOW_DOWNLOADS=OFF. Provide asio::asio or initialize the local submodule.")
+    endif()
     # Fallback: FetchContent
 
 	message(STATUS "Asio: using fallback standalone Asio from remote repository")
