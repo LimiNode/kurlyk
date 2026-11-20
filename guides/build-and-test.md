@@ -123,7 +123,7 @@ cmake --build build-full-cpp11-smoke
 |----------|----------|
 | Windows | MinGW and MSVC integration builds with fallback dependencies, HTTP backpressure regression, and local WebSocket integration coverage. |
 | Windows extras | ODR checks for singleton and auto-initialization headers. |
-| Linux | C++11/C++17 header smoke, C++11 HTTP/proxy checks, full C++11 HTTP/WebSocket compile-only smoke, and C++17 integration examples. |
+| Linux | C++11/C++17 header smoke, C++11 HTTP/proxy checks, full C++11 HTTP/WebSocket compile-only smoke, examples, and local response-body-limit integration tests in C++11/C++17. |
 | macOS | C++11/C++17 header smoke, C++11 HTTP/proxy checks, full C++11 HTTP/WebSocket compile-only smoke, and C++17 integration tests. |
 
 ## Documentation

@@ -5,6 +5,7 @@
 /// \file HttpRequestManager.hpp
 /// \brief Manages and processes HTTP requests using a singleton pattern.
 
+#include <limits>
 #include <type_traits>
 
 #include "HttpRequestManager/HttpRequestContext.hpp"

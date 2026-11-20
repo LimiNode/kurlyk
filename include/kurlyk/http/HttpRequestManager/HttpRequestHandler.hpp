@@ -46,8 +46,13 @@ namespace kurlyk {
 
         /// \brief Processes body data received from server and appends it to response content.
         static size_t write_http_response_body(char* data, size_t size, size_t nmemb, void* userdata) {
-            size_t total_size = size * nmemb;
             auto* handler = static_cast<HttpRequestHandler*>(userdata);
+            const size_t max_size = (std::numeric_limits<size_t>::max)();
+            if (size != 0 && nmemb > max_size / size) {
+                if (handler) handler->m_response_too_large = true;
+                return 0;
+            }
+            const size_t total_size = size * nmemb;
             if (handler) return handler->write_response_body(data, total_size);
             return total_size;
         }
@@ -82,7 +87,10 @@ namespace kurlyk {
                 m_response->status_code = 451; // Unavailable For Legal Reasons
             }
 
-            if (message->data.result != CURLE_OK) {
+            if (m_response_too_large) {
+                m_response->error_code = utils::make_error_code(utils::ClientError::ResponseTooLarge);
+                m_response->error_message = m_response->error_code.message();
+            } else if (message->data.result != CURLE_OK) {
                 m_response->error_code = utils::make_error_code(message->data.result);
             } else 
             if (m_response->status_code >= 400) {
@@ -103,6 +111,7 @@ namespace kurlyk {
                 retry_attempts &&
                 (has_curl_error || !has_valid_status) &&
                 retry_attempt < retry_attempts &&
+                !m_response_too_large &&
                 !m_has_stream_chunk;
 
             if (!should_retry) {
@@ -165,6 +174,7 @@ namespace kurlyk {
         char                                m_error_buffer[CURL_ERROR_SIZE]; ///< Buffer for CURL error messages.
         bool                                m_callback_called = false; ///< Indicates if the callback was called.
         bool                                m_has_stream_chunk = false; ///< Indicates if a streaming body chunk was emitted.
+        bool                                m_response_too_large = false; ///< Indicates a terminal response body limit violation.
         bool                                m_done = false; ///< Indicates if the request has received its final callback.
         mutable std::string                 m_ca_file; ///< Cached CA file path.
 
@@ -196,6 +206,13 @@ namespace kurlyk {
 
         /// \brief Stores received body data and emits a streaming chunk when enabled.
         size_t write_response_body(const char* data, size_t total_size) {
+            const size_t limit = m_request_context->request->max_response_body_bytes;
+            if (limit != 0 && m_response &&
+                (m_response->content.size() > limit ||
+                 total_size > limit - m_response->content.size())) {
+                m_response_too_large = true;
+                return 0; // Abort libcurl before retaining or streaming the rejected chunk.
+            }
             if (m_response) {
                 m_response->content.append(data, total_size);
             }
