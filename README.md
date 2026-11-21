@@ -31,6 +31,7 @@ If, for some reason, other libraries such as *easyhttp-cpp, curl_request, curlpp
 - Bearer token and API-key auth providers (`BearerTokenAuthProvider`, `ApiKeyAuthProvider`).
 - OAuth2 Authorization Code + PKCE client (`OAuthPkceClient`) using standalone HTTP helpers.
 - Support for C++11 and newer toolchains.
+- Optional [bounded plain HTTP listener](docs/http-server.md) with owned requests/responses, explicit runner ownership, and abortive shutdown (`KURLYK_HTTP_SERVER_SUPPORT=ON`, default OFF).
 
 ## Quick start
 

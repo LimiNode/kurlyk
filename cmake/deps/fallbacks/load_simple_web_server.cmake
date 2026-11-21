@@ -39,8 +39,8 @@ function(load_simple_web_server target)
 	endif()
 	include(FetchContent)
 	FetchContent_Declare(simple_web_server
-		GIT_REPOSITORY https://gitlab.com/eidheim/Simple-Web-Server.git
-		GIT_TAG 546895a93a29062bb178367b46c7afb72da9881e
+		GIT_REPOSITORY https://github.com/LimiNode/Simple-Web-Server.git
+		GIT_TAG f74866e83ae103cc6b40bb9f9f07d30e8ac09c28
 	)
 	FetchContent_GetProperties(simple_web_server)
 	if (NOT simple_web_server_POPULATED)

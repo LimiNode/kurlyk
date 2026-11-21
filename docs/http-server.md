@@ -1,0 +1,135 @@
+# Optional HTTP server foundation
+
+`KURLYK_HTTP_SERVER_SUPPORT=ON` provides `kurlyk::http_server` and the
+standalone `<kurlyk/http_server.hpp>` entry point. The option defaults to OFF;
+`kurlyk.hpp` does not include the server, and the server target does not link
+`HttpClient`, `WebSocketClient`, or `NetworkWorker`.
+
+This foundation is plain HTTP for loopback/private deployment. Public HTTPS,
+TLS configuration, Telegram authentication and acknowledgements belong to
+separate adapters/deployment work. It does not register webhooks, parse
+Telegram JSON, persist an inbox, or promise crash durability.
+
+## Backend framing requirement
+
+The pinned backend is the [LimiNode Simple-Web-Server corrective](https://github.com/LimiNode/Simple-Web-Server/pull/1)
+at `f74866e83ae103cc6b40bb9f9f07d30e8ac09c28`, based on upstream
+`546895a93a29062bb178367b46c7afb72da9881e`. It validates the complete chunk-size
+token and extensions, checks every chunk-data CRLF across fragmented reads,
+and rejects chunk sizes exceeding remaining buffer capacity without overflow.
+The previous upstream pin accepted malformed chunk sizes and delimiters; a
+receive-byte limit alone does not validate HTTP framing.
+
+Only an empty trailer section is supported: after the zero-size chunk, the
+backend requires the final CRLF. Nonempty trailers and malformed/truncated
+terminators are rejected before an application handler is called. Valid token,
+quoted, and escaped chunk extensions remain supported within configured bounds.
+
+A custom `simple_web_server` parent target or
+`KURLYK_SIMPLE_WEB_SERVER_SOURCE_DIR` provider must include equivalent framing
+corrections. CMake cannot automatically determine the version or semantic
+behavior behind an arbitrary parent-provided target; reusing that target is not
+proof that its parser is corrected. Run the server conformance checks against
+the chosen provider before accepting it.
+
+## Ownership and lifecycle
+
+1. Construct `HttpServer` with finite positive bounds and register exact
+   method/path handlers. No routing expressions or implicit path decoding.
+2. `start()` binds synchronously and returns the actual listening port. It may
+   throw on bind/configuration failure. Each instance is one-shot, including a
+   failed start; create a fresh instance for another lifecycle.
+3. Call `run()` exactly once, normally on an application-owned thread. Handlers
+   execute serially on this runner. Requests own their strings and headers;
+   callbacks may retain or move them. Responses own their body and headers.
+4. `request_stop()` is thread-safe, idempotent, and safe inside a handler. It
+   stops the I/O context, not the executing callback. The callback must return.
+   The runner then aborts connections and drains canceled network operations.
+5. Wait for `run()` to return (join the application's runner) before declaring
+   quiescence. The facade may be destroyed in a handler: `run()` retains internal
+   state until completion and never joins its own thread.
+
+Configuration, `start()`, and invocation of `run()` are owner-serialized.
+Only `request_stop()` may race with `run()`. The application must not race
+facade destruction with a call through another non-owning facade pointer.
+Starting again or running twice throws `logic_error`.
+
+Stop is abortive, not graceful delivery: an in-flight response may be lost.
+A handler exception or invalid/oversized returned response becomes an empty
+500 response when the connection remains writable. Backend exceptions from
+`run()` abort the listener and propagate to the application's runner boundary.
+Application handlers must not block indefinitely; network deadlines cannot
+preempt arbitrary user code.
+
+## Bounds and overload
+
+`max_request_bytes` is a cumulative **wire-byte** budget per connection,
+including the request line, headers, body, and chunk framing. The socket's
+`async_read_some()` limits each receive before data enters a backend buffer.
+Simple-Web-Server still owns HTTP parsing and its finite
+`max_request_streambuf_size` limit; there is no second HTTP parser or body
+accumulator. A large declared body can be rejected before reading it; fragmented
+or chunked bodies are bounded by actual received bytes regardless of declared
+sizes. The total limit is deliberately stricter than a body-only limit.
+An empty asynchronous read completes successfully with zero bytes, including
+at the exact budget boundary; it consumes no transport data. A nonempty read
+after the budget is exhausted fails asynchronously without receiving bytes.
+
+`max_connections` bounds admitted receiving/handling/writing connections. One
+additional accept socket is allowed. At capacity, accepted connections close
+without allocating a request buffer or invoking application code. The operating
+system's bounded listen backlog is not an application work queue. There is no
+unbounded dispatch queue and at most one application handler executes at once.
+
+The header deadline starts at connection admission. The content deadline spans
+body receipt through response transmission after the headers arrive. Timeouts,
+overload, malformed requests, disconnects, and request limits may close without
+an HTTP status; callers must tolerate transport failure. Each connection serves
+one request and responses force `Connection: close`; keep-alive, upgrade,
+pipelining, deferred responses, response streaming, and server-sent events are
+not supported in this foundation.
+
+Returned application response bodies and headers have independent finite
+validation limits. The callback is trusted code: these checks cannot prevent
+the callback itself from allocating an oversized object before returning it.
+Framing headers are generated by the listener; application-supplied
+Content-Length, Transfer-Encoding, Connection, invalid names, or invalid value
+bytes are rejected. Values permit HTAB, SP, visible ASCII, and bytes 128–255;
+other control bytes (including NUL/CR/LF) and DEL are rejected. Invalid output
+becomes an empty 500 response. Duplicate or ambiguous Content-Length/Transfer-Encoding framing
+does not reach application handlers. Unsupported methods may close without a
+response unless explicitly registered.
+
+Statuses 204, 205, and 304 never carry a response body. The listener omits
+Content-Length for 204 and 304, and emits Content-Length: 0 for 205. The
+response API has no separate representation length for 304. HEAD suppresses
+the body while retaining the corresponding GET body length unless these
+status-specific rules require an omitted or zero length.
+
+## Local verification
+
+Use pinned local source providers; configuration does not need downloads:
+
+```sh
+cmake -S tests/http_server -B build/server-cpp11-debug -G Ninja \
+  -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DKURLYK_SIMPLE_WEB_SERVER_SOURCE_DIR=/path/to/Simple-Web-Server \
+  -DKURLYK_ASIO_SOURCE_DIR=/path/to/asio
+cmake --build build/server-cpp11-debug
+ctest --test-dir build/server-cpp11-debug --output-on-failure
+```
+
+Repeat with C++17/Release. The loopback tests cover declared/fragmented/chunked
+oversize requests, oversized headers, malformed chunk-size/extension/CRLF
+framing, overflow, retained owned
+requests, response bounds, disconnects, read/write timeouts, overload, in-flight stop,
+stop before run, destruction from a callback, and fresh repeated lifecycles.
+Regressions also cover the exact wire budget boundary, posted empty and denied
+reads that consume no bytes, GET/HEAD status-specific body and length rules,
+and every possible response header-value byte (including NUL and obs-text).
+Chunk regressions assert zero application dispatch for malformed input and
+verify that a valid request still succeeds after each rejection. Loopback
+fragmented writes complement the backend's deterministic scripted-read tests;
+TCP packet boundaries are not treated as parser-read boundaries.
+CTest sets an independent 30-second liveness timeout.

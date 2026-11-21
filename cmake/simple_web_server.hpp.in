@@ -1,0 +1,9 @@
+#pragma once
+#ifndef KURLYK_HEADER_KURLYK_DETAIL_SIMPLE_WEB_SERVER_HPP_INCLUDED
+#define KURLYK_HEADER_KURLYK_DETAIL_SIMPLE_WEB_SERVER_HPP_INCLUDED
+#ifdef KURLYK_SIMPLE_WEB_SERVER_USE_FLAT
+#include <server_http.hpp>
+#else
+#include <simple-web-server/server_http.hpp>
+#endif
+#endif
