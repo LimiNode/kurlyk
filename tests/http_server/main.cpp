@@ -68,6 +68,135 @@ kurlyk::HttpServerResponse echo(kurlyk::HttpServerRequest request) {
     response.body = request.body;
     return response;
 }
+std::string response_body(const std::string& response) {
+    const auto end = response.find("\r\n\r\n");
+    CHECK(end != std::string::npos);
+    return response.substr(end + 4);
+}
+void exact_receive_boundary() {
+    const std::string request = "POST /echo HTTP/1.1\r\nHost: localhost\r\nTransfer-Encoding: chunked\r\n\r\n1\r\nx\r\n0\r\n\r\n";
+    CHECK(request.size() == 79);
+    kurlyk::HttpServerConfig config;
+    config.max_request_bytes = request.size();
+    kurlyk::HttpServer server(config);
+    std::atomic<int> calls{0};
+    server.set_handler("POST", "/echo", [&calls](kurlyk::HttpServerRequest input) {
+        ++calls;
+        return echo(std::move(input));
+    });
+    const auto port = server.start();
+    std::thread runner([&server] { server.run(); });
+    const auto exact = round_trip(port, request);
+    CHECK(exact.find("HTTP/1.1 200 ") == 0);
+    CHECK(response_body(exact) == "x");
+    CHECK(calls.load() == 1);
+    const std::string excessive = "POST /echo HTTP/1.1\r\nHost: localhost\r\nTransfer-Encoding: chunked\r\n\r\n2\r\nxy\r\n0\r\n\r\n";
+    CHECK(excessive.size() == request.size() + 1);
+    CHECK(round_trip(port, excessive).find("HTTP/1.1 200 ") == std::string::npos);
+    CHECK(calls.load() == 1);
+    CHECK(response_body(round_trip(port, request)) == "x");
+    server.request_stop();
+    runner.join();
+
+    // Exhaust exactly one byte, keeping another byte queued in the real socket.
+    SimpleWeb::io_context io;
+    net::ip::tcp::acceptor acceptor(io, net::ip::tcp::endpoint(SimpleWeb::make_address("127.0.0.1"), 0));
+    Socket peer(io);
+    peer.connect(acceptor.local_endpoint());
+    kurlyk::detail::HttpServerSocket limited(io, 1);
+    acceptor.accept(limited);
+    net::write(peer, net::buffer("xy", 2));
+    char byte = '?';
+    bool called = false;
+    limited.async_read_some(net::buffer(&byte, 1), [&called](const SimpleWeb::error_code& error, std::size_t count) {
+        CHECK(!error && count == 1);
+        called = true;
+    });
+    CHECK(!called);
+    io.run();
+    CHECK(called && byte == 'x');
+
+    SimpleWeb::restart(io);
+    called = false;
+    const std::vector<net::mutable_buffer> empty(2);
+    limited.async_read_some(empty, [&called](const SimpleWeb::error_code& error, std::size_t count) {
+        CHECK(!error && count == 0);
+        called = true;
+    });
+    CHECK(!called); // Zero-sized completion must still be posted, never inline.
+    io.run();
+    CHECK(called);
+
+    SimpleWeb::restart(io);
+    called = false;
+    byte = '?';
+    const std::vector<net::mutable_buffer> nonempty_after_empty = {net::mutable_buffer(), net::buffer(&byte, 1)};
+    limited.async_read_some(nonempty_after_empty, [&called](const SimpleWeb::error_code& error, std::size_t count) {
+        CHECK(error == SimpleWeb::make_error_code::make_error_code(SimpleWeb::errc::message_size) && count == 0);
+        called = true;
+    });
+    CHECK(!called);
+    io.run();
+    CHECK(called && byte == '?');
+    limited.non_blocking(true);
+    SimpleWeb::error_code error;
+    CHECK(static_cast<Socket&>(limited).read_some(net::buffer(&byte, 1), error) == 1);
+    CHECK(!error && byte == 'y'); // Neither completion consumed the queued byte.
+}
+void response_status_wire() {
+    kurlyk::HttpServer server;
+    const unsigned int statuses[] = {200, 204, 205, 304};
+    for (const auto status : statuses) {
+        const auto path = "/status-" + std::to_string(status);
+        const kurlyk::HttpServer::Handler handler = [status](kurlyk::HttpServerRequest) {
+            kurlyk::HttpServerResponse result;
+            result.status = status;
+            result.body = "x";
+            return result;
+        };
+        server.set_handler("GET", path, handler);
+        server.set_handler("HEAD", path, handler);
+    }
+    const auto port = server.start();
+    std::thread runner([&server] { server.run(); });
+    for (const auto status : statuses) {
+        for (const std::string method : {std::string("GET"), std::string("HEAD")}) {
+            const auto response = round_trip(port, method + " /status-" + std::to_string(status) + " HTTP/1.1\r\nHost: localhost\r\n\r\n");
+            CHECK(response.find("HTTP/1.1 " + std::to_string(status) + " ") == 0);
+            const auto body = response_body(response);
+            CHECK(body == (status == 200 && method == "GET" ? "x" : ""));
+            if (status == 204 || status == 304) CHECK(response.find("\r\nContent-Length:") == std::string::npos);
+            else CHECK(response.find(status == 205 ? "\r\nContent-Length: 0\r\n" : "\r\nContent-Length: 1\r\n") != std::string::npos);
+        }
+    }
+    server.request_stop();
+    runner.join();
+}
+void response_header_bytes() {
+    kurlyk::HttpServer server;
+    for (unsigned int value = 0; value != 256; ++value) {
+        server.set_handler("GET", "/header-" + std::to_string(value), [value](kurlyk::HttpServerRequest) {
+            kurlyk::HttpServerResponse result;
+            result.headers.push_back(std::make_pair("X-Test", "a" + std::string(1, static_cast<char>(value)) + "b"));
+            result.body = "payload";
+            return result;
+        });
+    }
+    const auto port = server.start();
+    std::thread runner([&server] { server.run(); });
+    for (unsigned int value = 0; value != 256; ++value) {
+        const auto response = round_trip(port, "GET /header-" + std::to_string(value) + " HTTP/1.1\r\nHost: localhost\r\n\r\n");
+        if (value == 9 || (value >= 32 && value != 127)) {
+            CHECK(response.find("HTTP/1.1 200 ") == 0);
+            CHECK(response.find("\r\nX-Test: a" + std::string(1, static_cast<char>(value)) + "b\r\n") != std::string::npos);
+            CHECK(response_body(response) == "payload");
+        } else {
+            CHECK(response == "HTTP/1.1 500 Response\r\nConnection: close\r\nContent-Length: 0\r\n\r\n");
+        }
+    }
+    server.request_stop();
+    runner.join();
+}
 void chunked_grammar() {
     kurlyk::HttpServerConfig config;
     config.max_request_bytes = 256;
@@ -281,7 +410,19 @@ void write_timeout() {
     runner.join();
 }
 }
-int main() {
+int main(int argc, char** argv) {
+    if (argc == 2) {
+        const std::string selected(argv[1]);
+        if (selected == "read-boundary") exact_receive_boundary();
+        else if (selected == "status-wire") response_status_wire();
+        else if (selected == "header-bytes") response_header_bytes();
+        else CHECK(false && "unknown regression selection");
+        return 0;
+    }
+    CHECK(argc == 1);
+    exact_receive_boundary();
+    response_status_wire();
+    response_header_bytes();
     chunked_grammar();
     request_bounds();
     overload_and_stop();

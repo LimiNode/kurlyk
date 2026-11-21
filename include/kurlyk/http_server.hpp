@@ -5,6 +5,7 @@
 /// \file
 /// \brief Optional, standalone HTTP listener; not included by kurlyk.hpp.
 #include <kurlyk/detail/simple_web_server.hpp>
+#include <algorithm>
 #include <atomic>
 #include <functional>
 #include <iterator>
@@ -41,8 +42,8 @@ struct HttpServerRequest {
 /// \brief Owned, non-streaming response; framing headers are supplied by the listener.
 struct HttpServerResponse {
     unsigned int status = 200; ///< Final status in [200,599]; invalid output becomes 500.
-    std::vector<std::pair<std::string, std::string> > headers; ///< Application headers; CR/LF and framing headers are forbidden.
-    std::string body; ///< Owned body; oversized output becomes an empty 500 response.
+    std::vector<std::pair<std::string, std::string> > headers; ///< Application headers; framing headers, CTLs except HTAB, and DEL are forbidden.
+    std::string body; ///< Owned body; suppressed for HEAD and status 204/205/304; oversized output becomes an empty 500.
 };
 
 namespace detail {
@@ -60,17 +61,22 @@ public:
 
     template<class Buffers, class Handler>
     void async_read_some(const Buffers& buffers, Handler handler) {
+        auto it = server_asio::buffer_sequence_begin(buffers);
+        const auto end = server_asio::buffer_sequence_end(buffers);
+        while (it != end && server_asio::buffer_size(*it) == 0) ++it;
+        if (it == end) {
+            SimpleWeb::post(m_io, [handler]() mutable {
+                handler(SimpleWeb::error_code(), 0);
+            });
+            return;
+        }
         if (m_remaining == 0) {
             SimpleWeb::post(m_io, [handler]() mutable {
                 handler(SimpleWeb::make_error_code::make_error_code(SimpleWeb::errc::message_size), 0);
             });
             return;
         }
-        auto it = server_asio::buffer_sequence_begin(buffers);
-        const auto end = server_asio::buffer_sequence_end(buffers);
-        while (it != end && server_asio::buffer_size(*it) == 0) ++it;
-        const server_asio::mutable_buffer buffer = it == end
-            ? server_asio::mutable_buffer() : server_asio::buffer(*it, m_remaining);
+        const server_asio::mutable_buffer buffer = server_asio::buffer(*it, m_remaining);
         server_asio::ip::tcp::socket::async_read_some(buffer,
             [this, handler](const SimpleWeb::error_code& error, std::size_t count) mutable {
                 m_remaining -= count;
@@ -253,9 +259,12 @@ private:
             for (const auto& header : response.headers) {
                 const auto& name = header.first;
                 const auto& value = header.second;
+                const bool invalid_value = std::any_of(value.begin(), value.end(), [](unsigned char byte) {
+                    return (byte < 0x20 && byte != '\t') || byte == 0x7f;
+                });
                 const std::size_t remaining = m_config.max_response_header_bytes - bytes;
                 if (name.empty() || name.find_first_not_of("!#$%&'*+-.^_`|~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz") != std::string::npos ||
-                    value.find_first_of("\r\n") != std::string::npos || name.size() > remaining ||
+                    invalid_value || name.size() > remaining ||
                     value.size() > remaining - name.size() || remaining - name.size() - value.size() < 4 ||
                     SimpleWeb::case_insensitive_equal(name, "Content-Length") ||
                     SimpleWeb::case_insensitive_equal(name, "Transfer-Encoding") ||
@@ -265,8 +274,10 @@ private:
             if (!valid) { response = HttpServerResponse(); response.status = 500; }
             *output << "HTTP/1.1 " << response.status << " Response\r\nConnection: close\r\n";
             for (const auto& header : response.headers) *output << header.first << ": " << header.second << "\r\n";
-            const bool no_body = response.status == 204 || response.status == 304;
-            *output << "Content-Length: " << (no_body ? 0 : response.body.size()) << "\r\n\r\n";
+            const bool no_body = response.status == 204 || response.status == 205 || response.status == 304;
+            if (response.status != 204 && response.status != 304)
+                *output << "Content-Length: " << (no_body ? 0 : response.body.size()) << "\r\n";
+            *output << "\r\n";
             if (method != "HEAD" && !no_body) output->write(response.body.data(), static_cast<std::streamsize>(response.body.size()));
         }
     };
