@@ -44,6 +44,15 @@ jobs:
           -DKURLYK_ASIO_INCLUDE_DIR=${{ github.workspace }}/external/asio/include
       - run: cmake --build build/consumer
       - run: ctest --test-dir build/consumer --output-on-failure
+      - name: Configure installed consumer with a flat parent server provider
+        run: >-
+          cmake -S tests/http_server/installed -B build/consumer-flat -G Ninja
+          -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17
+          -DCMAKE_PREFIX_PATH=${{ github.workspace }}/build/stage
+          -DKURLYK_ASIO_INCLUDE_DIR=${{ github.workspace }}/external/asio/include
+          -DKURLYK_TEST_SIMPLE_WEB_SERVER_SOURCE_DIR=${{ github.workspace }}/external/Simple-Web-Server
+      - run: cmake --build build/consumer-flat
+      - run: ctest --test-dir build/consumer-flat --output-on-failure
   sanitizers:
     runs-on: ubuntu-latest
     steps:

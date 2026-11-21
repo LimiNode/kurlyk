@@ -43,6 +43,6 @@ if(EXISTS "${server_source}/server_http.hpp")
         RENAME Simple-Web-Server-LICENSE)
 endif()
 configure_file(cmake/simple_web_server.hpp.in
-    "${CMAKE_CURRENT_BINARY_DIR}/generated/kurlyk/detail/simple_web_server.hpp" @ONLY)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/generated/kurlyk/detail/simple_web_server.hpp"
-    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/kurlyk/detail")
+    "${CMAKE_CURRENT_BINARY_DIR}/generated/kurlyk/http/server/backend/SimpleWeb/headers.hpp" @ONLY)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/generated/kurlyk/http/server/backend/SimpleWeb/headers.hpp"
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/kurlyk/http/server/backend/SimpleWeb")

@@ -10,6 +10,65 @@ TLS configuration, Telegram authentication and acknowledgements belong to
 separate adapters/deployment work. It does not register webhooks, parse
 Telegram JSON, persist an inbox, or promise crash durability.
 
+## Module boundaries
+
+`<kurlyk/http_server.hpp>` remains the public aggregate and selects the default
+SimpleWeb implementation at compile time. `<kurlyk/http/server/data.hpp>` is a
+separate, self-contained public contract for `HttpServerConfig`,
+`HttpServerRequest`, `HttpServerResponse`, and `HttpServerHandler`. It requires
+only the standard library: a provider-specific request handler can use it
+without including SimpleWeb, Asio, or the outbound HTTP client.
+`HttpServer::Handler` remains an alias for the same handler type.
+
+Ownership is divided as follows:
+
+| Owner | Responsibility |
+|---|---|
+| `http/server/HttpServer.hpp` | Public listener facade and its documented lifecycle operations. |
+| `http/server/detail/BasicHttpServer.hpp` | Exact route table, handler exceptions, one-shot flags, stop admission, and state retained by the caller-owned runner. |
+| `http/server/detail/response_policy.hpp` | Status/header/body validation and HEAD/204/205/304 body/length policy, without vendor helpers. |
+| `http/server/backend/SimpleWeb/SimpleWebHttpServerAdapter.hpp` | Backend request conversion, framing admission, connection bounds, I/O execution and drain, and serialization of the common response policy result. |
+| `http/server/backend/SimpleWeb/HttpServerSocket.hpp` | Cumulative receive-time wire-byte budget before backend buffering. |
+| `http/server/backend/SimpleWeb/headers.hpp` | Source-tree versus installed vendor-header layout bridge. |
+
+The internal `BasicHttpServer<Backend>` contract is deliberately not a public
+customization API. A backend is constructed from configuration, installs a
+method dispatch callback, binds synchronously, runs serially until stopped and
+drained, and offers a nonthrowing stop request. Dispatch receives an owned
+request and fills an owned response; `false` means abort without writing a
+response, not a successful empty response. The common state is the sole owner
+of routing and lifecycle flags; adapters do not repeat that state machine.
+A small fake backend tests this contract without vendor include paths or
+network libraries. There is no public virtual server hierarchy or runtime
+backend factory.
+
+This remains a header-only implementation: the complete listener aggregate
+necessarily includes its selected backend. Splitting headers is not binary
+isolation. Only the data/handler contract and internal common state/policy can
+be compiled without backend headers. Internal headers are implementation
+details, even though their definitions must accompany installed public headers.
+
+The installed bridge is generated at the same backend-owned path and chooses
+flat parent-provided headers or the installed `simple-web-server/` layout.
+The vendor pin and flat dependency-resolution order are unchanged.
+
+## Implementation status and webhook boundary
+
+The bounded, synchronous HTTP listener and its SimpleWeb adapter are
+implemented. Telegram webhook ingestion is not implemented here. A future
+Telegram-specific handler belongs above `HttpServerHandler`; it must not own
+the listener or turn the generic HTTP DTO into a Telegram/JSON DTO. Request
+body bytes are preserved after HTTP framing, without JSON parsing or
+reserialization, and duplicate headers remain available for authentication
+checks. Client request types remain separate from server request types.
+
+A future webhook contract must state whether a successful HTTP response means
+completed processing, durable inbox admission, or only volatile admission.
+Returning a synchronous `2xx` alone proves none of those storage properties.
+Deferred durable admission would require a separate, explicit completion
+contract covering exactly-once response completion and lifetime on timeout,
+disconnect, and stop; this structural split does not add asynchronous replies.
+
 ## Backend framing requirement
 
 The pinned backend is the [LimiNode Simple-Web-Server corrective](https://github.com/LimiNode/Simple-Web-Server/pull/1)
@@ -133,3 +192,16 @@ verify that a valid request still succeeds after each rejection. Loopback
 fragmented writes complement the backend's deterministic scripted-read tests;
 TCP packet boundaries are not treated as parser-read boundaries.
 CTest sets an independent 30-second liveness timeout.
+
+The same configuration also builds a standard-library-only first-include data
+test and a fake-backend test. They do not link `kurlyk::http_server` or inherit
+its vendor include paths. The fake checks route replacement and exact matching,
+handler exceptions, one-shot failure paths, stop rejection, retained runner
+state after destruction in a handler, and common response policy boundaries.
+All checks use active `CHECK` assertions in Release as well as Debug. The
+independent installed consumer repeats the data, fake, and real backend tests
+and compiles a combined client/server consumer against the installed exports.
+CI also repeats that consumer with
+`KURLYK_TEST_SIMPLE_WEB_SERVER_SOURCE_DIR=/path/to/Simple-Web-Server`, providing
+a flat `simple_web_server` parent target before package discovery. This covers
+both branches of the generated installed header-layout bridge.
