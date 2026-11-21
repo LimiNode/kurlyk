@@ -175,7 +175,7 @@ foreach(public_header IN LISTS KURLYK_PUBLIC_HEADERS)
     if(public_header STREQUAL
             "${CMAKE_CURRENT_SOURCE_DIR}/include/kurlyk/detail/simple_websocket_server_client.hpp" OR
        public_header STREQUAL
-            "${CMAKE_CURRENT_SOURCE_DIR}/include/kurlyk/detail/simple_web_server.hpp")
+            "${CMAKE_CURRENT_SOURCE_DIR}/include/kurlyk/http/server/backend/SimpleWeb/headers.hpp")
         continue()
     endif()
     file(RELATIVE_PATH public_header_relative

@@ -32,6 +32,7 @@
 - OAuth2 Authorization Code + PKCE клиент (`OAuthPkceClient`) поверх standalone HTTP helpers.
 - Поддержка C++11 и более новых toolchains.
 - Необязательный [ограниченный plain HTTP listener](docs/http-server.md) с владеющими запросами/ответами, явно управляемым runner и аварийной остановкой (`KURLYK_HTTP_SERVER_SUPPORT=ON`, по умолчанию OFF).
+  Самодостаточный контракт DTO/обработчика `<kurlyk/http/server/data.hpp>` не зависит от backend; входным заголовком listener остаётся `<kurlyk/http_server.hpp>`.
 
 ## Быстрый старт
 

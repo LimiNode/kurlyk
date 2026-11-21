@@ -32,6 +32,7 @@ If, for some reason, other libraries such as *easyhttp-cpp, curl_request, curlpp
 - OAuth2 Authorization Code + PKCE client (`OAuthPkceClient`) using standalone HTTP helpers.
 - Support for C++11 and newer toolchains.
 - Optional [bounded plain HTTP listener](docs/http-server.md) with owned requests/responses, explicit runner ownership, and abortive shutdown (`KURLYK_HTTP_SERVER_SUPPORT=ON`, default OFF).
+  Its standalone `<kurlyk/http/server/data.hpp>` DTO/handler contract has no backend dependencies; the listener keeps `<kurlyk/http_server.hpp>` as its aggregate entry point.
 
 ## Quick start
 
