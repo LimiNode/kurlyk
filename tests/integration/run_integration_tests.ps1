@@ -88,6 +88,7 @@ $TestExecutables = @(
     "rate_limit_partition_test.exe",
     "http_local_test.exe",
     "http_retry_streaming_test.exe",
+    "http_response_body_limit_test.exe",
     "http_client_destructor_test.exe"
 )
 

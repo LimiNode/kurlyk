@@ -447,6 +447,13 @@ namespace kurlyk {
             m_request.streaming = streaming;
         }
 
+        /// \brief Sets the response body limit for subsequently created requests.
+        /// \param bytes Maximum decoded body bytes per attempt; zero means unlimited.
+        /// \details An oversized response completes with ResponseTooLarge without automatic retry.
+        void set_max_response_body_bytes(std::size_t bytes) {
+            m_request.max_response_body_bytes = bytes;
+        }
+
         /// \brief Sets the proxy server address.
         /// \param ip Proxy server IP address.
         /// \param port Proxy server port.

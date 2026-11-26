@@ -42,6 +42,8 @@ namespace kurlyk {
         bool head_only       = false;    ///< If `true`, does not download the response body (HEAD-like behavior).
         bool streaming       = false;    ///< Enable intermediate callbacks for response body chunks.
 
+        std::size_t max_response_body_bytes = 0; ///< Body byte limit per attempt; 0 means unlimited.
+
         long timeout         = 30;       ///< Request timeout in seconds.
         long connect_timeout = 10;       ///< Connection timeout in seconds.
         HttpRateLimitHandlePtr general_rate_limit;  ///< General rate limit handle.
@@ -273,6 +275,12 @@ namespace kurlyk {
         /// \param streaming Enable (`true`) or disable (`false`) streaming callbacks.
         void set_streaming(bool streaming) {
             this->streaming = streaming;
+        }
+
+        /// \brief Sets the per-attempt response body limit, or zero for no limit.
+        /// \param bytes Maximum accepted decoded body bytes, including streaming responses.
+        void set_max_response_body_bytes(std::size_t bytes) {
+            max_response_body_bytes = bytes;
         }
 
         /// \brief Enables or disables verbose mode.
