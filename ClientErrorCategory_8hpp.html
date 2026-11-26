@@ -160,16 +160,17 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8a4075072d219e061ca0f3124f8fbef463">kurlyk::utils::NotConnected</a>
 , <a class="el" href="namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8a76c499f10e043a763e23c532982f6126">kurlyk::utils::QueueLimitExceeded</a>
 , <a class="el" href="namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8a075d9c9ae8c8f1c79c1a1965cd8c5a42">kurlyk::utils::ShuttingDown</a>
+, <a class="el" href="namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8aea049755df7d3ac3339ed1be31f670ee">kurlyk::utils::ResponseTooLarge</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a1b2f911d69c83070bd7ce9ce320950e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines errors related to the internal state or lifecycle of the HTTP/WebSocket client.  <a href="namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8">More...</a><br /></td></tr>
+<tr class="memdesc:a1b2f911d69c83070bd7ce9ce320950e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines client-side errors for HTTP and WebSocket operations.  <a href="namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a1b5131894eaadddfa25d5545861a1a41" id="r_a1b5131894eaadddfa25d5545861a1a41"><td class="memItemLeft">const std::error_category &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1utils.html#a1b5131894eaadddfa25d5545861a1a41">kurlyk::utils::client_error_category</a> ()</td></tr>
 <tr class="memdesc:a1b5131894eaadddfa25d5545861a1a41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the singleton instance of the <a class="el" href="classkurlyk_1_1utils_1_1ClientErrorCategory.html" title="Custom std::error_category for reporting internal client errors not tied to specific protocols (e....">ClientErrorCategory</a>.  <br /></td></tr>
 <tr class="memitem:a9c3dc895b9661682fcc279a7c6045480" id="r_a9c3dc895b9661682fcc279a7c6045480"><td class="memItemLeft">std::error_code&#160;</td><td class="memItemRight"><a class="el" href="namespacekurlyk_1_1utils.html#a9c3dc895b9661682fcc279a7c6045480">kurlyk::utils::make_error_code</a> (<a class="el" href="namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8">ClientError</a> e)</td></tr>
-<tr class="memdesc:a9c3dc895b9661682fcc279a7c6045480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a std::error_code from a <a class="el" href="namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8" title="Defines errors related to the internal state or lifecycle of the HTTP/WebSocket client.">ClientError</a> value.  <br /></td></tr>
+<tr class="memdesc:a9c3dc895b9661682fcc279a7c6045480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a std::error_code from a <a class="el" href="namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8" title="Defines client-side errors for HTTP and WebSocket operations.">ClientError</a> value.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Declares the ClientError enumeration and error category for internal client-side failures. </p>

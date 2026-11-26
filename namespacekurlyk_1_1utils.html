@@ -169,9 +169,10 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="#a1b2f911d69c83070bd7ce9ce320950e8a4075072d219e061ca0f3124f8fbef463">NotConnected</a>
 , <a class="el" href="#a1b2f911d69c83070bd7ce9ce320950e8a76c499f10e043a763e23c532982f6126">QueueLimitExceeded</a>
 , <a class="el" href="#a1b2f911d69c83070bd7ce9ce320950e8a075d9c9ae8c8f1c79c1a1965cd8c5a42">ShuttingDown</a>
+, <a class="el" href="#a1b2f911d69c83070bd7ce9ce320950e8aea049755df7d3ac3339ed1be31f670ee">ResponseTooLarge</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a1b2f911d69c83070bd7ce9ce320950e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines errors related to the internal state or lifecycle of the HTTP/WebSocket client.  <a href="#a1b2f911d69c83070bd7ce9ce320950e8">More...</a><br /></td></tr>
+<tr class="memdesc:a1b2f911d69c83070bd7ce9ce320950e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines client-side errors for HTTP and WebSocket operations.  <a href="#a1b2f911d69c83070bd7ce9ce320950e8">More...</a><br /></td></tr>
 <tr class="memitem:a59cab8e0e0a2e21d60d85065c5582224" id="r_a59cab8e0e0a2e21d60d85065c5582224"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a59cab8e0e0a2e21d60d85065c5582224">WebSocketError</a> { <br />
 &#160;&#160;<a class="el" href="#a59cab8e0e0a2e21d60d85065c5582224aaf98071f760be899f4fcf1d53a29ba17">ConnectionFailed</a> = 1
 , <a class="el" href="#a59cab8e0e0a2e21d60d85065c5582224ae0a3b68b0325c2195a0ebdf50bc2ed27">UnexpectedClose</a>
@@ -197,7 +198,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a1b5131894eaadddfa25d5545861a1a41" id="r_a1b5131894eaadddfa25d5545861a1a41"><td class="memItemLeft">const std::error_category &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1b5131894eaadddfa25d5545861a1a41">client_error_category</a> ()</td></tr>
 <tr class="memdesc:a1b5131894eaadddfa25d5545861a1a41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the singleton instance of the <a class="el" href="classkurlyk_1_1utils_1_1ClientErrorCategory.html" title="Custom std::error_category for reporting internal client errors not tied to specific protocols (e....">ClientErrorCategory</a>.  <br /></td></tr>
 <tr class="memitem:a9c3dc895b9661682fcc279a7c6045480" id="r_a9c3dc895b9661682fcc279a7c6045480"><td class="memItemLeft">std::error_code&#160;</td><td class="memItemRight"><a class="el" href="#a9c3dc895b9661682fcc279a7c6045480">make_error_code</a> (<a class="el" href="#a1b2f911d69c83070bd7ce9ce320950e8">ClientError</a> e)</td></tr>
-<tr class="memdesc:a9c3dc895b9661682fcc279a7c6045480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a std::error_code from a <a class="el" href="#a1b2f911d69c83070bd7ce9ce320950e8" title="Defines errors related to the internal state or lifecycle of the HTTP/WebSocket client.">ClientError</a> value.  <br /></td></tr>
+<tr class="memdesc:a9c3dc895b9661682fcc279a7c6045480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a std::error_code from a <a class="el" href="#a1b2f911d69c83070bd7ce9ce320950e8" title="Defines client-side errors for HTTP and WebSocket operations.">ClientError</a> value.  <br /></td></tr>
 <tr class="memitem:a4e1f8c34b442bd0f02731778fe175bd7" id="r_a4e1f8c34b442bd0f02731778fe175bd7"><td class="memItemLeft">std::error_code&#160;</td><td class="memItemRight"><a class="el" href="#a4e1f8c34b442bd0f02731778fe175bd7">make_error_code</a> (CURLcode e)</td></tr>
 <tr class="memdesc:a4e1f8c34b442bd0f02731778fe175bd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an std::error_code from a CURLcode, allowing CURL errors to be used with the std::error_code API.  <br /></td></tr>
 <tr class="memitem:a3d3ae4dc2e34cbea0769f6f7fd4bbdad" id="r_a3d3ae4dc2e34cbea0769f6f7fd4bbdad"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a3d3ae4dc2e34cbea0769f6f7fd4bbdad">is_valid_email_id</a> (const std::string &amp;str)</td></tr>
@@ -313,7 +314,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Defines errors related to the internal state or lifecycle of the HTTP/WebSocket client. </p>
+<p>Defines client-side errors for HTTP and WebSocket operations. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1b2f911d69c83070bd7ce9ce320950e8ad2aa53d9d798b1a4a99957538b77d38f" name="a1b2f911d69c83070bd7ce9ce320950e8ad2aa53d9d798b1a4a99957538b77d38f"></a>CancelledByUser&#160;</td><td class="fielddoc"><p>Request was cancelled explicitly by the user via cancel(). </p>
 </td></tr>
@@ -328,6 +329,8 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a1b2f911d69c83070bd7ce9ce320950e8a76c499f10e043a763e23c532982f6126" name="a1b2f911d69c83070bd7ce9ce320950e8a76c499f10e043a763e23c532982f6126"></a>QueueLimitExceeded&#160;</td><td class="fielddoc"><p>Operation was rejected because the bounded queue is already full. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a1b2f911d69c83070bd7ce9ce320950e8a075d9c9ae8c8f1c79c1a1965cd8c5a42" name="a1b2f911d69c83070bd7ce9ce320950e8a075d9c9ae8c8f1c79c1a1965cd8c5a42"></a>ShuttingDown&#160;</td><td class="fielddoc"><p>Operation was rejected because the owning subsystem is shutting down. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1b2f911d69c83070bd7ce9ce320950e8aea049755df7d3ac3339ed1be31f670ee" name="a1b2f911d69c83070bd7ce9ce320950e8aea049755df7d3ac3339ed1be31f670ee"></a>ResponseTooLarge&#160;</td><td class="fielddoc"><p>Actual HTTP response body bytes exceeded the request's configured limit. </p>
 </td></tr>
 </table>
 
@@ -556,7 +559,7 @@ Functions</h2></td></tr>
 <p>Returns the singleton instance of the <a class="el" href="classkurlyk_1_1utils_1_1ClientErrorCategory.html" title="Custom std::error_category for reporting internal client errors not tied to specific protocols (e....">ClientErrorCategory</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the client error category. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ClientErrorCategory_8hpp_source.html#l00055">55</a> of file <a class="el" href="ClientErrorCategory_8hpp_source.html">ClientErrorCategory.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ClientErrorCategory_8hpp_source.html#l00058">58</a> of file <a class="el" href="ClientErrorCategory_8hpp_source.html">ClientErrorCategory.hpp</a>.</p>
 
 </div>
 </div>
@@ -983,16 +986,16 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Creates a std::error_code from a <a class="el" href="#a1b2f911d69c83070bd7ce9ce320950e8" title="Defines errors related to the internal state or lifecycle of the HTTP/WebSocket client.">ClientError</a> value. </p>
+<p>Creates a std::error_code from a <a class="el" href="#a1b2f911d69c83070bd7ce9ce320950e8" title="Defines client-side errors for HTTP and WebSocket operations.">ClientError</a> value. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">e</td><td><a class="el" href="#a1b2f911d69c83070bd7ce9ce320950e8" title="Defines errors related to the internal state or lifecycle of the HTTP/WebSocket client.">ClientError</a> enum value. </td></tr>
+    <tr><td class="paramname">e</td><td><a class="el" href="#a1b2f911d69c83070bd7ce9ce320950e8" title="Defines client-side errors for HTTP and WebSocket operations.">ClientError</a> enum value. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::error_code representing the specified client error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ClientErrorCategory_8hpp_source.html#l00063">63</a> of file <a class="el" href="ClientErrorCategory_8hpp_source.html">ClientErrorCategory.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ClientErrorCategory_8hpp_source.html#l00066">66</a> of file <a class="el" href="ClientErrorCategory_8hpp_source.html">ClientErrorCategory.hpp</a>.</p>
 
 </div>
 </div>

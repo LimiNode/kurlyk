@@ -59,6 +59,7 @@ var classkurlyk_1_1HttpClient =
     [ "set_host", "classkurlyk_1_1HttpClient.html#ac5b1684d28dff736adede8a51a41dbd1", null ],
     [ "set_max_in_flight", "classkurlyk_1_1HttpClient.html#aad4c462013a5527d85f3677bd4db1cdd", null ],
     [ "set_max_redirects", "classkurlyk_1_1HttpClient.html#a2b5071dad4b3709a76b922a8f2e3bf7e", null ],
+    [ "set_max_response_body_bytes", "classkurlyk_1_1HttpClient.html#a91e6c57f6d64cfa81b93dd9535cbc619", null ],
     [ "set_origin", "classkurlyk_1_1HttpClient.html#aa72c74664bb854c8b4036abaac741e63", null ],
     [ "set_proxy", "classkurlyk_1_1HttpClient.html#a910693d98c1314afdb0accdbc8b7a691", null ],
     [ "set_proxy", "classkurlyk_1_1HttpClient.html#a722efe4941695dadaf576c85ac57ac95", null ],

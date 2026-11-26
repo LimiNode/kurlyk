@@ -1,5 +1,11 @@
 var NAVTREEINDEX4 =
 {
+"classkurlyk_1_1HttpRequestHandler.html#a1a110c020b10057ecb41ccb29be8d5db":[1,0,1,15,22],
+"classkurlyk_1_1HttpRequestHandler.html#a1a110c020b10057ecb41ccb29be8d5db":[2,0,0,14,22],
+"classkurlyk_1_1HttpRequestHandler.html#a1c0624663ba6d2ab711ff14635cc9d29":[1,0,1,15,0],
+"classkurlyk_1_1HttpRequestHandler.html#a1c0624663ba6d2ab711ff14635cc9d29":[2,0,0,14,0],
+"classkurlyk_1_1HttpRequestHandler.html#a23b653d244ea6b8bc9b7348cfb3402e7":[1,0,1,15,17],
+"classkurlyk_1_1HttpRequestHandler.html#a23b653d244ea6b8bc9b7348cfb3402e7":[2,0,0,14,17],
 "classkurlyk_1_1HttpRequestHandler.html#a2cbcadf813fd1a419a0110556ae59596":[1,0,1,15,21],
 "classkurlyk_1_1HttpRequestHandler.html#a2cbcadf813fd1a419a0110556ae59596":[2,0,0,14,21],
 "classkurlyk_1_1HttpRequestHandler.html#a32f9dde0cb3b990844fc60974e484d04":[1,0,1,15,5],
@@ -10,6 +16,8 @@ var NAVTREEINDEX4 =
 "classkurlyk_1_1HttpRequestHandler.html#a438a862fef6d7dde73edd901f7f75515":[2,0,0,14,30],
 "classkurlyk_1_1HttpRequestHandler.html#a455aeef540ea9cbd8a42d16fbf2a66e9":[1,0,1,15,15],
 "classkurlyk_1_1HttpRequestHandler.html#a455aeef540ea9cbd8a42d16fbf2a66e9":[2,0,0,14,15],
+"classkurlyk_1_1HttpRequestHandler.html#a467d663e973b424c2ec4b7dda3da6784":[1,0,1,15,32],
+"classkurlyk_1_1HttpRequestHandler.html#a467d663e973b424c2ec4b7dda3da6784":[2,0,0,14,32],
 "classkurlyk_1_1HttpRequestHandler.html#a5063145d679cb3217d6045ab48cf1181":[1,0,1,15,14],
 "classkurlyk_1_1HttpRequestHandler.html#a5063145d679cb3217d6045ab48cf1181":[2,0,0,14,14],
 "classkurlyk_1_1HttpRequestHandler.html#a582e14525aab6f737da78ee25321b1b6":[1,0,1,15,11],
@@ -241,13 +249,5 @@ var NAVTREEINDEX4 =
 "classkurlyk_1_1IWebSocketSender.html#ade073ce49cb88eb071bae7d82dd620bb":[1,0,1,19,3],
 "classkurlyk_1_1IWebSocketSender.html#ade073ce49cb88eb071bae7d82dd620bb":[2,0,0,18,3],
 "classkurlyk_1_1ProxyChecker.html":[1,0,1,22],
-"classkurlyk_1_1ProxyChecker.html":[2,0,0,21],
-"classkurlyk_1_1ProxyChecker.html#a6107385f6afd170d81707906d23da104":[1,0,1,22,0],
-"classkurlyk_1_1ProxyChecker.html#a6107385f6afd170d81707906d23da104":[2,0,0,21,0],
-"classkurlyk_1_1SimpleWebSocketClientAdapter.html":[1,0,1,27],
-"classkurlyk_1_1SimpleWebSocketClientAdapter.html":[2,0,0,26],
-"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a082a9a28596db3104bdd4c8c34a9f482":[1,0,1,27,28],
-"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a082a9a28596db3104bdd4c8c34a9f482":[2,0,0,26,28],
-"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a0d68eb256b18834cbd6916d23ebacc0d":[1,0,1,27,20],
-"classkurlyk_1_1SimpleWebSocketClientAdapter.html#a0d68eb256b18834cbd6916d23ebacc0d":[2,0,0,26,20]
+"classkurlyk_1_1ProxyChecker.html":[2,0,0,21]
 };

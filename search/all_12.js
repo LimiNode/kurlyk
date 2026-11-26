@@ -42,10 +42,11 @@ var searchData=
   ['reset_39',['reset',['../classkurlyk_1_1HttpRateLimitHandle.html#ad7f6710064087f9952708395197a8b45',1,'kurlyk::HttpRateLimitHandle::reset()'],['../classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#a9f765dc97a918bfd8dceb80353bea89b',1,'kurlyk::EmscriptenWebSocketClientAdapter::reset() override final']]],
   ['reset_5fwebsocket_40',['reset_websocket',['../classkurlyk_1_1EmscriptenWebSocketClientAdapter.html#ab42607076fe5e7959684b88f1cce3fee',1,'kurlyk::EmscriptenWebSocketClientAdapter']]],
   ['response_20chunks_41',['Streaming response chunks',['../index.html#http_streaming',1,'']]],
-  ['retry_5fattempt_42',['retry_attempt',['../classkurlyk_1_1HttpResponse.html#a04053b260e4c788a826abe79bb530d82',1,'kurlyk::HttpResponse::retry_attempt'],['../classkurlyk_1_1HttpRequestContext.html#a76bebebc68d4df78b33fe881e92668e3',1,'kurlyk::HttpRequestContext::retry_attempt']]],
-  ['retry_5fattempts_43',['retry_attempts',['../classkurlyk_1_1HttpRequest.html#ac0d9f61c44eab9ce4e2fb1bac95f1d55',1,'kurlyk::HttpRequest']]],
-  ['retry_5fdelay_5fms_44',['retry_delay_ms',['../classkurlyk_1_1HttpRequest.html#a7df310a8040c23d71786147dbf561373',1,'kurlyk::HttpRequest']]],
-  ['rl_5fgeneral_45',['RL_GENERAL',['../namespacekurlyk.html#a23c88f8eb4092642746144a019793ccface1b45fae7118ee510d863ac32a3a5d0',1,'kurlyk']]],
-  ['rl_5fspecific_46',['RL_SPECIFIC',['../namespacekurlyk.html#a23c88f8eb4092642746144a019793ccfad54b304aff8898490616feb2df0b5590',1,'kurlyk']]],
-  ['runtime_2ehpp_47',['runtime.hpp',['../runtime_8hpp.html',1,'']]]
+  ['responsetoolarge_42',['ResponseTooLarge',['../namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8aea049755df7d3ac3339ed1be31f670ee',1,'kurlyk::utils']]],
+  ['retry_5fattempt_43',['retry_attempt',['../classkurlyk_1_1HttpResponse.html#a04053b260e4c788a826abe79bb530d82',1,'kurlyk::HttpResponse::retry_attempt'],['../classkurlyk_1_1HttpRequestContext.html#a76bebebc68d4df78b33fe881e92668e3',1,'kurlyk::HttpRequestContext::retry_attempt']]],
+  ['retry_5fattempts_44',['retry_attempts',['../classkurlyk_1_1HttpRequest.html#ac0d9f61c44eab9ce4e2fb1bac95f1d55',1,'kurlyk::HttpRequest']]],
+  ['retry_5fdelay_5fms_45',['retry_delay_ms',['../classkurlyk_1_1HttpRequest.html#a7df310a8040c23d71786147dbf561373',1,'kurlyk::HttpRequest']]],
+  ['rl_5fgeneral_46',['RL_GENERAL',['../namespacekurlyk.html#a23c88f8eb4092642746144a019793ccface1b45fae7118ee510d863ac32a3a5d0',1,'kurlyk']]],
+  ['rl_5fspecific_47',['RL_SPECIFIC',['../namespacekurlyk.html#a23c88f8eb4092642746144a019793ccfad54b304aff8898490616feb2df0b5590',1,'kurlyk']]],
+  ['runtime_2ehpp_48',['runtime.hpp',['../runtime_8hpp.html',1,'']]]
 ];

@@ -31,5 +31,6 @@ var classkurlyk_1_1HttpRequestHandler =
     [ "m_has_stream_chunk", "classkurlyk_1_1HttpRequestHandler.html#a10be3fb52a92efd8a5e24071fd69520f", null ],
     [ "m_headers", "classkurlyk_1_1HttpRequestHandler.html#a91d4f8560330c9db0ec29547b79804f6", null ],
     [ "m_request_context", "classkurlyk_1_1HttpRequestHandler.html#a438a862fef6d7dde73edd901f7f75515", null ],
-    [ "m_response", "classkurlyk_1_1HttpRequestHandler.html#afd790350f7d041858d245e935d431942", null ]
+    [ "m_response", "classkurlyk_1_1HttpRequestHandler.html#afd790350f7d041858d245e935d431942", null ],
+    [ "m_response_too_large", "classkurlyk_1_1HttpRequestHandler.html#a467d663e973b424c2ec4b7dda3da6784", null ]
 ];

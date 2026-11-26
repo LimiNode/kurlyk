@@ -1,5 +1,13 @@
 var NAVTREEINDEX6 =
 {
+"classkurlyk_1_1WebSocketConfig.html#a6777d2cf462d3913e1d89764ed1b8fec":[1,0,1,31,14],
+"classkurlyk_1_1WebSocketConfig.html#a6777d2cf462d3913e1d89764ed1b8fec":[2,0,0,30,14],
+"classkurlyk_1_1WebSocketConfig.html#a69ad6b109e288a9565016fa0688db218":[1,0,1,31,36],
+"classkurlyk_1_1WebSocketConfig.html#a69ad6b109e288a9565016fa0688db218":[2,0,0,30,36],
+"classkurlyk_1_1WebSocketConfig.html#a70e84d4f21498fec4445b7d2f287e8ac":[1,0,1,31,26],
+"classkurlyk_1_1WebSocketConfig.html#a70e84d4f21498fec4445b7d2f287e8ac":[2,0,0,30,26],
+"classkurlyk_1_1WebSocketConfig.html#a71f87f439789e498b2768ca506f77dfc":[1,0,1,31,28],
+"classkurlyk_1_1WebSocketConfig.html#a71f87f439789e498b2768ca506f77dfc":[2,0,0,30,28],
 "classkurlyk_1_1WebSocketConfig.html#a739ad424467f4525b1f72b363ddc8a62":[1,0,1,31,20],
 "classkurlyk_1_1WebSocketConfig.html#a739ad424467f4525b1f72b363ddc8a62":[2,0,0,30,20],
 "classkurlyk_1_1WebSocketConfig.html#a74de0cba7518dc69e9c951a5dc6b6241":[1,0,1,31,3],
@@ -241,13 +249,5 @@ var NAVTREEINDEX6 =
 "classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html":[1,0,1,2,0,4],
 "classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html":[2,0,0,1,0,4],
 "classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#a109fe6c33e0a1c6f74f5d8c6ea6baa42":[1,0,1,2,0,4,10],
-"classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#a109fe6c33e0a1c6f74f5d8c6ea6baa42":[2,0,0,1,0,4,10],
-"classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#a1f2f2f2e18e16ff09e2fa5c831da1f29":[1,0,1,2,0,4,4],
-"classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#a1f2f2f2e18e16ff09e2fa5c831da1f29":[2,0,0,1,0,4,4],
-"classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#a234c3be1cf53771c93cbe3d9fe298e7b":[1,0,1,2,0,4,14],
-"classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#a234c3be1cf53771c93cbe3d9fe298e7b":[2,0,0,1,0,4,14],
-"classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#a3c0d14bab3bca6747f7a98284b90e932":[1,0,1,2,0,4,0],
-"classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#a3c0d14bab3bca6747f7a98284b90e932":[2,0,0,1,0,4,0],
-"classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#a49b388d3efbd830cd7539ef470c2e7d7":[1,0,1,2,0,4,13],
-"classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#a49b388d3efbd830cd7539ef470c2e7d7":[2,0,0,1,0,4,13]
+"classkurlyk_1_1http_1_1auth_1_1OAuthPkceClient.html#a109fe6c33e0a1c6f74f5d8c6ea6baa42":[2,0,0,1,0,4,10]
 };

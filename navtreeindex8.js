@@ -1,5 +1,13 @@
 var NAVTREEINDEX8 =
 {
+"index.html#http_backpressure":[0,2,0,8],
+"index.html#http_basic":[0,2,0,1],
+"index.html#http_callbacks":[0,2,0,0],
+"index.html#http_cancellation":[0,2,0,5],
+"index.html#http_ping":[0,2,0,3],
+"index.html#http_proxy":[0,2,0,2],
+"index.html#http_rate_limits":[0,2,0,6],
+"index.html#http_sec":[0,2,0],
 "index.html#http_streaming":[0,2,0,7],
 "index.html#http_variants":[0,2,0,4],
 "index.html#install_sec":[0,4],
@@ -141,6 +149,7 @@ var NAVTREEINDEX8 =
 "namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8a76c499f10e043a763e23c532982f6126":[1,0,1,4,12,5],
 "namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8a99c0cdf3eb7ef98539743e5dd39ac62c":[1,0,1,4,12,2],
 "namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8ad2aa53d9d798b1a4a99957538b77d38f":[1,0,1,4,12,0],
+"namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8aea049755df7d3ac3339ed1be31f670ee":[1,0,1,4,12,7],
 "namespacekurlyk_1_1utils.html#a1b2f911d69c83070bd7ce9ce320950e8af237deac1e85c65673a7bba9093bca7e":[1,0,1,4,12,3],
 "namespacekurlyk_1_1utils.html#a1b5131894eaadddfa25d5545861a1a41":[1,0,1,4,18],
 "namespacekurlyk_1_1utils.html#a2df05450956addc94e9eccddc8ebaa9c":[1,0,1,4,14],
@@ -240,14 +249,5 @@ var NAVTREEINDEX8 =
 "simple__http__request__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4":[3,0,1,17,1],
 "simple__http__request__example_8cpp_source.html":[3,0,1,17],
 "simple__websocket__server__client_8hpp.html":[3,0,2,0,1,0],
-"simple__websocket__server__client_8hpp.html#a3e2dd628df5d94be05341406184f2a97":[3,0,2,0,1,0,0],
-"simple__websocket__server__client_8hpp_source.html":[3,0,2,0,1,0],
-"startup_8hpp.html":[3,0,2,0,10],
-"startup_8hpp.html#a6879483ae88df7e849619f676368b125":[3,0,2,0,10,0],
-"startup_8hpp_source.html":[3,0,2,0,10],
-"storage_8hpp.html":[3,0,2,0,2,0,7],
-"storage_8hpp.html#affa1af6d61805543de917b719d64c879":[3,0,2,0,2,0,7,0],
-"storage_8hpp_source.html":[3,0,2,0,2,0,7],
-"string__utils_8hpp.html":[3,0,2,0,5,14],
-"string__utils_8hpp.html#a1e4ada2f25a718faa26500fc18a85a99":[3,0,2,0,5,14,0]
+"simple__websocket__server__client_8hpp.html#a3e2dd628df5d94be05341406184f2a97":[3,0,2,0,1,0,0]
 };
